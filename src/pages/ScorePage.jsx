@@ -1,5 +1,5 @@
 const ScorePage = () => {
-  return <></>;
+    return <></>;
 };
 
 export default ScorePage;

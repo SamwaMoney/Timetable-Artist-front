@@ -1,5 +1,5 @@
 const CreatePage = () => {
-  return <></>;
+    return <></>;
 };
 
 export default CreatePage;
