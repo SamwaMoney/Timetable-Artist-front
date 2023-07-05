@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './style/common.css';
+
+import MainPage from './pages/MainPage';
+import LoginPage from './pages/LoginPage';
+import CreatePage from './pages/CreatePage';
+import ScorePage from './pages/ScorePage';
+import RankingPage from './pages/RankingPage';
+import AboutUsPage from './pages/AboutUsPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          {/* 메인 페이지 */}
+          <Route exact path="/" element={<MainPage />} />
+          {/* 회원가입/로그인 페이지 */}
+          <Route exact path="/login" element={<LoginPage />} />
+          {/* 시간표 생성/수정 페이지 */}
+          <Route exact path="/create" element={<CreatePage />} />
+          {/* 시간표 점수 확인 페이지 */}
+          <Route exact path="/score" element={<ScorePage />} />
+          {/* 랭킹보드 페이지 */}
+          <Route exact path="/ranking" element={<RankingPage />} />
+          {/* About us 페이지 */}
+          <Route exact path="/aboutus" element={<AboutUsPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

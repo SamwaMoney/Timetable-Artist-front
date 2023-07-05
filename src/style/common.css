@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: 0;
+  font-family: 'Gothic A1', sans-serif;
+}
+
+/*
+@media (min-width: 576px) {
+    .wrapper {
+        width: 390px;
+        margin: 0 auto;
+    }
+}*/
+
+:root {
+  /* color */
+  --black: #171717;
+  --green: #B0FF00;
+  --blue: #1962ED;
+  --red: #F22B02;
+  --background: #E2E2E2;
+  --light-gray: #F3F5F2;
+  --white: #FFFFFF;
+  --gray: #D4D4D4;
+  
+  /* font */
+  --korean: 'Gothic A1', sans-serif;
+  --english: 'Montserrat', sans-serif;
+}
