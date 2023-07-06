@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import { useState } from 'react';
-import { FlexCenter } from './Ranking.style';
+import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 
 const Toggle = () => {

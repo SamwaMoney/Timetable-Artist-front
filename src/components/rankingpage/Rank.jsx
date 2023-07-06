@@ -1,7 +1,7 @@
 import S from './Ranking.style';
 import { styled } from 'styled-components';
-import LeftSection from './LeftSection';
-import RightSection from './RightSection';
+import LeftSection from './leftSection/LeftSection';
+import RightSection from './rightSection/RightSection';
 
 const Rank = () => {
     return (

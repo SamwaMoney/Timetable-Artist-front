@@ -1,8 +1,8 @@
-import { styled } from 'styled-components';
 import OneRanking from './OneRanking';
 import Toggle from './Toggle';
 import { useSearchParams } from 'react-router-dom';
-import { mockData } from '../../assets/rankingpage/rankMock';
+import { mockData } from '../../../assets/rankingpage/rankMock';
+
 const RankingList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -13,6 +13,7 @@ const RankingList = () => {
         <>
             {sort === 'popular' ? null : <Toggle />}
             {mockData.map((data, index) => {
+                console.log('aa', data);
                 return <OneRanking data={data} index={index} />;
             })}
         </>

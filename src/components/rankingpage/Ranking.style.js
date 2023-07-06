@@ -11,21 +11,16 @@ export const FlexMiddle = css`
     justify-content: center;
 `;
 
-const LeftSection = styled.div`
-    border: 1px solid black;
+const Section = styled.div`
+    overflow: scroll;
+    border: 0.1rem solid black;
     width: 534px;
     height: 588px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: scroll;
     background-color: var(--background);
-`;
-
-const RightSection = styled.div`
-    background-color: pink;
-    width: 534px;
-    height: 588px;
+    /* display: block; */
 `;
 
 const Header = styled.div`
@@ -34,6 +29,6 @@ const Header = styled.div`
     background-color: grey;
 `;
 
-const S = { LeftSection, RightSection, Header, FlexCenter };
+const S = { Section, Header, FlexCenter };
 
 export default S;

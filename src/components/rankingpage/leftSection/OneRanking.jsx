@@ -1,20 +1,21 @@
 import { styled } from 'styled-components';
-import { FlexCenter } from './Ranking.style';
+import { FlexCenter } from '../Ranking.style';
 
 const OneRanking = ({ data, index }) => {
-    console.log(data);
-    const { nickname, category } = data;
+    // const { nickname, category } = data;
     return (
-        <Wrapper>
-            <RankNum>{index + 1}</RankNum>
-            <UserInfo>
-                <NameContainer>
-                    <NameText>닉네임</NameText>
-                    <Name>{nickname}</Name>
-                </NameContainer>
-                <Category>{category}</Category>
-            </UserInfo>
-        </Wrapper>
+        data && (
+            <Wrapper>
+                <RankNum>{index + 1}</RankNum>
+                <UserInfo>
+                    <NameContainer>
+                        <NameText>닉네임</NameText>
+                        <Name>{data.nickname}</Name>
+                    </NameContainer>
+                    <Category>{data.Namecategory}</Category>
+                </UserInfo>
+            </Wrapper>
+        )
     );
 };
 export default OneRanking;

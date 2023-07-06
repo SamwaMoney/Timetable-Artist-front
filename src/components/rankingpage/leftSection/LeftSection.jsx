@@ -1,17 +1,18 @@
-import S, { FlexCenter } from './Ranking.style';
+import { FlexCenter } from '../Ranking.style';
+import S from '../Ranking.style';
 import { styled } from 'styled-components';
 import TabContainer from './Tab';
 import RankingList from './RankingList';
 
 const LeftSection = () => {
     return (
-        <S.LeftSection>
+        <S.Section>
             <Header>
                 <NewButton>시간표 등록하기</NewButton>
             </Header>
             <TabContainer />
             <RankingList></RankingList>
-        </S.LeftSection>
+        </S.Section>
     );
 };
 export default LeftSection;

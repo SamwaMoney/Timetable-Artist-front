@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style/common.css';
-
+import GlobalStyles from './style/global';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import CreatePage from './pages/CreatePage';
@@ -11,6 +11,7 @@ import AboutUsPage from './pages/AboutUsPage';
 function App() {
     return (
         <>
+            <GlobalStyles />
             <BrowserRouter>
                 <Routes>
                     {/* 메인 페이지 */}

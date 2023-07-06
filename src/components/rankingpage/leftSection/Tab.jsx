@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { FlexCenter } from './Ranking.style';
+import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 
