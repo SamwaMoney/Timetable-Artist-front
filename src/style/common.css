@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;700&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
-  overflow-x: 0;
-  font-family: 'Gothic A1', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: 0;
+    font-family: 'Gothic A1', sans-serif;
 }
 
 /*
@@ -16,17 +16,18 @@
 }*/
 
 :root {
-  /* color */
-  --black: #171717;
-  --green: #B0FF00;
-  --blue: #1962ED;
-  --red: #F22B02;
-  --background: #E2E2E2;
-  --light-gray: #F3F5F2;
-  --white: #FFFFFF;
-  --gray: #D4D4D4;
-  
-  /* font */
-  --korean: 'Gothic A1', sans-serif;
-  --english: 'Montserrat', sans-serif;
+    /* color */
+    --black: #171717;
+    --green: #b0ff00;
+    --blue: #1962ed;
+    --red: #f22b02;
+    --background: #e2e2e2;
+    --background-green: linear-gradient(to bottom, #b0ff00, #e2e2e2);
+    --light-gray: #f3f5f2;
+    --white: #ffffff;
+    --gray: #d4d4d4;
+
+    /* font */
+    --korean: 'Gothic A1', sans-serif;
+    --english: 'Montserrat', sans-serif;
 }
