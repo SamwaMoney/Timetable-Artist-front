@@ -1,44 +1,33 @@
 import { styled } from 'styled-components';
 import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
-const OneRanking = ({ data }) => {
-    const { id, nickname, score, category, rank } = data ? data : {};
-    const [searchParams, setSearchParams] = useSearchParams();
-    const currentId = searchParams.get('id') | 1;
-
-    const onMoveDetail = id => {
-        searchParams.set('id', id);
-        setSearchParams(searchParams);
-    };
-
+const RankUserInfo = ({ currentUser }) => {
     return (
-        data && (
+        currentUser && (
             <Wrapper>
-                <RankNum>{rank}</RankNum>
-                <UserInfo
-                    onClick={() => {
-                        onMoveDetail(id);
-                    }}
-                >
+                <RankNum>1</RankNum>
+                <UserInfo>
                     <NameContainer>
-                        <NameText>{nickname}</NameText>
-                        <Score>{score}</Score>
+                        <NameText>{currentUser.name}</NameText>
+                        <Score>{currentUser.score}</Score>
                     </NameContainer>
-                    <Category>{category}</Category>
+                    <Category>{currentUser.category}</Category>
                 </UserInfo>
             </Wrapper>
         )
     );
 };
-export default OneRanking;
+export default RankUserInfo;
 
 const RankNum = styled.div`
     width: 62px;
     height: 62px;
     border-radius: 50%;
-    background-color: white;
-    border: 0.1rem solid black;
+    background-color: var(--green);
+    border: 0.1rem solid var(--blue);
     ${FlexCenter}
     font-size:36px;
     font-weight: 700;
@@ -48,8 +37,8 @@ const RankNum = styled.div`
 const UserInfo = styled.div`
     width: 294px;
     height: 60.588px;
-    background-color: white;
-    border: 0.1rem solid black;
+    background-color: var(--green);
+    border: 0.1rem solid var(--blue);
     border-radius: 60px;
     ${FlexCenter}
     position:relative;

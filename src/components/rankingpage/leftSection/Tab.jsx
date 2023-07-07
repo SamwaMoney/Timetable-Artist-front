@@ -39,7 +39,7 @@ const TabContainer = () => {
                 }}
                 active={currentSort !== 'popular' ? true : false}
             >
-                {currentSort === 'worst' ? '최악의 시간표' : '최고의 시간표'}
+                {currentSort !== 'best' ? '최악의 시간표' : '최고의 시간표'}
             </Tab>
             <Tab
                 onClick={e => {

@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import { FlexCenter } from '../Ranking.style';
 import Like from '../../../assets/rankingpage/like.png';
 import Comment from '../../../assets/rankingpage/comment.png';
+
 const ButtonContainer = () => {
     return (
         <Wrapper>

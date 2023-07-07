@@ -22,6 +22,7 @@
     --blue: #1962ed;
     --red: #f22b02;
     --background: #e2e2e2;
+    --background-green: linear-gradient(to bottom, #b0ff00, #e2e2e2);
     --light-gray: #f3f5f2;
     --white: #ffffff;
     --gray: #d4d4d4;
