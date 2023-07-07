@@ -86,11 +86,19 @@ const initialState = [
 const rankReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'worst':
-            const worstState = [...state];
-            return worstState.sort((a, b) => a.score - b.score);
+            const _worstState = [...state];
+            _worstState.sort((a, b) => a.score - b.score);
+            const worstState = _worstState.map((user, index) => {
+                return { ...user, rank: index + 1 };
+            });
+            return worstState;
         case 'best':
-            const bestState = [...state];
-            return bestState.sort((a, b) => b.score - a.score);
+            const _bestState = [...state];
+            _bestState.sort((a, b) => b.score - a.score);
+            const bestState = _bestState.map((user, index) => {
+                return { ...user, rank: index + 1 };
+            });
+            return bestState;
         case 'popular':
             return state;
         default:

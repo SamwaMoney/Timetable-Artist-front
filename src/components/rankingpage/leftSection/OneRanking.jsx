@@ -3,7 +3,7 @@ import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 
 const OneRanking = ({ data, index }) => {
-    // const { nickname, category } = data;
+    const { id, nickname, score, Namecategory, rank } = data ? data : {};
     const [searchParams, setSearchParams] = useSearchParams();
     const onMoveDetail = id => {
         searchParams.set('id', id);
@@ -13,17 +13,17 @@ const OneRanking = ({ data, index }) => {
     return (
         data && (
             <Wrapper>
-                <RankNum>{index + 1}</RankNum>
+                <RankNum>{rank ? rank : index + 1}</RankNum>
                 <UserInfo
                     onClick={() => {
-                        onMoveDetail(data.id);
+                        onMoveDetail(id);
                     }}
                 >
                     <NameContainer>
-                        <NameText>{data.nickname}</NameText>
-                        <Score>{data.score}</Score>
+                        <NameText>{nickname}</NameText>
+                        <Score>{score}</Score>
                     </NameContainer>
-                    <Category>{data.Namecategory}</Category>
+                    <Category>{Namecategory}</Category>
                 </UserInfo>
             </Wrapper>
         )
@@ -35,7 +35,7 @@ const RankNum = styled.div`
     width: 62px;
     height: 62px;
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--green);
     border: 0.1rem solid black;
     ${FlexCenter}
     font-size:36px;

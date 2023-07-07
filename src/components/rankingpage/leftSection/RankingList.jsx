@@ -10,6 +10,7 @@ const RankingList = () => {
     const dispatch = useDispatch();
     const rankList = useSelector(state => state.rankReducer);
 
+    //선택한 정렬방식대로 순위 바꿔줌
     const sort = searchParams.get('sort');
     useEffect(() => {
         dispatch({

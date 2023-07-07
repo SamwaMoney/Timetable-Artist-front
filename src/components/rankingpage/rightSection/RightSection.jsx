@@ -7,16 +7,18 @@ import styled from 'styled-components';
 import Like from '../../../assets/rankingpage/like.png';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const RightSection = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentUser, setCurrentUser] = useState();
     const currentId = searchParams.get('id');
-    //id로 데이터 파싱
+    const rankList = useSelector(state => state.rankReducer);
+
+    //현재 선택한 유저의 id와 일치하는 데이터를 찾아서 보여주기
     useEffect(() => {
-        console.log(currentId);
-        const result = mockData.find(data => data.id === currentId / 1);
-        console.log('gggg', result);
+        const result = rankList.find(data => data.id === currentId / 1);
+        console.log(result);
         setCurrentUser(result);
     }, [currentId]);
 

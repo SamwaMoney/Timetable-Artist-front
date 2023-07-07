@@ -1,11 +1,17 @@
 import { styled } from 'styled-components';
 import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TabContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentSort, setCurrentSort] = useState('worst');
+
+    const sort = searchParams.get('sort');
+
+    useEffect(() => {
+        setCurrentSort(sort);
+    }, [sort]);
 
     /*정렬 기준대로 쿼리스트링을 바꿔줌*/
     const onMoveSortPage = e => {
@@ -15,6 +21,9 @@ const TabContainer = () => {
         if (innerText === '최악의 시간표') {
             newSearchParams.set('sort', 'worst');
             setCurrentSort('worst');
+        } else if (innerText === '최고의 시간표') {
+            newSearchParams.set('sort', 'best');
+            setCurrentSort('best');
         } else {
             newSearchParams.set('sort', 'popular');
             setCurrentSort('popular');
@@ -28,9 +37,9 @@ const TabContainer = () => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                active={currentSort === 'worst' ? true : false}
+                active={currentSort !== 'popular' ? true : false}
             >
-                최악의 시간표
+                {currentSort === 'worst' ? '최악의 시간표' : '최고의 시간표'}
             </Tab>
             <Tab
                 onClick={e => {
