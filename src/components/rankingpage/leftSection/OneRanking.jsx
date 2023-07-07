@@ -1,16 +1,27 @@
 import { styled } from 'styled-components';
 import { FlexCenter } from '../Ranking.style';
+import { useSearchParams } from 'react-router-dom';
 
 const OneRanking = ({ data, index }) => {
     // const { nickname, category } = data;
+    const [searchParams, setSearchParams] = useSearchParams();
+    const onMoveDetail = id => {
+        searchParams.set('id', id);
+        setSearchParams(searchParams);
+    };
+
     return (
         data && (
             <Wrapper>
                 <RankNum>{index + 1}</RankNum>
-                <UserInfo>
+                <UserInfo
+                    onClick={() => {
+                        onMoveDetail(data.id);
+                    }}
+                >
                     <NameContainer>
-                        <NameText>닉네임</NameText>
-                        <Name>{data.nickname}</Name>
+                        <NameText>{data.nickname}</NameText>
+                        <Score>{data.score}</Score>
                     </NameContainer>
                     <Category>{data.Namecategory}</Category>
                 </UserInfo>
@@ -56,7 +67,7 @@ const NameContainer = styled.div`
     left: 20px;
 `;
 
-const Name = styled.div`
+const Score = styled.div`
     font-size: 17px;
 `;
 
