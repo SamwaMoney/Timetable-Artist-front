@@ -7,20 +7,25 @@ ${reset}
   * {
     box-sizing: border-box;
   };
-  body{
+  body {
         padding: 0;
         margin: 0;
-        font-family: 'Noto Sans KR', sans-serif;
-    };
-  input{
+        font-family: 'Gothic A1', sans-serif;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+  };    
+  ::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+  };
+  input {
         display: flex;
         outline: none;
         padding-left: 10px;
-    };
+  };
   button {
     border: none;
     cursor: pointer;
-  }
+  };
 `;
 
 export default GlobalStyles;
