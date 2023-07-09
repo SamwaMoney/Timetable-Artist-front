@@ -2,11 +2,11 @@ import { styled } from 'styled-components';
 import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import S from '../Ranking.style';
 
 const TabContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentSort, setCurrentSort] = useState('worst');
-
     const sort = searchParams.get('sort');
 
     useEffect(() => {
@@ -32,43 +32,24 @@ const TabContainer = () => {
     };
 
     return (
-        <Wrapper>
-            <Tab
+        <S.TabContainer>
+            <S.Tab
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
                 active={currentSort !== 'popular' ? true : false}
             >
                 {currentSort !== 'best' ? '최악의 시간표' : '최고의 시간표'}
-            </Tab>
-            <Tab
+            </S.Tab>
+            <S.Tab
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
                 active={currentSort === 'popular'}
             >
                 인기 시간표
-            </Tab>
-        </Wrapper>
+            </S.Tab>
+        </S.TabContainer>
     );
 };
 export default TabContainer;
-
-const Wrapper = styled.div`
-    width: 394px;
-    height: 37px;
-    width: 100%;
-    margin-top: 32px;
-    ${FlexCenter};
-`;
-
-const Tab = styled.div`
-    width: 152px;
-    height: 32px;
-    font-size: 14px;
-    font-weight: 500;
-    ${FlexCenter};
-    border-bottom: ${({ active }) =>
-        active ? '5px solid black' : '3px solid black'};
-    cursor: pointer;
-`;
