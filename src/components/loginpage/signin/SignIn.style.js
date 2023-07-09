@@ -3,15 +3,15 @@ const S = {};
 S.Wrapper =styled.div`
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: 31.2rem;
     padding: auto;
     align-items: center;
     .input {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-top: 100px;
-        margin-bottom: 85px;
+        margin-top: 6.25rem;
+        margin-bottom: 3.4rem;
     }
 `;
 S.InputWrapper = styled.div`
@@ -24,70 +24,64 @@ S.InputWrapper = styled.div`
         justify-content: space-between;
     }
     .id-input {
-        gap: 34px;
-    }
-    .pw-input {
-        gap: 20px;
+        padding-bottom: 3rem;
     }
     .alert-text { // 로그인 실패 시 뜨는 문구
         text-align: center;
-        margin: 20px auto;
+        margin: 1.2rem auto;
         
         color: var(--red);
         font-family: var(--korean);
-        font-size: 14px;
+        font-size: 0.8vw;
         font-style: normal;
         font-weight: 500;
         line-height: 154.953%;
     }
     .hidden {
-        visibility: hidden;
+        //visibility: hidden;
     }
 `;
 S.Text = styled.p`
-    margin: auto;
-    margin-right: 20px;
+    margin: auto 1.2rem auto 0;
     color: var(--black);
     font-family: var(--english);
-    font-size: 20px;
+    font-size: 1.2vw;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 `;
 S.InputBox = styled.input`
     display: flex;
-    width: 200px;
-    padding: 16px 28px;
+    width: 10vw;
+    padding: 1rem 1.7rem;
     align-items: flex-start;
-    gap: 8px;
+    gap: 0.5rem;
     border-radius: 60px;
     border: 0.1rem solid var(--black);
-    background-image: var(--light-grey);
-    margin: auto;
+    background-image: var(--light-gray);
 
     // placehoder 및 innertext css
     ::placeholder {
-        color: var(--grey);
+        color: var(--gray);
     }
     font-family: var(--korean);
-    font-size: 14px;
+    font-size: 0.8vw;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 `;
 S.SubmitBtn = styled.button`
-    width: 194px;
-    height: 44px;
+    width: 11vw;
+    height: 2.75rem;
     align-items: flex-start;
-    gap: 16px;
     background: var(--blue);
-    border-radius: 38px;
+    border-radius: 2.3rem;
     border: 0.1rem solid var(--black);
 
     color: var(--white, #FFF);
     text-align: center;
     font-family: var(--white);
-    font-size: 14px;
+    font-size: 0.8vw;
     font-style: normal;
     font-weight: 500;
     line-height: normal;

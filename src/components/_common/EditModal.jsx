@@ -12,7 +12,7 @@ const EditModal = ({ setIsEditModalOpen }) => {
     }
     return (
         <M.Modal>
-            <div className="edit modal">
+            <div className="red-background modal">
                 <p className="emoji">(╯︵╰,)</p>
                 <p className="text edit-text">시간표를 수정하면<br/>기존의 시간표와 랭킹 기록이 사라져요!<br/>그래도 수정할까요?</p>
                 <div>

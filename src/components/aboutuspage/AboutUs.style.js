@@ -3,29 +3,27 @@ const A = {};
 A.Wrapper = styled.div`
     display: flex;
     height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
     justify-content: center;
     align-items: center;
     background: var(--background);
 `;
 A.ContentWrapper = styled.div`
-    width: 1084px;
-    height: 588px;
-    border: 0.1rem solid #000;
+    width: 60%;
+    height: 70%;
+    border: 0.1rem solid var(--black);
     background: linear-gradient(180deg, var(--green) 0%, var(--background) 100%);
-    margin-left: 16px;
+    margin-left: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
-    .div {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+
+    overflow: hidden;
 `;
 A.Logo = styled.img`
-    width: 330px;
-    margin: 0 90px;
+    width: 18vw;
+    margin: 0 5.5vw;
 `;
 A.AboutUsWrapper = styled.div`
     display: flex;
@@ -33,7 +31,7 @@ A.AboutUsWrapper = styled.div`
     align-items: center;
     text-align: center;
     margin: auto;
-    padding: 0px 90px;
+    padding: 0 3vw;
     flex-grow: 1;
 `;
 A.TextBox = styled.div`
@@ -41,25 +39,24 @@ A.TextBox = styled.div`
         color: #000;
         text-align: center;
         font-family: var(--english);
-        font-size: 24px;
+        font-size: 1.6vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        margin-bottom: 30px;
+        margin-bottom: 2vw;
     }
     .kor {
         font-family: var(--korean);
     }
-
     .content {
         color: #000;
         text-align: center;
         font-family: var(--korean);
-        font-size: 14px;
+        font-size: 0.8vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        margin-bottom: 30px;
+        margin-bottom: 1.8rem;
     }
 `;
 export { A };

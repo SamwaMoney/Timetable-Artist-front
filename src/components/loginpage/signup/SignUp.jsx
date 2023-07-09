@@ -18,8 +18,11 @@ const SignUp = () => {
             // 회원가입 api 불러오기
         }
     }
-
-    const handlePwCheck = (e) => {
+    const handlePwChange = (e) => {
+        setPw(e.target.value);
+        setIsPwMatch(pwCheck === e.target.value);
+    }
+    const handlePwCheckChange = (e) => {
         setPwCheck(e.target.value);
         setIsPwMatch(pw === e.target.value);
     }
@@ -29,7 +32,7 @@ const SignUp = () => {
             <form onSubmit={e => handleSubmit(e)}>
                 <div className="input">
                     <S.InputWrapper>
-                        <div className="id-input">
+                        <div>
                             <S.Text>ID</S.Text>
                             <S.InputBox
                                 placeholder="아이디"
@@ -40,23 +43,23 @@ const SignUp = () => {
                         <p className="text text-bottom">아이디가 닉네임으로 활용됩니다.</p>
                     </S.InputWrapper>
                     <S.InputWrapper>
-                        <div className="pw-input">
+                        <div>
                             <S.Text>PW</S.Text>
                             <S.InputBox
-                                placeholder="비밀번호 확인"
+                                placeholder="비밀번호"
                                 type="password"
-                                onChange={e => setPw(e.target.value)}
+                                onChange={e => handlePwChange(e)}
                             />
                         </div>
                         <p className="text">*영문, 숫자, 특수문자 입력 가능</p>
                     </S.InputWrapper>
                     <S.InputWrapper>
-                        <div className="pw-check-input">
+                        <div>
                             <S.Text></S.Text>
                             <S.InputBox
                                 placeholder="비밀번호 확인"
                                 type="password"
-                                onChange={e => handlePwCheck(e)}
+                                onChange={e => handlePwCheckChange(e)}
                             />
                         </div>
                         <p className={`alert-text text ${isPwMatch ? 'hidden' : ''}`}>비밀번호가 일치하지 않습니다.</p>

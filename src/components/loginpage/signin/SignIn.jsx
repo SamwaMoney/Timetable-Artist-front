@@ -27,10 +27,9 @@ const SignIn = () => {
                                 onChange={e => setId(e.target.value)}
                             />
                         </div>
-                        <p className="alert-text hidden">비밀번호가 일치하지 않습니다.</p>
                     </S.InputWrapper>
                     <S.InputWrapper>
-                        <div className="pw-input">
+                        <div>
                             <S.Text>PW</S.Text>
                             <S.InputBox
                                 placeholder="비밀번호"
