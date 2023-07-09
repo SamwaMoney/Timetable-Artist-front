@@ -43,9 +43,6 @@ S.MenuBtn = styled.div`
         font-size: 1.4vw;
         font-family: var(--english);
     }
-    .aboutus p {
-        //align-items: center;
-    }
 `;
 S.WithdrawalBtn = styled.div`
     width: 100%;
