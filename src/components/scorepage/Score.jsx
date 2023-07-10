@@ -6,12 +6,14 @@ import sharing_icon from '../../assets/scorepage/sharing_option.svg';
 import instagram from '../../assets/scorepage/instagram.svg';
 import kakaotalk from '../../assets/scorepage/kakaotalk.svg';
 import twitter from '../../assets/scorepage/twitter.svg';
+import Hamburger from '../_common/Hamburger';
 const Score = () => {
     const [data, setData] = useState([1]);
     return (
         <S.Wrapper>
             {/*햄버거*/}
-            <S.Hamburger />
+            {/* <S.Hamburger /> */}
+            <Hamburger />
             <S.Container>
                 {data.length !== 0 ? (
                     <>

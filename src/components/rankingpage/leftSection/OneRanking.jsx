@@ -34,8 +34,8 @@ const OneRanking = ({ data }) => {
 export default OneRanking;
 
 const RankNum = styled.div`
-    width: 62px;
-    height: 62px;
+    width: 3.9rem;
+    height: 3.9rem;
     border-radius: 50%;
     background-color: white;
     border: 0.1rem solid black;
@@ -46,8 +46,8 @@ const RankNum = styled.div`
 `;
 
 const UserInfo = styled.div`
-    width: 294px;
-    height: 60.588px;
+    width: 18.4rem;
+    height: 3.8rem;
     background-color: white;
     border: 0.1rem solid black;
     border-radius: 60px;
@@ -57,11 +57,11 @@ const UserInfo = styled.div`
 
 const Wrapper = styled.div`
     font-family: Montserrat;
-    height: 60.588px;
-    ${FlexCenter}
-    margin-top:32px;
-    width: 361px;
-    justify-content: space-between;
+    width: 33.38rem;
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const NameContainer = styled.div`
@@ -79,7 +79,6 @@ const NameText = styled.div`
 
 const Category = styled.div`
     width: 180px;
-
     position: absolute;
     left: 90px;
 `;
