@@ -24,9 +24,9 @@ const Toggle = () => {
             <S.ToggleButton onClick={handleChange}>
                 <S.Slider sort={sort} />
             </S.ToggleButton>
-            <S.Text>
+            <S.ToggleText>
                 {sort === 'worst' ? '최고의 시간표 보기' : '최악의 시간표 보기'}
-            </S.Text>
+            </S.ToggleText>
         </S.ToggleContainer>
     );
 };

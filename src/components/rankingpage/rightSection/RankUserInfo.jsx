@@ -1,21 +1,17 @@
-import { styled } from 'styled-components';
-import { FlexCenter } from '../Ranking.style';
-import { useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import S from '../Ranking.style';
 
 const RankUserInfo = ({ currentUser }) => {
+    const isCurrentUser = true;
     return (
         currentUser && (
             <S.RankUserContainer>
-                <S.RankNum>1</S.RankNum>
-                <S.UserInfo>
+                <S.RankNum isCurrentUser={isCurrentUser}>1</S.RankNum>
+                <S.UserInfo isCurrentUser={isCurrentUser}>
                     <S.NameContainer>
                         <S.NameText>{currentUser.name}</S.NameText>
                         <S.Score>{currentUser.score}</S.Score>
                     </S.NameContainer>
-                    <S.Category>{currentUser.category}</S.Category>
+                    <S.RankUserName>{currentUser.nickname}</S.RankUserName>
                 </S.UserInfo>
             </S.RankUserContainer>
         )
