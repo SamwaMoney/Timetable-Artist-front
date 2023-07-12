@@ -12,58 +12,53 @@ M.Modal = styled.div`
     z-index: 999;
 
     .modal {
-        width: 21rem;
-        height: 13.1rem;
+        width: 17.5%;
+        height: 21.5%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
         text-align: center;
 
-        border-radius: 0.6rem;
+        border-radius: 10px;
         border: 0.1rem solid var(--black);
     }
     .emoji, .text {
-        font-family: var(--korean);
-        font-size: 1.2rem;
+        font-size: 1vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
     }
     .edit-text {
-        font-size: 1rem;
+        font-size: 0.85vw;
     }
     .btn {
-        width: 7.6rem;
-        height: 2.8rem;
+        width: 6.4vw;
+        height: 4.6vh;
         flex-shrink: 0;
         border-radius: 33px;
         border: 0.1rem solid var(--black);
-        margin: 0.6rem 1.2rem;
+        margin: 0.5vw 1vw;
         margin-top: 0;
         cursor: pointer;
 
         color: var(--black);
         text-align: center;
-        font-family: var(--korean);
-        font-size: 1rem;
+        font-size: 0.85vw;
         font-style: normal;
         font-weight: 600;
-        line-height: 2.5rem;
     }
     .big-btn {
-        width: 15.1rem;
-        height: 2.8rem;
+        width: 12.6vw;
+        height: 4.6vh;
         border-radius: 33px;
         border: 0.1rem solid var(--black);
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.5vw;
         cursor: pointer;
 
-        font-family: var(--korean);
-        font-size: 1rem;
+        font-size: 0.85vw;
         font-style: normal;
         font-weight: 600;
-        line-height: 2.5rem;
     }
     .red-background {
         background: linear-gradient(180deg, #F21F02 0%, #FF8372 10.24%, #FFEBE8 23.78%, #FFF 30.03%);

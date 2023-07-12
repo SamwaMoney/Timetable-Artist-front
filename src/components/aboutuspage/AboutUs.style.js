@@ -23,7 +23,7 @@ A.ContentWrapper = styled.div`
 `;
 A.Logo = styled.img`
     width: 18vw;
-    margin: 0 5.5vw;
+    margin: 0 9.15%;
 `;
 A.AboutUsWrapper = styled.div`
     display: flex;
@@ -38,25 +38,26 @@ A.TextBox = styled.div`
     .title {
         color: #000;
         text-align: center;
-        font-family: var(--english);
         font-size: 1.6vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
         margin-bottom: 2vw;
     }
-    .kor {
-        font-family: var(--korean);
+    .eng {
+        font-family: var(--english);
     }
     .content {
         color: #000;
         text-align: center;
-        font-family: var(--korean);
         font-size: 0.8vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        margin-bottom: 1.8rem;
+        margin-bottom: 3vw;
+    }
+    .last-content {
+        margin-bottom: 0;
     }
 `;
 export { A };

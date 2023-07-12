@@ -47,7 +47,7 @@ const Login = () => {
                 <div className="div">
                     <L.Logo src={logo}/>
                 </div>
-                <L.TabWrapper className="div">
+                <L.TabWrapper>
                     <L.Tab>
                         {tabArr.map((section) => {
                             return section.tabTittle;
