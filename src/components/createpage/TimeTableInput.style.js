@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const S = {};
 
 S.InputContainer = styled.div`
-    display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    height: 100%;
+    width: 100%;
 `;
 
 S.MainText = styled.div`
@@ -34,21 +34,23 @@ S.DescPlaceText = styled(S.DescText)`
 `;
 
 S.LectureButton = styled.button`
-    width: 5.2rem;
-    height: 1.9rem;
+    width: 45%;
+    height: 2rem;
     padding: 0.25rem 0.75rem;
     background-color: ${props => props.bgcolor};
     border-radius: 19px;
     border: 0.08rem solid var(--black);
 
     font-family: Gothic A1;
-    font-size: 13px;
+    font-size: 0.7rem;
     font-weight: 500;
     color: white;
 `;
 
 S.ButtonDiv = styled.div`
-    width: 14.45rem;
+    margin-left: 30%;
+    margin-top: 5%;
+    width: 50%;
     display: flex;
     justify-content: space-between;
 `;
@@ -58,11 +60,12 @@ S.InputDiv = styled.div`
     align-items: center;
     gap: 1.648rem;
 
-    margin-top: 25.6px;
+    margin-top: 5%;
+    padding-left: 5%;
 `;
 
 S.DescDiv = styled.div`
-    width: 14.45rem;
+    width: 60%;
     height: 2rem;
     z-index: 10;
 
@@ -86,7 +89,7 @@ S.TimeDropdownDiv = styled(S.DayDropdownDiv)`
 `;
 
 S.DropdownDiv = styled.div`
-    width: 14.45rem;
+    width: 10rem;
     height: ${props => (props.isopen ? '10rem' : '2rem')};
 
     border-radius: ${props => (props.isopen ? '18px' : '28px')};
@@ -97,7 +100,6 @@ S.DropdownDiv = styled.div`
 `;
 
 S.NameInput = styled.input`
-    width: 14.45rem;
     height: 2rem;
 
     border-radius: 28px;
@@ -124,19 +126,19 @@ S.DownIcon = styled.img`
 `;
 
 S.CompleteBtn = styled.button`
-    width: 16.5rem;
-    height: 4rem;
+    margin-left: 30%;
+    width: 40%;
+    height: 15%;
 
     border-radius: 17.6px;
     border: 0.08rem solid var(--black);
     background-color: #b0ff00;
 
     font-family: Gothic A1;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: 600;
     line-height: normal;
-
-    margin-top: 2.304rem;
+    margin-top: 5%;
 `;
 
 S.RedCircle = styled.div`
@@ -144,9 +146,15 @@ S.RedCircle = styled.div`
     height: 0.35rem;
     border-radius: 50%;
     background-color: red;
-
     margin-left: 0.4rem;
     margin-top: -0.64rem;
 `;
 
+S.InputText = styled.div`
+    width: 20%;
+    display: flex;
+`;
+S.InputBox = styled.div`
+    width: 70%;
+`;
 export { S };

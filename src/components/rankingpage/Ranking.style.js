@@ -44,30 +44,31 @@ S.SmallContainer = styled.div`
 `;
 
 S.Header = styled.div`
-    margin-top: 1.7rem;
+    margin-top: 7%;
+    height: 20%;
+    display: block;
 `;
 
 S.NewButton = styled.div`
-    margin-top: 1rem;
-    width: 12.13rem;
-    height: 2.8rem;
+    width: 140%;
+    margin-left: -20%;
+    padding: 10% 10% 10% 10%;
     border: 0.1rem solid var(--blue);
     font-weight: 500;
     ${FlexCenter}
     color: var(--blue);
     border-radius: 44px;
     background-color: var(--green);
-    text-align: center;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 `;
 
 //rank
 S.RankNum = styled.div`
-    width: 3.9rem;
-    height: 3.9rem;
+    width: 60px;
+    height: 50px;
     border-radius: 50%;
     ${FlexCenter}
-    font-size: 2.7rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: Montserrat;
     background-color: ${({ isCurrentUser }) =>
@@ -77,37 +78,25 @@ S.RankNum = styled.div`
         ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
 `;
 
-S.RankNumCurrent = styled.div`
-    width: 3.9rem;
-    height: 3.9rem;
-    border-radius: 50%;
-    border: 0.1rem solid black;
-    ${FlexCenter}
-    font-size: 3rem;
-    font-weight: 700;
-    font-family: Montserrat;
-    background-color: pink;
-`;
-
 S.UserInfo = styled.div`
-    width: 18.6rem;
-    height: 3.8rem;
+    width: 100%;
+    height: 100%;
     background-color: ${({ isCurrentUser }) =>
         isCurrentUser ? 'var(--green)' : 'white'};
     border: 0.1rem solid black;
     border-radius: 60px;
     ${FlexCenter}
-    position:relative;
+    position: relative;
     color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
     border: 0.1rem solid
         ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    font-size: 1.25rem;
+    font-size: 1rem;
 `;
 
 S.RankContainer = styled.div`
     font-family: Montserrat;
-    width: 22.8rem;
-    margin-top: 1.2rem;
+    width: 100%;
+    margin-top: 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,15 +104,16 @@ S.RankContainer = styled.div`
 
 //탭 css
 S.TabContainer = styled.div`
-    margin-top: 1.7rem;
-    height: 2.3rem;
+    margin-top: 10%;
+    height: 15%;
+    width: 75%;
     ${FlexCenter};
 `;
 
 S.Tab = styled.div`
-    width: 12.3rem;
-    height: 1.65rem;
-    font-size: 0.9rem;
+    width: 50%;
+    padding-bottom: 3%;
+    font-size: 0.8rem;
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
@@ -134,9 +124,8 @@ S.Tab = styled.div`
 //토글 css
 S.ToggleContainer = styled.div`
     ${FlexCenter}
-    margin-top: 1.7rem;
-    margin-left: -10rem;
-    margin-bottom: 1rem;
+    margin-top: 10%;
+    margin-left: -30%;
 `;
 
 S.ToggleButton = styled.div`
@@ -164,7 +153,7 @@ S.Slider = styled.div`
 `;
 
 S.ToggleText = styled.div`
-    font-size: 1rem;
+    font-size: 0.7rem;
     margin-left: 10px;
     color: black;
 `;
@@ -187,7 +176,8 @@ S.TextBox = styled.div`
 S.List = styled.div`
     ${FlexCenter}
     flex-direction:column;
-    margin-bottom: 2rem;
+    margin-bottom: 10%;
+    width: 75%;
 `;
 
 //rightSection : 개별 유저 section
@@ -219,16 +209,15 @@ S.List = styled.div`
 
 S.RankUserContainer = styled.div`
     font-family: Montserrat;
-    height: 60.588px;
     ${FlexCenter}
-    margin-top:32px;
-    width: 361px;
+    margin-top:10%;
+    width: 70%;
     justify-content: space-between;
 `;
 
 S.NameContainer = styled.div`
     position: absolute;
-    left: 20px;
+    left: 10%;
 `;
 
 S.Score = styled.div`
@@ -236,30 +225,29 @@ S.Score = styled.div`
 `;
 
 S.NameText = styled.div`
-    font-size: 12px;
+    font-size: 0.6rem;
 `;
 
 S.Category = styled.div`
-    width: 180px;
     position: absolute;
-    left: 70px;
+    display: block;
+    left: 30%;
+    padding-right: 2%;
+    font-size: 0.9rem;
 `;
 
 //버튼 컨테이너
 S.ButtonContainer = styled.div`
-    width: 200px
-    height: 25px;
+    width: 75%;
     border-radius: 5px;
-    display:flex;
-    position:relative;
-    left:-100px;
-    margin-top:1.5rem;
-
+    display: flex;
+    position: relative;
+    margin-top: 1.2rem;
 `;
 
 S.IconButton = styled.button`
-    width: 55px;
-    height: 25px;
+    width: 18%;
+    height: 100%;
     background-color: var(--red);
     border-radius: 5px;
     display: flex;
@@ -279,8 +267,6 @@ S.Icon = styled.img`
 
 //댓글
 S.OneCommentContainer = styled.div`
-    width: 320px;
-    height: 100px;
     background-color: var(--green);
     border-radius: 7px;
     border: 0.1rem solid black;
@@ -297,17 +283,22 @@ S.CommentInfo = styled.div`
 
 S.CommentUserName = styled.div`
     padding-right: 0.5rem;
+    font-size: 0.9rem;
     font-weight: 600;
 `;
 
-S.CommentDate = styled.div``;
+S.CommentDate = styled.div`
+    font-size: 0.8rem;
+`;
 
-S.CommentText = styled.div``;
+S.CommentText = styled.div`
+    font-size: 0.9rem;
+`;
 
 //시간표 목업 사진
 S.TimeTable = styled.img`
-    width: 358px;
-    height: 385px;
+    width: 75%;
+    height: 75%;
     background-color: #888;
     border: 1px solid black;
     margin-top: 0.8rem;
@@ -315,8 +306,8 @@ S.TimeTable = styled.img`
 
 //댓글 쓰기 컴포넌트
 S.NewCommentWrapper = styled.div`
-    margin-top: 1rem;
-    width: 20.25rem;
+    margin-top: 5%;
+    width: 75%;
     font-size: 1.2vw;
     padding: 0.5rem 0.5rem;
     border-radius: 2rem;
@@ -334,13 +325,13 @@ S.CommentInput = styled.textarea`
 `;
 
 S.UploadImg = styled.img`
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin-left: 20px;
 `;
 
 S.OneUserName = styled.div`
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--blue);
     margin-top: 0.8rem;

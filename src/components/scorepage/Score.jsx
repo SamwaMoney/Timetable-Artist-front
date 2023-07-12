@@ -12,7 +12,6 @@ const Score = () => {
     return (
         <S.Wrapper>
             {/*햄버거*/}
-            {/* <S.Hamburger /> */}
             <Hamburger />
             <S.Container>
                 {data.length !== 0 ? (
