@@ -23,7 +23,7 @@ A.ContentWrapper = styled.div`
 `;
 A.Logo = styled.img`
     width: 18vw;
-    margin: 0 5.5vw;
+    margin: 0 9.15%;
 `;
 A.AboutUsWrapper = styled.div`
     display: flex;
