@@ -21,7 +21,7 @@ const Rank = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const rankList = useSelector(state => state.rankReducer);
     const [currentUser, setCurrentUser] = useState();
-    const currentId = searchParams.get('id') || 1;
+    const currentId = searchParams.get('id') || rankList[0].id;
 
     //현재 선택한 유저의 id와 일치하는 데이터를 찾아서 보여주기
     useEffect(() => {
@@ -46,10 +46,11 @@ const Rank = () => {
                     <RankingList></RankingList>
                 </S.SmallContainer>
                 {/*개별 유저 데이터 보여주는 right section*/}
-                <S.SmallContainer>
-                    <RankUserInfo currentUser={currentUser} />
-                    {/*🧐자의로 추가한 부분 : 유저 닉네임*/}
-                    {/* {currentUser && (
+                {currentUser && (
+                    <S.SmallContainer>
+                        <RankUserInfo currentUser={currentUser} />
+                        {/*🧐자의로 추가한 부분 : 유저 닉네임*/}
+                        {/* {currentUser && (
                         <S.OneUserNameContainer>
                             <S.OneUserName>
                                 {currentUser?.nickname}
@@ -57,24 +58,25 @@ const Rank = () => {
                             <S.TimeTableText>님의 시간표</S.TimeTableText>
                         </S.OneUserNameContainer>
                     )} */}
-                    <S.BedgeContainer>
-                        {<S.Bedge2>{currentUser?.category}</S.Bedge2>}
-                    </S.BedgeContainer>
-                    <S.TimeTable src={TimeTableImg} alt='사진' />
-                    {/*버튼 컨테이너*/}
-                    <S.ButtonContainer>
-                        <S.IconButton>
-                            <S.Icon src={NoLike} alt='하트' />
-                            11
-                        </S.IconButton>
-                        <S.IconButton>
-                            <S.Icon src={Comment} alt='댓글' />
-                            11
-                        </S.IconButton>
-                    </S.ButtonContainer>
-                    <NewComment />
-                    <CommentList />
-                </S.SmallContainer>
+                        <S.BedgeContainer>
+                            {<S.Bedge2>{currentUser?.category}</S.Bedge2>}
+                        </S.BedgeContainer>
+                        <S.TimeTable src={TimeTableImg} alt='사진' />
+                        {/*버튼 컨테이너*/}
+                        <S.ButtonContainer>
+                            <S.IconButton>
+                                <S.Icon src={NoLike} alt='하트' />
+                                11
+                            </S.IconButton>
+                            <S.IconButton>
+                                <S.Icon src={Comment} alt='댓글' />
+                                11
+                            </S.IconButton>
+                        </S.ButtonContainer>
+                        <NewComment />
+                        <CommentList />
+                    </S.SmallContainer>
+                )}
             </S.Container>
         </S.Wrapper>
     );

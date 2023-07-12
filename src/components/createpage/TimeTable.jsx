@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
     const startHour = 8;
@@ -19,7 +18,6 @@ const TimeTable = () => {
 
     return (
         <div style={{ position: 'relative' }}>
-            <ResetBtn>초기화</ResetBtn>
             <TimeTableContainer>
                 <table>
                     <thead>
@@ -30,7 +28,7 @@ const TimeTable = () => {
                             ))}
                         </tr>
                     </thead>
-                    <tbody style={{backgroundColor: "white"}}>
+                    <tbody style={{ backgroundColor: 'white' }}>
                         {timeSlots.map((timeSlot, index) => (
                             <tr key={timeSlot}>
                                 <TimeCell>{timeSlot}</TimeCell>
@@ -53,8 +51,8 @@ const TimeTable = () => {
 export default TimeTable;
 
 const TimeTableContainer = styled.div`
-    width: 20.54rem;
-    height: 22.1575rem;
+    width: 100%;
+    height: 100%;
 
     border-radius: 0.4rem;
     border: 0.08rem solid var(--black);
@@ -104,6 +102,9 @@ const TableCell = styled.td`
     }
 
     border-radius: ${({ isFirst, isLast }) =>
-        isFirst ? '0.5625rem 0.5625rem 0 0' : isLast ? '0 0 0.5625rem 0.5625rem' : 'none'};
-
+        isFirst
+            ? '0.5625rem 0.5625rem 0 0'
+            : isLast
+            ? '0 0 0.5625rem 0.5625rem'
+            : 'none'};
 `;
