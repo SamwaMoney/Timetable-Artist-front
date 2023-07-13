@@ -35,7 +35,7 @@ const initialState = [
     {
         id: 66,
         nickname: '피카츄6',
-        category: '이대생인 내가 쉬는 시간에는 치타?',
+        category: '쉬는시간에 치타가 되는 사람',
         score: 43,
     },
     {
@@ -59,7 +59,7 @@ const initialState = [
     {
         id: 100,
         nickname: '피카츄10',
-        category: '(충격) 6시 넘어서 수업 듣는 사람 (진짜 계심)',
+        category: '누가 6시까지 수업을 들을까?',
         score: 76,
     },
     {

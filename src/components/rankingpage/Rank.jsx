@@ -13,6 +13,7 @@ import TimeTableImg from '../../assets/scorepage/timetable.png';
 import NoLike from '../../assets/rankingpage/heart1.png';
 import Comment from '../../assets/rankingpage/comment.png';
 import NewComment from './rightSection/NewComment';
+import OneRanking from './leftSection/OneRanking';
 
 const Rank = () => {
     const [isMyData, setIsMyData] = useState(false);
@@ -43,24 +44,12 @@ const Rank = () => {
                         )}
                     </S.Header>
                     <TabContainer />
-                    <RankingList></RankingList>
+                    <RankingList />
                 </S.SmallContainer>
                 {/*개별 유저 데이터 보여주는 right section*/}
                 {currentUser && (
                     <S.SmallContainer>
-                        <RankUserInfo currentUser={currentUser} />
-                        {/*🧐자의로 추가한 부분 : 유저 닉네임*/}
-                        {/* {currentUser && (
-                        <S.OneUserNameContainer>
-                            <S.OneUserName>
-                                {currentUser?.nickname}
-                            </S.OneUserName>
-                            <S.TimeTableText>님의 시간표</S.TimeTableText>
-                        </S.OneUserNameContainer>
-                    )} */}
-                        <S.BedgeContainer>
-                            {<S.Bedge2>{currentUser?.category}</S.Bedge2>}
-                        </S.BedgeContainer>
+                        <OneRanking data={currentUser} />
                         <S.TimeTable src={TimeTableImg} alt='사진' />
                         {/*버튼 컨테이너*/}
                         <S.ButtonContainer>

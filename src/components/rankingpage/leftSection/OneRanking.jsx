@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import S from '../Ranking.style';
@@ -32,11 +31,13 @@ const OneRanking = ({ data }) => {
                         onMoveDetail(id);
                     }}
                 >
-                    <S.NameContainer isCurrentUser={isCurrentUser}>
-                        <S.NameText>{nickname}</S.NameText>
-                        <S.Score>{score}</S.Score>
+                    <S.NameContainer>
+                        <S.Score>{score}점</S.Score>
                     </S.NameContainer>
-                    <S.Category>{category}</S.Category>
+                    <S.CategoryContainer>
+                        <S.Category>{category}</S.Category>
+                        <S.Nickname>{nickname}</S.Nickname>
+                    </S.CategoryContainer>
                 </S.UserInfo>
             </S.RankContainer>
         )

@@ -64,6 +64,7 @@ S.NewButton = styled.div`
 
 //rank
 S.RankNum = styled.div`
+    margin-right: 1%;
     width: 60px;
     height: 50px;
     border-radius: 50%;
@@ -95,7 +96,7 @@ S.UserInfo = styled.div`
 
 S.RankContainer = styled.div`
     font-family: Montserrat;
-    width: 100%;
+    width: 80%;
     margin-top: 10%;
     display: flex;
     justify-content: space-between;
@@ -177,7 +178,7 @@ S.List = styled.div`
     ${FlexCenter}
     flex-direction:column;
     margin-bottom: 10%;
-    width: 75%;
+    width: 90%;
 `;
 
 //rightSection : 개별 유저 section
@@ -217,23 +218,33 @@ S.RankUserContainer = styled.div`
 
 S.NameContainer = styled.div`
     position: absolute;
-    left: 10%;
+    left: 5%;
 `;
 
 S.Score = styled.div`
-    font-size: 17px;
+    font-size: 1rem;
 `;
 
 S.NameText = styled.div`
     font-size: 0.6rem;
 `;
 
-S.Category = styled.div`
+S.CategoryContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    display: block;
-    left: 30%;
-    padding-right: 2%;
+    left: 23%;
+    padding-right: 3%;
+`;
+
+S.Category = styled.div`
+    font-weight: 700;
     font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+`;
+S.Nickname = styled.div`
+    font-size: 0.9rem;
+    margin-left: 2rem;
 `;
 
 //버튼 컨테이너
