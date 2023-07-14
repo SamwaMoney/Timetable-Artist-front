@@ -185,6 +185,17 @@ S.UploadBtn = styled.button`
     font-weight: 600;
     margin-bottom: 10%;
 `;
+S.UploadedBtn = styled.button`
+    border-radius: 34px;
+    background: var(--white);
+    width: 50%;
+    padding: 3%;
+
+    color: var(--gray);
+    font-size: 0.75vw;
+    font-weight: 400;
+    margin-bottom: 10%;
+`;
 S.IconContainer = styled(S.BasicContainer)`
     margin: 5% 3% 10% 3%;
     gap: 15%;
