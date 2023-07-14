@@ -8,6 +8,8 @@ import ScorePage from './pages/ScorePage';
 import RankingPage from './pages/RankingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import NotFoundPage from './pages/404Page';
+import MHamburger from './components/_common/M_Hamburger';
+import MenuPage from './pages/M_MenuPage';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
@@ -40,6 +42,7 @@ function App() {
                             path='/aboutus'
                             element={<AboutUsPage />}
                         />
+                        <Route path='/menu' element={<MenuPage />} />
                         <Route path='/*' element={<NotFoundPage />} />
                     </Routes>
                 </BrowserRouter>

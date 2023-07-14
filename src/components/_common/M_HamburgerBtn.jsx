@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+const MHamburgerButton = () => {
+    const navigate = useNavigate();
 
-const MHamburger = () => {
+    const onMoveMenuPage = () => {
+        navigate('/menu');
+    };
     return (
-        <Wrapper>
+        <Wrapper onClick={onMoveMenuPage}>
             <Line1 />
             <Line2 />
             <Line3 />
@@ -10,7 +15,7 @@ const MHamburger = () => {
     );
 };
 
-export default MHamburger;
+export default MHamburgerButton;
 
 const Wrapper = styled.div`
     position: absolute;
