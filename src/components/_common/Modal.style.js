@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 const M = {};
 M.Modal = styled.div`
     position: fixed;
@@ -23,7 +23,8 @@ M.Modal = styled.div`
         border-radius: 10px;
         border: 0.1rem solid var(--black);
     }
-    .emoji, .text {
+    .emoji,
+    .text {
         font-size: 1vw;
         font-style: normal;
         font-weight: 500;
@@ -61,19 +62,35 @@ M.Modal = styled.div`
         font-weight: 600;
     }
     .red-background {
-        background: linear-gradient(180deg, #F21F02 0%, #FF8372 10.24%, #FFEBE8 23.78%, #FFF 30.03%);
+        background: linear-gradient(
+            180deg,
+            #f21f02 0%,
+            #ff8372 10.24%,
+            #ffebe8 23.78%,
+            #fff 30.03%
+        );
     }
     .blue-background {
-        background: linear-gradient(180deg, #1962ED 0%, #6FA0FF 10.24%, #E2ECFF 23.78%, #FFF 30.03%);
+        background: linear-gradient(
+            180deg,
+            #1962ed 0%,
+            #6fa0ff 10.24%,
+            #e2ecff 23.78%,
+            #fff 30.03%
+        );
     }
     .gray-btn {
-        background: #EAEAEA;
+        background: #eaeaea;
     }
     .red-btn {
-        background: #FFA396;
+        background: #ffa396;
     }
     .blue-btn {
-        background: #8FB6FF;
+        background: #8fb6ff;
+    }
+    .error-text {
+        font-size: 1.1rem;
+        font-weight: 500;
     }
 `;
 export { M };
