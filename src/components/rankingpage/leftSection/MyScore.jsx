@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-import { FlexCenter } from '../Ranking.style';
 import S from '../Ranking.style';
 
 const MyScore = () => {

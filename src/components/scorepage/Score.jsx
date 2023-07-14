@@ -3,12 +3,30 @@ import { useState } from 'react';
 import timetable from '../../assets/scorepage/timetable.png';
 import type from '../../assets/scorepage/Rectangle 98.png';
 import sharing_icon from '../../assets/scorepage/sharing_option.svg';
+import sharing_none from '../../assets/scorepage/sharing_none.svg';
 import instagram from '../../assets/scorepage/instagram.svg';
 import kakaotalk from '../../assets/scorepage/kakaotalk.svg';
 import twitter from '../../assets/scorepage/twitter.svg';
 import Hamburger from '../_common/Hamburger';
+import RangkingModal from '../_common/RankingModal';
+import EditModal from '../_common/EditModal';
 const Score = () => {
     const [data, setData] = useState([1]);
+    const [isRankingModalOpen, setRankingModalOpen] = useState(false);
+    const [isUploaded, setIsUploaded] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isHidden, setIsHidden] = useState(true);
+
+    const handleRankingClick = () => {
+        setRankingModalOpen(true);
+        setIsUploaded(true);
+    };
+
+    const handleEditClick = e => {
+        e.preventDefault();
+        setIsEditModalOpen(true);
+    };
+
     return (
         <S.Wrapper>
             {/*햄버거*/}
@@ -73,18 +91,56 @@ const Score = () => {
                                 <div className='text'>✔ 6전공! 전공마스터</div>
                             </S.SpecialBox>
                             <S.Hide>
-                                <S.Icon src={sharing_icon} width={'1.5vw'} />
+                                {isHidden ? (
+                                    <button
+                                        onClick={() => {
+                                            setIsHidden(false);
+                                        }}
+                                        style={{ background: 'none' }}
+                                    >
+                                        <S.Icon
+                                            src={sharing_icon}
+                                            width={'1.5vw'}
+                                        />
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => {
+                                            setIsHidden(true);
+                                        }}
+                                        style={{ background: 'none' }}
+                                    >
+                                        <S.Icon
+                                            src={sharing_none}
+                                            width={'1.5vw'}
+                                        />
+                                    </button>
+                                )}
                                 <div className='text'>
                                     강의명을 숨기고 게시할래요.
                                 </div>
                             </S.Hide>
-                            <S.UploadBtn>랭킹보드에 게시하기</S.UploadBtn>
+                            {isUploaded ? (
+                                <S.UploadedBtn>
+                                    이미 랭킹보드에 게시 완료되었어요
+                                </S.UploadedBtn>
+                            ) : (
+                                <S.UploadBtn onClick={handleRankingClick}>
+                                    랭킹보드에 게시하기
+                                </S.UploadBtn>
+                            )}
+
                             <S.BasicFont>SNS에 공유하기</S.BasicFont>
                             <S.IconContainer>
                                 <S.Icon src={instagram} width={'3vw'} />
                                 <S.Icon src={kakaotalk} width={'3vw'} />
                                 <S.Icon src={twitter} width={'3vw'} />
                             </S.IconContainer>
+                            {isUploaded && (
+                                <S.UploadBtn onClick={e => handleEditClick(e)}>
+                                    시간표 수정하기
+                                </S.UploadBtn>
+                            )}
                         </S.SmallContainer>
                     </>
                 ) : (
@@ -95,6 +151,12 @@ const Score = () => {
                     </S.NoData>
                 )}
             </S.Container>
+            {isRankingModalOpen && (
+                <RangkingModal setRankingModalOpen={setRankingModalOpen} />
+            )}
+            {isEditModalOpen && (
+                <EditModal setIsEditModalOpen={setIsEditModalOpen} />
+            )}
         </S.Wrapper>
     );
 };
