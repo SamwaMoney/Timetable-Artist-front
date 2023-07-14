@@ -1,6 +1,7 @@
 import { M } from './Modal.style';
 
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 const ResetModal = ({ setIsResetModalOpen }) => {
     const handleResetClick = () => {
@@ -9,18 +10,21 @@ const ResetModal = ({ setIsResetModalOpen }) => {
         window.location.reload();
     };
     return (
-        <M.Modal>
-            <div className='red-background modal'>
-                <p className='emoji'>(๑°ㅁ°๑)‼</p>
-                <p className='text'>정말 초기화할까요?</p>
+        <M.Modal className={`${isMobile && "mobile-background"}`}>
+            <div className={`red-background modal ${isMobile && "mobile-modal"}`}>
+                <p className={`emoji ${isMobile && "mobile-emoji"}`}>(๑°ㅁ°๑)‼</p>
+                <p className={`text ${isMobile && "mobile-text"}`}>정말 초기화할까요?</p>
                 <div>
                     <button
                         onClick={() => setIsResetModalOpen(false)}
-                        className='btn gray-btn'
+                        className={`btn gray-btn ${isMobile && "mobile-btn"}`}
                     >
                         취소
                     </button>
-                    <button onClick={handleResetClick} className='btn red-btn'>
+                    <button 
+                        onClick={handleResetClick} 
+                        className={`btn red-btn ${isMobile && "mobile-btn"}`}
+                    >
                         초기화
                     </button>
                 </div>

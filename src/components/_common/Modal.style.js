@@ -11,6 +11,10 @@ M.Modal = styled.div`
     align-items: center;
     z-index: 999;
 
+    &.mobile-background {
+        background: rgba(0, 0, 0, 0.40);
+    }
+
     .modal {
         width: 17.5%;
         height: 21.5%;
@@ -20,8 +24,13 @@ M.Modal = styled.div`
         align-items: center;
         text-align: center;
 
-        border-radius: 10px;
+        border-radius: 30px;
         border: 0.1rem solid var(--black);
+
+        &.mobile-modal {
+            width: 69.2%;
+            height: 25%;
+        }
     }
     .emoji,
     .text {
@@ -29,15 +38,25 @@ M.Modal = styled.div`
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+        &.mobile-emoji {
+            font-size: 5vw;
+        }
+        &.mobile-text {
+            font-size: 4vw;
+        }
     }
     .edit-text {
         font-size: 0.85vw;
+
+        &.mobile-edit-text {
+            font-size: 3.5vw;
+        }
     }
     .btn {
         width: 6.4vw;
         height: 4.6vh;
         flex-shrink: 0;
-        border-radius: 33px;
+        border-radius: 90px;
         border: 0.1rem solid var(--black);
         margin: 0.5vw 1vw;
         margin-top: 0;
@@ -48,18 +67,35 @@ M.Modal = styled.div`
         font-size: 0.85vw;
         font-style: normal;
         font-weight: 600;
+
+        &.mobile-btn {
+            width: 22vw;
+            height: 5vh;
+            font-size: 3.5vw;
+            font-weight: 700;
+            margin: 2vw 4vw;
+        }
     }
     .big-btn {
+        color: var(--black);
         width: 12.6vw;
         height: 4.6vh;
-        border-radius: 33px;
+        border-radius: 90px;
         border: 0.1rem solid var(--black);
-        margin-bottom: 0.5vw;
+        margin: 0.5vw 0;
         cursor: pointer;
 
         font-size: 0.85vw;
         font-style: normal;
         font-weight: 600;
+
+        &.mobile-big-btn {
+            width: 43.3vw;
+            height: 5vh;
+            font-size: 3.5vw;
+            font-weight: 700;
+            margin: 2vw 0;
+        }
     }
     .red-background {
         background: linear-gradient(

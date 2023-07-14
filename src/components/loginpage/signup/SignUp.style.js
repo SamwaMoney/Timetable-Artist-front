@@ -12,6 +12,9 @@ S.Wrapper =styled.div`
         justify-content: center;
         height: 45vh;
     }
+    .mobile-input {
+        height: 60vh;
+    }
 `;
 S.InputWrapper = styled.div`
     display: flex;
@@ -21,6 +24,9 @@ S.InputWrapper = styled.div`
         display: flex;
         height: auto;
         justify-content: space-between;
+        &.mobile-div {
+            width: 75vw;
+        }
     }
     .text {
         text-align: center;
@@ -31,6 +37,10 @@ S.InputWrapper = styled.div`
         font-style: normal;
         font-weight: 500;
         line-height: 154.953%;
+    }
+    .mobile-text {
+        margin: 4vw auto;
+        font-size: 3vw;
     }
     .text-top {
         margin-bottom: 0;
@@ -54,6 +64,9 @@ S.Text = styled.p`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    &.mobile-Text {
+        font-size: 5vw;
+    }
 `;
 S.InputBox = styled.input`
     display: flex;
@@ -62,7 +75,7 @@ S.InputBox = styled.input`
     align-items: flex-start;
     border-radius: 60px;
     border: 0.1rem solid var(--black);
-    background-image: var(--light-gray);
+    background: var(--light-gray);
 
     // placehoder 및 innertext css
     ::placeholder {
@@ -72,13 +85,19 @@ S.InputBox = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    &.mobile-inputbox {
+        width: 60vw;
+        height: 6.7vh;
+        font-size: 4.3vw;
+        
+    }
 `;
 S.SubmitBtn = styled.button`
     width: 11vw;
     height: 5vh;
     align-items: flex-start;
     background: var(--blue);
-    border-radius: 36px;
+    border-radius: 5rem;
     border: 0.1rem solid var(--black);
 
     color: var(--white, #FFF);
@@ -90,5 +109,10 @@ S.SubmitBtn = styled.button`
     line-height: normal;
 
     cursor: pointer;
+    &.mobile-btn {
+        width: 53.3vw;
+        height: 7.3vh;
+        font-size: 5vw;
+    }
 `;
 export {S};
