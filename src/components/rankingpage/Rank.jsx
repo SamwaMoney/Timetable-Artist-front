@@ -1,24 +1,23 @@
 import S from './Ranking.style';
 import Hamburger from '../_common/Hamburger';
-import { useState } from 'react';
 import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import RankUserInfo from './rightSection/RankUserInfo';
+import { useEffect, useState } from 'react';
 import CommentList from './rightSection/CommentList';
 import TimeTableImg from '../../assets/scorepage/timetable.png';
-import NoLike from '../../assets/rankingpage/heart1.png';
-import Comment from '../../assets/rankingpage/comment.png';
 import NewComment from './rightSection/NewComment';
 import OneRanking from './leftSection/OneRanking';
+import NewButton from './leftSection/Button';
+import CommentButton from './rightSection/CmtButton';
+import HeartButton from './rightSection/HeartButton';
 
-const Rank = () => {
-    const [isMyData, setIsMyData] = useState(false);
+const Rank = ({ isMyData }) => {
+    // const [isMyData, setIsMyData] = useState(true);
 
-    //right secton 로직
+    //right secton 로직isMyData={isMyData}
     const [searchParams, setSearchParams] = useSearchParams();
     const rankList = useSelector(state => state.rankReducer);
     const [currentUser, setCurrentUser] = useState();
@@ -36,13 +35,7 @@ const Rank = () => {
             {/*랭킹 보여주는 left section*/}
             <S.Container>
                 <S.SmallContainer>
-                    <S.Header>
-                        {isMyData ? (
-                            <MyScore />
-                        ) : (
-                            <S.NewButton>시간표 등록하기</S.NewButton>
-                        )}
-                    </S.Header>
+                    {isMyData ? <MyScore /> : <NewButton isMyData={isMyData} />}
                     <TabContainer />
                     <RankingList />
                 </S.SmallContainer>
@@ -53,14 +46,8 @@ const Rank = () => {
                         <S.TimeTable src={TimeTableImg} alt='사진' />
                         {/*버튼 컨테이너*/}
                         <S.ButtonContainer>
-                            <S.IconButton>
-                                <S.Icon src={NoLike} alt='하트' />
-                                11
-                            </S.IconButton>
-                            <S.IconButton>
-                                <S.Icon src={Comment} alt='댓글' />
-                                11
-                            </S.IconButton>
+                            <HeartButton />
+                            <CommentButton />
                         </S.ButtonContainer>
                         <NewComment />
                         <CommentList />

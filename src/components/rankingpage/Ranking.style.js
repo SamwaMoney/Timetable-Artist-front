@@ -50,8 +50,8 @@ S.Header = styled.div`
 `;
 
 S.NewButton = styled.div`
-    width: 140%;
-    margin-left: -20%;
+    width: 160%;
+    margin-left: -30%;
     padding: 10% 10% 10% 10%;
     border: 0.1rem solid var(--blue);
     font-weight: 500;
@@ -81,7 +81,7 @@ S.RankNum = styled.div`
 
 S.UserInfo = styled.div`
     width: 100%;
-    height: 100%;
+    height: 3.4rem;
     background-color: ${({ isCurrentUser }) =>
         isCurrentUser ? 'var(--green)' : 'white'};
     border: 0.1rem solid black;
@@ -97,6 +97,7 @@ S.UserInfo = styled.div`
 S.RankContainer = styled.div`
     font-family: Montserrat;
     width: 80%;
+    height: 100%;
     margin-top: 10%;
     display: flex;
     justify-content: space-between;
@@ -105,7 +106,7 @@ S.RankContainer = styled.div`
 
 //탭 css
 S.TabContainer = styled.div`
-    margin-top: 10%;
+    margin-top: 6%;
     height: 15%;
     width: 75%;
     ${FlexCenter};
@@ -161,52 +162,41 @@ S.ToggleText = styled.div`
 
 //내 점수 보기
 S.MyScoreContainer = styled.div`
-    width: 20.1rem;
+    margin-top: 10%;
+    width: 70%;
     height: 5.1rem;
     border-radius: 20px;
-    border: 0.1rem solid var(--black, #171717);
+    border: 0.1rem solid var(--blue);
+    color: var(--blue);
     background: var(--background-green);
     ${FlexCenter};
+    padding: 0.5rem 0;
 `;
 
 S.TextBox = styled.div`
     margin: 0 2rem;
+    ${FlexCenter}
+    flex-direction: column;
 `;
-
+S.Text = styled.div`
+    font-family: Montserrat;
+    font-size: 0.9rem;
+    font-weight: 500;
+`;
+S.RankText = styled.div`
+    font-family: Montserrat;
+    font-weight: 550;
+    font-size: 1.5rem;
+`;
 //점수 list
 S.List = styled.div`
     ${FlexCenter}
     flex-direction:column;
     margin-bottom: 10%;
-    width: 90%;
+    width: 100%;
 `;
 
 //rightSection : 개별 유저 section
-
-//RankUser
-// S.RankNum = styled.div`
-//     width: 62px;
-//     height: 62px;
-//     border-radius: 50%;
-//     background-color: var(--green);
-//     border: 0.1rem solid var(--blue);
-//     ${FlexCenter}
-//     font-size:36px;
-//     font-weight: 700;
-//     color: var(--blue);
-//     font-family: Montserrat;
-// `;
-
-// S.UserInfo = styled.div`
-//     width: 294px;
-//     height: 60.588px;
-//     background-color: var(--green);
-//     border: 0.1rem solid var(--blue);
-//     border-radius: 60px;
-//     ${FlexCenter}
-//     position:relative;
-//     color: var(--blue);
-// `;
 
 S.RankUserContainer = styled.div`
     font-family: Montserrat;
@@ -223,6 +213,9 @@ S.NameContainer = styled.div`
 
 S.Score = styled.div`
     font-size: 1rem;
+    font-weight: 500;
+    position: absolute;
+    left: 5%;
 `;
 
 S.NameText = styled.div`
