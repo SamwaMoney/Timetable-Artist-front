@@ -40,7 +40,7 @@ S.SmallContainer = styled.div`
     width: 49.5%;
     height: 100%;
     overflow-y: scroll;
-    border: 1px solid black;
+    border: 0.1rem solid black;
 `;
 
 S.Header = styled.div`
