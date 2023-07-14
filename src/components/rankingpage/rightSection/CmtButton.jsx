@@ -1,4 +1,4 @@
-import S from '../Ranking.style';
+import { S } from '../Ranking.style';
 import Comment from '../../../assets/rankingpage/comment.png';
 
 const CommentButton = () => {

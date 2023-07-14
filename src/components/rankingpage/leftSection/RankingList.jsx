@@ -3,9 +3,8 @@ import Toggle from './Toggle';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import S from '../Ranking.style';
-
-const RankingList = () => {
+import { S, M } from '../Ranking.style';
+const RankingList = ({ isMobile }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const rankList = useSelector(state => state.rankReducer);
@@ -20,7 +19,22 @@ const RankingList = () => {
         });
     }, [sort]);
 
-    return (
+    return isMobile ? (
+        <M.List>
+            {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
+            {sort === 'popular' ? null : <Toggle isMobile={isMobile} />}
+            {rankList.map((user, index) => {
+                return (
+                    <OneRanking
+                        isMobile={isMobile}
+                        key={user.id}
+                        data={user}
+                        index={index}
+                    />
+                );
+            })}
+        </M.List>
+    ) : (
         <S.List>
             {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
             {sort === 'popular' ? null : <Toggle />}

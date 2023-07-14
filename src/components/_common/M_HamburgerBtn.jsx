@@ -21,15 +21,15 @@ const Wrapper = styled.div`
     position: absolute;
     top: 8%;
     left: 7%;
-    width: 43px;
-    height: 40px;
+    width: 65px;
+    height: 80px;
     span {
         background-color: black;
         position: absolute;
-        width: 2.4rem;
-        height: 4px;
+        width: 100%;
+        height: 6px;
         font-weight: 500;
-        border-radius: 2px;
+        border-radius: 3px;
     }
 `;
 
@@ -38,9 +38,9 @@ const Line1 = styled.span`
 `;
 
 const Line2 = styled.span`
-    top: 13px;
+    top: 20px;
 `;
 
 const Line3 = styled.span`
-    top: 26px;
+    top: 40px;
 `;

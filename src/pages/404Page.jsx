@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { M } from '../components/_common/Modal.style';
-import S from '../components/rankingpage/Ranking.style';
+import { S } from '../components/rankingpage/Ranking.style';
 const NotFoundPage = () => {
     return (
         <S.Wrapper>

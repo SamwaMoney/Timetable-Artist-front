@@ -1,4 +1,3 @@
-import S from './Ranking.style';
 import Hamburger from '../_common/Hamburger';
 import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
@@ -13,6 +12,7 @@ import OneRanking from './leftSection/OneRanking';
 import NewButton from './leftSection/Button';
 import CommentButton from './rightSection/CmtButton';
 import HeartButton from './rightSection/HeartButton';
+import { S } from './Ranking.style';
 
 const Rank = ({ isMyData }) => {
     // const [isMyData, setIsMyData] = useState(true);
