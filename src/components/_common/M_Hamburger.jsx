@@ -41,14 +41,6 @@ const MHamburger = () => {
 
     return (
         <S.FlexContainer>
-            {/* <div
-                style={{
-                    padding: '10% 0px 10% 5%',
-                    borderBottom: '0.1rem solid black',
-                }}
-            >
-                <AiOutlineLeft size='10vw' onClick={handleMoveBack} />
-            </div> */}
             <div style={{ marginTop: '30%', borderBottom: '1px solid black' }}>
                 <BackBtn />
             </div>

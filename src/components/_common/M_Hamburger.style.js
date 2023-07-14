@@ -17,7 +17,7 @@ S.MenuBtn = styled.div`
     a {
         color: var(--black);
         font-family: var(--korean);
-        font-size: 7vw;
+        font-size: 6.5vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
