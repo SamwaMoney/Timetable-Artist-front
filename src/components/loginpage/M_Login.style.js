@@ -1,43 +1,14 @@
 import { styled } from "styled-components";
 const L = {};
 L.Wrapper = styled.div`
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
     background: var(--background);
-`;
-L.ContentWrapper = styled.div`
-    width: 60%;
-    height: 70%;
-    border: 0.1rem solid var(--black);
-    background: linear-gradient(180deg, var(--green) 0%, var(--background) 100%);
-    margin-left: 1%;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    position: fixed;
     overflow: hidden;
-    .div {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-`;
-L.Logo = styled.img`
-    width: 18vw;
-    margin: 0 9%;
-`;
-L.Tab = styled.ul`
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    height: 5vh;
 `;
 L.TabWrapper = styled.div`
     display: flex;
@@ -46,7 +17,14 @@ L.TabWrapper = styled.div`
     height: 80%;
     align-items: center;
     text-align: center;
-    flex-grow: 1;
+`;
+L.Tab = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 5vh;
 `;
 L.TabTittle = styled.li`
     display: flex;
@@ -56,7 +34,7 @@ L.TabTittle = styled.li`
 
     color: var(--black);
     text-align: center;
-    font-size: 1.2vw;
+    font-size: 4.3vw;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -69,17 +47,16 @@ L.TabItem = styled.div`
     flex-direction: column;
 `;
 L.Line = styled.div`
-    width: 20vw;
+    width: 80vw;
     height: 0.3vh;
     background: var(--black);
 `;
 L.ActiveLine = styled.div`
-    width: 10vw;
+    width: 40vw;
     height: 0.2vh;
     margin-top: auto;
     &.active {
         background: var(--black);
     }
 `;
-
 export { L };

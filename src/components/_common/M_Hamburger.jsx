@@ -49,7 +49,12 @@ const MHamburger = () => {
                 <AiOutlineLeft size='2rem' onClick={handleMoveBack} />
             </div>
             <S.MenuBtn>
-                <NavLink>
+                <NavLink
+                    to='/aboutus'
+                    style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                    }
+                >
                     <p>ABOUT US</p>
                 </NavLink>
             </S.MenuBtn>

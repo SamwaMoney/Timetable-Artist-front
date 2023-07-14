@@ -1,12 +1,11 @@
-import Hamburger from "../_common/Hamburger";
-import { L } from "./Login.style";
-import logo from "../../assets/mainpage/시간표아티스트logo.png";
-
 import { useState } from "react";
-import SignIn from "./signin/SignIn";
-import SignUp from "./signup/SignUp";
 
-const Login = () => {
+import MSignIn from "./signin/M_SignIn";
+import MSignUp from "./signup/M_SignUp";
+
+import { L } from "./M_Login.style";
+
+const MLogin = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const handleTabClick = (index) => setActiveIndex(index);
 
@@ -22,7 +21,7 @@ const Login = () => {
                 </L.TabItem>
             ),
             tabContent: (
-                <SignIn />
+                <MSignIn />
             ),
         },
         {
@@ -35,19 +34,14 @@ const Login = () => {
                 </L.TabItem>
             ),
             tabContent: (
-                <SignUp />
+                <MSignUp />
             ),
         },
     ];
 
     return (
         <L.Wrapper>
-            <Hamburger />
-            <L.ContentWrapper>
-                <div className="div">
-                    <L.Logo src={logo}/>
-                </div>
-                <L.TabWrapper>
+            <L.TabWrapper>
                     <L.Tab>
                         {tabArr.map((section) => {
                             return section.tabTittle;
@@ -57,10 +51,9 @@ const Login = () => {
                     <div>
                         {tabArr[activeIndex].tabContent}
                     </div>
-                </L.TabWrapper>
-            </L.ContentWrapper>
+            </L.TabWrapper>
         </L.Wrapper>
     );
 }
 
-export default Login;
+export default MLogin;
