@@ -25,7 +25,7 @@ const RankingList = () => {
             {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
             {sort === 'popular' ? null : <Toggle />}
             {rankList.map((user, index) => {
-                return <OneRanking data={user} index={index} />;
+                return <OneRanking key={user.id} data={user} index={index} />;
             })}
         </S.List>
     );

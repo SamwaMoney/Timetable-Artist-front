@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import S from '../Ranking.style';
 
 const OneComment = () => {

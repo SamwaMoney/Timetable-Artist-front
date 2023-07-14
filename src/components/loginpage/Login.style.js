@@ -33,15 +33,19 @@ L.Logo = styled.img`
 `;
 L.Tab = styled.ul`
     display: flex;
-    justify-content: space-around;
+    //justify-content: space-around;
+    justify-content: center;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 0;
     margin-bottom: 0;
     height: 5vh;
 `;
 L.TabWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    //justify-content: space-between;
+    justify-content: center;
+    height: 80%;
     align-items: center;
     text-align: center;
     flex-grow: 1;
@@ -54,7 +58,6 @@ L.TabTittle = styled.li`
 
     color: var(--black);
     text-align: center;
-    font-family: var(--korean);
     font-size: 1.2vw;
     font-style: normal;
     font-weight: 700;
@@ -66,12 +69,12 @@ L.TabItem = styled.div`
 `;
 L.Line = styled.div`
     width: 20vw;
-    height: 0.25rem;
+    height: 0.3vh;
     background: var(--black);
 `;
 L.ActiveLine = styled.div`
     width: 10vw;
-    height: 0.125rem;
+    height: 0.2vh;
     margin-top: auto;
     &.active {
         background: var(--black);

@@ -12,6 +12,6 @@ const CommentList = () => {
 export default CommentList;
 
 const CommentContainer = styled.div`
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 5%;
+    width: 75%;
 `;
