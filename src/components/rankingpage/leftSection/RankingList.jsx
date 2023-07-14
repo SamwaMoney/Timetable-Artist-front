@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { S, M } from '../Ranking.style';
 const RankingList = ({ isMobile }) => {
+    console.log('isMobll', isMobile);
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const rankList = useSelector(state => state.rankReducer);

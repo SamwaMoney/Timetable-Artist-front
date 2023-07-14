@@ -21,47 +21,44 @@ const OneRanking = ({ data, isMobile }) => {
         }
     }, [id, currentId, isCurrentUser]);
 
-    return (
-        data &&
-        (isMobile ? (
-            <>
-                <M.RankContainer>
-                    <M.RankNum isCurrentUser={isCurrentUser}>{rank}</M.RankNum>
-                    <M.UserInfo
-                        isCurrentUser={isCurrentUser}
-                        onClick={() => {
-                            onMoveDetail(id);
-                        }}
-                    >
-                        <M.Score>{score}점</M.Score>
-                        <M.CategoryContainer>
-                            <M.Category>{category}</M.Category>
-                            <M.Nickname>{nickname}</M.Nickname>
-                        </M.CategoryContainer>
-                    </M.UserInfo>
-                </M.RankContainer>
-                <S.TimeTable src={TimeTableImg} alt='사진' />
-            </>
-        ) : (
-            <>
-                <S.RankContainer>
-                    <S.RankNum isCurrentUser={isCurrentUser}>{rank}</S.RankNum>
-                    <S.UserInfo
-                        isCurrentUser={isCurrentUser}
-                        onClick={() => {
-                            onMoveDetail(id);
-                        }}
-                    >
-                        <S.Score>{score}점</S.Score>
-                        <S.CategoryContainer>
-                            <S.Category>{category}</S.Category>
-                            <S.Nickname>{nickname}</S.Nickname>
-                        </S.CategoryContainer>
-                    </S.UserInfo>
-                </S.RankContainer>
-                <S.TimeTable src={TimeTableImg} alt='사진' />
-            </>
-        ))
+    return isMobile ? (
+        <>
+            <M.RankContainer>
+                <M.RankNum isCurrentUser={isCurrentUser}>{rank}</M.RankNum>
+                <M.UserInfo
+                    isCurrentUser={isCurrentUser}
+                    onClick={() => {
+                        onMoveDetail(id);
+                    }}
+                >
+                    <M.Score>{score}점</M.Score>
+                    <M.CategoryContainer>
+                        <M.Category>{category}</M.Category>
+                        <M.Nickname>{nickname}</M.Nickname>
+                    </M.CategoryContainer>
+                </M.UserInfo>
+            </M.RankContainer>
+            <S.TimeTable src={TimeTableImg} alt='사진' />
+        </>
+    ) : (
+        <>
+            <S.RankContainer>
+                <S.RankNum isCurrentUser={isCurrentUser}>{rank}</S.RankNum>
+                <S.UserInfo
+                    isCurrentUser={isCurrentUser}
+                    onClick={() => {
+                        onMoveDetail(id);
+                    }}
+                >
+                    <S.Score>{score}점</S.Score>
+                    <S.CategoryContainer>
+                        <S.Category>{category}</S.Category>
+                        <S.Nickname>{nickname}</S.Nickname>
+                    </S.CategoryContainer>
+                </S.UserInfo>
+            </S.RankContainer>
+            <S.TimeTable src={TimeTableImg} alt='사진' />
+        </>
     );
 };
 export default OneRanking;

@@ -4,6 +4,7 @@ import WithdrawalModal from './WithdrawalModal';
 import EditModal from './EditModal';
 import S from './M_Hamburger.style';
 import { AiOutlineLeft } from 'react-icons/ai';
+import BackBtn from './BackBtn';
 
 const MHamburger = () => {
     const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
@@ -40,13 +41,16 @@ const MHamburger = () => {
 
     return (
         <S.FlexContainer>
-            <div
+            {/* <div
                 style={{
-                    padding: '40px 0px 40px 20px',
+                    padding: '10% 0px 10% 5%',
                     borderBottom: '0.1rem solid black',
                 }}
             >
                 <AiOutlineLeft size='10vw' onClick={handleMoveBack} />
+            </div> */}
+            <div style={{ marginTop: '30%', borderBottom: '1px solid black' }}>
+                <BackBtn />
             </div>
             <S.MenuBtn>
                 <NavLink

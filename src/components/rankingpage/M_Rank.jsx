@@ -27,7 +27,7 @@ const MobileRank = ({ isMyData }) => {
                 </div>
             )}
             <TabContainer isMobile={isMobile} />
-            <RankingList />
+            <RankingList isMobile={isMobile} />
         </M.FlexContainer>
     );
 };

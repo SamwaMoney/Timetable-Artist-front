@@ -20,6 +20,7 @@ S.BasicContainer = styled.div`
 `;
 
 M.FlexContainer = styled.div`
+    font-style: var(--korean);
     ${FlexCenter}
     flex-direction: column;
     background-color: var(--background);
@@ -88,7 +89,7 @@ S.RankNum = styled.div`
 M.RankNum = styled.div`
     margin-right: 1%;
     width: 20%;
-    height: 13vw;
+    height: 14vw;
     border-radius: 50%;
     ${FlexCenter}
     font-size: 8vw;
@@ -117,11 +118,11 @@ S.UserInfo = styled.div`
 `;
 M.UserInfo = styled.div`
     width: 100%;
-    padding: 8%;
+    height: 14vw;
     background-color: ${({ isCurrentUser }) =>
         isCurrentUser ? 'var(--green)' : 'white'};
     border: 0.1rem solid black;
-    border-radius: 70px;
+    border-radius: 7vw;
     ${FlexCenter}
     position: relative;
     color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
@@ -145,7 +146,8 @@ M.RankContainer = styled.div`
     font-family: Montserrat;
     width: 80%;
     height: 100%;
-    margin-top: 10%;
+    margin-top: 7%;
+    margin-bottom: 3%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -178,7 +180,7 @@ S.Tab = styled.div`
 M.Tab = styled.div`
     width: 50%;
     padding-bottom: 3%;
-    font-size: 2.2vw;
+    font-size: 4vw;
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
@@ -199,9 +201,9 @@ M.ToggleWrapper = styled.div`
     margin-top: 10%;
 `;
 M.ToggleContainer = styled.div`
-    margin-left: -50%;
-    width: 13.5%;
-    height: 60px;
+    margin-left: -30%;
+    width: 14vw;
+    height: 7vw;
     ${FlexCenter}
 `;
 
@@ -221,7 +223,7 @@ M.ToggleButton = styled.div`
     height: 100%;
     background-color: white;
     border: 0.1rem solid black;
-    border-radius: 30px;
+    border-radius: 3.5vw;
     cursor: pointer;
 `;
 
@@ -241,14 +243,14 @@ S.Slider = styled.div`
 
 M.Slider = styled.div`
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 5.3vw;
+    height: 5.3vw;
     background-color: ${props =>
         props.sort === 'worst' ? '#f22b02' : '#1962ed'};
     border: 1.3px solid black;
     border-radius: 50%;
     top: 50%;
-    left: ${props => (props.sort === 'worst' ? '95px' : '5px')};
+    left: ${props => (props.sort === 'worst' ? '7.5vw' : '1vw')};
     transform: translate(0, -50%);
     transition: left 0.2s ease;
 `;
@@ -260,7 +262,7 @@ S.ToggleText = styled.div`
 `;
 
 M.ToggleText = styled.div`
-    font-size: 2vw;
+    font-size: 3.5vw;
     margin-left: 10px;
     color: black;
 `;
@@ -312,7 +314,7 @@ S.Text = styled.div`
 
 M.Text = styled.div`
     font-family: Montserrat;
-    font-size: 3vw;
+    font-size: 3.5vw;
     font-weight: 500;
     margin-bottom: 5%;
 `;
@@ -324,7 +326,7 @@ S.RankText = styled.div`
 `;
 M.RankText = styled.div`
     font-weight: 700;
-    font-size: 6vw;
+    font-size: 7vw;
     margin-top: 5%;
 `;
 
@@ -401,7 +403,7 @@ M.Category = styled.div`
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: 700;
-    font-size: 3.7vw;
+    font-size: 4vw;
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
