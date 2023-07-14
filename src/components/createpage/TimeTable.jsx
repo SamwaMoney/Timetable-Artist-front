@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
     const startHour = 8;
-    const endHour = 21.5;
+    const endHour = 20;
     const timeInterval = 0.5;
-    const numberOfSlots = (endHour - startHour) / timeInterval + 1;
+    const numberOfSlots = (endHour - startHour) / timeInterval;
 
     const timeSlots = Array.from({ length: numberOfSlots }, (_, index) => {
         // 시간 계산 (정각인 경우 출력, 30분인 경우 출력하지 않음)
@@ -17,7 +18,11 @@ const TimeTable = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
     return (
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', width: '35.7%' }}>
+            <ResetDiv>
+                <ResetBtn>초기화</ResetBtn>
+                <NoticeText>*강의 블록을 클릭하면 하나씩 삭제할 수 있어요.</NoticeText>
+            </ResetDiv>
             <TimeTableContainer>
                 <table>
                     <thead>
@@ -43,6 +48,10 @@ const TimeTable = () => {
                         ))}
                     </tbody>
                 </table>
+                <EtcDiv>
+                    <TableText>etc</TableText>
+                    <EtcDescDiv></EtcDescDiv>
+                </EtcDiv>
             </TimeTableContainer>
         </div>
     );
@@ -51,8 +60,8 @@ const TimeTable = () => {
 export default TimeTable;
 
 const TimeTableContainer = styled.div`
-    width: 100%;
-    height: 100%;
+    /* width: 20.54rem; */
+    height: 22.1575rem;
 
     border-radius: 0.4rem;
     border: 0.08rem solid var(--black);
@@ -60,6 +69,21 @@ const TimeTableContainer = styled.div`
 
     display: flex;
     justify-content: flex-end;
+    flex-direction: column;
+`;
+
+const ResetDiv = styled.div`
+    position: absolute;
+    top: -3rem;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`;
+
+const NoticeText = styled.div`
+    font-size: 0.5625vw;
+    font-weight: 500;
 `;
 
 const ResetBtn = styled.button`
@@ -74,8 +98,8 @@ const ResetBtn = styled.button`
     font-size: 11px;
     font-weight: 500;
 
-    position: absolute;
-    top: -3rem;
+    /* position: absolute;
+    top: -3rem; */
 `;
 
 const DayCell = styled.th`
@@ -94,6 +118,7 @@ const TimeCell = styled.td`
     line-height: normal;
 
     background-color: var(--background);
+    text-align: center;
 `;
 
 const TableCell = styled.td`
@@ -107,4 +132,28 @@ const TableCell = styled.td`
             : isLast
             ? '0 0 0.5625rem 0.5625rem'
             : 'none'};
+`;
+
+const EtcDiv = styled.div`
+    display: flex;
+    justify-content: space-around;
+`;
+
+const TableText = styled.div`
+    font-family: var(--english);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: normal;
+
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+const EtcDescDiv = styled.div`
+    background-color: white;
+    width: 304px;
+    height: 50px;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-left: auto;
 `;

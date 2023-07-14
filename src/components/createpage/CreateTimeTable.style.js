@@ -32,18 +32,10 @@ S.Container = styled(S.BasicContainer)`
     height: 70%;
     border: 0.1rem solid black;
     background: linear-gradient(180deg, #b0ff00 0%, #e2e2e2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
 
-S.SmallContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 49.5%;
-    height: 100%;
+    justify-content: space-evenly;
+
     overflow-y: scroll;
 `;
 export { S };
