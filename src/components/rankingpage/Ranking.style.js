@@ -19,6 +19,12 @@ S.BasicContainer = styled.div`
     align-items: center;
 `;
 
+M.FlexContainer = styled.div`
+    ${FlexCenter}
+    flex-direction: column;
+    background-color: var(--background);
+`;
+
 S.Wrapper = styled(S.BasicContainer)`
     background-color: var(--background);
     height: 100vh;
@@ -81,8 +87,8 @@ S.RankNum = styled.div`
 
 M.RankNum = styled.div`
     margin-right: 1%;
-    padding: 3% 5.5% 3% 5.5%;
-    height: 10%;
+    width: 20%;
+    height: 13vw;
     border-radius: 50%;
     ${FlexCenter}
     font-size: 8vw;
@@ -128,7 +134,8 @@ S.RankContainer = styled.div`
     font-family: Montserrat;
     width: 80%;
     height: 100%;
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-bottom: 3%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,7 +200,7 @@ M.ToggleWrapper = styled.div`
 `;
 M.ToggleContainer = styled.div`
     margin-left: -50%;
-    width: 13.7%;
+    width: 13.5%;
     height: 60px;
     ${FlexCenter}
 `;
@@ -358,6 +365,7 @@ S.Score = styled.div`
 `;
 
 M.Score = styled.div`
+    font-family: Montserrat;
     font-size: 4vw;
     font-weight: 500;
     position: absolute;
@@ -393,7 +401,7 @@ M.Category = styled.div`
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: 700;
-    font-size: 4vw;
+    font-size: 3.7vw;
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
@@ -401,6 +409,7 @@ S.Nickname = styled.div`
     margin-left: 2rem;
 `;
 M.Nickname = styled.div`
+    font-family: Montserrat;
     font-size: 2.5rem;
 `;
 

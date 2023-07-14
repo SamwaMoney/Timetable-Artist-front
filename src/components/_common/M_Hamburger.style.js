@@ -18,7 +18,7 @@ S.MenuBtn = styled.div`
     a {
         color: var(--black);
         font-family: var(--korean);
-        font-size: 1.6rem;
+        font-size: 5vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
@@ -37,7 +37,7 @@ S.MenuBtn = styled.div`
 `;
 S.WithdrawalBtn = styled.div`
     width: 100%;
-    height: 6vh;
+    height: 10vh;
     margin-top: auto;
     cursor: pointer;
     overflow: hidden;
@@ -46,7 +46,7 @@ S.WithdrawalBtn = styled.div`
 
     color: var(--black);
     font-family: var(--english);
-    font-size: 1rem;
+    font-size: 3vw;
     font-style: normal;
     font-weight: 500;
     line-height: 154.953%;
