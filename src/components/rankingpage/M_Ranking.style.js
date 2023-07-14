@@ -1,7 +1,7 @@
 import { styled, css } from 'styled-components';
-const S = {};
+const M = {};
 
-S.FlexContainer = styled.div`
+M.FlexContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -11,8 +11,18 @@ S.FlexContainer = styled.div`
     overflow: scroll;
 `;
 
-S.ButtonContainer = styled.div`
+M.ButtonContainer = styled.div`
     margin-top: 23%;
     width: 100%;
 `;
-export default S;
+M.RankText = styled.div`
+    font-family: Montserrat;
+    font-weight: 550;
+    font-size: 1.4rem;
+`;
+M.Text = styled.div`
+    font-family: Montserrat;
+    font-size: 30px;
+    font-weight: 500;
+`;
+export default M;

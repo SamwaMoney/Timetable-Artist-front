@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import S from '../Ranking.style';
+import { S, M } from '../Ranking.style';
 import TimeTableImg from '../../../assets/scorepage/timetable.png';
 
-const OneRanking = ({ data }) => {
+const OneRanking = ({ data, isMobile }) => {
     const { id, nickname, score, category, rank } = data ? data : {};
     const [searchParams, setSearchParams] = useSearchParams();
     const currentId = searchParams.get('id') | 1;
@@ -22,7 +22,27 @@ const OneRanking = ({ data }) => {
     }, [id, currentId, isCurrentUser]);
 
     return (
-        data && (
+        data &&
+        (isMobile ? (
+            <>
+                <M.RankContainer>
+                    <M.RankNum isCurrentUser={isCurrentUser}>{rank}</M.RankNum>
+                    <M.UserInfo
+                        isCurrentUser={isCurrentUser}
+                        onClick={() => {
+                            onMoveDetail(id);
+                        }}
+                    >
+                        <M.Score>{score}점</M.Score>
+                        <M.CategoryContainer>
+                            <M.Category>{category}</M.Category>
+                            <M.Nickname>{nickname}</M.Nickname>
+                        </M.CategoryContainer>
+                    </M.UserInfo>
+                </M.RankContainer>
+                <S.TimeTable src={TimeTableImg} alt='사진' />
+            </>
+        ) : (
             <>
                 <S.RankContainer>
                     <S.RankNum isCurrentUser={isCurrentUser}>{rank}</S.RankNum>
@@ -41,7 +61,7 @@ const OneRanking = ({ data }) => {
                 </S.RankContainer>
                 <S.TimeTable src={TimeTableImg} alt='사진' />
             </>
-        )
+        ))
     );
 };
 export default OneRanking;
