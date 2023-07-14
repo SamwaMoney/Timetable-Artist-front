@@ -3,8 +3,7 @@ import NewButton from './leftSection/Button';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import MyScore from './leftSection/MyScore';
-import { useState } from 'react';
-import M from './M_Ranking.style';
+import { M } from './Ranking.style';
 
 const MobileRank = ({ isMyData }) => {
     const isMobile = true;
@@ -28,7 +27,7 @@ const MobileRank = ({ isMyData }) => {
                 </div>
             )}
             <TabContainer isMobile={isMobile} />
-            <RankingList isMobile={isMobile} />
+            <RankingList />
         </M.FlexContainer>
     );
 };

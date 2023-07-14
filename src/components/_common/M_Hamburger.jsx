@@ -46,7 +46,7 @@ const MHamburger = () => {
                     borderBottom: '0.1rem solid black',
                 }}
             >
-                <AiOutlineLeft size='2rem' onClick={handleMoveBack} />
+                <AiOutlineLeft size='10vw' onClick={handleMoveBack} />
             </div>
             <S.MenuBtn>
                 <NavLink
