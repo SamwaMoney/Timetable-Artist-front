@@ -7,8 +7,13 @@ import instagram from '../../assets/scorepage/instagram.svg';
 import kakaotalk from '../../assets/scorepage/kakaotalk.svg';
 import twitter from '../../assets/scorepage/twitter.svg';
 import Hamburger from '../_common/Hamburger';
+import RangkingModal from '../_common/RankingModal';
 const Score = () => {
     const [data, setData] = useState([1]);
+    const [isRankingModalOpen, setRankingModalOpen] = useState(false);
+    const handleRankingClick = () => {
+        setRankingModalOpen(true);
+    };
     return (
         <S.Wrapper>
             {/*햄버거*/}
@@ -78,7 +83,9 @@ const Score = () => {
                                     강의명을 숨기고 게시할래요.
                                 </div>
                             </S.Hide>
-                            <S.UploadBtn>랭킹보드에 게시하기</S.UploadBtn>
+                            <S.UploadBtn onClick={handleRankingClick}>
+                                랭킹보드에 게시하기
+                            </S.UploadBtn>
                             <S.BasicFont>SNS에 공유하기</S.BasicFont>
                             <S.IconContainer>
                                 <S.Icon src={instagram} width={'3vw'} />
@@ -95,6 +102,9 @@ const Score = () => {
                     </S.NoData>
                 )}
             </S.Container>
+            {isRankingModalOpen && (
+                <RangkingModal setRankingModalOpen={setRankingModalOpen} />
+            )}
         </S.Wrapper>
     );
 };
