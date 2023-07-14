@@ -1,5 +1,5 @@
 import Write from '../../../assets/rankingpage/write.png';
-import S from '../Ranking.style';
+import { S } from '../Ranking.style';
 
 const NewComment = () => {
     return (

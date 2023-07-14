@@ -1,4 +1,4 @@
-import S from '../Ranking.style';
+import { S } from '../Ranking.style';
 import NoLike from '../../../assets/rankingpage/heart1.png';
 
 const HeartButton = () => {

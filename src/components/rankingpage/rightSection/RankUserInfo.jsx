@@ -1,4 +1,4 @@
-import S from '../Ranking.style';
+import { S } from '../Ranking.style';
 
 const RankUserInfo = ({ currentUser }) => {
     const isCurrentUser = true;

@@ -1,19 +1,17 @@
 import MHamburgerButton from '../_common/M_HamburgerBtn';
-import S from './M_Ranking.style';
 import NewButton from './leftSection/Button';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import MyScore from './leftSection/MyScore';
+import { useState } from 'react';
+import M from './M_Ranking.style';
 
 const MobileRank = ({ isMyData }) => {
+    const isMobile = true;
     return (
-        <S.FlexContainer>
+        <M.FlexContainer>
             <MHamburgerButton />
             {isMyData ? (
-                <div style={{ marginTop: '30%', width: '30%' }}>
-                    <NewButton />
-                </div>
-            ) : (
                 <div
                     style={{
                         width: '100%',
@@ -22,12 +20,16 @@ const MobileRank = ({ isMyData }) => {
                         justifyContent: 'center',
                     }}
                 >
-                    <MyScore />
+                    <MyScore isMobile={isMobile} />
+                </div>
+            ) : (
+                <div style={{ marginTop: '30%', width: '30%' }}>
+                    <NewButton isMobile={isMobile} />
                 </div>
             )}
-            <TabContainer />
-            <RankingList />
-        </S.FlexContainer>
+            <TabContainer isMobile={isMobile} />
+            <RankingList isMobile={isMobile} />
+        </M.FlexContainer>
     );
 };
 export default MobileRank;
