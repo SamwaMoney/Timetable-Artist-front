@@ -19,7 +19,7 @@ export default MHamburgerButton;
 
 const Wrapper = styled.div`
     position: absolute;
-    top: 8%;
+    top: 6.2%;
     left: 7%;
     width: 65px;
     height: 80px;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
         background-color: black;
         position: absolute;
         width: 100%;
-        height: 6px;
+        height: 1vw;
         font-weight: 500;
         border-radius: 3px;
     }
@@ -38,9 +38,9 @@ const Line1 = styled.span`
 `;
 
 const Line2 = styled.span`
-    top: 20px;
+    top: 2.5vw;
 `;
 
 const Line3 = styled.span`
-    top: 40px;
+    top: 5vw;
 `;

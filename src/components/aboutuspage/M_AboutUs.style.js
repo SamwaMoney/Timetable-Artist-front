@@ -1,7 +1,11 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 const A = {};
 A.Wrapper = styled.div`
-    background: linear-gradient(180deg, var(--green) 0%, var(--background) 100%);
+    background: linear-gradient(
+        180deg,
+        var(--green) 0%,
+        var(--background) 100%
+    );
     width: 100%;
     height: 100%;
 `;
@@ -9,6 +13,7 @@ A.MoveBackBtn = styled.div`
     padding: 40px 0px 40px 20px;
 `;
 A.ContentWrapper = styled.div`
+    padding-top: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
