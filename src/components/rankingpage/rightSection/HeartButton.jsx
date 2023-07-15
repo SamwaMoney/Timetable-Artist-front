@@ -5,7 +5,7 @@ const HeartButton = () => {
     return (
         <S.IconButton>
             <S.Icon src={NoLike} alt='하트' />
-            11
+            <p>11</p>
         </S.IconButton>
     );
 };

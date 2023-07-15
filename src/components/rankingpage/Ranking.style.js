@@ -128,9 +128,12 @@ M.UserInfo = styled.div`
     color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
     border: 0.1rem solid
         ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    font-size: 1rem;
 `;
-
+M.OneRankWrapper = styled.div`
+    position: relative;
+    ${FlexCenter}
+    flex-direction:column;
+`;
 S.RankContainer = styled.div`
     font-family: Montserrat;
     width: 80%;
@@ -144,7 +147,7 @@ S.RankContainer = styled.div`
 
 M.RankContainer = styled.div`
     font-family: Montserrat;
-    width: 80%;
+    width: 85%;
     height: 100%;
     margin-top: 7%;
     margin-bottom: 3%;
@@ -403,7 +406,7 @@ M.Category = styled.div`
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: 700;
-    font-size: 4vw;
+    font-size: 4.4vw;
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
@@ -411,8 +414,7 @@ S.Nickname = styled.div`
     margin-left: 2rem;
 `;
 M.Nickname = styled.div`
-    font-family: Montserrat;
-    font-size: 2.5rem;
+    font-size: 2rem;
 `;
 
 //버튼 컨테이너
@@ -423,7 +425,24 @@ S.ButtonContainer = styled.div`
     position: relative;
     margin-top: 1.2rem;
 `;
-
+M.ButtonContainer = styled.div`
+    position: absolute;
+    bottom: 1vw;
+    width: 100vw;
+    ${FlexCenter}
+    height:10vw;
+    div {
+        width: 40vw;
+    }
+    img {
+        width: 8vw;
+        height: 8vw;
+    }
+    p {
+        border-radius: 40%;
+        font-size: 4.5vw;
+    }
+`;
 S.IconButton = styled.button`
     width: 18%;
     height: 100%;

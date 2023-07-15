@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
 import TimeTableImg from '../../../assets/scorepage/timetable.png';
+import HeartButton from '../rightSection/HeartButton';
+import CommentButton from '../rightSection/CmtButton';
 
 const OneRanking = ({ data, isMobile }) => {
     const { id, nickname, score, category, rank } = data ? data : {};
@@ -22,7 +24,7 @@ const OneRanking = ({ data, isMobile }) => {
     }, [id, currentId, isCurrentUser]);
 
     return isMobile ? (
-        <>
+        <M.OneRankWrapper>
             <M.RankContainer>
                 <M.RankNum isCurrentUser={isCurrentUser}>{rank}</M.RankNum>
                 <M.UserInfo
@@ -39,7 +41,11 @@ const OneRanking = ({ data, isMobile }) => {
                 </M.UserInfo>
             </M.RankContainer>
             <S.TimeTable src={TimeTableImg} alt='사진' />
-        </>
+            <M.ButtonContainer>
+                <HeartButton />
+                <CommentButton />
+            </M.ButtonContainer>
+        </M.OneRankWrapper>
     ) : (
         <>
             <S.RankContainer>

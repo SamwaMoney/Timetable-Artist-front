@@ -5,7 +5,7 @@ const CommentButton = () => {
     return (
         <S.IconButton>
             <S.Icon src={Comment} alt='댓글' />
-            11
+            <p>11</p>
         </S.IconButton>
     );
 };
