@@ -9,7 +9,16 @@ const CreateTimeTable = () => {
             <S.Wrapper>
                 <Hamburger />
                 <S.Container>
-                    <TimeTable />
+                    <S.TimeTableDiv>
+                        <S.ResetDiv>
+                            <S.ResetBtn>초기화</S.ResetBtn>
+                            <S.NoticeText>
+                                *강의 블록을 클릭하면 하나씩 삭제할 수 있어요.
+                            </S.NoticeText>
+                        </S.ResetDiv>
+                        <TimeTable />
+                    </S.TimeTableDiv>
+
                     <TimeTableInput />
                 </S.Container>
             </S.Wrapper>

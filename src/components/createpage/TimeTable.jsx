@@ -18,42 +18,36 @@ const TimeTable = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
     return (
-        <div style={{ position: 'relative', width: '35.7%' }}>
-            <ResetDiv>
-                <ResetBtn>초기화</ResetBtn>
-                <NoticeText>*강의 블록을 클릭하면 하나씩 삭제할 수 있어요.</NoticeText>
-            </ResetDiv>
-            <TimeTableContainer>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
+        <TimeTableContainer>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        {days.map(day => (
+                            <DayCell key={day}>{day}</DayCell>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody style={{ backgroundColor: 'white' }}>
+                    {timeSlots.map((timeSlot, index) => (
+                        <tr key={timeSlot}>
+                            <TimeCell>{timeSlot}</TimeCell>
                             {days.map(day => (
-                                <DayCell key={day}>{day}</DayCell>
+                                <TableCell
+                                    key={`${day}-${timeSlot}`}
+                                    isFirst={index === 0}
+                                    isLast={index === numberOfSlots - 1}
+                                ></TableCell>
                             ))}
                         </tr>
-                    </thead>
-                    <tbody style={{ backgroundColor: 'white' }}>
-                        {timeSlots.map((timeSlot, index) => (
-                            <tr key={timeSlot}>
-                                <TimeCell>{timeSlot}</TimeCell>
-                                {days.map(day => (
-                                    <TableCell
-                                        key={`${day}-${timeSlot}`}
-                                        isFirst={index === 0}
-                                        isLast={index === numberOfSlots - 1}
-                                    ></TableCell>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <EtcDiv>
-                    <TableText>etc</TableText>
-                    <EtcDescDiv></EtcDescDiv>
-                </EtcDiv>
-            </TimeTableContainer>
-        </div>
+                    ))}
+                </tbody>
+            </table>
+            <EtcDiv>
+                <TableText>etc</TableText>
+                <EtcDescDiv></EtcDescDiv>
+            </EtcDiv>
+        </TimeTableContainer>
     );
 };
 
@@ -70,36 +64,6 @@ const TimeTableContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-`;
-
-const ResetDiv = styled.div`
-    position: absolute;
-    top: -3rem;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-`;
-
-const NoticeText = styled.div`
-    font-size: 0.5625vw;
-    font-weight: 500;
-`;
-
-const ResetBtn = styled.button`
-    width: 52px;
-    height: 25px;
-    padding: 5px 9px;
-
-    border-radius: 1.5rem;
-    border: 0.08rem solid var(--black);
-    background: var(--red, #f22b02);
-
-    font-size: 11px;
-    font-weight: 500;
-
-    /* position: absolute;
-    top: -3rem; */
 `;
 
 const DayCell = styled.th`
