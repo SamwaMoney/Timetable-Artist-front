@@ -24,7 +24,6 @@ const Wrapper = styled.div`
     width: 100%;
     height: 20vw;
     background-color: var(--background);
-    border-bottom: 0.3rem solid var(--green);
     display: flex;
     align-items: center;
     padding-top: 5vw;
