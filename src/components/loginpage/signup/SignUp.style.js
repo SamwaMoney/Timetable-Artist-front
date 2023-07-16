@@ -5,7 +5,6 @@ S.Wrapper =styled.div`
     flex-direction: column;
     padding: auto;
     align-items: center;
-    justify-content: center;
     .input {
         display: flex;
         flex-direction: column;
@@ -13,7 +12,7 @@ S.Wrapper =styled.div`
         height: 45vh;
     }
     .mobile-input {
-        height: 60vh;
+        height: 55vh;
     }
 `;
 S.InputWrapper = styled.div`

@@ -1,7 +1,6 @@
 import { S } from '../Ranking.style';
 import { M } from '../Ranking.style';
 const MyScore = ({ isMobile }) => {
-    console.log('isMobile', isMobile);
     return isMobile ? (
         <M.MyScoreContainer>
             <M.FlexBox>

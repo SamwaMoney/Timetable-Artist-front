@@ -3,7 +3,6 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import WithdrawalModal from './WithdrawalModal';
 import EditModal from './EditModal';
 import S from './M_Hamburger.style';
-import { AiOutlineLeft } from 'react-icons/ai';
 import BackBtn from './BackBtn';
 
 const MHamburger = () => {
@@ -41,7 +40,7 @@ const MHamburger = () => {
 
     return (
         <S.FlexContainer>
-            <div style={{ marginTop: '30%', borderBottom: '1px solid black' }}>
+            <div style={{ marginTop: '25%', borderBottom: '1px solid black' }}>
                 <BackBtn />
             </div>
             <S.MenuBtn>

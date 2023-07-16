@@ -17,11 +17,9 @@ const TimeTableInput = () => {
         '17:00',
         '18:30',
         '20:00',
-        '21:30',
     ];
     // 강의 장소 배열
     const coursePlace = [
-        '원격/비대면',
         'ECC',
         '공학관',
         '교육관',
@@ -42,6 +40,7 @@ const TimeTableInput = () => {
         '음악관',
         '종합과학관',
         '포스코관',
+        '원격/비대면',
     ];
 
     // dropdown 4개 open 여부 (요일, 시작시간, 끝시간, 장소)
@@ -85,22 +84,17 @@ const TimeTableInput = () => {
     return (
         <>
             <S.InputContainer>
-                <S.InputDiv>
-                    <S.ButtonDiv>
-                        <S.LectureButton bgcolor='#F22B02'>
-                            강의 삭제
-                        </S.LectureButton>
-                        <S.LectureButton bgcolor='#1962ED'>
-                            강의 추가
-                        </S.LectureButton>
-                    </S.ButtonDiv>
-                </S.InputDiv>
+                <S.LectureButtonDiv>
+                    <S.LectureButton bgcolor='#1962ED'>
+                        강의 추가
+                    </S.LectureButton>
+                </S.LectureButtonDiv>
 
                 <S.InputDiv>
-                    <S.InputText>
+                    <div style={{ display: 'flex' }}>
                         <S.MainText>강의시간</S.MainText>
                         <S.RedCircle />
-                    </S.InputText>
+                    </div>
                     <S.DescDiv style={{ zIndex: '20' }}>
                         {/* 요일 dropdown */}
                         <S.DayDropdownDiv isopen={isOpen[0]}>
@@ -216,67 +210,66 @@ const TimeTableInput = () => {
 
                 <S.ButtonDiv>
                     <S.AddBtn src={add_course} alt='+버튼' />
+                    <S.CheckBoxDiv>
+                        <S.CheckBox type='checkbox' value='-1' />
+                        <S.CheckBoxText>지정된 시간 없음</S.CheckBoxText>
+                    </S.CheckBoxDiv>
                 </S.ButtonDiv>
 
                 <S.InputDiv>
-                    <S.InputText>
+                    <div style={{ display: 'flex' }}>
                         <S.MainText>강의장소</S.MainText>
                         <S.RedCircle />
-                    </S.InputText>
-                    <S.InputBox>
-                        <S.DescDiv>
-                            <S.DropdownDiv isopen={isOpen[3]}>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'space-between',
-                                    }}
-                                    onClick={() => changeOpen(3, true)}
-                                >
-                                    <S.DescPlaceText>
-                                        {selectedPlace}
-                                    </S.DescPlaceText>
-                                    <S.DownIcon
-                                        src={ic_dropdown}
-                                        isopen={isOpen[3]}
-                                        alt='dropdown버튼'
-                                    />
-                                </div>
-                                {isOpen[3] === true
-                                    ? coursePlace.map((place, _) => {
-                                          return (
-                                              <div
-                                                  onClick={() =>
-                                                      changeContent(
-                                                          3,
-                                                          'where',
-                                                          place,
-                                                      )
-                                                  }
-                                              >
-                                                  <S.DescPlaceText>
-                                                      {place}
-                                                  </S.DescPlaceText>
-                                              </div>
-                                          );
-                                      })
-                                    : null}
-                            </S.DropdownDiv>
-                        </S.DescDiv>
-                    </S.InputBox>
+                    </div>
+                    <S.DescDiv>
+                        <S.DropdownDiv isopen={isOpen[3]}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                }}
+                                onClick={() => changeOpen(3, true)}
+                            >
+                                <S.DescPlaceText>
+                                    {selectedPlace}
+                                </S.DescPlaceText>
+                                <S.DownIcon
+                                    src={ic_dropdown}
+                                    isopen={isOpen[3]}
+                                    alt='dropdown버튼'
+                                />
+                            </div>
+                            {isOpen[3] === true
+                                ? coursePlace.map((place, _) => {
+                                      return (
+                                          <div
+                                              onClick={() =>
+                                                  changeContent(
+                                                      3,
+                                                      'where',
+                                                      place,
+                                                  )
+                                              }
+                                          >
+                                              <S.DescPlaceText>
+                                                  {place}
+                                              </S.DescPlaceText>
+                                          </div>
+                                      );
+                                  })
+                                : null}
+                        </S.DropdownDiv>
+                    </S.DescDiv>
                 </S.InputDiv>
 
                 <S.InputDiv>
-                    <S.InputText>
-                        <S.MainText style={{ width: '3.988rem' }}>
-                            강의명
-                        </S.MainText>
-                    </S.InputText>
-                    <S.InputBox>
-                        <S.NameInput placeholder='강의명을 입력하세요' />
-                    </S.InputBox>
+                    <S.MainText style={{ width: '3.988rem' }}>
+                        강의명
+                    </S.MainText>
+                    <S.NameInput placeholder='강의명을 입력하세요' />
                 </S.InputDiv>
+
                 <S.CompleteBtn>시간표 완성</S.CompleteBtn>
             </S.InputContainer>
         </>

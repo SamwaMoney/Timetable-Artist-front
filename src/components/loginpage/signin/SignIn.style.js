@@ -12,7 +12,7 @@ S.Wrapper =styled.div`
         height: 45vh;
     }
     .mobile-input {
-        height: 60vh;
+        height: 55vh;
     }
 `;
 S.InputWrapper = styled.div`
