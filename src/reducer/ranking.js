@@ -1,5 +1,6 @@
 //ranking에 관한 reducer입니다.
-
+// import TimeTable from '../assets/timetable.png';
+import TimeTable from '../assets/scorepage/timetable.png';
 //초기 데이터로 initialState를 만들어 넣었습니다.
 const initialState = [
     {
@@ -7,30 +8,35 @@ const initialState = [
         nickname: '피카츄1',
         category: '연강연강수업을 모으자',
         score: 10,
+        tableImg: TimeTable,
     },
     {
         id: 22,
         nickname: '피카츄2',
         category: '나는한건물만판다',
         score: 30,
+        tableImg: TimeTable,
     },
     {
         id: 33,
         nickname: '피카츄3',
         category: '이화사랑산악회',
         score: 20,
+        tableImg: TimeTable,
     },
     {
         id: 44,
         nickname: '피카츄4',
         category: '학교가밥먹여주냐',
         score: 100,
+        tableImg: TimeTable,
     },
     {
         id: 55,
         nickname: '피카츄5',
         category: '상여자 특) 점심 먹고 등교함',
         score: 60,
+        tableImg: TimeTable,
     },
     {
         id: 66,
@@ -42,43 +48,22 @@ const initialState = [
         id: 77,
         nickname: '피카츄7',
         category: '점심은 포기 못해',
-        score: 18,
+        score: 43,
+        tableImg: TimeTable,
     },
     {
         id: 88,
         nickname: '피카츄8',
         category: '“밥은 먹고 다니냐?”',
         score: 39,
+        tableImg: TimeTable,
     },
     {
         id: 99,
         nickname: '피카츄9',
         category: '이대 지박령을 뵙습니다',
         score: 50,
-    },
-    {
-        id: 100,
-        nickname: '피카츄10',
-        category: '누가 6시까지 수업을 들을까?',
-        score: 76,
-    },
-    {
-        id: 111,
-        nickname: '피카츄11',
-        category: '공강 언젠지 물어보지 마세요',
-        score: 76,
-    },
-    {
-        id: 122,
-        nickname: '피카츄',
-        category: '등록금 뿌린 대로 거두자',
-        score: 89,
-    },
-    {
-        id: 133,
-        nickname: '피카츄',
-        category: '슬기로운 공강생활',
-        score: 29,
+        tableImg: TimeTable,
     },
 ];
 

@@ -1,5 +1,5 @@
 import MHamburgerButton from '../_common/M_HamburgerBtn';
-import NewButton from './leftSection/Button';
+import NewButton from './leftSection/NewButton';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import MyScore from './leftSection/MyScore';
@@ -14,7 +14,6 @@ const MobileRank = ({ isMyData }) => {
                 <div
                     style={{
                         width: '100%',
-                        marginTop: '20%',
                         display: 'flex',
                         justifyContent: 'center',
                     }}
@@ -31,4 +30,5 @@ const MobileRank = ({ isMyData }) => {
         </M.FlexContainer>
     );
 };
+
 export default MobileRank;
