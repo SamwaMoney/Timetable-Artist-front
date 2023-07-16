@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile } from 'react-device-detect';
 
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
@@ -18,42 +19,36 @@ const TimeTable = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
     return (
-        <div style={{ position: 'relative', width: '35.7%' }}>
-            <ResetDiv>
-                <ResetBtn>초기화</ResetBtn>
-                <NoticeText>*강의 블록을 클릭하면 하나씩 삭제할 수 있어요.</NoticeText>
-            </ResetDiv>
-            <TimeTableContainer>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
+        <TimeTableContainer>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        {days.map(day => (
+                            <DayCell key={day}>{day}</DayCell>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody style={{ backgroundColor: 'white' }}>
+                    {timeSlots.map((timeSlot, index) => (
+                        <tr key={timeSlot}>
+                            <TimeCell>{timeSlot}</TimeCell>
                             {days.map(day => (
-                                <DayCell key={day}>{day}</DayCell>
+                                <TableCell
+                                    key={`${day}-${timeSlot}`}
+                                    isfirst={index === 0}
+                                    islast={index === numberOfSlots - 1}
+                                ></TableCell>
                             ))}
                         </tr>
-                    </thead>
-                    <tbody style={{ backgroundColor: 'white' }}>
-                        {timeSlots.map((timeSlot, index) => (
-                            <tr key={timeSlot}>
-                                <TimeCell>{timeSlot}</TimeCell>
-                                {days.map(day => (
-                                    <TableCell
-                                        key={`${day}-${timeSlot}`}
-                                        isFirst={index === 0}
-                                        isLast={index === numberOfSlots - 1}
-                                    ></TableCell>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <EtcDiv>
-                    <TableText>etc</TableText>
-                    <EtcDescDiv></EtcDescDiv>
-                </EtcDiv>
-            </TimeTableContainer>
-        </div>
+                    ))}
+                </tbody>
+            </table>
+            <EtcDiv>
+                <TableText>etc</TableText>
+                <EtcDescDiv></EtcDescDiv>
+            </EtcDiv>
+        </TimeTableContainer>
     );
 };
 
@@ -70,36 +65,13 @@ const TimeTableContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-`;
 
-const ResetDiv = styled.div`
-    position: absolute;
-    top: -3rem;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-`;
-
-const NoticeText = styled.div`
-    font-size: 0.5625vw;
-    font-weight: 500;
-`;
-
-const ResetBtn = styled.button`
-    width: 52px;
-    height: 25px;
-    padding: 5px 9px;
-
-    border-radius: 1.5rem;
-    border: 0.08rem solid var(--black);
-    background: var(--red, #f22b02);
-
-    font-size: 11px;
-    font-weight: 500;
-
-    /* position: absolute;
-    top: -3rem; */
+    ${isMobile &&
+    `
+       align-items: stretch;
+       height: 55%;
+       border: 0px;
+    `}
 `;
 
 const DayCell = styled.th`
@@ -109,6 +81,12 @@ const DayCell = styled.th`
     line-height: normal;
 
     width: 3.8rem;
+
+    ${isMobile &&
+    `
+       font-size: 3.2vw;
+       width: 11rem;
+    `}
 `;
 
 const TimeCell = styled.td`
@@ -119,6 +97,11 @@ const TimeCell = styled.td`
 
     background-color: var(--background);
     text-align: center;
+
+    ${isMobile &&
+    `
+       font-size: 3.2vw;
+    `}
 `;
 
 const TableCell = styled.td`
@@ -126,12 +109,22 @@ const TableCell = styled.td`
         background-color: white;
     }
 
-    border-radius: ${({ isFirst, isLast }) =>
-        isFirst
+    border-radius: ${({ isfirst, islast }) =>
+        isfirst
             ? '0.5625rem 0.5625rem 0 0'
-            : isLast
+            : islast
             ? '0 0 0.5625rem 0.5625rem'
             : 'none'};
+
+    ${isMobile &&
+    `
+        border-radius: ${({ isfirst, islast }) =>
+            isfirst
+                ? '1.5rem 1.5rem 0 0'
+                : islast
+                ? '0 0 1.5rem 1.5rem'
+                : 'none'};
+    `}
 `;
 
 const EtcDiv = styled.div`
@@ -147,6 +140,11 @@ const TableText = styled.div`
 
     margin-left: auto;
     margin-right: auto;
+
+    ${isMobile &&
+    `
+       font-size: 3.2vw;
+    `}
 `;
 
 const EtcDescDiv = styled.div`
@@ -156,4 +154,11 @@ const EtcDescDiv = styled.div`
     border-radius: 8px;
     margin-top: 2px;
     margin-left: auto;
+
+    ${isMobile &&
+    `
+       width: 55rem;
+       height: 7.5rem;
+       margin-top: 8px;
+    `}
 `;
