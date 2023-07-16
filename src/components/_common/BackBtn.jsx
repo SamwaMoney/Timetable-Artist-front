@@ -19,4 +19,5 @@ const Wrapper = styled.div`
     position: fixed;
     left: 5%;
     top: 3.5%;
+    width: 100%;
 `;

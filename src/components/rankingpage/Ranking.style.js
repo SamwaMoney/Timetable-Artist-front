@@ -140,7 +140,6 @@ S.RankContainer = styled.div`
     font-family: Montserrat;
     width: 80%;
     height: 100%;
-    margin-top: 5%;
     margin-bottom: 3%;
     display: flex;
     justify-content: space-between;
@@ -151,8 +150,8 @@ M.RankContainer = styled.div`
     font-family: Montserrat;
     width: 85%;
     height: 100%;
-    margin-top: 10vw;
-    margin-bottom: 3vw;
+    margin-top: 7vw;
+    margin-bottom: 2vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,7 +165,7 @@ S.TabContainer = styled.div`
     ${FlexCenter};
 `;
 M.TabContainer = styled.div`
-    margin-top: 6%;
+    margin-top: 7%;
     height: 15%;
     width: 75%;
     ${FlexCenter};
@@ -416,7 +415,7 @@ S.Nickname = styled.div`
     margin-left: 2rem;
 `;
 M.Nickname = styled.div`
-    font-size: 2rem;
+    font-size: 4.2vw;
 `;
 
 //버튼 컨테이너
@@ -430,7 +429,7 @@ S.ButtonContainer = styled.div`
 M.TimeTableWrapper = styled.div`
     ${FlexCenter}
     position: relative;
-    margin-left: 10%;
+    margin-left: 15%;
     img {
         width: 80%;
         height: 80%;
@@ -512,22 +511,38 @@ S.Icon = styled.img`
 `;
 
 M.Icon = styled.img`
-    width: 4rem;
-    height: 4rem;
-`;
-M.LikeNum = styled.div`
-    font-size: 0.9rem;
+    width: 7vw;
+    height: 7vw;
     position: absolute;
-    margin-left: 75vw;
+    right: 6vw;
+`;
+
+S.CommentIcon = styled.img`
+    width: 7vw;
+    height: 7vw;
+    right: 3vw;
+`;
+
+M.CommentIcon = styled.img`
+    width: 7vw;
+    height: 7vw;
+    right: 10vw;
+`;
+
+M.LikeNum = styled.div`
+    font-size: 5vw;
+    position: absolute;
+    right: 1.8vw;
+    padding-top: 1.4vw;
 `;
 //댓글
 M.OneCommentContainer = styled.div`
     background-color: var(--green);
     border-radius: 7px;
     border: 0.1rem solid black;
-    margin-top: 0.8rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    margin-top: 2vw;
+    margin-bottom: 2.4rem;
+    padding: 2vw;
     display: flex;
     flex-direction: column;
 `;
@@ -560,6 +575,7 @@ S.CommentUserName = styled.div`
 `;
 
 M.CommentUserName = styled.div`
+    margin-top: 1vw;
     font-size: 4vw;
     font-weight: 600;
     position: absolute;
@@ -571,6 +587,7 @@ S.CommentDate = styled.div`
 `;
 
 M.CommentDate = styled.div`
+    margin-top: 1vw;
     font-size: 4vw;
     position: absolute;
     left: 10vw;
@@ -581,8 +598,8 @@ S.CommentText = styled.div`
 `;
 
 M.CommentText = styled.div`
-    margin-top: 5vw;
-    font-size: 0.9rem;
+    margin-top: 7vw;
+    font-size: 4vw;
 `;
 
 S.FlexContainer = styled.div`
@@ -617,7 +634,7 @@ M.NewCommentWrapper = styled.div`
     bottom: 0;
     background-color: var(--background);
     ${FlexCenter}
-    height: 12vw;
+    height: 16vw;
     z-index: 100;
 `;
 M.NewCommentContainer = styled.div`
@@ -637,7 +654,7 @@ M.CommentInput = styled.input`
     border: none;
     border-radius: 5rem;
     z-index: 10;
-    padding: 1.5vw;
+    padding: 3vw;
     width: 80%;
 `;
 S.UploadImg = styled.img`
@@ -648,10 +665,10 @@ S.UploadImg = styled.img`
     right: 1rem;
 `;
 M.UploadImg = styled.img`
-    /* position: absolute;
-    top: 2.4vw;
-    right: 5.8vw;
-    height: 7vw; */
+    position: absolute;
+    top: 4vw;
+    right: 6.5vw;
+    height: 7.7vw;
 `;
 
 S.OneUserName = styled.div`
