@@ -129,9 +129,13 @@ M.UserInfo = styled.div`
     color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
     border: 0.1rem solid
         ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    font-size: 1rem;
 `;
-
+M.OneRankWrapper = styled.div`
+    width: 100%;
+    position: relative;
+    ${FlexCenter}
+    flex-direction:column;
+`;
 S.RankContainer = styled.div`
     font-family: Montserrat;
     width: 80%;
@@ -145,10 +149,10 @@ S.RankContainer = styled.div`
 
 M.RankContainer = styled.div`
     font-family: Montserrat;
-    width: 80%;
+    width: 85%;
     height: 100%;
-    margin-top: 7%;
-    margin-bottom: 3%;
+    margin-top: 10vw;
+    margin-bottom: 3vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -391,7 +395,7 @@ M.CategoryContainer = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    left: 23%;
+    left: 20%;
     padding-right: 3%;
 `;
 
@@ -404,7 +408,7 @@ M.Category = styled.div`
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: 700;
-    font-size: 4vw;
+    font-size: 4.4vw;
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
@@ -412,8 +416,7 @@ S.Nickname = styled.div`
     margin-left: 2rem;
 `;
 M.Nickname = styled.div`
-    font-family: Montserrat;
-    font-size: 2.5rem;
+    font-size: 2rem;
 `;
 
 //버튼 컨테이너
@@ -424,7 +427,52 @@ S.ButtonContainer = styled.div`
     position: relative;
     margin-top: 1.2rem;
 `;
+M.TimeTableWrapper = styled.div`
+    ${FlexCenter}
+    position: relative;
+    margin-left: 10%;
+    img {
+        width: 80%;
+        height: 80%;
+    }
+`;
 
+M.ButtonContainer = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 10vw;
+    height: 10vw;
+    display: flex;
+    div {
+        width: 40vw;
+    }
+    img {
+        width: 5vw;
+        height: 5vw;
+    }
+    p {
+        border-radius: 40%;
+        font-size: 4.5vw;
+    }
+`;
+
+M.DetailBtnContainer = styled.div`
+    display: flex;
+    margin-top: 5vw;
+    margin-left: -10vw;
+    div {
+        width: 200vw;
+    }
+    img {
+        width: 7vw;
+        height: 7vw;
+    }
+    p {
+        width: 30vw;
+        border-radius: 40%;
+        font-size: 4.5vw;
+    }
+`;
 S.IconButton = styled.button`
     width: 18%;
     height: 100%;
@@ -440,12 +488,50 @@ S.IconButton = styled.button`
     margin: 0 5px;
 `;
 
+M.IconButton = styled.button`
+    width: 10vw;
+    height: 7vw;
+    background-color: var(--red);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+    font-family: Montserrat;
+    font-weight: 600;
+    margin: 0 5px;
+    p {
+        font-size: 4vw;
+    }
+`;
+
 S.Icon = styled.img`
+    z-index: 10;
     width: 1.5rem;
     height: 1.5rem;
 `;
 
+M.Icon = styled.img`
+    width: 4rem;
+    height: 4rem;
+`;
+M.LikeNum = styled.div`
+    font-size: 0.9rem;
+    position: absolute;
+    margin-left: 75vw;
+`;
 //댓글
+M.OneCommentContainer = styled.div`
+    background-color: var(--green);
+    border-radius: 7px;
+    border: 0.1rem solid black;
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+`;
+
 S.OneCommentContainer = styled.div`
     background-color: var(--green);
     border-radius: 7px;
@@ -457,8 +543,14 @@ S.OneCommentContainer = styled.div`
 
 S.CommentInfo = styled.div`
     display: flex;
-    width: 80%;
     padding-bottom: 0.5rem;
+    width: 100%;
+    position: relative;
+`;
+M.CommentInfo = styled.div`
+    display: flex;
+    padding-bottom: 0.5rem;
+    position: relative;
 `;
 
 S.CommentUserName = styled.div`
@@ -467,18 +559,40 @@ S.CommentUserName = styled.div`
     font-weight: 600;
 `;
 
+M.CommentUserName = styled.div`
+    font-size: 4vw;
+    font-weight: 600;
+    position: absolute;
+    left: 0;
+`;
+
 S.CommentDate = styled.div`
     font-size: 0.8rem;
+`;
+
+M.CommentDate = styled.div`
+    font-size: 4vw;
+    position: absolute;
+    left: 10vw;
 `;
 
 S.CommentText = styled.div`
     font-size: 0.9rem;
 `;
 
+M.CommentText = styled.div`
+    margin-top: 5vw;
+    font-size: 0.9rem;
+`;
+
+S.FlexContainer = styled.div`
+    display: flex;
+`;
+
 //시간표 목업 사진
 S.TimeTable = styled.img`
-    width: 75%;
-    height: 75%;
+    width: 90%;
+    height: 90%;
     background-color: #888;
     border: 1px solid black;
     margin-top: 0.8rem;
@@ -495,19 +609,49 @@ S.NewCommentWrapper = styled.div`
     display: flex;
     align-items: center;
     background-color: white;
+    position: relative;
+`;
+M.NewCommentWrapper = styled.div`
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--background);
+    ${FlexCenter}
+    height: 12vw;
+    z-index: 100;
+`;
+M.NewCommentContainer = styled.div`
+    width: 90%;
+    background-color: white;
+    height: 70%;
+    border-radius: 10vw;
 `;
 
-S.CommentInput = styled.textarea`
-    width: 80%;
-    padding-left: 20px;
-    font-size: 1.2vw;
+S.CommentInput = styled.input`
     border: none;
 `;
 
+M.CommentInput = styled.input`
+    padding-left: 10vw;
+    font-size: 4.3vw;
+    border: none;
+    border-radius: 5rem;
+    z-index: 10;
+    padding: 1.5vw;
+    width: 80%;
+`;
 S.UploadImg = styled.img`
     width: 1.5rem;
     height: 1.5rem;
-    margin-left: 20px;
+    margin-left: 5rem;
+    position: absolute;
+    right: 1rem;
+`;
+M.UploadImg = styled.img`
+    /* position: absolute;
+    top: 2.4vw;
+    right: 5.8vw;
+    height: 7vw; */
 `;
 
 S.OneUserName = styled.div`
@@ -529,45 +673,46 @@ S.TimeTableText = styled.div`
     margin-top: 0.8rem;
 `;
 
-S.Bedge = styled.div`
-    margin-top: 5px;
-    height: 20px;
-    border: 5px;
-    border-radius: 5px;
-    padding: 3px;
-    font-weight: 500;
-    background-color: red;
-    color: white;
-    margin-left: 10px;
-`;
-S.Bedge2 = styled.div`
-    margin-top: 5px;
-    height: 20px;
-    border: 5px;
-    border-radius: 5px;
-    padding: 3px;
-    font-weight: 500;
-    background-color: violet;
-    color: white;
-    margin-left: 10px;
-`;
-S.Bedge3 = styled.div`
-    margin-top: 5px;
-    height: 20px;
-    border: 5px;
-    border-radius: 5px;
-    padding: 3px;
-    font-weight: 500;
-    background-color: yellowgreen;
-    color: white;
-    margin-left: 10px;
-`;
-S.BedgeContainer = styled.div`
-    ${FlexCenter}
-    width: 80%;
-    height: 30px;
-    margin-top: 10px;
-`;
 S.RankUserName = styled.div`
     font-size: 20px;
+`;
+
+//모바일 디테일 페이지
+M.DetailWrapper = styled.div`
+    width: 100%;
+    padding-top: 15vw;
+    ${FlexCenter}
+    flex-direction: column;
+    background-color: var(--background);
+`;
+
+M.CommentWrapper = styled.div`
+    ${FlexCenter}
+    div {
+        width: 85vw;
+        padding: 1vw;
+        font-size: 4vw;
+    }
+`;
+
+S.CommentTextWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    width: 30vw;
+`;
+
+M.CommentTextWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    width: 5vw;
+    background-color: skyblue;
+`;
+
+S.CommentLikeWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+M.CommentLikeWrapper = styled.div`
+    display: flex;
 `;

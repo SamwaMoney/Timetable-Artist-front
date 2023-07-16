@@ -9,6 +9,7 @@ import RankingPage from './pages/RankingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import NotFoundPage from './pages/404Page';
 import MenuPage from './pages/M_MenuPage';
+import MRankDetail from './components/rankingpage/M_RankDetail';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
@@ -34,6 +35,11 @@ function App() {
                             exact
                             path='/ranking'
                             element={<RankingPage />}
+                        />
+                        <Route
+                            exact
+                            path='/ranking/detail/:id'
+                            element={<MRankDetail />}
                         />
                         {/* About us 페이지 */}
                         <Route

@@ -1,11 +1,11 @@
 import OneComment from './OneComment';
 import styled from 'styled-components';
-const CommentList = () => {
+const CommentList = ({ isMobile }) => {
     return (
         <CommentContainer>
-            <OneComment />
-            <OneComment />
-            <OneComment />
+            <OneComment isMobile={isMobile} />
+            <OneComment isMobile={isMobile} />
+            <OneComment isMobile={isMobile} />
         </CommentContainer>
     );
 };
