@@ -1,31 +1,41 @@
-import { useSearchParams } from 'react-router-dom';
 import { S, M } from './Ranking.style';
-import { useSelector } from 'react-redux';
-import CommentList from './rightSection/CommentList';
-import BackBtn from '../_common/BackBtn';
+import { useSearchParams } from 'react-router-dom';
 import HeartButton from './rightSection/HeartButton';
 import CommentButton from './rightSection/CmtButton';
+import CommentList from './rightSection/CommentList';
+import { AiOutlineLeft } from 'react-icons/ai';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { styled } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import NewComment from './rightSection/NewComment';
+
 const MRankDetail = () => {
-    //랭크를 params으로 전달받아 렌더링함.
     const rankList = useSelector(state => state.rankReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const rank = searchParams.get('rank');
+    const navigate = useNavigate();
 
-    // 목데이터
     const { id, nickname, score, category, tableImg } = rankList
         ? rankList[0]
         : null;
 
-    console.log('params', id);
+    const handleMoveBack = () => {
+        navigate(-1);
+    };
+
     return (
-        <>
-            <BackBtn />
+        <div>
+            <Wrapper>
+                <div style={{ marginTop: '7vw', marginLeft: '4vw' }}>
+                    <AiOutlineLeft size='10vw' onClick={handleMoveBack} />
+                </div>
+            </Wrapper>
             <M.DetailWrapper>
                 <M.RankContainer>
                     <M.RankNum>{rank}</M.RankNum>
                     <M.UserInfo>
                         <M.Score>{score}</M.Score>
+
                         <M.CategoryContainer>
                             <M.Category>{category}</M.Category>
                             <M.Nickname>{nickname}</M.Nickname>
@@ -37,19 +47,20 @@ const MRankDetail = () => {
                     <HeartButton />
                     <CommentButton />
                 </M.DetailBtnContainer>
-                {/* <div
-                    style={{
-                        width: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                > */}
-                <M.CommentWrapper>
-                    <CommentList isMobile={true} />
-                </M.CommentWrapper>
-                {/* <NewComment isMobile={true} /> */}
+                <M.CommentWrapper></M.CommentWrapper>
+                {/*뎃글 적는 인풋창*/}
+                <NewComment isMobile={true} />
+                <CommentList isMobile={true} />
             </M.DetailWrapper>
-        </>
+        </div>
     );
 };
 export default MRankDetail;
+
+const Wrapper = styled.div`
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 10%;
+    background-color: var(--background);
+`;

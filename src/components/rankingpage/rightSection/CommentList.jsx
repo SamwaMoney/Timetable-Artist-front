@@ -1,6 +1,7 @@
 import OneComment from './OneComment';
 import styled from 'styled-components';
 const CommentList = ({ isMobile }) => {
+    console.log(isMobile);
     return (
         <CommentContainer>
             <OneComment isMobile={isMobile} />
@@ -12,6 +13,7 @@ const CommentList = ({ isMobile }) => {
 export default CommentList;
 
 const CommentContainer = styled.div`
-    margin-top: 5%;
-    width: 75%;
+    margin-top: 2%;
+    margin-bottom: 15vw;
+    width: 85%;
 `;

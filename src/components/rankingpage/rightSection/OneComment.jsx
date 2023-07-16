@@ -10,7 +10,7 @@ const OneComment = ({ isMobile }) => {
             <M.CommentInfo>
                 <M.CommentUserName>익명</M.CommentUserName>
                 <M.CommentDate>2023.7.9</M.CommentDate>
-                <M.Icon src={NoLike} />
+                {isLike ? <M.Icon src={GetLike} /> : <M.Icon src={NoLike} />}
                 <M.LikeNum>0</M.LikeNum>
             </M.CommentInfo>
             <M.CommentText>
