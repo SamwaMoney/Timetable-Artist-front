@@ -5,6 +5,7 @@ import CommentList from './rightSection/CommentList';
 import BackBtn from '../_common/BackBtn';
 import HeartButton from './rightSection/HeartButton';
 import CommentButton from './rightSection/CmtButton';
+import NewComment from './rightSection/NewComment';
 const MRankDetail = () => {
     //랭크를 params으로 전달받아 렌더링함.
     const rankList = useSelector(state => state.rankReducer);
@@ -46,6 +47,7 @@ const MRankDetail = () => {
                 <M.CommentWrapper>
                     <CommentList isMobile={true} />
                 </M.CommentWrapper>
+                <NewComment isMobile={true} />
             </M.DetailWrapper>
         </>
     );

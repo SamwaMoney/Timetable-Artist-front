@@ -7,20 +7,16 @@ const OneComment = ({ isMobile }) => {
     const [isLike, setIsLike] = useState(true);
     return isMobile ? (
         <M.OneCommentContainer>
-            {/* <S.CommentInfo>
-                <S.CommentLikeWrapper>
-                    <S.CommentUserName>익명</S.CommentUserName>
-                    <S.CommentDate>2023.7.9</S.CommentDate>
-                </S.CommentLikeWrapper>
-                <S.CommentLikeWrapper>
-                    <M.Icon src={NoLike} />
-                    <M.LikeNum>0</M.LikeNum>
-                </S.CommentLikeWrapper>
-            </S.CommentInfo> */}
-            <S.CommentText>
+            <M.CommentInfo>
+                <M.CommentUserName>익명</M.CommentUserName>
+                <M.CommentDate>2023.7.9</M.CommentDate>
+                <M.Icon src={NoLike} />
+                <M.LikeNum>0</M.LikeNum>
+            </M.CommentInfo>
+            <M.CommentText>
                 그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
                 Spotlight 날 봐 I'm a star star star
-            </S.CommentText>
+            </M.CommentText>
         </M.OneCommentContainer>
     ) : (
         <S.OneCommentContainer>

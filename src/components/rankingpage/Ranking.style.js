@@ -514,9 +514,13 @@ S.Icon = styled.img`
 M.Icon = styled.img`
     width: 4rem;
     height: 4rem;
+    position: absolute;
+    right: 10vw;
 `;
 M.LikeNum = styled.div`
     font-size: 0.9rem;
+    position: absolute;
+    margin-left: 75vw;
 `;
 //댓글
 M.OneCommentContainer = styled.div`
@@ -526,6 +530,8 @@ M.OneCommentContainer = styled.div`
     margin-top: 0.8rem;
     margin-bottom: 1rem;
     padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
 `;
 
 S.OneCommentContainer = styled.div`
@@ -540,8 +546,12 @@ S.OneCommentContainer = styled.div`
 S.CommentInfo = styled.div`
     display: flex;
     padding-bottom: 0.5rem;
-    background-color: red;
     width: 100%;
+    position: relative;
+`;
+M.CommentInfo = styled.div`
+    display: flex;
+    padding-bottom: 0.5rem;
     position: relative;
 `;
 
@@ -551,11 +561,29 @@ S.CommentUserName = styled.div`
     font-weight: 600;
 `;
 
+M.CommentUserName = styled.div`
+    font-size: 4vw;
+    font-weight: 600;
+    position: absolute;
+    left: 0;
+`;
+
 S.CommentDate = styled.div`
     font-size: 0.8rem;
 `;
 
+M.CommentDate = styled.div`
+    font-size: 4vw;
+    position: absolute;
+    left: 10vw;
+`;
+
 S.CommentText = styled.div`
+    font-size: 0.9rem;
+`;
+
+M.CommentText = styled.div`
+    margin-top: 5vw;
     font-size: 0.9rem;
 `;
 
@@ -584,18 +612,45 @@ S.NewCommentWrapper = styled.div`
     align-items: center;
     background-color: white;
 `;
+M.NewCommentWrapper = styled.div`
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--background);
+    ${FlexCenter}
+    height: 12vw;
+    z-index: 100;
+`;
+M.NewCommentContainer = styled.div`
+    width: 90%;
+    background-color: white;
+    height: 70%;
+    border-radius: 10vw;
+`;
 
-S.CommentInput = styled.textarea`
-    width: 80%;
-    padding-left: 20px;
-    font-size: 1.2vw;
+S.CommentInput = styled.input`
     border: none;
 `;
 
+M.CommentInput = styled.input`
+    padding-left: 10vw;
+    font-size: 4.3vw;
+    border: none;
+    border-radius: 5rem;
+    z-index: 10;
+    padding: 1.5vw;
+    width: 80%;
+`;
 S.UploadImg = styled.img`
     width: 1.5rem;
     height: 1.5rem;
-    margin-left: 20px;
+    margin-left: 4rem;
+`;
+M.UploadImg = styled.img`
+    position: absolute;
+    top: 2.4vw;
+    right: 5.8vw;
+    height: 7vw;
 `;
 
 S.OneUserName = styled.div`
@@ -658,7 +713,4 @@ S.CommentLikeWrapper = styled.div`
 
 M.CommentLikeWrapper = styled.div`
     display: flex;
-    align-items: center;
-    /* position: absolute;
-    right: 0; */
 `;
