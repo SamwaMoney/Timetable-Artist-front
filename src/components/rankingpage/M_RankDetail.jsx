@@ -47,7 +47,7 @@ const MRankDetail = () => {
                 <M.CommentWrapper>
                     <CommentList isMobile={true} />
                 </M.CommentWrapper>
-                <NewComment isMobile={true} />
+                {/* <NewComment isMobile={true} /> */}
             </M.DetailWrapper>
         </>
     );

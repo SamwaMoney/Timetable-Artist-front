@@ -514,8 +514,6 @@ S.Icon = styled.img`
 M.Icon = styled.img`
     width: 4rem;
     height: 4rem;
-    position: absolute;
-    right: 10vw;
 `;
 M.LikeNum = styled.div`
     font-size: 0.9rem;
@@ -611,6 +609,7 @@ S.NewCommentWrapper = styled.div`
     display: flex;
     align-items: center;
     background-color: white;
+    position: relative;
 `;
 M.NewCommentWrapper = styled.div`
     width: 100%;
@@ -644,13 +643,15 @@ M.CommentInput = styled.input`
 S.UploadImg = styled.img`
     width: 1.5rem;
     height: 1.5rem;
-    margin-left: 4rem;
+    margin-left: 5rem;
+    position: absolute;
+    right: 1rem;
 `;
 M.UploadImg = styled.img`
-    position: absolute;
+    /* position: absolute;
     top: 2.4vw;
     right: 5.8vw;
-    height: 7vw;
+    height: 7vw; */
 `;
 
 S.OneUserName = styled.div`
@@ -678,6 +679,7 @@ S.RankUserName = styled.div`
 
 //모바일 디테일 페이지
 M.DetailWrapper = styled.div`
+    width: 100%;
     padding-top: 15vw;
     ${FlexCenter}
     flex-direction: column;
