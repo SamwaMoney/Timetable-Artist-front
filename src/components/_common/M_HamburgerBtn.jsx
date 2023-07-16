@@ -7,10 +7,12 @@ const MHamburgerButton = () => {
         navigate('/menu');
     };
     return (
-        <Wrapper onClick={onMoveMenuPage}>
-            <Line1 />
-            <Line2 />
-            <Line3 />
+        <Wrapper>
+            <HamburgerButton onClick={onMoveMenuPage}>
+                <Line1 />
+                <Line2 />
+                <Line3 />
+            </HamburgerButton>
         </Wrapper>
     );
 };
@@ -18,8 +20,19 @@ const MHamburgerButton = () => {
 export default MHamburgerButton;
 
 const Wrapper = styled.div`
-    position: absolute;
-    top: 6.2%;
+    z-index: 100;
+    width: 100%;
+    height: 20vw;
+    background-color: var(--background);
+    border-bottom: 0.3rem solid var(--green);
+    display: flex;
+    align-items: center;
+    padding-top: 5vw;
+    position: fixed;
+    top: 0;
+`;
+const HamburgerButton = styled.div`
+    position: relative;
     left: 7%;
     width: 65px;
     height: 80px;

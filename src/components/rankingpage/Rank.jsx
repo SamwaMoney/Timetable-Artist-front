@@ -9,7 +9,7 @@ import CommentList from './rightSection/CommentList';
 import TimeTableImg from '../../assets/scorepage/timetable.png';
 import NewComment from './rightSection/NewComment';
 import OneRanking from './leftSection/OneRanking';
-import NewButton from './leftSection/Button';
+import NewButton from './leftSection/NewButton';
 import CommentButton from './rightSection/CmtButton';
 import HeartButton from './rightSection/HeartButton';
 import { S } from './Ranking.style';

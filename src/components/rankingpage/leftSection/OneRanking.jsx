@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
-import TimeTableImg from '../../../assets/scorepage/timetable.png';
+import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
 const OneRanking = ({ data, isMobile }) => {
-    const { id, nickname, score, category, rank } = data ? data : {};
+    const { id, nickname, score, category, rank, tableImg } = data ? data : {};
     const [searchParams, setSearchParams] = useSearchParams();
     const currentId = searchParams.get('id') | 1;
     const [isCurrentUser, setIsCurrentUser] = useState();
+    const [isShowTimeTable, setIsShowTimeTable] = useState(false);
+
+    //디테일 페이지 이동(웹)
     const onMoveDetail = id => {
         searchParams.set('id', id);
         setSearchParams(searchParams);
+    };
+
+    //시간표 보기(모바일)
+    const onShowTimeTable = () => {
+        setIsShowTimeTable(prev => !prev);
     };
 
     useEffect(() => {
@@ -28,7 +36,7 @@ const OneRanking = ({ data, isMobile }) => {
                 <M.UserInfo
                     isCurrentUser={isCurrentUser}
                     onClick={() => {
-                        onMoveDetail(id);
+                        onShowTimeTable();
                     }}
                 >
                     <M.Score>{score}점</M.Score>
@@ -36,9 +44,21 @@ const OneRanking = ({ data, isMobile }) => {
                         <M.Category>{category}</M.Category>
                         <M.Nickname>{nickname}</M.Nickname>
                     </M.CategoryContainer>
+                    {isShowTimeTable ? (
+                        <div style={{ position: 'absolute', right: 40 }}>
+                            <AiOutlineCaretUp size={40} color={`var(--blue)`} />
+                        </div>
+                    ) : (
+                        <div style={{ position: 'absolute', right: 40 }}>
+                            <AiOutlineCaretDown
+                                size={40}
+                                color={`var(--blue)`}
+                            />
+                        </div>
+                    )}
                 </M.UserInfo>
             </M.RankContainer>
-            <S.TimeTable src={TimeTableImg} alt='사진' />
+            {isShowTimeTable ? <S.TimeTable src={tableImg} alt='사진' /> : null}
         </>
     ) : (
         <>
@@ -57,7 +77,7 @@ const OneRanking = ({ data, isMobile }) => {
                     </S.CategoryContainer>
                 </S.UserInfo>
             </S.RankContainer>
-            <S.TimeTable src={TimeTableImg} alt='사진' />
+            <S.TimeTable src={tableImg} alt='사진' />
         </>
     );
 };

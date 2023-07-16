@@ -20,6 +20,7 @@ S.BasicContainer = styled.div`
 `;
 
 M.FlexContainer = styled.div`
+    margin-top: 15vw;
     font-style: var(--korean);
     ${FlexCenter}
     flex-direction: column;
@@ -263,7 +264,7 @@ S.ToggleText = styled.div`
 
 M.ToggleText = styled.div`
     font-size: 3.5vw;
-    margin-left: 10px;
+    margin-left: 3vw;
     color: black;
 `;
 

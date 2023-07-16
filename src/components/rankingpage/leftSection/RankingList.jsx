@@ -1,18 +1,17 @@
 import OneRanking from './OneRanking';
 import Toggle from './Toggle';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { S, M } from '../Ranking.style';
+
 const RankingList = ({ isMobile }) => {
-    console.log('isMobll', isMobile);
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const rankList = useSelector(state => state.rankReducer);
-
     //선택한 정렬방식대로 순위 바꿔줌
     const sort = searchParams.get('sort') || 'worst';
-    console.log('sort', sort);
 
     useEffect(() => {
         dispatch({
