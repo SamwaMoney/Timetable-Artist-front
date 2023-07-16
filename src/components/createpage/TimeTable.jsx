@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile } from 'react-device-detect';
 
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
@@ -35,8 +36,8 @@ const TimeTable = () => {
                             {days.map(day => (
                                 <TableCell
                                     key={`${day}-${timeSlot}`}
-                                    isFirst={index === 0}
-                                    isLast={index === numberOfSlots - 1}
+                                    isfirst={index === 0}
+                                    islast={index === numberOfSlots - 1}
                                 ></TableCell>
                             ))}
                         </tr>
@@ -64,6 +65,13 @@ const TimeTableContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
+
+    ${isMobile &&
+    `
+       align-items: stretch;
+       height: 55%;
+       border: 0px;
+    `}
 `;
 
 const DayCell = styled.th`
@@ -73,6 +81,12 @@ const DayCell = styled.th`
     line-height: normal;
 
     width: 3.8rem;
+
+    ${isMobile &&
+    `
+       font-size: 3.2vw;
+       width: 11rem;
+    `}
 `;
 
 const TimeCell = styled.td`
@@ -83,6 +97,11 @@ const TimeCell = styled.td`
 
     background-color: var(--background);
     text-align: center;
+
+    ${isMobile &&
+    `
+       font-size: 3.2vw;
+    `}
 `;
 
 const TableCell = styled.td`
@@ -90,12 +109,22 @@ const TableCell = styled.td`
         background-color: white;
     }
 
-    border-radius: ${({ isFirst, isLast }) =>
-        isFirst
+    border-radius: ${({ isfirst, islast }) =>
+        isfirst
             ? '0.5625rem 0.5625rem 0 0'
-            : isLast
+            : islast
             ? '0 0 0.5625rem 0.5625rem'
             : 'none'};
+
+    ${isMobile &&
+    `
+        border-radius: ${({ isfirst, islast }) =>
+            isfirst
+                ? '1.5rem 1.5rem 0 0'
+                : islast
+                ? '0 0 1.5rem 1.5rem'
+                : 'none'};
+    `}
 `;
 
 const EtcDiv = styled.div`
@@ -111,6 +140,11 @@ const TableText = styled.div`
 
     margin-left: auto;
     margin-right: auto;
+
+    ${isMobile &&
+    `
+       font-size: 3.2vw;
+    `}
 `;
 
 const EtcDescDiv = styled.div`
@@ -120,4 +154,11 @@ const EtcDescDiv = styled.div`
     border-radius: 8px;
     margin-top: 2px;
     margin-left: auto;
+
+    ${isMobile &&
+    `
+       width: 55rem;
+       height: 7.5rem;
+       margin-top: 8px;
+    `}
 `;
