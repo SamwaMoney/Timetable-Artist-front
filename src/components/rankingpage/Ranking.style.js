@@ -137,6 +137,7 @@ M.OneRankWrapper = styled.div`
     flex-direction:column;
 `;
 S.RankContainer = styled.div`
+    margin-top: 5%;
     font-family: Montserrat;
     width: 80%;
     height: 100%;
@@ -188,7 +189,7 @@ M.Tab = styled.div`
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
-        active ? '5px solid black' : '2.5px solid black'};
+        active ? '1.2vw solid black' : '0.3rem solid black'};
     cursor: pointer;
 `;
 
@@ -206,8 +207,8 @@ M.ToggleWrapper = styled.div`
 `;
 M.ToggleContainer = styled.div`
     margin-left: -30%;
-    width: 14vw;
-    height: 7vw;
+    width: 12vw;
+    height: 6vw;
     ${FlexCenter}
 `;
 
@@ -247,14 +248,14 @@ S.Slider = styled.div`
 
 M.Slider = styled.div`
     position: absolute;
-    width: 5.3vw;
-    height: 5.3vw;
+    width: 4.5vw;
+    height: 4.5vw;
     background-color: ${props =>
         props.sort === 'worst' ? '#f22b02' : '#1962ed'};
     border: 1.3px solid black;
     border-radius: 50%;
     top: 50%;
-    left: ${props => (props.sort === 'worst' ? '7.5vw' : '1vw')};
+    left: ${props => (props.sort === 'worst' ? '6.2vw' : '1vw')};
     transform: translate(0, -50%);
     transition: left 0.2s ease;
 `;
@@ -420,7 +421,7 @@ M.Nickname = styled.div`
 
 //버튼 컨테이너
 S.ButtonContainer = styled.div`
-    width: 75%;
+    width: 85%;
     border-radius: 5px;
     display: flex;
     position: relative;
@@ -482,7 +483,7 @@ S.IconButton = styled.button`
     justify-content: space-evenly;
     color: white;
     font-family: Montserrat;
-    font-size: 10px;
+    font-size: 0.9rem;
     font-weight: 600;
     margin: 0 5px;
 `;
@@ -618,7 +619,7 @@ S.TimeTable = styled.img`
 //댓글 쓰기 컴포넌트
 S.NewCommentWrapper = styled.div`
     margin-top: 5%;
-    width: 75%;
+    width: 85%;
     font-size: 1.2vw;
     padding: 0.5rem 0.5rem;
     border-radius: 2rem;
