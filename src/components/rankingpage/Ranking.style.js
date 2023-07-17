@@ -58,9 +58,9 @@ S.Header = styled.div`
 `;
 
 S.NewButton = styled.div`
-    width: 160%;
-    margin-left: -30%;
-    padding: 10% 10% 10% 10%;
+    margin-top: 7%;
+    width: 50%;
+    padding: 4%;
     border: 0.1rem solid var(--blue);
     font-weight: 500;
     ${FlexCenter}
@@ -68,6 +68,19 @@ S.NewButton = styled.div`
     border-radius: 44px;
     background-color: var(--green);
     font-size: 0.9rem;
+`;
+
+M.NewButton = styled.div`
+    margin-top: 10vw;
+    width: 65%;
+    padding: 4vw;
+    border: 0.1rem solid var(--blue);
+    font-weight: 500;
+    ${FlexCenter}
+    color: var(--blue);
+    border-radius: 10vw;
+    background-color: var(--green);
+    font-size: 4.5vw;
 `;
 
 //rank
@@ -161,13 +174,11 @@ M.RankContainer = styled.div`
 //탭 css
 S.TabContainer = styled.div`
     margin-top: 6%;
-    height: 15%;
     width: 75%;
     ${FlexCenter};
 `;
 M.TabContainer = styled.div`
     margin-top: 7%;
-    height: 15%;
     width: 75%;
     ${FlexCenter};
 `;
@@ -284,7 +295,11 @@ S.MyScoreContainer = styled.div`
     ${FlexCenter};
     padding: 0.5rem 0;
 `;
-
+M.MyScoreWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
 M.MyScoreContainer = styled.div`
     background-color: blue;
     margin-top: 10%;
@@ -384,24 +399,21 @@ S.NameText = styled.div`
 `;
 
 S.CategoryContainer = styled.div`
-    display: flex;
+    ${FlexCenter}
     flex-direction: column;
-    position: absolute;
-    left: 23%;
-    padding-right: 3%;
+    padding-left: 1.6rem;
 `;
 
 M.CategoryContainer = styled.div`
+    padding-left: 5vw;
     display: flex;
+    ${FlexCenter}
     flex-direction: column;
-    position: absolute;
-    left: 20%;
-    padding-right: 3%;
 `;
 
 S.Category = styled.div`
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 0.2rem;
 `;
 M.Category = styled.div`
@@ -412,8 +424,7 @@ M.Category = styled.div`
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
-    font-size: 0.9rem;
-    margin-left: 2rem;
+    font-size: 1rem;
 `;
 M.Nickname = styled.div`
     font-size: 4.2vw;
@@ -459,7 +470,7 @@ M.ButtonContainer = styled.div`
 M.DetailBtnContainer = styled.div`
     display: flex;
     margin-top: 5vw;
-    margin-left: -10vw;
+    margin-left: -60vw;
     margin-bottom: 2vw;
     div {
         width: 200vw;
@@ -490,17 +501,17 @@ S.IconButton = styled.button`
 `;
 
 M.IconButton = styled.button`
-    width: 10vw;
+    width: 13vw;
     height: 7vw;
     background-color: var(--red);
-    border-radius: 5px;
+    border-radius: 2vw;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     color: white;
     font-family: Montserrat;
-    font-weight: 600;
-    margin: 0 5px;
+    font-weight: 500;
+    margin-right: 1vw;
     p {
         font-size: 4vw;
     }
@@ -526,9 +537,8 @@ S.CommentIcon = styled.img`
 `;
 
 M.CommentIcon = styled.img`
-    width: 7vw;
-    height: 7vw;
-    right: 10vw;
+    width: 6vw;
+    height: 6vw;
 `;
 
 M.LikeNum = styled.div`

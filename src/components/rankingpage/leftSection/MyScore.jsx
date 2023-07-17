@@ -2,16 +2,18 @@ import { S } from '../Ranking.style';
 import { M } from '../Ranking.style';
 const MyScore = ({ isMobile }) => {
     return isMobile ? (
-        <M.MyScoreContainer>
-            <M.FlexBox>
-                <M.Text>내 점수</M.Text>
-                <M.RankText>80점</M.RankText>
-            </M.FlexBox>
-            <M.FlexBox>
-                <M.Text>내 랭킹</M.Text>
-                <M.RankText>258위</M.RankText>
-            </M.FlexBox>
-        </M.MyScoreContainer>
+        <M.MyScoreWrapper>
+            <M.MyScoreContainer>
+                <M.FlexBox>
+                    <M.Text>내 점수</M.Text>
+                    <M.RankText>80점</M.RankText>
+                </M.FlexBox>
+                <M.FlexBox>
+                    <M.Text>내 랭킹</M.Text>
+                    <M.RankText>258위</M.RankText>
+                </M.FlexBox>
+            </M.MyScoreContainer>
+        </M.MyScoreWrapper>
     ) : (
         <S.MyScoreContainer>
             <S.FlexBox>

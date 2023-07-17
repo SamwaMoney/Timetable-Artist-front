@@ -9,7 +9,6 @@ import CommentList from './rightSection/CommentList';
 import TimeTableImg from '../../assets/scorepage/timetable.png';
 import NewComment from './rightSection/NewComment';
 import OneRanking from './leftSection/OneRanking';
-import NewButton from './leftSection/NewButton';
 import CommentButton from './rightSection/CmtButton';
 import HeartButton from './rightSection/HeartButton';
 import { S } from './Ranking.style';
@@ -35,7 +34,13 @@ const Rank = ({ isMyData }) => {
             {/*랭킹 보여주는 left section*/}
             <S.Container>
                 <S.SmallContainer>
-                    {isMyData ? <MyScore /> : <NewButton isMyData={isMyData} />}
+                    {isMyData ? (
+                        <MyScore isMobile={false} />
+                    ) : (
+                        <S.NewButton isMobile={false}>
+                            시간표 등록하기
+                        </S.NewButton>
+                    )}
                     <TabContainer />
                     <RankingList />
                 </S.SmallContainer>

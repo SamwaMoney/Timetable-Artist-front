@@ -9,9 +9,11 @@ import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import NewComment from './rightSection/NewComment';
 
+//해당 유저의 아이디를 params로 가져오고, rank의 경우는 쿼리스트링으로 가져옴
 const MRankDetail = () => {
     const rankList = useSelector(state => state.rankReducer);
     const [searchParams, setSearchParams] = useSearchParams();
+    //유저의 랭크
     const rank = searchParams.get('rank');
     const navigate = useNavigate();
 
@@ -44,8 +46,8 @@ const MRankDetail = () => {
                 </M.RankContainer>
                 <S.TimeTable src={tableImg} alt='사진' />
                 <M.DetailBtnContainer>
-                    <HeartButton />
-                    <CommentButton />
+                    <HeartButton isMobile={true} />
+                    <CommentButton isMobile={true} />
                 </M.DetailBtnContainer>
                 <M.CommentWrapper></M.CommentWrapper>
                 {/*뎃글 적는 인풋창*/}

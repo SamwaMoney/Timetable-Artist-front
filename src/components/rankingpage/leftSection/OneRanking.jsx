@@ -46,6 +46,7 @@ const OneRanking = ({ data, isMobile }) => {
     //     }
     // }, [id, currentId, isCurrentUser]);
 
+    //모바일 페이지 timeTable hover했을 떄 디테일 페이지로 이동 가능
     return isMobile ? (
         <>
             <M.OneRankWrapper>
@@ -63,14 +64,14 @@ const OneRanking = ({ data, isMobile }) => {
                             <M.Nickname>{nickname}</M.Nickname>
                         </M.CategoryContainer>
                         {isShowTimeTable ? (
-                            <div style={{ position: 'absolute', right: 40 }}>
+                            <div style={{ position: 'absolute', right: 30 }}>
                                 <AiOutlineCaretUp
                                     size={40}
                                     color={`var(--blue)`}
                                 />
                             </div>
                         ) : (
-                            <div style={{ position: 'absolute', right: 40 }}>
+                            <div style={{ position: 'absolute', right: 30 }}>
                                 <AiOutlineCaretDown
                                     size={40}
                                     color={`var(--blue)`}
