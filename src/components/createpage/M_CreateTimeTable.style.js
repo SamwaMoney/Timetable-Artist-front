@@ -26,6 +26,10 @@ S.MButtonDiv = styled.div`
     align-items: flex-end;
 
     margin-bottom: 4.3vh;
+
+    &.delete {
+        display: none;
+    }
 `;
 
 S.MResetBtn = styled.button`
@@ -57,6 +61,10 @@ S.MTimeTableText = styled.div`
     font-weight: 700;
 
     margin-bottom: 10%;
+
+    &.delete {
+        display: none;
+    }
 `;
 
 S.MNicknameText = styled.span`
