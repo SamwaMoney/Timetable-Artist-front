@@ -7,8 +7,12 @@ import CreatePage from './pages/CreatePage';
 import ScorePage from './pages/ScorePage';
 import RankingPage from './pages/RankingPage';
 import AboutUsPage from './pages/AboutUsPage';
-import NotFoundPage from './pages/404Page';
 import MenuPage from './pages/M_MenuPage';
+import MError from './components/_common/M_Error';
+import Error from './components/_common/Error';
+import ErrorPage from './pages/ErrorPage';
+import MLoading from './components/_common/M_Loading';
+import LoadingPage from './pages/LoadingPage';
 import MRankDetail from './components/rankingpage/M_RankDetail';
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -48,7 +52,8 @@ function App() {
                             element={<AboutUsPage />}
                         />
                         <Route path='/menu' element={<MenuPage />} />
-                        <Route path='/*' element={<NotFoundPage />} />
+                        <Route path='/loading' element={<LoadingPage />} />
+                        <Route path='/*' element={<ErrorPage />} />
                     </Routes>
                 </BrowserRouter>
             </Provider>

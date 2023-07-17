@@ -549,7 +549,8 @@ M.OneCommentContainer = styled.div`
 `;
 
 S.OneCommentContainer = styled.div`
-    background-color: var(--green);
+    /* background-color: var(--green); */
+    background-color: white;
     border-radius: 7px;
     border: 0.1rem solid black;
     margin-top: 0.8rem;
