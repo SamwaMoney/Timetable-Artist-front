@@ -460,6 +460,7 @@ M.DetailBtnContainer = styled.div`
     display: flex;
     margin-top: 5vw;
     margin-left: -10vw;
+    margin-bottom: 2vw;
     div {
         width: 200vw;
     }
@@ -556,6 +557,7 @@ S.OneCommentContainer = styled.div`
     margin-top: 0.8rem;
     margin-bottom: 1rem;
     padding: 0.5rem 1rem;
+    position: relative;
 `;
 
 S.CommentInfo = styled.div`
@@ -597,6 +599,7 @@ M.CommentDate = styled.div`
 
 S.CommentText = styled.div`
     font-size: 0.9rem;
+    padding-bottom: 0rem;
 `;
 
 M.CommentText = styled.div`
@@ -620,8 +623,9 @@ S.TimeTable = styled.img`
 //댓글 쓰기 컴포넌트
 S.NewCommentWrapper = styled.div`
     margin-top: 5%;
+    margin-bottom: 3%;
     width: 85%;
-    font-size: 1.2vw;
+    font-size: 1.4rem;
     padding: 0.5rem 0.5rem;
     border-radius: 2rem;
     border: none;
@@ -648,6 +652,7 @@ M.NewCommentContainer = styled.div`
 
 S.CommentInput = styled.input`
     border: none;
+    height: 2rem;
 `;
 
 M.CommentInput = styled.input`
@@ -730,6 +735,11 @@ M.CommentTextWrapper = styled.div`
 S.CommentLikeWrapper = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
+`;
+S.CommentLikeNum = styled.div`
+    padding-left: 0.3rem;
+    padding-top: 0.25rem;
 `;
 
 M.CommentLikeWrapper = styled.div`

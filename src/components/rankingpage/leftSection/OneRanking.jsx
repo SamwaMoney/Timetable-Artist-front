@@ -5,6 +5,7 @@ import HeartButton from '../rightSection/HeartButton';
 import CommentButton from '../rightSection/CmtButton';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
+//선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 const OneRanking = ({ data, isMobile }) => {
     const { id, nickname, score, category, rank, tableImg } = data ? data : {};
     const navigate = useNavigate();
@@ -24,8 +25,6 @@ const OneRanking = ({ data, isMobile }) => {
     //디테일 페이지 이동(웹)
     const onMoveMDetail = id => {
         navigate(`/ranking/detail/${id}?rank=${rank}`);
-        // searchParams.set('id', id);
-        // setSearchParams(searchParams);
     };
 
     //디테일 페이지 이동(모바일)
