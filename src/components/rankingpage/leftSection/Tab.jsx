@@ -1,10 +1,8 @@
-import { styled } from 'styled-components';
-import { FlexCenter } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import S from '../Ranking.style';
-
-const TabContainer = () => {
+import { S } from '../Ranking.style';
+import { M } from '../Ranking.style';
+const TabContainer = ({ isMobile }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentSort, setCurrentSort] = useState('worst');
     const sort = searchParams.get('sort');
@@ -31,7 +29,26 @@ const TabContainer = () => {
         setSearchParams(newSearchParams, toString());
     };
 
-    return (
+    return isMobile ? (
+        <M.TabContainer>
+            <M.Tab
+                onClick={e => {
+                    onMoveSortPage(e);
+                }}
+                active={currentSort !== 'popular' ? true : false}
+            >
+                {currentSort !== 'best' ? '최악의 시간표' : '최고의 시간표'}
+            </M.Tab>
+            <M.Tab
+                onClick={e => {
+                    onMoveSortPage(e);
+                }}
+                active={currentSort === 'popular'}
+            >
+                인기 시간표
+            </M.Tab>
+        </M.TabContainer>
+    ) : (
         <S.TabContainer>
             <S.Tab
                 onClick={e => {

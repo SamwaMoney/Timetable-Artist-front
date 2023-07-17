@@ -3,20 +3,26 @@ import Hamburger from '../_common/Hamburger';
 import TimeTable from '../createpage/TimeTable';
 import TimeTableInput from '../createpage/TimeTableInput';
 
-//페이지
 const CreateTimeTable = () => {
     return (
-        <S.Wrapper>
-            <Hamburger />
-            <S.Container>
-                <S.SmallContainer>
-                    <TimeTable />
-                </S.SmallContainer>
-                <S.SmallContainer>
+        <>
+            <S.Wrapper>
+                <Hamburger />
+                <S.Container>
+                    <S.TimeTableDiv>
+                        <S.ResetDiv>
+                            <S.ResetBtn>초기화</S.ResetBtn>
+                            <S.NoticeText>
+                                *강의 블록을 클릭하면 하나씩 삭제할 수 있어요.
+                            </S.NoticeText>
+                        </S.ResetDiv>
+                        <TimeTable />
+                    </S.TimeTableDiv>
+
                     <TimeTableInput />
-                </S.SmallContainer>
-            </S.Container>
-        </S.Wrapper>
+                </S.Container>
+            </S.Wrapper>
+        </>
     );
 };
 

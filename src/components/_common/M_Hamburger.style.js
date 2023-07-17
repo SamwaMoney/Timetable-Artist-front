@@ -11,21 +11,19 @@ S.FlexContainer = styled.div`
 S.MenuBtn = styled.div`
     display: flex;
     width: 100%;
-    height: 70px;
     border-bottom: 0.1rem solid var(--black);
     overflow: hidden;
-    padding-left: 20px;
+    padding-left: 5%;
     a {
         color: var(--black);
         font-family: var(--korean);
-        font-size: 1.6rem;
+        font-size: 5.8vw;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
         display: flex;
         align-items: center;
-        margin: auto;
-
+        padding: 10% 0 10% 0;
         text-decoration: none;
         width: 100%;
         height: 6vh;
@@ -37,16 +35,16 @@ S.MenuBtn = styled.div`
 `;
 S.WithdrawalBtn = styled.div`
     width: 100%;
-    height: 6vh;
+    height: 10vh;
     margin-top: auto;
     cursor: pointer;
     overflow: hidden;
     position: absolute;
     bottom: 0;
-
+    padding-left: 5%;
     color: var(--black);
     font-family: var(--english);
-    font-size: 1rem;
+    font-size: 5vw;
     font-style: normal;
     font-weight: 500;
     line-height: 154.953%;

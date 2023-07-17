@@ -1,14 +1,19 @@
 import Write from '../../../assets/rankingpage/write.png';
-import S from '../Ranking.style';
+import { S, M } from '../Ranking.style';
 
-const NewComment = () => {
-    return (
-        <>
-            <S.NewCommentWrapper>
-                <S.CommentInput placeholder='댓글 쓰기...' />
-                <S.UploadImg src={Write} alt='올리기' />
-            </S.NewCommentWrapper>
-        </>
+const NewComment = ({ isMobile }) => {
+    return isMobile ? (
+        <M.NewCommentWrapper>
+            <M.NewCommentContainer>
+                <M.CommentInput placeholder='댓글 쓰기...' />
+                <M.UploadImg src={Write} alt='올리기' />
+            </M.NewCommentContainer>
+        </M.NewCommentWrapper>
+    ) : (
+        <S.NewCommentWrapper>
+            <S.CommentInput placeholder='댓글 쓰기...' />
+            <S.UploadImg src={Write} alt='올리기' />
+        </S.NewCommentWrapper>
     );
 };
 

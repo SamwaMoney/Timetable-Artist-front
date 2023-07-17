@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import cursor from "../../assets/mainpage/custom_cursor.png";
 const S = {};
 S.Wrapper = styled.div`
     display: flex;
@@ -18,8 +19,46 @@ S.Korean = styled.div`
     line-height: normal;
     margin: 2.5% 0;
 `;
-S.Logo = styled.img`
+S.LogoContainer = styled.div`
     width: 25vw;
+    perspective: 1000px;
+    cursor: url(${cursor}), auto;
+
+    &:hover .hover-text {
+        visibility: visible;
+    }
+`;
+S.FrontLogo = styled.img`
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+    &.clicked {
+        transform: rotateY(-180deg);
+    }
+`;
+S.BackLogo = styled.img`
+    width: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+    &.clicked {
+        transform: rotateY(180deg);
+    }
+`;
+S.HoverText = styled.div`
+    width: max-content;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    font-size: 0.8vw;
+    color: var(--white);
+    padding: 2% 5%;
+    border-radius: 3vw;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
 `;
 S.LoginBtn = styled.button`
     border-radius: 22px;

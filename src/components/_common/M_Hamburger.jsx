@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import WithdrawalModal from './WithdrawalModal';
 import EditModal from './EditModal';
 import S from './M_Hamburger.style';
-import { AiOutlineLeft } from 'react-icons/ai';
+import BackBtn from './BackBtn';
 
 const MHamburger = () => {
     const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
@@ -40,16 +40,16 @@ const MHamburger = () => {
 
     return (
         <S.FlexContainer>
-            <div
-                style={{
-                    padding: '40px 0px 40px 20px',
-                    borderBottom: '0.1rem solid black',
-                }}
-            >
-                <AiOutlineLeft size='2rem' onClick={handleMoveBack} />
+            <div style={{ marginTop: '25%', borderBottom: '1px solid black' }}>
+                <BackBtn />
             </div>
             <S.MenuBtn>
-                <NavLink>
+                <NavLink
+                    to='/aboutus'
+                    style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                    }
+                >
                     <p>ABOUT US</p>
                 </NavLink>
             </S.MenuBtn>

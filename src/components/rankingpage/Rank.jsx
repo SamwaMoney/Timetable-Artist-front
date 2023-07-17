@@ -1,4 +1,3 @@
-import S from './Ranking.style';
 import Hamburger from '../_common/Hamburger';
 import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
@@ -10,9 +9,10 @@ import CommentList from './rightSection/CommentList';
 import TimeTableImg from '../../assets/scorepage/timetable.png';
 import NewComment from './rightSection/NewComment';
 import OneRanking from './leftSection/OneRanking';
-import NewButton from './leftSection/Button';
+import NewButton from './leftSection/NewButton';
 import CommentButton from './rightSection/CmtButton';
 import HeartButton from './rightSection/HeartButton';
+import { S } from './Ranking.style';
 
 const Rank = ({ isMyData }) => {
     // const [isMyData, setIsMyData] = useState(true);

@@ -33,7 +33,6 @@ L.Logo = styled.img`
 `;
 L.Tab = styled.ul`
     display: flex;
-    //justify-content: space-around;
     justify-content: center;
     margin: auto;
     margin-top: 0;
@@ -43,7 +42,6 @@ L.Tab = styled.ul`
 L.TabWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    //justify-content: space-between;
     justify-content: center;
     height: 80%;
     align-items: center;
@@ -60,8 +58,11 @@ L.TabTittle = styled.li`
     text-align: center;
     font-size: 1.2vw;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
+    &.active {
+        font-weight: 700;
+    }
 `;
 L.TabItem = styled.div`
     display: flex;

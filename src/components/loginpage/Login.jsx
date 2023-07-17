@@ -15,7 +15,7 @@ const Login = () => {
         {
             tabTittle: (
                 <L.TabItem key="sign-in">
-                    <L.TabTittle onClick={() => handleTabClick(0)}>
+                    <L.TabTittle onClick={() => handleTabClick(0)} className={activeIndex === 0 ? "active" : ""}>
                         로그인
                     </L.TabTittle>
                     <L.ActiveLine className={activeIndex === 0 ? "active" : ""}/>
@@ -28,7 +28,7 @@ const Login = () => {
         {
             tabTittle: (
                 <L.TabItem key="sign-up">
-                    <L.TabTittle onClick={() => handleTabClick(1)}>
+                    <L.TabTittle onClick={() => handleTabClick(1)} className={activeIndex === 1 ? "active" : ""}>
                         회원가입
                     </L.TabTittle>
                     <L.ActiveLine className={activeIndex === 1 ? "active" : ""}/>

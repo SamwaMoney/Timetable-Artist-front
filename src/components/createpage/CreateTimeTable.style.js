@@ -32,18 +32,47 @@ S.Container = styled(S.BasicContainer)`
     height: 70%;
     border: 0.1rem solid black;
     background: linear-gradient(180deg, #b0ff00 0%, #e2e2e2 100%);
+
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+
+    overflow-y: scroll;
 `;
 
-S.SmallContainer = styled.div`
+S.TimeTableDiv = styled.div`
     display: flex;
     flex-direction: column;
+    width: 35.7%;
+
+    margin-bottom: 4%;
+`;
+
+S.ResetDiv = styled.div`
+    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 49.5%;
-    height: 100%;
-    overflow-y: scroll;
+    gap: 10px;
+
+    margin-bottom: 8%;
+`;
+
+S.NoticeText = styled.div`
+    font-size: 0.5625vw;
+    font-weight: 500;
+`;
+
+S.ResetBtn = styled.button`
+    width: 52px;
+    height: 25px;
+    padding: 5px 9px;
+
+    border-radius: 1.5rem;
+    border: 0.08rem solid var(--black);
+    background: var(--red, #f22b02);
+
+    font-size: 11px;
+    font-weight: 500;
+
+    /* position: absolute;
+    top: -3rem; */
 `;
 export { S };
