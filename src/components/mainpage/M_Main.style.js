@@ -51,8 +51,8 @@ M.Btn = styled.button`
     width: 80vw;
     height: 10vh;
     text-align: center;
-    border-radius: 3rem;
-    border: 0.1rem solid var(--black);
+    border-radius: 22px;
+    border: 0.05rem solid var(--black);
     
     font-size: 5.5vw;
     font-style: normal;
