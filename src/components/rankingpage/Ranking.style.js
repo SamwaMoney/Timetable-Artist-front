@@ -417,7 +417,7 @@ S.Category = styled.div`
     margin-bottom: 0.2rem;
 `;
 M.Category = styled.div`
-    padding-top: 5px;
+    padding-top: 0.5rem;
     padding-bottom: 5px;
     font-weight: 700;
     font-size: 4.4vw;
@@ -428,6 +428,7 @@ S.Nickname = styled.div`
 `;
 M.Nickname = styled.div`
     font-size: 4.2vw;
+    margin-bottom: 2vw;
 `;
 
 //버튼 컨테이너
