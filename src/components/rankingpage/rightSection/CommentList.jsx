@@ -1,7 +1,10 @@
 import OneComment from './OneComment';
 import styled from 'styled-components';
-const CommentList = ({ isMobile }) => {
-    console.log(isMobile);
+import { useEffect } from 'react';
+const CommentList = ({ isMobile, timetableId }) => {
+    useEffect(() => {
+        //timetableID로 댓글을 불러오는 api 로직
+    }, []);
     return isMobile ? (
         <MCommentContainer>
             <OneComment isMobile={isMobile} />

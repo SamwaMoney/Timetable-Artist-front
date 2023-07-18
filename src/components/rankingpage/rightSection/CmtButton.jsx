@@ -1,7 +1,7 @@
 import { S, M } from '../Ranking.style';
 import Comment from '../../../assets/rankingpage/comment.png';
 
-const CommentButton = ({ isMobile }) => {
+const CommentButton = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
             <M.CommentIcon src={Comment} alt='하트' />
@@ -10,7 +10,7 @@ const CommentButton = ({ isMobile }) => {
     ) : (
         <S.IconButton>
             <S.Icon src={Comment} alt='하트' />
-            <p>11</p>
+            <p>{number}</p>
         </S.IconButton>
     );
 };
