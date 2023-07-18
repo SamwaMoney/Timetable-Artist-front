@@ -51,14 +51,14 @@ const OneRanking = ({ data, isMobile, setCurrentUser }) => {
                         {isShowTimeTable ? (
                             <div style={{ position: 'absolute', right: 10 }}>
                                 <AiOutlineCaretUp
-                                    size={20}
+                                    size={10}
                                     color={`var(--blue)`}
                                 />
                             </div>
                         ) : (
                             <div style={{ position: 'absolute', right: 10 }}>
                                 <AiOutlineCaretDown
-                                    size={20}
+                                    size={10}
                                     color={`var(--blue)`}
                                 />
                             </div>
