@@ -40,7 +40,12 @@ const MHamburger = () => {
 
     return (
         <S.FlexContainer>
-            <div style={{ marginTop: '25%', borderBottom: '1px solid black' }}>
+            <div
+                style={{
+                    marginTop: '30%',
+                    borderBottom: ' 0.1rem solid black',
+                }}
+            >
                 <BackBtn />
             </div>
             <S.MenuBtn>

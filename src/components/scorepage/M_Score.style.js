@@ -29,10 +29,10 @@ S.Title = styled.div`
     font-weight: 600;
     text-align: center;
     .score {
-        margin: 50% 0% 5% 0%;
+        margin: 20% 0% 5% 0%;
     }
     .type {
-        margin: 20% 0% 5% 0%;
+        margin: 25% 0% 5% 0%;
     }
 `;
 S.Score = styled.div`
@@ -99,7 +99,7 @@ S.ResultBox = styled(S.BasicFont)`
     justify-content: center;
 
     border-radius: 13px;
-    border: 0.1rem solid var(--black);
+    border: 0.05rem solid var(--black);
     background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.9) 0%,
@@ -139,7 +139,7 @@ S.SpecialBox = styled(S.BasicFont)`
     justify-content: center;
 
     border-radius: 13px;
-    border: 0.1rem solid var(--black);
+    border: 0.05rem solid var(--black);
     background: var(--white);
 
     padding: 3% 3% 3% 3%;
@@ -167,7 +167,7 @@ S.Icon = styled.img`
 `;
 S.UploadBtn = styled.button`
     border-radius: 34px;
-    border: 0.1rem solid var(--black);
+    border: 0.05rem solid var(--black);
     background: var(--blue);
     width: 60%;
     padding: 3%;
@@ -198,20 +198,25 @@ S.NoData = styled(S.BasicContainer)`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    background: var(
+        --hamburger,
+        linear-gradient(180deg, #b0ff00 0%, #e2e2e2 100%)
+    );
+    padding-top: 40vh;
 `;
 S.NoDataText = styled.div`
-    font-size: 1.2vw;
+    font-size: 4vw;
     font-weight: 500;
-    margin-bottom: 3%;
+    margin-bottom: 8%;
 `;
 S.Button = styled.button`
     border-radius: 33px;
-    border: 0.1rem solid var(--black);
+    border: 0.05rem solid var(--black);
     background: var(--green);
-    width: 25%;
-    height: 10%;
-    font-size: 1vw;
-    font-weight: 600;
+    width: 50%;
+    height: 8%;
+    font-size: 4vw;
+    font-weight: 700;
     text-align: center;
 `;
 export { S };
