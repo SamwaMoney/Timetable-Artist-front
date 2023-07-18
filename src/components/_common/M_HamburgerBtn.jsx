@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import hamburgerIcon from '../../assets/_common/hamburger.svg';
 const MHamburgerButton = () => {
     const navigate = useNavigate();
 
@@ -8,11 +9,7 @@ const MHamburgerButton = () => {
     };
     return (
         <Wrapper>
-            <HamburgerButton onClick={onMoveMenuPage}>
-                <Line1 />
-                <Line2 />
-                <Line3 />
-            </HamburgerButton>
+            <HamburgerButton onClick={onMoveMenuPage} src={hamburgerIcon} />
         </Wrapper>
     );
 };
@@ -23,30 +20,20 @@ const Wrapper = styled.div`
     z-index: 100;
     width: 100%;
     height: 20vw;
-    background-color: var(--background);
     display: flex;
     align-items: center;
-    padding-top: 5vw;
+    padding-top: 6vh;
+    padding-left: 5vw;
     position: fixed;
     top: 0;
 `;
-const HamburgerButton = styled.div`
+const HamburgerButton = styled.img`
     position: relative;
-    left: 7%;
-    width: 65px;
-    height: 80px;
-    span {
-        background-color: black;
-        position: absolute;
-        width: 100%;
-        height: 1vw;
-        font-weight: 500;
-        border-radius: 3px;
-    }
+    width: 10vw;
 `;
 
 const Line1 = styled.span`
-    top: 0px;
+    top: 0;
 `;
 
 const Line2 = styled.span`
