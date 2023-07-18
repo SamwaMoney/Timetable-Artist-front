@@ -200,7 +200,7 @@ M.Tab = styled.div`
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
-        active ? '1.2vw solid black' : '0.3rem solid black'};
+        active ? '1.2vw solid black' : '0.6vw solid black'};
     cursor: pointer;
 `;
 
