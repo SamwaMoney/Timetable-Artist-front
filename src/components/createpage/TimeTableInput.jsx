@@ -1,5 +1,7 @@
 import { S } from './TimeTableInput.style';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addSelectedData } from '../../reducer/action';
 import add_course from '../../assets/createpage/add_course.png';
 import ic_dropdown from '../../assets/createpage/ic_dropdown.png';
 
@@ -53,27 +55,28 @@ const TimeTableInput = () => {
         setIsOpen(copyIsOpen);
     };
 
-    // 선택된 요일
-    const [selectedDay, setSelectedDay] = useState('월');
-
-    // 선택된 시작 시간
-    const [selectedStartTime, setSelectedStartTime] = useState('8:00');
-
-    // 선택된 끝 시간
-    const [selectedEndTime, setSelectedEndTime] = useState('9:30');
+    // 선택된 요일, 시작 시간, 끝 시간
+    const [selectedDateTime, setSelectedDateTime] = useState({
+        day: '월',
+        startTime: '8:00',
+        endTime: '9:30',
+    });
 
     // 선택된 강의 장소
     const [selectedPlace, setSelectedPlace] = useState('ECC');
 
+    // 입력받은 강의명
+    const [selectedClassName, setSelectedClassName] = useState('');
+
     // 장소 업데이트 함수
     const changeContent = (openIndex, category, content) => {
         if (category === 'day') {
-            setSelectedDay(content);
+            setSelectedDateTime({ ...selectedDateTime, day: content });
             // 요일 업데이트 후 드롭다운 닫기
         } else if (category === 'start') {
-            setSelectedStartTime(content);
+            setSelectedDateTime({ ...selectedDateTime, startTime: content });
         } else if (category === 'end') {
-            setSelectedEndTime(content);
+            setSelectedDateTime({ ...selectedDateTime, endTime: content });
         } else if (category === 'where') {
             setSelectedPlace(content);
             // 장소 업데이트 후 드롭다운 닫기
@@ -81,11 +84,34 @@ const TimeTableInput = () => {
         changeOpen(openIndex, false);
     };
 
+    // 강의명 input 관리 함수
+    const changeNameInput = e => {
+        setSelectedClassName(e.target.value);
+    };
+
+    const dispatch = useDispatch();
+
+    const handleButtonClick = () => {
+        // 객체 형태로 가공하여 새로운 데이터 생성
+        const newData = {
+            day: selectedDateTime.day,
+            startTime: selectedDateTime.startTime,
+            endTime: selectedDateTime.endTime,
+            place: selectedPlace,
+            name: selectedClassName,
+        };
+
+        console.log(newData);
+
+        // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
+        dispatch(addSelectedData(newData));
+    };
+
     return (
         <>
             <S.InputContainer>
                 <S.LectureButtonDiv>
-                    <S.LectureButton bgcolor='#1962ED'>
+                    <S.LectureButton bgcolor='#1962ED' onClick={handleButtonClick}>
                         강의 추가
                     </S.LectureButton>
                 </S.LectureButtonDiv>
@@ -106,7 +132,9 @@ const TimeTableInput = () => {
                                 }}
                                 onClick={() => changeOpen(0, true)}
                             >
-                                <S.DescDayText>{selectedDay}</S.DescDayText>
+                                <S.DescDayText>
+                                    {selectedDateTime.day}
+                                </S.DescDayText>
                                 <S.DownIcon
                                     src={ic_dropdown}
                                     isopen={isOpen[0]}
@@ -141,7 +169,7 @@ const TimeTableInput = () => {
                                 onClick={() => changeOpen(1, true)}
                             >
                                 <S.DescTimeText>
-                                    {selectedStartTime}
+                                    {selectedDateTime.startTime}
                                 </S.DescTimeText>
                                 <S.DownIcon
                                     src={ic_dropdown}
@@ -181,7 +209,7 @@ const TimeTableInput = () => {
                                 onClick={() => changeOpen(2, true)}
                             >
                                 <S.DescTimeText>
-                                    {selectedEndTime}
+                                    {selectedDateTime.endTime}
                                 </S.DescTimeText>
                                 <S.DownIcon
                                     src={ic_dropdown}
@@ -267,7 +295,11 @@ const TimeTableInput = () => {
                     <S.MainText style={{ width: '3.988rem' }}>
                         강의명
                     </S.MainText>
-                    <S.NameInput placeholder='강의명을 입력하세요' />
+                    <S.NameInput
+                        type='text'
+                        placeholder='강의명을 입력하세요'
+                        onChange={changeNameInput}
+                    />
                 </S.InputDiv>
 
                 <S.CompleteBtn>시간표 완성</S.CompleteBtn>
