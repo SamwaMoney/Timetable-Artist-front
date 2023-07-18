@@ -1,6 +1,21 @@
 import { S } from '../Ranking.style';
 import { M } from '../Ranking.style';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+
+//로그인 + 시간표 채점 정보가 있을때 생김
+//점수 랭킹 조회 => 내 id와 일치하는 객체의 ranking을 가져와서 보여주기
+
 const MyScore = ({ isMobile }) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const sort = searchParams.get('sort') || 'lowest';
+
+    useEffect(() => {
+        //내 순위 검색하는 api 로직 => sort에 바뀌면 실행
+    }, [sort]);
+
+    //내 점수는 전역 상태로 관리해서 가져오기
+
     return isMobile ? (
         <M.MyScoreWrapper>
             <M.MyScoreContainer>

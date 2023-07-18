@@ -4,16 +4,16 @@ import { S, M } from '../Ranking.style';
 
 const Toggle = ({ isMobile }) => {
     //최악의 시간표가 false, 최고의 시간표가 true
-    const [sort, setSort] = useState('worst');
+    const [sort, setSort] = useState('lowest');
     const [searchParams, setSearchParams] = useSearchParams();
 
     const handleChange = () => {
-        if (sort === 'best') {
-            setSort('worst');
-            searchParams.set('sort', 'worst');
-        } else if (sort === 'worst') {
-            setSort('best');
-            searchParams.set('sort', 'best');
+        if (sort === 'highest') {
+            setSort('lowest');
+            searchParams.set('sort', 'lowest');
+        } else if (sort === 'lowest') {
+            setSort('highest');
+            searchParams.set('sort', 'highest');
         }
         setSearchParams(searchParams);
     };
@@ -26,7 +26,9 @@ const Toggle = ({ isMobile }) => {
                 </M.ToggleButton>
             </M.ToggleContainer>
             <M.ToggleText>
-                {sort === 'worst' ? '최고의 시간표 보기' : '최악의 시간표 보기'}
+                {sort === 'lowest'
+                    ? '최고의 시간표 보기'
+                    : '최악의 시간표 보기'}
             </M.ToggleText>
         </M.ToggleWrapper>
     ) : (
@@ -35,7 +37,9 @@ const Toggle = ({ isMobile }) => {
                 <S.Slider sort={sort} />
             </S.ToggleButton>
             <S.ToggleText>
-                {sort === 'worst' ? '최고의 시간표 보기' : '최악의 시간표 보기'}
+                {sort === 'lowest'
+                    ? '최고의 시간표 보기'
+                    : '최악의 시간표 보기'}
             </S.ToggleText>
         </S.ToggleContainer>
     );

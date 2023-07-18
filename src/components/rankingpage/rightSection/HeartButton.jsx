@@ -1,7 +1,7 @@
 import { S, M } from '../Ranking.style';
 import NoLike from '../../../assets/rankingpage/heart1.png';
 
-const HeartButton = ({ isMobile }) => {
+const HeartButton = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
             <M.CommentIcon src={NoLike} alt='하트' />
@@ -10,7 +10,7 @@ const HeartButton = ({ isMobile }) => {
     ) : (
         <S.IconButton>
             <S.Icon src={NoLike} alt='하트' />
-            <p>11</p>
+            <p>{number}</p>
         </S.IconButton>
     );
 };

@@ -248,11 +248,11 @@ S.Slider = styled.div`
     width: 15px;
     height: 15px;
     background-color: ${props =>
-        props.sort === 'worst' ? '#f22b02' : '#1962ed'};
+        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     border: 1.3px solid black;
     border-radius: 50%;
     top: 50%;
-    left: ${props => (props.sort === 'worst' ? '17px' : '1px')};
+    left: ${props => (props.sort === 'lowest' ? '17px' : '1px')};
     transform: translate(0, -50%);
     transition: left 0.2s ease;
 `;
@@ -262,11 +262,11 @@ M.Slider = styled.div`
     width: 4.5vw;
     height: 4.5vw;
     background-color: ${props =>
-        props.sort === 'worst' ? '#f22b02' : '#1962ed'};
+        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     border: 1.3px solid black;
     border-radius: 50%;
     top: 50%;
-    left: ${props => (props.sort === 'worst' ? '6.2vw' : '1vw')};
+    left: ${props => (props.sort === 'lowest' ? '6.2vw' : '1vw')};
     transform: translate(0, -50%);
     transition: left 0.2s ease;
 `;

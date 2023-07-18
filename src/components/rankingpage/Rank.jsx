@@ -3,30 +3,30 @@ import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import { useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import CommentList from './rightSection/CommentList';
 import TimeTableImg from '../../assets/scorepage/timetable.png';
 import NewComment from './rightSection/NewComment';
-import OneRanking from './leftSection/OneRanking';
 import CommentButton from './rightSection/CmtButton';
 import HeartButton from './rightSection/HeartButton';
 import { S } from './Ranking.style';
-
+import RankUserInfo from './rightSection/RankUserInfo';
+import { mock_ranking } from '../../_mock/ranking';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+//여기서 mock_ranking을 보여줌
+//여기서 랭킹 api를 요청후 뿌려줌
 const Rank = ({ isMyData }) => {
-    // const [isMyData, setIsMyData] = useState(true);
-
-    //right secton 로직isMyData={isMyData}
     const [searchParams, setSearchParams] = useSearchParams();
-    const rankList = useSelector(state => state.rankReducer);
-    const [currentUser, setCurrentUser] = useState();
-    const currentId = searchParams.get('id') || rankList[0].id;
+    const sort = searchParams.get('sort') || 'lowest';
+    const navigate = useNavigate();
+    //api로 받아온 데이터 관리하는 곳
+    const [data, setData] = useState(mock_ranking);
+    const [isLogin, setIsLogin] = useState(false);
+    const [currentUser, setCurrentUser] = useState(mock_ranking[0]);
 
-    //현재 선택한 유저의 id와 일치하는 데이터를 찾아서 보여주기
     useEffect(() => {
-        const result = rankList.find(data => data.id === currentId / 1);
-        setCurrentUser(result);
-    }, [currentId]);
+        //랭킹보드 불러오는 로직 (sort에 따라 바뀜)
+    }, [sort]);
 
     return (
         <S.Wrapper>
@@ -36,28 +36,44 @@ const Rank = ({ isMyData }) => {
                 <S.SmallContainer>
                     {isMyData ? (
                         <MyScore isMobile={false} />
+                    ) : isLogin ? (
+                        <S.NewButton
+                            onClick={() => {
+                                navigate('/create');
+                            }}
+                            isMobile={false}
+                        >
+                            시간표 등록하기
+                        </S.NewButton>
                     ) : (
-                        <S.NewButton isMobile={false}>
+                        <S.NewButton
+                            isMobile={false}
+                            onClick={() => {
+                                navigate('/login');
+                            }}
+                        >
                             시간표 등록하기
                         </S.NewButton>
                     )}
                     <TabContainer />
-                    <RankingList />
+                    <RankingList
+                        data={data}
+                        currentUser={currentUser}
+                        setCurrentUser={setCurrentUser}
+                    />
                 </S.SmallContainer>
                 {/*개별 유저 데이터 보여주는 right section*/}
-                {currentUser && (
-                    <S.SmallContainer>
-                        <OneRanking data={currentUser} />
-                        <S.TimeTable src={TimeTableImg} alt='사진' />
-                        {/*버튼 컨테이너*/}
-                        <S.ButtonContainer>
-                            <HeartButton />
-                            <CommentButton />
-                        </S.ButtonContainer>
-                        <NewComment />
-                        <CommentList />
-                    </S.SmallContainer>
-                )}
+                <S.SmallContainer>
+                    <RankUserInfo data={currentUser} />
+                    <S.TimeTable src={currentUser.tableImg} alt='사진' />
+                    {/*버튼 컨테이너*/}
+                    <S.ButtonContainer>
+                        <HeartButton number={currentUser.likeCount} />
+                        <CommentButton number={currentUser.replyCount} />
+                    </S.ButtonContainer>
+                    <NewComment />
+                    <CommentList timetableId={currentUser.timetableId} />
+                </S.SmallContainer>
             </S.Container>
         </S.Wrapper>
     );

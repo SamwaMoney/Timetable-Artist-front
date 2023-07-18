@@ -6,31 +6,26 @@ import CommentButton from '../rightSection/CmtButton';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
-const OneRanking = ({ data, isMobile }) => {
-    const { id, nickname, score, category, rank, tableImg } = data ? data : {};
+//받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
+const OneRanking = ({ data, isMobile, setCurrentUser }) => {
     const navigate = useNavigate();
+
+    //받아온 데이터에 해당 프로퍼티를 꺼내줌
+    const { timetableId, owner, score, tableType, ranking, tableImg } = data;
+
     const [searchParams, setSearchParams] = useSearchParams();
-    const currentId = searchParams.get('id') | 1;
-    const [isCurrentUser, setIsCurrentUser] = useState();
-    const [currentSort, setCurrentSort] = useState('worst');
     const [isShowTimeTable, setIsShowTimeTable] = useState(false);
 
-    const sort = searchParams.get('sort');
-
-    //정렬대로 sort를 바꿔줌
-    useEffect(() => {
-        setCurrentSort(sort);
-    }, [sort, currentSort]);
+    const sort = searchParams.get('sort') || 'lowest';
 
     //디테일 페이지 이동(웹)
-    const onMoveMDetail = id => {
-        navigate(`/ranking/detail/${id}?rank=${rank}`);
+    const onMoveDetail = id => {
+        setCurrentUser(data);
     };
 
     //디테일 페이지 이동(모바일)
-    const onMoveDetail = id => {
-        searchParams.set('id', id);
-        setSearchParams(searchParams);
+    const onMoveMDetail = timetableId => {
+        navigate(`/ranking/detail/${timetableId}?rank=${ranking}`);
     };
 
     //시간표 보기(모바일)
@@ -38,42 +33,32 @@ const OneRanking = ({ data, isMobile }) => {
         setIsShowTimeTable(prev => !prev);
     };
 
-    // useEffect(() => {
-    //     if (currentId === id) {
-    //         setIsCurrentUser(true);
-    //     } else {
-    //         setIsCurrentUser(false);
-    //     }
-    // }, [id, currentId, isCurrentUser]);
-
-    //모바일 페이지 timeTable hover했을 떄 디테일 페이지로 이동 가능
     return isMobile ? (
         <>
             <M.OneRankWrapper>
                 <M.RankContainer>
-                    <M.RankNum isCurrentUser={isCurrentUser}>{rank}</M.RankNum>
+                    <M.RankNum>{ranking}</M.RankNum>
                     <M.UserInfo
-                        isCurrentUser={isCurrentUser}
                         onClick={() => {
                             onShowTimeTable();
                         }}
                     >
                         <M.Score>{score}점</M.Score>
                         <M.CategoryContainer>
-                            <M.Category>{category}</M.Category>
-                            <M.Nickname>{nickname}</M.Nickname>
+                            <M.Category>{tableType}</M.Category>
+                            <M.Nickname>{owner}</M.Nickname>
                         </M.CategoryContainer>
                         {isShowTimeTable ? (
                             <div style={{ position: 'absolute', right: 30 }}>
                                 <AiOutlineCaretUp
-                                    size={40}
+                                    size={25}
                                     color={`var(--blue)`}
                                 />
                             </div>
                         ) : (
                             <div style={{ position: 'absolute', right: 30 }}>
                                 <AiOutlineCaretDown
-                                    size={40}
+                                    size={25}
                                     color={`var(--blue)`}
                                 />
                             </div>
@@ -86,7 +71,7 @@ const OneRanking = ({ data, isMobile }) => {
                             src={tableImg}
                             alt='사진'
                             onClick={() => {
-                                onMoveMDetail(id);
+                                onMoveMDetail(timetableId);
                             }}
                         />
                         <M.ButtonContainer>
@@ -100,17 +85,16 @@ const OneRanking = ({ data, isMobile }) => {
     ) : (
         <>
             <S.RankContainer>
-                <S.RankNum isCurrentUser={isCurrentUser}>{rank}</S.RankNum>
+                <S.RankNum>{ranking}</S.RankNum>
                 <S.UserInfo
-                    isCurrentUser={isCurrentUser}
                     onClick={() => {
-                        onMoveDetail(id);
+                        onMoveDetail(timetableId);
                     }}
                 >
                     <S.Score>{score}점</S.Score>
                     <S.CategoryContainer>
-                        <S.Category>{category}</S.Category>
-                        <S.Nickname>{nickname}</S.Nickname>
+                        <S.Category>{tableType}</S.Category>
+                        <S.Nickname>{owner}</S.Nickname>
                     </S.CategoryContainer>
                 </S.UserInfo>
             </S.RankContainer>
