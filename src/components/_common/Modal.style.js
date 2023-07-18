@@ -17,6 +17,7 @@ M.Modal = styled.div`
 
     .modal {
         width: 17.5%;
+        width: 16.5%;
         height: 21.5%;
         display: flex;
         flex-direction: column;
@@ -24,12 +25,14 @@ M.Modal = styled.div`
         align-items: center;
         text-align: center;
 
-        border-radius: 30px;
+        border-radius: 10px;
         border: 0.1rem solid var(--black);
+        padding: 0.3vw 0;
 
         &.mobile-modal {
             width: 69.2%;
             height: 25%;
+            border: 0.05rem solid var(--black);
         }
     }
     .emoji,
@@ -53,13 +56,12 @@ M.Modal = styled.div`
         }
     }
     .btn {
-        width: 6.4vw;
-        height: 4.6vh;
+        width: 6vw;
+        height: 4.7vh;
         flex-shrink: 0;
-        border-radius: 90px;
+        border-radius: 33px;
         border: 0.1rem solid var(--black);
-        margin: 0.5vw 1vw;
-        margin-top: 0;
+        margin: 0 1vw;
         cursor: pointer;
 
         color: var(--black);
@@ -71,18 +73,18 @@ M.Modal = styled.div`
         &.mobile-btn {
             width: 22vw;
             height: 5vh;
-            font-size: 3.5vw;
+            font-size: 4vw;
             font-weight: 700;
-            margin: 2vw 4vw;
+            margin: 0 4vw;
+            border: 0.05rem solid var(--black);
         }
     }
     .big-btn {
         color: var(--black);
-        width: 12.6vw;
-        height: 4.6vh;
-        border-radius: 90px;
+        width: 12vw;
+        height: 4.7vh;
+        border-radius: 33px;
         border: 0.1rem solid var(--black);
-        margin: 0.5vw 0;
         cursor: pointer;
 
         font-size: 0.85vw;
@@ -92,9 +94,9 @@ M.Modal = styled.div`
         &.mobile-big-btn {
             width: 43.3vw;
             height: 5vh;
-            font-size: 3.5vw;
+            font-size: 4vw;
             font-weight: 700;
-            margin: 2vw 0;
+            border: 0.05rem solid var(--black);
         }
     }
     .red-background {
