@@ -61,15 +61,15 @@ S.NoticeText = styled.div`
 `;
 
 S.ResetBtn = styled.button`
-    width: 52px;
-    height: 25px;
-    padding: 5px 9px;
+    width: 4vw;
+    height: 4vh;
+    /* padding: 5px 9px; */
 
-    border-radius: 1.5rem;
+    border-radius: 1.4rem;
     border: 0.08rem solid var(--black);
     background: var(--red, #f22b02);
 
-    font-size: 11px;
+    font-size: 0.75vw;
     font-weight: 500;
 
     /* position: absolute;

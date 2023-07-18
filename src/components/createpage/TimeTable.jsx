@@ -153,6 +153,7 @@ const TimeTableContainer = styled.div`
        align-items: stretch;
        height: 55%;
        border: 0px;
+       width: 90%;
     `}
 `;
 
@@ -248,7 +249,7 @@ const EtcDescDiv = styled.div`
     ${isMobile &&
     `
        width: 55rem;
-       height: 7.5rem;
+       height: 5rem;
        margin-top: 8px;
     `}
 `;
