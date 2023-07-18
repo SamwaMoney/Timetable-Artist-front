@@ -18,6 +18,6 @@ export default BackBtn;
 const Wrapper = styled.div`
     position: fixed;
     left: 5%;
-    top: 3.5%;
+    top: 5%;
     width: 100%;
 `;
