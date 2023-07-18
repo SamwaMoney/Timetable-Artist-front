@@ -138,7 +138,7 @@ export default TimeTable;
 
 const TimeTableContainer = styled.div`
     /* width: 20.54rem; */
-    height: 22.1575rem;
+    /* height: 22.1575rem; */
 
     border-radius: 0.4rem;
     border: 0.08rem solid var(--black);

@@ -37,7 +37,7 @@ S.MResetBtn = styled.button`
     height: 3vh;
 
     border-radius: 72px;
-    border: 3px solid var(--black);
+    border: 0.05rem solid var(--black);
     background: var(--red, #f22b02);
 
     font-size: 3vw;
@@ -51,7 +51,7 @@ S.MCompleteBtn = styled.button`
     width: 29.38vw;
     height: 5vh;
     border-radius: 72px;
-    border: 3px solid var(--black, #171717);
+    border: 0.05rem solid var(--black, #171717);
     background: var(--green, #b0ff00);
 `;
 
@@ -70,7 +70,7 @@ S.MTimeTableText = styled.div`
 S.MNicknameText = styled.span`
     font-size: 5.5vw;
     font-weight: 700;
-    border-bottom: 3px solid black;
+    border-bottom: 0.05rem solid black;
     padding-bottom: 4px;
 `;
 
