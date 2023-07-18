@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const S = {};
 
 const INPUTWIDTH = 55;
-const INPUTHEIGHT = 5;
-const FONTBASICSIZE = 4;
+const INPUTHEIGHT = 2.2;
+const FONTBASICSIZE = 3.5;
 
 S.MModalContainer = styled.div`
     width: 100vw;
@@ -102,13 +102,12 @@ S.MMainTextDiv = styled.div`
 `;
 
 S.MRedCircle = styled.div`
-    width: 15px;
-    height: 15px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background-color: red;
 
-    margin-left: 1%;
-    margin-top: -1%;
+    margin-left: 3%;
 `;
 
 S.MPlaceInput = styled.div`
@@ -116,7 +115,7 @@ S.MPlaceInput = styled.div`
     height: ${INPUTHEIGHT}rem;
 
     border-radius: 60px;
-    border: 3px solid var(--black);
+    border: 0.05rem solid var(--black);
     background: #fff;
     padding-left: 6%;
     font-size: ${FONTBASICSIZE}vw;
@@ -131,9 +130,14 @@ S.MTimeInputDiv = styled.div`
 `;
 
 S.MTimeInput = styled(S.MPlaceInput)`
-    padding: 0 10%;
+    padding: 0 14%;
     justify-content: space-between;
     width: 100%;
+
+    &.ischecked {
+        pointer-events: none;
+        opacity: 0.7;
+    }
 `;
 
 S.MNameInput = styled.input`
@@ -142,7 +146,7 @@ S.MNameInput = styled.input`
     height: ${INPUTHEIGHT}rem;
 
     border-radius: 60px;
-    border: 3px solid var(--black);
+    border: 0.05rem solid var(--black);
     background: #fff;
 
     padding-left: 6%;
@@ -163,6 +167,10 @@ S.MAddButtonDiv = styled.div`
 S.MAddButton = styled.img`
     width: 17%;
     cursor: pointer;
+
+    &.ischecked {
+        visibility: hidden;
+    }
 `;
 
 S.MCheckBoxDiv = styled.div`
@@ -172,8 +180,8 @@ S.MCheckBoxDiv = styled.div`
 `;
 
 S.MCheckBox = styled.input`
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
 `;
 
 S.MCheckBoxText = styled.div`
@@ -196,7 +204,7 @@ S.MCompleteButton = styled.button`
     width: 66vw;
     height: 6vh;
 
-    border: 3px solid var(--black, #171717);
+    border: 0.05rem solid var(--black, #171717);
     border-radius: 100px;
     background-color: var(--blue, #1962ed);
 `;
