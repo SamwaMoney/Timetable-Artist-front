@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 const S = {};
 
-const INPUTWIDTH = 55;
-const INPUTHEIGHT = 2.2;
+const INPUTWIDTH = 65;
+const INPUTHEIGHT = 2.4;
 const FONTBASICSIZE = 3.5;
 
 S.MModalContainer = styled.div`
+    z-index: 1000;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -15,17 +16,17 @@ S.MModalContainer = styled.div`
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
     align-items: flex-end;
 `;
 
 S.MModal = styled.div`
     width: 100vw;
-    height: 55vh;
+    height: 160vw;
     background-color: white;
-
+    position: fixed;
+    bottom: 0;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
 
     border-radius: 27px 27px 0 0;
     flex-direction: column;
@@ -76,11 +77,10 @@ S.MModalXImg = styled.img`
 // 모달 content 부분
 
 S.MInputContainer = styled.div`
+    width: 70vw;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 7.5%;
 
+    margin-top: 7.5%;
     &.timeinput {
         align-items: flex-start;
     }
@@ -126,13 +126,15 @@ S.MPlaceInput = styled.div`
 `;
 
 S.MTimeInputDiv = styled.div`
-    width: 55%;
+    width: 50vw;
 `;
 
 S.MTimeInput = styled(S.MPlaceInput)`
+    margin-left: 6vw;
     padding: 0 14%;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
+    width: 44vw;
 
     &.ischecked {
         pointer-events: none;
@@ -193,7 +195,7 @@ S.MCompleteButtonDiv = styled.div`
     display: flex;
     justify-content: center;
 
-    margin-top: 20%;
+    margin-top: 50%;
 `;
 
 S.MCompleteButton = styled.button`

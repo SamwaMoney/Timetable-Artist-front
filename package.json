@@ -17,6 +17,7 @@
     "redux-devtools-extension": "^2.13.9",
     "styled-components": "^6.0.2",
     "styled-reset": "^4.5.1",
+    "swiper": "^10.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
