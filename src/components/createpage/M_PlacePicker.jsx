@@ -4,8 +4,11 @@ import { COURSE_PLACE, PickerOptions } from '../../consts/timeTableInput';
 import { useState } from 'react';
 import { S } from './M_CreateTimeTable.style';
 
-const PlacePicker = ({ setIsPlacePickerOpen, isPlacePickerOpen }) => {
-    console.log('open', isPlacePickerOpen);
+const PlacePicker = ({
+    setIsPlacePickerOpen,
+    isPlacePickerOpen,
+    setSelectedPlace,
+}) => {
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState(0); // 초기값은 월(0)로 설정
 
     //요일을 감지해 바꿔주는 함수
@@ -22,6 +25,7 @@ const PlacePicker = ({ setIsPlacePickerOpen, isPlacePickerOpen }) => {
 
     //picker 다 선택후 완성 (확인 버튼)
     const onPickerComplete = () => {
+        setSelectedPlace(COURSE_PLACE[selectedPlaceIndex]);
         setIsPlacePickerOpen(prev => !prev);
         //선택한 시간을 객체로 만들어 저장하는 로직
     };

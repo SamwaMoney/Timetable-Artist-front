@@ -1,5 +1,5 @@
 import { S } from './M_TimeTableInputModal.style';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ic_x from '../../assets/createpage/ic_x.png';
 import add_course_mobile from '../../assets/createpage/add_course_mobile.png';
 import TimePicker from './M_TimePicker';
@@ -11,41 +11,82 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
     const [isChecked, setIsChecked] = useState(false);
 
     //시간 정하는 타임 픽커 열리는지
+    //두번쨰 인자 숫자는 몇번째 인풋의 타임픽커 인지 알려줌
     const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
     //장소 정하는 장소 픽커 열리는지
     const [isPlacePickerOpen, setIsPlacePickerOpen] = useState(false);
-    //두번째 시간창이 열려있는지
+    //두번째 시간 인풋창이 열려있는지
     const [isSecondTimeInputOpen, setIsSecondTimeInputOpen] = useState(false);
+
+    // 선택된 요일, 시작 시간, 끝 시간
+    const [selectedDateTime, setSelectedDateTime] = useState({
+        day: '월',
+        startTime: '8:00',
+        endTime: '9:30',
+    });
+
+    // 두번째 선택된 요일, 시작 시간, 끝 시간
+    //두번째 인풋창이 열려있으면 기본값, 아니면 null
+    const [plusSelectedDateTime, setPlusSelectedDateTime] = useState({
+        day: '월',
+        startTime: '8:00',
+        endTime: '9:30',
+    });
+
+    //장소 선택
+    const [selectedPlace, setSelectedPlace] = useState('ECC');
+
+    //강의명 input
+    const [courseName, setCourseName] = useState('');
+
+    //두번째 인풋의 경우 열려있지 않으면 null로 처리해야 함 (아직 안함)
+
+    //결과 확인용
+    useEffect(() => {
+        console.log('________________________');
+        console.log('시간확인', selectedDateTime);
+        console.log('두번째시간확인', plusSelectedDateTime);
+        console.log('장소확인', selectedPlace);
+        console.log('강의명', courseName);
+    }, [selectedDateTime, selectedPlace, plusSelectedDateTime, courseName]);
+
+    //강의명 onChange
+    const onChangeCourseName = e => {
+        setCourseName(e.target.value);
+    };
 
     const handleCheckBox = e => {
         setIsChecked(e.target.checked);
     };
 
-    const onTimePickerOpen = () => {
+    //타임 피커를 열음
+    const onTimePickerOpen = num => {
         if (!isTimePickerOpen) {
-            return setIsTimePickerOpen(true);
+            return setIsTimePickerOpen([true, num]);
         }
     };
 
-    const onPlacePickerOpen = prev => {
-        if (isTimePickerOpen) {
-            return setIsPlacePickerOpen(false);
-        } else {
+    //장소 피커를 열음
+    const onPlacePickerOpen = () => {
+        if (!isPlacePickerOpen) {
             return setIsPlacePickerOpen(true);
         }
     };
 
+    //플러스 버튼을 눌러서 2번쨰 input 창이 생기게 함
     const onAddTimeInput = () => {
         if (!isSecondTimeInputOpen) {
             return setIsSecondTimeInputOpen(true);
         }
     };
 
+    //마이너스 버튼을 눌러서 2번쨰 input이 닫히게 함
     const onCloseTimeInput = () => {
         if (isSecondTimeInputOpen) {
             return setIsSecondTimeInputOpen(false);
         }
     };
+
     return (
         <>
             <S.MModalContainer>
@@ -57,7 +98,6 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                         </S.MModalHandleContainer>
                         {/* x버튼 */}
                         <S.MModalXContainer>
-                            {/* <S.MModalTitleText>강의 추가</S.MModalTitleText> */}
                             <S.MModalXImg
                                 src={ic_x}
                                 alt='x버튼'
@@ -81,12 +121,18 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                     className={
                                         isChecked === true ? 'ischecked' : ''
                                     }
-                                    onClick={onTimePickerOpen}
+                                    onClick={() => {
+                                        onTimePickerOpen(1);
+                                    }}
                                 >
-                                    <div>월</div>
-                                    {/*나중에 결과값으로 바꿔야 할듯??*/}
-                                    <div>00:00 - 00:00</div>
+                                    {/*첫번째 시간input => 선택한 결과값이 인풋에 반영됨*/}
+                                    <div>{selectedDateTime.day}</div>
+                                    <div>
+                                        {selectedDateTime.startTime} -
+                                        {selectedDateTime.endTime}
+                                    </div>
                                 </S.MTimeInput>
+                                {/*두번째 인풋 창을 열면 새로운 시간 인풋창이 생성*/}
                                 {!isSecondTimeInputOpen ? (
                                     <div>
                                         <S.MAddButtonDiv>
@@ -119,18 +165,32 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                             width: '55vw',
                                         }}
                                     >
-                                        <S.MTimeInput
-                                            className={
-                                                isChecked === true
-                                                    ? 'ischecked'
-                                                    : ''
-                                            }
-                                            onClick={onTimePickerOpen}
-                                        >
-                                            <div>월</div>
-                                            {/*나중에 결과값으로 바꿔야 할듯??*/}
-                                            <div>00:00 - 00:00</div>
-                                        </S.MTimeInput>
+                                        {plusSelectedDateTime && (
+                                            <S.MTimeInput
+                                                className={
+                                                    isChecked === true
+                                                        ? 'ischecked'
+                                                        : ''
+                                                }
+                                                onClick={() => {
+                                                    onTimePickerOpen(2);
+                                                }}
+                                            >
+                                                {/*두번째 input => 선택한 결과값이 인풋에 반영됨*/}
+                                                <div>
+                                                    {plusSelectedDateTime.day}
+                                                </div>
+                                                <div>
+                                                    {
+                                                        plusSelectedDateTime.startTime
+                                                    }
+                                                    -{' '}
+                                                    {
+                                                        plusSelectedDateTime.endTime
+                                                    }
+                                                </div>
+                                            </S.MTimeInput>
+                                        )}
                                         {/*시간 빼기 버튼*/}
                                         <AiOutlineMinus
                                             size={'7vw'}
@@ -143,13 +203,26 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                         />
                                     </div>
                                 )}
-                                {isTimePickerOpen ? (
+
+                                {/*타임 픽커*/}
+                                {!isTimePickerOpen ? null : (
                                     <TimePicker
                                         setIsTimePickerOpen={
                                             setIsTimePickerOpen
                                         }
+                                        setSelectedDateTime={
+                                            setSelectedDateTime
+                                        }
+                                        isTimePickerOpen={isTimePickerOpen}
+                                        selectedDateTime={selectedDateTime}
+                                        setIsSecondTimeInputOpen={
+                                            setIsSecondTimeInputOpen
+                                        }
+                                        setPlusSelectedDateTime={
+                                            setPlusSelectedDateTime
+                                        }
                                     />
-                                ) : null}
+                                )}
                             </S.MTimeInputDiv>
                         </S.MInputContainer>
 
@@ -159,7 +232,7 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                 <S.MRedCircle />
                             </S.MMainTextDiv>
                             <S.MPlaceInput onClick={onPlacePickerOpen}>
-                                ECC
+                                {selectedPlace}
                             </S.MPlaceInput>
                             {isPlacePickerOpen ? (
                                 <>
@@ -168,6 +241,7 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                             setIsPlacePickerOpen
                                         }
                                         isPlacePickerOpen={isPlacePickerOpen}
+                                        setSelectedPlace={setSelectedPlace}
                                     />
                                 </>
                             ) : null}
@@ -177,7 +251,11 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                             <S.MMainTextDiv>
                                 <S.MMainText>강의명</S.MMainText>
                             </S.MMainTextDiv>
-                            <S.MNameInput placeholder='강의명을 입력하세요' />
+                            <S.MNameInput
+                                value={courseName}
+                                onChange={onChangeCourseName}
+                                placeholder='강의명을 입력하세요'
+                            />
                         </S.MInputContainer>
                     </div>
 

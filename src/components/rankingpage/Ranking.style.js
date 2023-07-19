@@ -557,13 +557,12 @@ M.OneCommentContainer = styled.div`
 `;
 
 S.OneCommentContainer = styled.div`
-    /* background-color: var(--green); */
     background-color: white;
     border-radius: 7px;
     border: 0.1rem solid black;
     margin-top: 0.8rem;
     margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
     position: relative;
 `;
 
@@ -604,6 +603,7 @@ M.CommentDate = styled.div`
 S.CommentText = styled.div`
     font-size: 0.9rem;
     padding-bottom: 0rem;
+    width: 80%;
 `;
 
 M.CommentText = styled.div`
@@ -725,7 +725,7 @@ M.CommentWrapper = styled.div`
 
 S.CommentTextWrapper = styled.div`
     display: flex;
-    align-items: center;
+    padding-top: 1vw;
     width: 30vw;
 `;
 
@@ -737,13 +737,17 @@ M.CommentTextWrapper = styled.div`
 `;
 
 S.CommentLikeWrapper = styled.div`
+    display: absolute;
+    top: 0.2vw;
+    right: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
 `;
 S.CommentLikeNum = styled.div`
-    padding-left: 0.3rem;
     padding-top: 0.25rem;
+    position: absolute;
+    top: 2rem;
 `;
 
 M.CommentLikeWrapper = styled.div`

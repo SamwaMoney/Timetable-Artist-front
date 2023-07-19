@@ -42,18 +42,27 @@ const OneComment = ({ isMobile }) => {
                     <S.CommentUserName>익명</S.CommentUserName>
                     <S.CommentDate>2023.7.9</S.CommentDate>
                 </S.CommentTextWrapper>
-                <S.CommentLikeWrapper>
-                    <S.Icon src={NoLike} />
-                    <S.CommentLikeNum>0</S.CommentLikeNum>
-                </S.CommentLikeWrapper>
+                <TiDelete
+                    size='4vw'
+                    style={{ marginTop: '-0.6vw', marginRight: '1vw' }}
+                    color='var(--background)'
+                />
+                {isLike ? (
+                    <S.CommentLikeWrapper>
+                        <S.Icon src={GetLike} />
+                        <div>0</div>
+                    </S.CommentLikeWrapper>
+                ) : (
+                    <S.CommentLikeWrapper>
+                        <S.Icon src={NoLike} />
+                        <div>0</div>
+                    </S.CommentLikeWrapper>
+                )}
             </S.CommentInfo>
             <S.CommentText>
                 그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
                 Spotlight 날 봐 I'm a star star star
             </S.CommentText>
-            <div style={{ position: 'absolute', left: '-1rem', top: '-1rem' }}>
-                <TiDelete size='2rem' color='var(--grey)' />
-            </div>
         </S.OneCommentContainer>
     );
 };

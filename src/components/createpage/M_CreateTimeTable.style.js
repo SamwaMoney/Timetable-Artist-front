@@ -111,15 +111,7 @@ S.PlacePickerWrapper = styled.div`
     height:20vw;
     display:flex;
     flex-direction:column;
-    /* position: fixed;
-    padding-left: 1vw;
-    bottom: 0;
-    width: 100vw;
-    z-index: 100;
-    background-color: var(--background);
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column; */
+
     div {
         font-weight: 500;
     }

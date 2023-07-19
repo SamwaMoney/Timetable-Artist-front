@@ -1,42 +1,59 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { styled } from 'styled-components';
 import { COURSE_TIME, DAYS_OF_WEEK } from '../../consts/timeTableInput';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { S } from './M_CreateTimeTable.style';
 import { PickerOptions } from '../../consts/timeTableInput';
-const TimePicker = ({ setIsTimePickerOpen }) => {
+
+const TimePicker = ({
+    setIsTimePickerOpen,
+    selectedDateTime,
+    isTimePickerOpen,
+    setSelectedDateTime,
+    setPlusSelectedDateTime,
+}) => {
     const [selectedDayIndex, setSelectedDayIndex] = useState(0); // 초기값은 월(0)로 설정
     const [selectedTimeStartIndex, setSelectedTimeStartIndex] = useState(0);
     const [selectedTimeEndIndex, setSelectedTimeEndIndex] = useState(0);
 
     //요일을 감지해 바꿔주는 함수
     const onChangeDay = swiper => {
-        // 클릭한 슬라이드의 인덱스를 업데이트하여 선택된 슬라이드 표시
-        console.log('day', swiper.activeIndex);
         setSelectedDayIndex(swiper.activeIndex);
     };
 
     //시작시간을 감지해 바꿔주는 함수
     const onChangeStartTime = swiper => {
-        console.log('startTime', swiper.activeIndex);
         setSelectedTimeStartIndex(swiper.activeIndex);
     };
 
     //끝시간을 감지해 바꿔주는 함수
     const onChangeEndTime = swiper => {
-        console.log('endTime', swiper.activeIndex);
         setSelectedTimeEndIndex(swiper.activeIndex);
     };
 
     //picker닫음 (취소 버튼)
     const onPickerClose = () => {
-        setIsTimePickerOpen(prev => !prev);
+        setIsTimePickerOpen(false);
     };
 
     //picker 다 선택후 완성 (확인 버튼)
+    //선택한 시간을 객체로 만들어 저장하는 로직
     const onPickerComplete = () => {
-        setIsTimePickerOpen(prev => !prev);
-        //선택한 시간을 객체로 만들어 저장하는 로직
+        if (isTimePickerOpen[1] === 1) {
+            setSelectedDateTime({
+                day: DAYS_OF_WEEK[selectedDayIndex],
+                startTime: COURSE_TIME[selectedTimeStartIndex],
+                endTime: COURSE_TIME[selectedTimeEndIndex],
+            });
+            setIsTimePickerOpen(false);
+        } else if (isTimePickerOpen[1] === 2) {
+            setPlusSelectedDateTime({
+                day: DAYS_OF_WEEK[selectedDayIndex],
+                startTime: COURSE_TIME[selectedTimeStartIndex],
+                endTime: COURSE_TIME[selectedTimeEndIndex],
+            });
+            setIsTimePickerOpen(false);
+        }
     };
 
     return (
