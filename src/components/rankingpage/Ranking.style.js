@@ -420,7 +420,7 @@ M.Category = styled.div`
     padding-top: 0.5rem;
     padding-bottom: 5px;
     font-weight: 700;
-    font-size: 4.4vw;
+    font-size: 4.1vw;
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
@@ -471,20 +471,11 @@ M.ButtonContainer = styled.div`
 M.DetailBtnContainer = styled.div`
     display: flex;
     margin-top: 5vw;
-    margin-left: -60vw;
+    margin-left: -55vw;
     margin-bottom: 2vw;
     div {
         width: 200vw;
-    }
-    img {
-        width: 7vw;
-        height: 7vw;
-    }
-    p {
-        width: 30vw;
-        border-radius: 40%;
-        font-size: 4.5vw;
-    }
+    } */
 `;
 S.IconButton = styled.button`
     width: 18%;
@@ -523,12 +514,24 @@ S.Icon = styled.img`
     width: 1.5rem;
     height: 1.5rem;
 `;
+M.IconContainer = styled.div`
+    ${FlexCenter}
+`;
 
+M.HeartContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4vw;
+    padding-left: 2.5vw;
+    div {
+        font-size: 4vw;
+        padding-top: 1vw;
+    }
+`;
 M.Icon = styled.img`
     width: 7vw;
     height: 7vw;
-    position: absolute;
-    right: 6vw;
 `;
 
 S.CommentIcon = styled.img`
@@ -542,15 +545,9 @@ M.CommentIcon = styled.img`
     height: 6vw;
 `;
 
-M.LikeNum = styled.div`
-    font-size: 5vw;
-    position: absolute;
-    right: 1.8vw;
-    padding-top: 1.4vw;
-`;
 //댓글
 M.OneCommentContainer = styled.div`
-    background-color: var(--green);
+    background-color: var(--white);
     border-radius: 7px;
     border: 0.1rem solid black;
     margin-top: 2vw;
@@ -578,9 +575,10 @@ S.CommentInfo = styled.div`
     position: relative;
 `;
 M.CommentInfo = styled.div`
-    display: flex;
-    padding-bottom: 0.5rem;
-    position: relative;
+    ${FlexCenter}
+    justify-content:space-between;
+    width: 100%;
+    height: 10vw;
 `;
 
 S.CommentUserName = styled.div`
@@ -590,11 +588,8 @@ S.CommentUserName = styled.div`
 `;
 
 M.CommentUserName = styled.div`
-    margin-top: 1vw;
     font-size: 4vw;
     font-weight: 600;
-    position: absolute;
-    left: 0;
 `;
 
 S.CommentDate = styled.div`
@@ -602,10 +597,9 @@ S.CommentDate = styled.div`
 `;
 
 M.CommentDate = styled.div`
-    margin-top: 1vw;
     font-size: 4vw;
-    position: absolute;
-    left: 10vw;
+    padding-left: 3vw;
+    color: var(--grey);
 `;
 
 S.CommentText = styled.div`
@@ -614,8 +608,8 @@ S.CommentText = styled.div`
 `;
 
 M.CommentText = styled.div`
-    margin-top: 7vw;
     font-size: 4vw;
+    width: 75%;
 `;
 
 S.FlexContainer = styled.div`
@@ -624,8 +618,8 @@ S.FlexContainer = styled.div`
 
 //시간표 목업 사진
 S.TimeTable = styled.img`
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
     background-color: #888;
     border: 1px solid black;
     margin-top: 0.8rem;

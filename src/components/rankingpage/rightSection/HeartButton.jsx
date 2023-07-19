@@ -5,7 +5,7 @@ const HeartButton = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
             <M.CommentIcon src={NoLike} alt='하트' />
-            <p>11</p>
+            <p>10</p>
         </M.IconButton>
     ) : (
         <S.IconButton>

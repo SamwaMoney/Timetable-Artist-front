@@ -1,8 +1,16 @@
 import { S } from './M_TimeTableInputModal.style';
+import { useState } from 'react';
 import ic_x from '../../assets/createpage/ic_x.png';
 import add_course_mobile from '../../assets/createpage/add_course_mobile.png';
 
 const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
+    // 지정된 시간 없음 체크박스 선택
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheckBox = e => {
+        setIsChecked(e.target.checked);
+    };
+
     return (
         <>
             <S.MModalContainer>
@@ -33,7 +41,11 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                 <S.MRedCircle />
                             </S.MMainTextDiv>
                             <S.MTimeInputDiv>
-                                <S.MTimeInput>
+                                <S.MTimeInput
+                                    className={
+                                        isChecked === true ? 'ischecked' : ''
+                                    }
+                                >
                                     <div>월</div>
                                     <div>8:00 - 9:30</div>
                                 </S.MTimeInput>
@@ -41,9 +53,17 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                     <S.MAddButton
                                         src={add_course_mobile}
                                         alt='+버튼'
+                                        className={
+                                            isChecked === true
+                                                ? 'ischecked'
+                                                : ''
+                                        }
                                     />
                                     <S.MCheckBoxDiv>
-                                        <S.MCheckBox type='checkbox' />
+                                        <S.MCheckBox
+                                            type='checkbox'
+                                            onChange={handleCheckBox}
+                                        />
                                         <S.MCheckBoxText>
                                             지정된 시간 없음
                                         </S.MCheckBoxText>

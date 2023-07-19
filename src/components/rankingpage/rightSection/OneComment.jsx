@@ -11,19 +11,24 @@ const OneComment = ({ isMobile }) => {
     return isMobile ? (
         <M.OneCommentContainer>
             <M.CommentInfo>
-                <M.CommentUserName>익명</M.CommentUserName>
-                <M.CommentDate>2023.7.9</M.CommentDate>
-                <div
-                    style={{
-                        position: 'absolute',
-                        left: '-6.5vw',
-                        top: '-6.5vw',
-                    }}
-                >
-                    <TiDelete size='9vw' color='var(--grey)' />
-                </div>
-                {isLike ? <M.Icon src={GetLike} /> : <M.Icon src={NoLike} />}
-                <M.LikeNum>0</M.LikeNum>
+                <M.IconContainer>
+                    <M.CommentUserName>익명</M.CommentUserName>
+                    <M.CommentDate>3시간 전</M.CommentDate>
+                </M.IconContainer>
+                <M.IconContainer>
+                    <TiDelete size='8vw' color='var(--background)' />
+                    {isLike ? (
+                        <M.HeartContainer>
+                            <M.Icon src={GetLike} />
+                            <div>0</div>
+                        </M.HeartContainer>
+                    ) : (
+                        <M.HeartContainer>
+                            <M.Icon src={NoLike} />
+                            <div>0</div>
+                        </M.HeartContainer>
+                    )}
+                </M.IconContainer>
             </M.CommentInfo>
             <M.CommentText>
                 그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
