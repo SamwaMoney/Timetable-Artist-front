@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { S } from './M_CreateTimeTable.style';
 import { PickerOptions } from '../../consts/timeTableInput';
 
+//시간 고르는 창
 const TimePicker = ({
     setIsTimePickerOpen,
     selectedDateTime,

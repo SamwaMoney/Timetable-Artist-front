@@ -4,6 +4,7 @@ import { COURSE_PLACE, PickerOptions } from '../../consts/timeTableInput';
 import { useState } from 'react';
 import { S } from './M_CreateTimeTable.style';
 
+//요일 고르는 창
 const PlacePicker = ({
     setIsPlacePickerOpen,
     isPlacePickerOpen,
