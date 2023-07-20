@@ -4,46 +4,14 @@ import { useDispatch } from 'react-redux';
 import { addSelectedData } from '../../reducer/action';
 import add_course from '../../assets/createpage/add_course.png';
 import ic_dropdown from '../../assets/createpage/ic_dropdown.png';
+import {
+    DAYS_OF_WEEK,
+    COURSE_PLACE,
+    COURSE_TIME,
+} from '../../consts/timeTableInput';
 
 const TimeTableInput = () => {
-    // 요일 배열
-    const dayOfWeek = ['월', '화', '수', '목', '금'];
     // 강의 시간 배열
-    const courseTime = [
-        '8:00',
-        '9:30',
-        '11:00',
-        '12:30',
-        '14:00',
-        '15:30',
-        '17:00',
-        '18:30',
-        '20:00',
-    ];
-    // 강의 장소 배열
-    const coursePlace = [
-        'ECC',
-        '공학관',
-        '교육관',
-        '학관',
-        '국제교육관',
-        '대강당',
-        '법학관',
-        '헬렌관',
-        '연구협력관',
-        '테니스장',
-        '생활관',
-        '동창회관',
-        '약학관',
-        '신세계관',
-        'sk텔레콤관(정보관)',
-        '조형예술관',
-        '체육관',
-        '음악관',
-        '종합과학관',
-        '포스코관',
-        '원격/비대면',
-    ];
 
     // dropdown 4개 open 여부 (요일, 시작시간, 끝시간, 장소)
     const [isOpen, setIsOpen] = useState([false, false, false, false]);
@@ -111,7 +79,10 @@ const TimeTableInput = () => {
         <>
             <S.InputContainer>
                 <S.LectureButtonDiv>
-                    <S.LectureButton bgcolor='#1962ED' onClick={handleButtonClick}>
+                    <S.LectureButton
+                        bgcolor='#1962ED'
+                        onClick={handleButtonClick}
+                    >
                         강의 추가
                     </S.LectureButton>
                 </S.LectureButtonDiv>
@@ -142,7 +113,7 @@ const TimeTableInput = () => {
                                 />
                             </div>
                             {isOpen[0] === true
-                                ? dayOfWeek.map((day, _) => {
+                                ? DAYS_OF_WEEK.map((day, _) => {
                                       return (
                                           <div
                                               onClick={() =>
@@ -178,7 +149,7 @@ const TimeTableInput = () => {
                                 />
                             </div>
                             {isOpen[1] === true
-                                ? courseTime.map((time, _) => {
+                                ? COURSE_TIME.map((time, _) => {
                                       return (
                                           <div
                                               onClick={() =>
@@ -218,7 +189,7 @@ const TimeTableInput = () => {
                                 />
                             </div>
                             {isOpen[2] === true
-                                ? courseTime.map((time, _) => {
+                                ? COURSE_TIME.map((time, _) => {
                                       return (
                                           <div
                                               onClick={() =>
@@ -269,7 +240,7 @@ const TimeTableInput = () => {
                                 />
                             </div>
                             {isOpen[3] === true
-                                ? coursePlace.map((place, _) => {
+                                ? COURSE_PLACE.map((place, _) => {
                                       return (
                                           <div
                                               onClick={() =>
