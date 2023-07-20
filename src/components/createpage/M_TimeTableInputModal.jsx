@@ -5,10 +5,13 @@ import add_course_mobile from '../../assets/createpage/add_course_mobile.png';
 import TimePicker from './M_TimePicker';
 import PlacePicker from './M_PlacePicker';
 import { AiOutlineMinus } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { addSelectedData } from '../../reducer/action';
 
 const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
     // 지정된 시간 없음 체크박스 선택
     const [isChecked, setIsChecked] = useState(false);
+    const dispatch = useDispatch();
 
     //시간 정하는 타임 픽커 열리는지
     //두번쨰 인자 숫자는 몇번째 인풋의 타임픽커 인지 알려줌
@@ -85,6 +88,23 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
         if (isSecondTimeInputOpen) {
             return setIsSecondTimeInputOpen(false);
         }
+    };
+
+    //시간표에 추가
+    const handleButtonClick = () => {
+        // 객체 형태로 가공하여 새로운 데이터 생성
+        const newData = {
+            day: selectedDateTime.day,
+            startTime: selectedDateTime.startTime,
+            endTime: selectedDateTime.endTime,
+            place: selectedPlace,
+            name: courseName,
+        };
+
+        console.log(newData);
+
+        // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
+        dispatch(addSelectedData(newData));
     };
 
     return (
@@ -260,7 +280,9 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                     </div>
 
                     <S.MCompleteButtonDiv>
-                        <S.MCompleteButton>시간표에 추가</S.MCompleteButton>
+                        <S.MCompleteButton onClick={handleButtonClick}>
+                            시간표에 추가
+                        </S.MCompleteButton>
                     </S.MCompleteButtonDiv>
                 </S.MModal>
             </S.MModalContainer>
