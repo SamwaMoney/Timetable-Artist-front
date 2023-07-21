@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import HeartBtn from './LikeBtn';
 import NoLike from '../../../assets/rankingpage/heart1.png';
+import GetLike from '../../../assets/rankingpage/heart2.png';
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
 //현재 시간을 0시간전으로 계산해서 보여주기
 const OneComment = ({ isMobile }) => {
@@ -42,10 +43,22 @@ const OneComment = ({ isMobile }) => {
                     <S.CommentUserName>익명</S.CommentUserName>
                     <S.CommentDate>2023.7.9</S.CommentDate>
                 </S.CommentTextWrapper>
-                <S.CommentLikeWrapper>
-                    <S.Icon src={NoLike} />
-                    <S.CommentLikeNum>0</S.CommentLikeNum>
-                </S.CommentLikeWrapper>
+                <TiDelete
+                    size='4vw'
+                    style={{ marginTop: '-0.6vw', marginRight: '1vw' }}
+                    color='var(--background)'
+                />
+                {isLike ? (
+                    <S.CommentLikeWrapper>
+                        <S.Icon src={GetLike} />
+                        <div>0</div>
+                    </S.CommentLikeWrapper>
+                ) : (
+                    <S.CommentLikeWrapper>
+                        <S.Icon src={NoLike} />
+                        <div>0</div>
+                    </S.CommentLikeWrapper>
+                )}
             </S.CommentInfo>
             <S.CommentText>
                 그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot

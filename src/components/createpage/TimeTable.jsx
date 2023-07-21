@@ -17,7 +17,7 @@ const TimeTable = () => {
         return index % 2 === 0 ? hour : hour + 0.5;
     });
 
-    console.log(timeSlots);
+    // console.log(timeSlots);
 
     const dayMappings = {
         월: 'Mon',
@@ -43,7 +43,7 @@ const TimeTable = () => {
     const AdditionalContent = ({ selectedData }) => (
         <BlockText>
             <div>{selectedData[0].name}</div>
-            <br/>
+            <br />
             <div>{selectedData[0].place}</div>
         </BlockText>
     );
