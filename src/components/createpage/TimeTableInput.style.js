@@ -28,18 +28,6 @@ S.DescText = styled.span`
     }
 `;
 
-S.DescDayText = styled(S.DescText)`
-    margin-left: 23%;
-`;
-
-S.DescTimeText = styled(S.DescText)`
-    margin-left: 14.3%;
-`;
-
-S.DescPlaceText = styled(S.DescText)`
-    margin-left: 9.1%;
-`;
-
 S.LectureButton = styled.button`
     width: 5.2rem;
     height: 1.9rem;
@@ -84,6 +72,8 @@ S.InputDiv = styled.div`
     margin-top: 7.7%;
 `;
 
+// dropdown 부분
+
 S.DescDiv = styled.div`
     /* width: 14.45rem; */
     width: 72%;
@@ -96,25 +86,6 @@ S.DescDiv = styled.div`
     @media screen and (max-height: 500px) {
         height: 1.5rem;
     }
-`;
-
-S.DayDropdownDiv = styled.div`
-    width: 4.1rem;
-    height: ${props => (props.isopen ? '10rem' : '2rem')};
-
-    border-radius: ${props => (props.isopen ? '18px' : '35px')};
-    border: 0.08rem solid var(--black);
-    background: #fff;
-
-    overflow-y: ${props => (props.isopen ? 'scroll' : 'unset')};
-
-    @media screen and (max-height: 500px) {
-        height: ${props => (props.isopen ? '7.5rem' : '1.5rem')};
-    }
-`;
-
-S.TimeDropdownDiv = styled(S.DayDropdownDiv)`
-    width: 4.5rem;
 `;
 
 S.DropdownDiv = styled.div`
@@ -160,6 +131,10 @@ S.CheckBoxDiv = styled.div`
 
 S.AddBtn = styled.img`
     width: 16%;
+
+    &.ischecked {
+        visibility: hidden;
+    }
 `;
 
 S.CheckBox = styled.input`
@@ -205,6 +180,11 @@ S.RedCircle = styled.div`
 
     margin-left: 0.4rem;
     margin-top: -0.64rem;
+`;
+
+S.MinusBtn = styled.img`
+    width: 15%;
+    margin-top: 4.5%;
 `;
 
 export { S };
