@@ -1,7 +1,7 @@
 import { S, M } from './Ranking.style';
 import { useSearchParams } from 'react-router-dom';
-import HeartButton from './rightSection/HeartButton';
-import CommentButton from './rightSection/CmtButton';
+import HeartTag from './rightSection/HeartTag';
+import CmtTag from './rightSection/CmtTag';
 import CommentList from './rightSection/CommentList';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { styled } from 'styled-components';
@@ -49,8 +49,8 @@ const MRankDetail = () => {
                 </M.RankContainer>
                 <S.TimeTable src={tableImg} alt='사진' />
                 <M.DetailBtnContainer>
-                    <HeartButton isMobile={true} />
-                    <CommentButton isMobile={true} />
+                    <HeartTag isMobile={true} />
+                    <CmtTag isMobile={true} />
                 </M.DetailBtnContainer>
                 <M.CommentWrapper></M.CommentWrapper>
                 {/*뎃글 적는 인풋창*/}

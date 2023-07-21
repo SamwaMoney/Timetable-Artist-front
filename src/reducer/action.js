@@ -6,3 +6,7 @@ export const addSelectedData = data => {
         payload: data,
     };
 };
+
+export const ADD_RESULT = 'ADD_RESULT';
+
+export const REPLACE_RESULT = 'REPLACE_RESULT';

@@ -1,7 +1,7 @@
 import { S, M } from '../Ranking.style';
 import NoLike from '../../../assets/rankingpage/heart1.png';
 
-const HeartButton = ({ isMobile, number }) => {
+const HeartTag = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
             <M.CommentIcon src={NoLike} alt='하트' />
@@ -14,4 +14,4 @@ const HeartButton = ({ isMobile, number }) => {
         </S.IconButton>
     );
 };
-export default HeartButton;
+export default HeartTag;

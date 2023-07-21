@@ -1,20 +1,35 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
-import HeartButton from '../rightSection/HeartButton';
-import CommentButton from '../rightSection/CmtButton';
+import HeartTag from '../rightSection/HeartTag';
+import CmtTag from '../rightSection/CmtTag';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
+
+//내 랭크에만 작게 표시함
 
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 //받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
-const OneRanking = ({ data, isMobile, setCurrentUser }) => {
+const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [isShowTimeTable, setIsShowTimeTable] = useState(false);
+    //디테일 페이지에 표시된 유저인지(초록색)
+    const [isCurrentUser, setIsCurrentUser] = useState(
+        data?.timetableId === currentUser?.timetableId,
+    );
+
+    //현재 디테일 페이지에 표시된 유저를 바꿔줌 => 초록색으로 색상 바뀜
+    useEffect(() => {
+        if (data?.timetableId === currentUser?.timetableId) {
+            setIsCurrentUser(true);
+        } else {
+            setIsCurrentUser(false);
+        }
+    }, [data, currentUser]);
+
     const navigate = useNavigate();
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
     const { timetableId, owner, score, tableType, ranking, tableImg } = data;
-
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [isShowTimeTable, setIsShowTimeTable] = useState(false);
 
     const sort = searchParams.get('sort') || 'lowest';
 
@@ -75,8 +90,8 @@ const OneRanking = ({ data, isMobile, setCurrentUser }) => {
                             }}
                         />
                         <M.ButtonContainer>
-                            <HeartButton isMobile={true} />
-                            <CommentButton isMobile={true} />
+                            <HeartTag isMobile={true} />
+                            <CmtTag isMobile={true} />
                         </M.ButtonContainer>
                     </M.TimeTableWrapper>
                 ) : null}
@@ -85,11 +100,12 @@ const OneRanking = ({ data, isMobile, setCurrentUser }) => {
     ) : (
         <>
             <S.RankContainer>
-                <S.RankNum>{ranking}</S.RankNum>
+                <S.RankNum isCurrentUser={isCurrentUser}>{ranking}</S.RankNum>
                 <S.UserInfo
                     onClick={() => {
                         onMoveDetail(timetableId);
                     }}
+                    isCurrentUser={isCurrentUser}
                 >
                     <S.Score>{score}점</S.Score>
                     <S.CategoryContainer>
