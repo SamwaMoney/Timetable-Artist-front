@@ -107,10 +107,10 @@ S.PlacePickerWrapper = styled.div`
     z-index:200;
     position: fixed;
     bottom: 0;
-    background-color:var(--background)
-    height:20vw;
-    display:flex;
-    flex-direction:column;
+    background-color:var(--background);
+    height: 20vw;
+    display: flex;
+    flex-direction: column;
 
     div {
         font-weight: 500;
@@ -173,7 +173,7 @@ S.SelectedContainer = styled.div`
 `;
 
 S.MPickerSmallBtn = styled.button`
-    margin-left: 20vw;
+    /* margin-left: 20vw; */
     margin-top: 4vw;
     width: 18vw;
     height: 8vw;
@@ -202,5 +202,7 @@ S.PickerBtnWrapper = styled.div`
     position: fixed;
     left: 0;
     z-index: 2000;
+    display: flex;
+    justify-content: space-around;
 `;
 export { S };

@@ -52,7 +52,18 @@ const PlacePicker = ({
                 <S.SelectedContainer />
                 <Swiper {...PickerOptions} onSlideChange={onChangeDay}>
                     {COURSE_PLACE.map((place, index) => (
-                        <SwiperSlide key={index}>{place}</SwiperSlide>
+                        <SwiperSlide
+                            key={index}
+                            style={{
+                                textAlign: 'center',
+                                color:
+                                    selectedPlaceIndex === index
+                                        ? 'black'
+                                        : 'gray',
+                            }}
+                        >
+                            {place}
+                        </SwiperSlide>
                     ))}
                 </Swiper>
             </S.PickerWrapper>
