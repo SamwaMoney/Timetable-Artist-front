@@ -85,12 +85,13 @@ M.NewButton = styled.div`
 
 //rank
 S.RankNum = styled.div`
+    display: border-box;
     margin-right: 1%;
-    width: 60px;
-    height: 50px;
+    width: 5rem;
+    height: 4rem;
     border-radius: 50%;
     ${FlexCenter}
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     font-family: Montserrat;
     background-color: ${({ isCurrentUser }) =>
@@ -118,7 +119,7 @@ M.RankNum = styled.div`
 
 S.UserInfo = styled.div`
     width: 100%;
-    height: 3.4rem;
+    height: 4rem;
     background-color: ${({ isCurrentUser }) =>
         isCurrentUser ? 'var(--green)' : 'white'};
     border: 0.1rem solid black;
@@ -150,9 +151,9 @@ M.OneRankWrapper = styled.div`
     flex-direction:column;
 `;
 S.RankContainer = styled.div`
-    margin-top: 5%;
+    margin-top: 1rem;
     font-family: Montserrat;
-    width: 80%;
+    width: 75%;
     height: 100%;
     margin-bottom: 3%;
     display: flex;
@@ -186,7 +187,7 @@ M.TabContainer = styled.div`
 S.Tab = styled.div`
     width: 50%;
     padding-bottom: 3%;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
@@ -200,7 +201,7 @@ M.Tab = styled.div`
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
-        active ? '1.2vw solid black' : '0.5vw solid black'};
+        active ? '1.2vw solid black' : '0.6vw solid black'};
     cursor: pointer;
 `;
 
@@ -286,7 +287,7 @@ M.ToggleText = styled.div`
 //내 점수 보기
 S.MyScoreContainer = styled.div`
     margin-top: 10%;
-    width: 77%;
+    width: 75%;
     height: 5.1rem;
     border-radius: 20px;
     border: 0.1rem solid var(--blue);
@@ -341,7 +342,7 @@ M.Text = styled.div`
 
 S.RankText = styled.div`
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.7vw;
     margin-top: 5%;
 `;
 M.RankText = styled.div`
@@ -384,6 +385,7 @@ S.Score = styled.div`
     font-weight: 500;
     position: absolute;
     left: 5%;
+    width: 20%;
 `;
 
 M.Score = styled.div`
@@ -402,6 +404,7 @@ S.CategoryContainer = styled.div`
     ${FlexCenter}
     flex-direction: column;
     padding-left: 1.6rem;
+    width: 80%;
 `;
 
 M.CategoryContainer = styled.div`
@@ -412,22 +415,23 @@ M.CategoryContainer = styled.div`
 `;
 
 S.Category = styled.div`
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
     margin-bottom: 0.2rem;
 `;
 M.Category = styled.div`
-    padding-top: 5px;
+    padding-top: 0.5rem;
     padding-bottom: 5px;
     font-weight: 700;
     font-size: 4.1vw;
     margin-bottom: 0.2rem;
 `;
 S.Nickname = styled.div`
-    font-size: 1rem;
+    font-size: 1.1rem;
 `;
 M.Nickname = styled.div`
     font-size: 4.2vw;
+    margin-bottom: 2vw;
 `;
 
 //버튼 컨테이너
@@ -470,15 +474,12 @@ M.ButtonContainer = styled.div`
 M.DetailBtnContainer = styled.div`
     display: flex;
     margin-top: 5vw;
-    margin-left: -55vw;
+    margin-left: -50vw;
     margin-bottom: 2vw;
-    div {
-        width: 200vw;
-    } */
 `;
 S.IconButton = styled.button`
-    width: 18%;
-    height: 100%;
+    width: 4vw;
+    height: 2vw;
     background-color: var(--red);
     border-radius: 5px;
     display: flex;
@@ -489,11 +490,14 @@ S.IconButton = styled.button`
     font-size: 0.9rem;
     font-weight: 600;
     margin: 0 5px;
+    p {
+        font-size: 1rem;
+    }
 `;
 
 M.IconButton = styled.button`
-    width: 13vw;
-    height: 7vw;
+    width: 16vw;
+    height: 9vw;
     background-color: var(--red);
     border-radius: 2vw;
     display: flex;
@@ -510,8 +514,13 @@ M.IconButton = styled.button`
 
 S.Icon = styled.img`
     z-index: 10;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover {
+        transform: scale(1.3);
+    }
 `;
 M.IconContainer = styled.div`
     ${FlexCenter}
@@ -531,6 +540,11 @@ M.HeartContainer = styled.div`
 M.Icon = styled.img`
     width: 7vw;
     height: 7vw;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover {
+        transform: scale(1.3);
+    }
 `;
 
 S.CommentIcon = styled.img`
@@ -540,8 +554,18 @@ S.CommentIcon = styled.img`
 `;
 
 M.CommentIcon = styled.img`
-    width: 6vw;
-    height: 6vw;
+    width: 8vw;
+    height: 8vw;
+`;
+
+M.HeartIcon = styled.img`
+    width: 8vw;
+    height: 8vw;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover {
+        transform: scale(1.3);
+    }
 `;
 
 //댓글
@@ -602,7 +626,6 @@ M.CommentDate = styled.div`
 
 S.CommentText = styled.div`
     font-size: 0.9rem;
-    padding-bottom: 0rem;
     width: 80%;
 `;
 
@@ -725,7 +748,7 @@ M.CommentWrapper = styled.div`
 
 S.CommentTextWrapper = styled.div`
     display: flex;
-    padding-top: 1vw;
+    padding-top: 0.5rem;
     width: 30vw;
 `;
 

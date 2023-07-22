@@ -1,18 +1,18 @@
 import { S, M } from '../Ranking.style';
 import Comment from '../../../assets/rankingpage/comment.png';
 
-const CommentButton = ({ isMobile, number }) => {
+const CmtTag = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
-            <M.CommentIcon src={Comment} alt='하트' />
-            <p>11</p>
+            <M.CommentIcon src={Comment} alt='댓글' />
+            <p>{number}</p>
         </M.IconButton>
     ) : (
         <S.IconButton>
-            <S.Icon src={Comment} alt='하트' />
+            <S.Icon src={Comment} alt='댓글' />
             <p>{number}</p>
         </S.IconButton>
     );
 };
 
-export default CommentButton;
+export default CmtTag;

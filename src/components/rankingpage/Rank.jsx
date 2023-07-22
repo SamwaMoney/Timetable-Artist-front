@@ -4,10 +4,9 @@ import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import { useSearchParams } from 'react-router-dom';
 import CommentList from './rightSection/CommentList';
-import TimeTableImg from '../../assets/scorepage/timetable.png';
 import NewComment from './rightSection/NewComment';
-import CommentButton from './rightSection/CmtButton';
-import HeartButton from './rightSection/HeartButton';
+import LikeBtn from './rightSection/LikeBtn';
+import CmtTag from './rightSection/CmtTag';
 import { S } from './Ranking.style';
 import RankUserInfo from './rightSection/RankUserInfo';
 import { mock_ranking } from '../../_mock/ranking';
@@ -68,8 +67,8 @@ const Rank = ({ isMyData }) => {
                     <S.TimeTable src={currentUser.tableImg} alt='사진' />
                     {/*버튼 컨테이너*/}
                     <S.ButtonContainer>
-                        <HeartButton number={currentUser.likeCount} />
-                        <CommentButton number={currentUser.replyCount} />
+                        <LikeBtn number={currentUser.likeCount} />
+                        <CmtTag number={currentUser.replyCount} />
                     </S.ButtonContainer>
                     <NewComment />
                     <CommentList timetableId={currentUser.timetableId} />

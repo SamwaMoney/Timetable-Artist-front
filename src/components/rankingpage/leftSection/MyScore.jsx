@@ -1,5 +1,4 @@
-import { S } from '../Ranking.style';
-import { M } from '../Ranking.style';
+import { S, M } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -11,11 +10,10 @@ const MyScore = ({ isMobile }) => {
     const sort = searchParams.get('sort') || 'lowest';
 
     useEffect(() => {
-        //내 순위 검색하는 api 로직 => sort에 바뀌면 실행
+        //내 순위 검색하는 api 로직 => sort가 바뀌면 실행
     }, [sort]);
 
-    //내 점수는 전역 상태로 관리해서 가져오기
-
+    //내 점수는 전역 상태로 관리해서 가져오기 => redux
     return isMobile ? (
         <M.MyScoreWrapper>
             <M.MyScoreContainer>

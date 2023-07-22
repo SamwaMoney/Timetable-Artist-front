@@ -1,23 +1,43 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
-import HeartButton from '../rightSection/HeartButton';
-import CommentButton from '../rightSection/CmtButton';
+import HeartButton from '../rightSection/LikeBtn';
+import CommentButton from '../rightSection/CmtTag';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 //받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
-const OneRanking = ({ data, isMobile, setCurrentUser }) => {
+const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
+    const [isCurrentUser, setIsCurrentUser] = useState(false);
+
     const navigate = useNavigate();
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
-    const { timetableId, owner, score, tableType, ranking, tableImg } = data;
+    const {
+        timetableId,
+        owner,
+        score,
+        tableType,
+        ranking,
+        tableImg,
+        likeCount,
+        replyCount,
+    } = data;
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [isShowTimeTable, setIsShowTimeTable] = useState(false);
 
     const sort = searchParams.get('sort') || 'lowest';
 
+    useEffect(() => {
+        if (currentUser?.timetableId === timetableId) {
+            setIsCurrentUser(true);
+            console.log(isCurrentUser);
+        } else {
+            setIsCurrentUser(false);
+            console.log(isCurrentUser);
+        }
+    }, [isCurrentUser, currentUser, timetableId]);
     //디테일 페이지 이동(웹)
     const onMoveDetail = id => {
         setCurrentUser(data);
@@ -51,7 +71,7 @@ const OneRanking = ({ data, isMobile, setCurrentUser }) => {
                         {isShowTimeTable ? (
                             <div style={{ position: 'absolute', right: 12 }}>
                                 <AiOutlineCaretUp
-                                    size={10}
+                                    size={15}
                                     color={`var(--blue)`}
                                 />
                             </div>
@@ -75,8 +95,11 @@ const OneRanking = ({ data, isMobile, setCurrentUser }) => {
                             }}
                         />
                         <M.ButtonContainer>
-                            <HeartButton isMobile={true} />
-                            <CommentButton isMobile={true} />
+                            <HeartButton number={likeCount} isMobile={true} />
+                            <CommentButton
+                                number={replyCount}
+                                isMobile={true}
+                            />
                         </M.ButtonContainer>
                     </M.TimeTableWrapper>
                 ) : null}
@@ -85,14 +108,15 @@ const OneRanking = ({ data, isMobile, setCurrentUser }) => {
     ) : (
         <>
             <S.RankContainer>
-                <S.RankNum>{ranking}</S.RankNum>
+                <S.RankNum isCurrentUser={isCurrentUser}>{ranking}</S.RankNum>
                 <S.UserInfo
+                    isCurrentUser={isCurrentUser}
                     onClick={() => {
                         onMoveDetail(timetableId);
                     }}
                 >
                     <S.Score>{score}점</S.Score>
-                    <S.CategoryContainer>
+                    <S.CategoryContainer isCurrentUser={isCurrentUser}>
                         <S.Category>{tableType}</S.Category>
                         <S.Nickname>{owner}</S.Nickname>
                     </S.CategoryContainer>
