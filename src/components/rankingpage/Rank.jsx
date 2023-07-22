@@ -5,7 +5,7 @@ import RankingList from './leftSection/RankingList';
 import { useSearchParams } from 'react-router-dom';
 import CommentList from './rightSection/CommentList';
 import NewComment from './rightSection/NewComment';
-import HeartTag from './rightSection/HeartTag';
+import LikeBtn from './rightSection/LikeBtn';
 import CmtTag from './rightSection/CmtTag';
 import { S } from './Ranking.style';
 import RankUserInfo from './rightSection/RankUserInfo';
@@ -67,7 +67,7 @@ const Rank = ({ isMyData }) => {
                     <S.TimeTable src={currentUser.tableImg} alt='사진' />
                     {/*버튼 컨테이너*/}
                     <S.ButtonContainer>
-                        <HeartTag number={currentUser.likeCount} />
+                        <LikeBtn number={currentUser.likeCount} />
                         <CmtTag number={currentUser.replyCount} />
                     </S.ButtonContainer>
                     <NewComment />

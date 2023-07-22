@@ -5,7 +5,7 @@ const CmtTag = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
             <M.CommentIcon src={Comment} alt='하트' />
-            <p>11</p>
+            <p>{number}</p>
         </M.IconButton>
     ) : (
         <S.IconButton>

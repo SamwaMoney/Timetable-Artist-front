@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
-import HeartTag from '../rightSection/HeartTag';
+import LikeBtn from '../rightSection/LikeBtn';
+import CmtLikeBtn from '../rightSection/CmtLikeBtn';
 import CmtTag from '../rightSection/CmtTag';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
@@ -13,9 +14,7 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [isShowTimeTable, setIsShowTimeTable] = useState(false);
     //디테일 페이지에 표시된 유저인지(초록색)
-    const [isCurrentUser, setIsCurrentUser] = useState(
-        data?.timetableId === currentUser?.timetableId,
-    );
+    const [isCurrentUser, setIsCurrentUser] = useState();
 
     //현재 디테일 페이지에 표시된 유저를 바꿔줌 => 초록색으로 색상 바뀜
     useEffect(() => {
@@ -29,7 +28,16 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
     const navigate = useNavigate();
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
-    const { timetableId, owner, score, tableType, ranking, tableImg } = data;
+    const {
+        timetableId,
+        owner,
+        score,
+        tableType,
+        ranking,
+        tableImg,
+        likeCount,
+        replyCount,
+    } = data;
 
     const sort = searchParams.get('sort') || 'lowest';
 
@@ -90,8 +98,8 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
                             }}
                         />
                         <M.ButtonContainer>
-                            <HeartTag isMobile={true} />
-                            <CmtTag isMobile={true} />
+                            <LikeBtn isMobile={true} number={likeCount} />
+                            <CmtTag isMobile={true} number={replyCount} />
                         </M.ButtonContainer>
                     </M.TimeTableWrapper>
                 ) : null}

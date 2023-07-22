@@ -1,6 +1,6 @@
 import { S, M } from './Ranking.style';
 import { useSearchParams } from 'react-router-dom';
-import HeartTag from './rightSection/HeartTag';
+import LikeBtn from './rightSection/LikeBtn';
 import CmtTag from './rightSection/CmtTag';
 import CommentList from './rightSection/CommentList';
 import { AiOutlineLeft } from 'react-icons/ai';
@@ -21,7 +21,15 @@ const MRankDetail = () => {
     const handleMoveBack = () => {
         navigate(-1);
     };
-    const { timetableId, owner, score, tableType, tableImg } = mock_ranking[0];
+    const {
+        timetableId,
+        owner,
+        score,
+        tableType,
+        tableImg,
+        likeCount,
+        replyCount,
+    } = mock_ranking[0];
 
     useEffect(() => {
         //timetableId로 해당 유저의 정보 검색
@@ -29,35 +37,37 @@ const MRankDetail = () => {
     }, []);
 
     return (
-        <div>
-            <Wrapper>
-                <div style={{ marginTop: '7vw', marginLeft: '4vw' }}>
-                    <AiOutlineLeft size='10vw' onClick={handleMoveBack} />
-                </div>
-            </Wrapper>
-            <M.DetailWrapper>
-                <M.RankContainer>
-                    <M.RankNum>{rank}</M.RankNum>
-                    <M.UserInfo>
-                        <M.Score>{score}</M.Score>
+        mock_ranking[0] && (
+            <div>
+                <Wrapper>
+                    <div style={{ marginTop: '7vw', marginLeft: '4vw' }}>
+                        <AiOutlineLeft size='10vw' onClick={handleMoveBack} />
+                    </div>
+                </Wrapper>
+                <M.DetailWrapper>
+                    <M.RankContainer>
+                        <M.RankNum>{rank}</M.RankNum>
+                        <M.UserInfo>
+                            <M.Score>{score}</M.Score>
 
-                        <M.CategoryContainer>
-                            <M.Category>{tableType}</M.Category>
-                            <M.Nickname>{owner}</M.Nickname>
-                        </M.CategoryContainer>
-                    </M.UserInfo>
-                </M.RankContainer>
-                <S.TimeTable src={tableImg} alt='사진' />
-                <M.DetailBtnContainer>
-                    <HeartTag isMobile={true} />
-                    <CmtTag isMobile={true} />
-                </M.DetailBtnContainer>
-                <M.CommentWrapper></M.CommentWrapper>
-                {/*뎃글 적는 인풋창*/}
-                <NewComment isMobile={true} />
-                <CommentList isMobile={true} />
-            </M.DetailWrapper>
-        </div>
+                            <M.CategoryContainer>
+                                <M.Category>{tableType}</M.Category>
+                                <M.Nickname>{owner}</M.Nickname>
+                            </M.CategoryContainer>
+                        </M.UserInfo>
+                    </M.RankContainer>
+                    <S.TimeTable src={tableImg} alt='사진' />
+                    <M.DetailBtnContainer>
+                        <LikeBtn isMobile={true} number={likeCount} />
+                        <CmtTag isMobile={true} number={replyCount} />
+                    </M.DetailBtnContainer>
+                    <M.CommentWrapper></M.CommentWrapper>
+                    {/*뎃글 적는 인풋창*/}
+                    <NewComment isMobile={true} />
+                    <CommentList isMobile={true} />
+                </M.DetailWrapper>
+            </div>
+        )
     );
 };
 export default MRankDetail;
