@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const S = {};
 
 const INPUTWIDTH = 65;
-const INPUTHEIGHT = 2.4;
+const INPUTHEIGHT = 2.2;
 const FONTBASICSIZE = 3.5;
 
 S.MModalContainer = styled.div`
@@ -126,15 +126,14 @@ S.MPlaceInput = styled.div`
 `;
 
 S.MTimeInputDiv = styled.div`
-    width: 50vw;
+    width: 65%;
 `;
 
 S.MTimeInput = styled(S.MPlaceInput)`
-    margin-left: 6vw;
-    padding: 0 14%;
+    padding: 0 20%;
     justify-content: space-between;
-    /* width: 100%; */
-    width: 44vw;
+    width: 100%;
+    /* width: 44vw; */
 
     &.ischecked {
         pointer-events: none;
@@ -163,11 +162,11 @@ S.MAddButtonDiv = styled.div`
     display: flex;
     justify-content: space-between;
 
-    margin-top: 6%;
+    margin-top: 7.5%;
 `;
 
 S.MAddButton = styled.img`
-    width: 17%;
+    width: 20%;
     cursor: pointer;
 
     &.ischecked {
@@ -209,6 +208,12 @@ S.MCompleteButton = styled.button`
     border: 0.05rem solid var(--black, #171717);
     border-radius: 100px;
     background-color: var(--blue, #1962ed);
+`;
+
+S.MinusBtn = styled.img`
+    width: ${INPUTHEIGHT}rem;
+    position: absolute;
+    cursor: pointer;
 `;
 
 export { S };

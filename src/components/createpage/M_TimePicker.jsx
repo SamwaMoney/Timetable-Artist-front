@@ -78,7 +78,16 @@ const TimePicker = ({
                 <S.SelectedContainer />
                 <Swiper {...PickerOptions} onSlideChange={onChangeDay}>
                     {DAYS_OF_WEEK.map((day, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide
+                            key={index}
+                            style={{
+                                textAlign: 'center',
+                                color:
+                                    selectedDayIndex === index
+                                        ? 'black'
+                                        : 'gray',
+                            }}
+                        >
                             <div
                                 style={{
                                     fontSize: '5vw',
@@ -91,7 +100,16 @@ const TimePicker = ({
                 </Swiper>
                 <Swiper {...PickerOptions} onSlideChange={onChangeStartTime}>
                     {COURSE_TIME.map((time, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide
+                            key={index}
+                            style={{
+                                textAlign: 'center',
+                                color:
+                                    selectedTimeStartIndex === index
+                                        ? 'black'
+                                        : 'gray',
+                            }}
+                        >
                             <div
                                 style={{
                                     fontSize: '5vw',
@@ -104,7 +122,16 @@ const TimePicker = ({
                 </Swiper>
                 <Swiper {...PickerOptions} onSlideChange={onChangeEndTime}>
                     {COURSE_TIME.map((time, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide
+                            key={index}
+                            style={{
+                                textAlign: 'center',
+                                color:
+                                    selectedTimeEndIndex === index
+                                        ? 'black'
+                                        : 'gray',
+                            }}
+                        >
                             {' '}
                             <div
                                 style={{

@@ -4,7 +4,7 @@ import ic_x from '../../assets/createpage/ic_x.png';
 import add_course_mobile from '../../assets/createpage/add_course_mobile.png';
 import TimePicker from './M_TimePicker';
 import PlacePicker from './M_PlacePicker';
-import { AiOutlineMinus } from 'react-icons/ai';
+import subtract_course from '../../assets/createpage/subtract_course.png';
 import { useDispatch } from 'react-redux';
 import { addSelectedData } from '../../reducer/action';
 
@@ -154,7 +154,7 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                 </S.MTimeInput>
                                 {/*두번째 인풋 창을 열면 새로운 시간 인풋창이 생성*/}
                                 {!isSecondTimeInputOpen ? (
-                                    <div>
+                                    <>
                                         <S.MAddButtonDiv>
                                             <S.MAddButton
                                                 src={add_course_mobile}
@@ -176,13 +176,12 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                                 </S.MCheckBoxText>
                                             </S.MCheckBoxDiv>
                                         </S.MAddButtonDiv>
-                                    </div>
+                                    </>
                                 ) : (
                                     <div
                                         style={{
-                                            paddingTop: '2vw',
+                                            paddingTop: '1.7vh',
                                             display: 'flex',
-                                            width: '55vw',
                                         }}
                                     >
                                         {plusSelectedDateTime && (
@@ -211,14 +210,9 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                                 </div>
                                             </S.MTimeInput>
                                         )}
-                                        {/*시간 빼기 버튼*/}
-                                        <AiOutlineMinus
-                                            size={'7vw'}
-                                            color={'red'}
-                                            style={{
-                                                position: 'absolute',
-                                                right: '6vw',
-                                            }}
+                                        <S.MinusBtn
+                                            src={subtract_course}
+                                            alt='-버튼'
                                             onClick={onCloseTimeInput}
                                         />
                                     </div>
