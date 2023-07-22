@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { S } from '../Ranking.style';
 import { M } from '../Ranking.style';
 import { useLocation } from 'react-router-dom';

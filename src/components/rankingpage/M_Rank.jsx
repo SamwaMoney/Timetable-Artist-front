@@ -2,7 +2,7 @@ import MHamburgerButton from '../_common/M_HamburgerBtn';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import MyScore from './leftSection/MyScore';
-import { M, S } from './Ranking.style';
+import { M } from './Ranking.style';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { mock_ranking } from '../../_mock/ranking';

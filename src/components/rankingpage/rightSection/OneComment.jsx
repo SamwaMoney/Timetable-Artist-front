@@ -1,7 +1,5 @@
 import { S, M } from '../Ranking.style';
-import { useState } from 'react';
 import { TiDelete } from 'react-icons/ti';
-import HeartBtn from './LikeBtn';
 import CmtLikeBtn from './CmtLikeBtn';
 
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기

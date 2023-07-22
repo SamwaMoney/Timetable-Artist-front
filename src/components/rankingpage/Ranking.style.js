@@ -187,7 +187,7 @@ M.TabContainer = styled.div`
 S.Tab = styled.div`
     width: 50%;
     padding-bottom: 3%;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
