@@ -21,7 +21,7 @@
 | :-: | :-: | :-: | :-: |
 |  <img src="https://github.com/SamwaMoney/Time-Table-Artist-front/assets/125418818/fa690ee3-97ab-4f45-9f29-d0b87820c087" width="150"> | <img src="https://github.com/SamwaMoney/Time-Table-Artist-front/assets/125418818/c91ae39b-482d-4f6a-91cd-c3095d09adfe" width="150">| <img src="https://github.com/SamwaMoney/Time-Table-Artist-front/assets/125418818/b7f764d4-43e5-43be-a4a1-f65f00a0e1ea" width="150"> | <img src="https://github.com/SamwaMoney/Time-Table-Artist-front/assets/125418818/1b11d7e4-9b90-442a-af66-64347dfacd66" width="150"> |
 |[김민정](https://github.com/wowalswjd)|[최한비](https://github.com/hanby-choi)|[권태영](https://github.com/teyeong)|[오혜린](https://github.com/ooherin)|
-|시간표 생성페이지 제작|결과페이지 제작, 알고리즘|로그인 페이지 제작|랭킹보드 페이지 제작|
+|시간표 생성페이지 제작|시간표 점수 페이지 제작, 채점 알고리즘 작성|로그인 페이지 제작|랭킹보드 페이지 제작|
 
 </div>
 
