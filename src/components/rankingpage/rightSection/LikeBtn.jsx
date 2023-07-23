@@ -24,9 +24,19 @@ const LikeBtn = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
             {isLike ? (
-                <M.HeartIcon src={BlueLike} alt='하트' onClick={onCancelLike} />
+                <S.EventIcon
+                    width={2}
+                    src={BlueLike}
+                    alt='하트'
+                    onClick={onCancelLike}
+                />
             ) : (
-                <M.HeartIcon src={NoLike} alt='하트' onClick={onGiveLike} />
+                <S.EventIcon
+                    width={2}
+                    src={NoLike}
+                    alt='하트'
+                    onClick={onGiveLike}
+                />
             )}
             <p>{number}</p>
         </M.IconButton>
@@ -34,12 +44,22 @@ const LikeBtn = ({ isMobile, number }) => {
         <S.IconButton>
             {isLike ? (
                 <>
-                    <S.Icon src={BlueLike} alt='하트' onClick={onCancelLike} />
+                    <S.EventIcon
+                        width={2}
+                        src={BlueLike}
+                        alt='하트'
+                        onClick={onCancelLike}
+                    />
                     <p>{number}</p>
                 </>
             ) : (
                 <>
-                    <S.Icon src={NoLike} alt='하트' onClick={onGiveLike} />
+                    <S.EventIcon
+                        width={2}
+                        src={NoLike}
+                        alt='하트'
+                        onClick={onGiveLike}
+                    />
                     <p>{number}</p>
                 </>
             )}

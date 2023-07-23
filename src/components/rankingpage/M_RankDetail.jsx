@@ -61,8 +61,7 @@ const MRankDetail = () => {
                         <LikeBtn isMobile={true} number={likeCount} />
                         <CmtTag isMobile={true} number={replyCount} />
                     </M.DetailBtnContainer>
-                    <M.CommentWrapper></M.CommentWrapper>
-                    {/*뎃글 적는 인풋창*/}
+                    {/*뎃글 적는 인풋창 */}
                     <NewComment isMobile={true} />
                     <CommentList isMobile={true} />
                 </M.DetailWrapper>

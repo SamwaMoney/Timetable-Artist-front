@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
-import HeartButton from '../rightSection/LikeBtn';
-import CommentButton from '../rightSection/CmtTag';
+import LikeBtn from '../rightSection/LikeBtn';
+import CmtTag from '../rightSection/CmtTag';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
@@ -86,22 +86,21 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
                     </M.UserInfo>
                 </M.RankContainer>
                 {isShowTimeTable ? (
-                    <M.TimeTableWrapper>
-                        <S.TimeTable
-                            src={tableImg}
-                            alt='사진'
-                            onClick={() => {
-                                onMoveMDetail(timetableId);
-                            }}
-                        />
-                        <M.ButtonContainer>
-                            <HeartButton number={likeCount} isMobile={true} />
-                            <CommentButton
-                                number={replyCount}
-                                isMobile={true}
+                    <>
+                        <M.TimeTableWrapper>
+                            <S.TimeTable
+                                src={tableImg}
+                                alt='사진'
+                                onClick={() => {
+                                    onMoveMDetail(timetableId);
+                                }}
                             />
+                        </M.TimeTableWrapper>
+                        <M.ButtonContainer>
+                            <LikeBtn number={likeCount} isMobile={true} />
+                            <CmtTag number={replyCount} isMobile={true} />
                         </M.ButtonContainer>
-                    </M.TimeTableWrapper>
+                    </>
                 ) : null}
             </M.OneRankWrapper>
         </>

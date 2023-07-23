@@ -23,9 +23,13 @@ const CmtLikeBtn = ({ isMobile }) => {
         return (
             <M.HeartContainer>
                 {isLike ? (
-                    <M.Icon src={GetLike} onClick={onCancelLike} />
+                    <S.EventIcon
+                        width={2}
+                        src={GetLike}
+                        onClick={onCancelLike}
+                    />
                 ) : (
-                    <M.Icon src={NoLike} onClick={onGiveLike} />
+                    <S.EventIcon width={2} src={NoLike} onClick={onGiveLike} />
                 )}
                 <div>0</div>
             </M.HeartContainer>
@@ -34,9 +38,17 @@ const CmtLikeBtn = ({ isMobile }) => {
         return (
             <S.CommentLikeWrapper>
                 {isLike ? (
-                    <S.Icon src={GetLike} onClick={onCancelLike} />
+                    <S.EventIcon
+                        width={1.8}
+                        src={GetLike}
+                        onClick={onCancelLike}
+                    />
                 ) : (
-                    <S.Icon src={NoLike} onClick={onGiveLike} />
+                    <S.EventIcon
+                        width={1.8}
+                        src={NoLike}
+                        onClick={onGiveLike}
+                    />
                 )}
                 <div>0</div>
             </S.CommentLikeWrapper>
