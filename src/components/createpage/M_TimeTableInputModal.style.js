@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 const S = {};
 
-const INPUTWIDTH = 55;
-const INPUTHEIGHT = 5;
-const FONTBASICSIZE = 4;
+const INPUTWIDTH = 65;
+const INPUTHEIGHT = 2.2;
+const FONTBASICSIZE = 3.5;
 
 S.MModalContainer = styled.div`
+    z-index: 1000;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -15,17 +16,17 @@ S.MModalContainer = styled.div`
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
     align-items: flex-end;
 `;
 
 S.MModal = styled.div`
     width: 100vw;
-    height: 55vh;
+    height: 160vw;
     background-color: white;
-
+    position: fixed;
+    bottom: 0;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
 
     border-radius: 27px 27px 0 0;
     flex-direction: column;
@@ -76,11 +77,10 @@ S.MModalXImg = styled.img`
 // 모달 content 부분
 
 S.MInputContainer = styled.div`
+    width: 70vw;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 7.5%;
 
+    margin-top: 7.5%;
     &.timeinput {
         align-items: flex-start;
     }
@@ -102,13 +102,12 @@ S.MMainTextDiv = styled.div`
 `;
 
 S.MRedCircle = styled.div`
-    width: 15px;
-    height: 15px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background-color: red;
 
-    margin-left: 1%;
-    margin-top: -1%;
+    margin-left: 3%;
 `;
 
 S.MPlaceInput = styled.div`
@@ -116,7 +115,7 @@ S.MPlaceInput = styled.div`
     height: ${INPUTHEIGHT}rem;
 
     border-radius: 60px;
-    border: 3px solid var(--black);
+    border: 0.05rem solid var(--black);
     background: #fff;
     padding-left: 6%;
     font-size: ${FONTBASICSIZE}vw;
@@ -127,13 +126,19 @@ S.MPlaceInput = styled.div`
 `;
 
 S.MTimeInputDiv = styled.div`
-    width: 55%;
+    width: 65%;
 `;
 
 S.MTimeInput = styled(S.MPlaceInput)`
-    padding: 0 10%;
+    padding: 0 20%;
     justify-content: space-between;
     width: 100%;
+    /* width: 44vw; */
+
+    &.ischecked {
+        pointer-events: none;
+        opacity: 0.7;
+    }
 `;
 
 S.MNameInput = styled.input`
@@ -142,7 +147,7 @@ S.MNameInput = styled.input`
     height: ${INPUTHEIGHT}rem;
 
     border-radius: 60px;
-    border: 3px solid var(--black);
+    border: 0.05rem solid var(--black);
     background: #fff;
 
     padding-left: 6%;
@@ -157,12 +162,16 @@ S.MAddButtonDiv = styled.div`
     display: flex;
     justify-content: space-between;
 
-    margin-top: 6%;
+    margin-top: 7.5%;
 `;
 
 S.MAddButton = styled.img`
-    width: 17%;
+    width: 20%;
     cursor: pointer;
+
+    &.ischecked {
+        visibility: hidden;
+    }
 `;
 
 S.MCheckBoxDiv = styled.div`
@@ -172,8 +181,8 @@ S.MCheckBoxDiv = styled.div`
 `;
 
 S.MCheckBox = styled.input`
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
 `;
 
 S.MCheckBoxText = styled.div`
@@ -185,7 +194,7 @@ S.MCompleteButtonDiv = styled.div`
     display: flex;
     justify-content: center;
 
-    margin-top: 20%;
+    margin-top: 50%;
 `;
 
 S.MCompleteButton = styled.button`
@@ -196,9 +205,15 @@ S.MCompleteButton = styled.button`
     width: 66vw;
     height: 6vh;
 
-    border: 3px solid var(--black, #171717);
+    border: 0.05rem solid var(--black, #171717);
     border-radius: 100px;
     background-color: var(--blue, #1962ed);
+`;
+
+S.MinusBtn = styled.img`
+    width: ${INPUTHEIGHT}rem;
+    position: absolute;
+    cursor: pointer;
 `;
 
 export { S };

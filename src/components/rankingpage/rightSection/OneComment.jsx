@@ -1,17 +1,21 @@
 import { S, M } from '../Ranking.style';
-import NoLike from '../../../assets/rankingpage/heart1.png';
-import GetLike from '../../../assets/rankingpage/heart2.png';
-import { useState } from 'react';
+import { TiDelete } from 'react-icons/ti';
+import CmtLikeBtn from './CmtLikeBtn';
 
+//자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
+//현재 시간을 0시간전으로 계산해서 보여주기
 const OneComment = ({ isMobile }) => {
-    const [isLike, setIsLike] = useState(true);
     return isMobile ? (
         <M.OneCommentContainer>
             <M.CommentInfo>
-                <M.CommentUserName>익명</M.CommentUserName>
-                <M.CommentDate>2023.7.9</M.CommentDate>
-                {isLike ? <M.Icon src={GetLike} /> : <M.Icon src={NoLike} />}
-                <M.LikeNum>0</M.LikeNum>
+                <M.IconContainer>
+                    <M.CommentUserName>익명</M.CommentUserName>
+                    <M.CommentDate>3시간 전</M.CommentDate>
+                </M.IconContainer>
+                <M.IconContainer>
+                    <TiDelete size='8vw' color='var(--background)' />
+                    <CmtLikeBtn isMobile={true} />
+                </M.IconContainer>
             </M.CommentInfo>
             <M.CommentText>
                 그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
@@ -25,15 +29,19 @@ const OneComment = ({ isMobile }) => {
                     <S.CommentUserName>익명</S.CommentUserName>
                     <S.CommentDate>2023.7.9</S.CommentDate>
                 </S.CommentTextWrapper>
-                <S.CommentLikeWrapper>
-                    <S.Icon src={NoLike} />
-                    <p>0</p>
-                </S.CommentLikeWrapper>
             </S.CommentInfo>
             <S.CommentText>
                 그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
                 Spotlight 날 봐 I'm a star star star
             </S.CommentText>
+            <div style={{ position: 'absolute', right: '3rem', top: '0.4rem' }}>
+                <TiDelete size='2rem' color='var(--background)' />
+            </div>
+            <div
+                style={{ position: 'absolute', right: '0.5rem', top: '0.4rem' }}
+            >
+                <CmtLikeBtn isMobile={false} />
+            </div>
         </S.OneCommentContainer>
     );
 };

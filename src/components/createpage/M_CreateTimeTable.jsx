@@ -15,22 +15,33 @@ const MCreateTimeTable = () => {
             <S.MWrapper>
                 <MHamburgerButton />
                 <S.MInnerContainer>
-                    <S.MButtonDiv className={isModalOpen? "delete" : ""}>
+                    <S.MButtonDiv className={isModalOpen ? 'delete' : ''}>
                         <S.MResetBtn>초기화</S.MResetBtn>
                         <S.MCompleteBtn>완성</S.MCompleteBtn>
                     </S.MButtonDiv>
-                    <S.MTimeTableText className={isModalOpen? "delete" : ""}>
+                    <S.MTimeTableText className={isModalOpen ? 'delete' : ''}>
                         <S.MNicknameText>{nickname}</S.MNicknameText>의 시간표
                     </S.MTimeTableText>
 
                     <TimeTable />
 
                     <S.MAddButtonDiv>
-                        <S.MAddButton src={add_timetable} alt='+버튼' onClick={()=>{setIsModalOpen(true)}}/>
+                        <S.MAddButton
+                            src={add_timetable}
+                            alt='+버튼'
+                            onClick={() => {
+                                setIsModalOpen(true);
+                            }}
+                        />
                     </S.MAddButtonDiv>
                 </S.MInnerContainer>
             </S.MWrapper>
-            {isModalOpen && <MTimeTableInputModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>}
+            {isModalOpen && (
+                <MTimeTableInputModal
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                />
+            )}
         </>
     );
 };

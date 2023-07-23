@@ -81,6 +81,7 @@ S.InputBox = styled.input`
         width: 60vw;
         height: 6.7vh;
         font-size: 4.3vw;
+        border: 0.05rem solid var(--black);
     }
 `;
 S.SubmitBtn = styled.button`
@@ -88,7 +89,7 @@ S.SubmitBtn = styled.button`
     height: 5vh;
     align-items: flex-start;
     background: var(--blue);
-    border-radius: 5rem;
+    border-radius: 38px;
     border: 0.1rem solid var(--black);
 
     color: var(--white, #FFF);
@@ -104,6 +105,7 @@ S.SubmitBtn = styled.button`
         width: 53.3vw;
         height: 7.3vh;
         font-size: 5vw;
+        border: 0.05rem solid var(--black);
     }
 `;
 export {S};
