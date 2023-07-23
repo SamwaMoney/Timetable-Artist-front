@@ -9,8 +9,8 @@ const RankingList = ({ isMobile, data, currentUser, setCurrentUser }) => {
     //선택한 정렬방식대로 순위 바꿔줌
     const sort = searchParams.get('sort') || 'lowest';
 
-    return isMobile ? (
-        <M.List>
+    return (
+        <S.List>
             {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
             {sort === 'like' ? null : <Toggle isMobile={isMobile} />}
             {data &&
@@ -26,22 +26,6 @@ const RankingList = ({ isMobile, data, currentUser, setCurrentUser }) => {
                         />
                     );
                 })}
-        </M.List>
-    ) : (
-        <S.List>
-            {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
-            {sort === 'like' ? null : <Toggle />}
-            {data.map((user, index) => {
-                return (
-                    <OneRanking
-                        key={user.id}
-                        data={user}
-                        index={index}
-                        currentUser={currentUser}
-                        setCurrentUser={setCurrentUser}
-                    />
-                );
-            })}
         </S.List>
     );
 };

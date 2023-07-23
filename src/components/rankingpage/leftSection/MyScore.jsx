@@ -17,14 +17,14 @@ const MyScore = ({ isMobile }) => {
     return isMobile ? (
         <M.MyScoreWrapper>
             <M.MyScoreContainer>
-                <M.FlexBox>
+                <S.FlexBox>
                     <M.Text>내 점수</M.Text>
                     <M.RankText>80점</M.RankText>
-                </M.FlexBox>
-                <M.FlexBox>
+                </S.FlexBox>
+                <S.FlexBox>
                     <M.Text>내 랭킹</M.Text>
                     <M.RankText>258위</M.RankText>
-                </M.FlexBox>
+                </S.FlexBox>
             </M.MyScoreContainer>
         </M.MyScoreWrapper>
     ) : (

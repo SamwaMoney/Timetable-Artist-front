@@ -4,12 +4,12 @@ import Comment from '../../../assets/rankingpage/comment.png';
 const CmtTag = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>
-            <M.CommentIcon src={Comment} alt='댓글' />
+            <S.NoEventIcon width={2} src={Comment} alt='댓글' />
             <p>{number}</p>
         </M.IconButton>
     ) : (
         <S.IconButton>
-            <S.Icon src={Comment} alt='댓글' />
+            <S.NoEventIcon width={2} src={Comment} alt='댓글' />
             <p>{number}</p>
         </S.IconButton>
     );

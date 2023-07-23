@@ -6,17 +6,13 @@ export const FlexCenter = css`
     justify-content: center;
 `;
 
-export const FlexMiddle = css`
-    display: flex;
-    justify-content: center;
-`;
-
+//웹 스타일 객체
 export const S = {};
+//모바일 스타일 객체
 export const M = {};
+
 S.BasicContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${FlexCenter}
 `;
 
 M.FlexContainer = styled.div`
@@ -28,6 +24,7 @@ M.FlexContainer = styled.div`
 `;
 
 S.Wrapper = styled(S.BasicContainer)`
+    font-family: Montserrat;
     background-color: var(--background);
     height: 100vh;
     width: 100vw;
@@ -57,122 +54,107 @@ S.Header = styled.div`
     display: block;
 `;
 
-S.NewButton = styled.div`
-    margin-top: 7%;
-    width: 50%;
-    padding: 4%;
+//시간표 등록하기 버튼
+const NewButton = styled.div`
     border: 0.1rem solid var(--blue);
     font-weight: 500;
     ${FlexCenter}
     color: var(--blue);
-    border-radius: 44px;
     background-color: var(--green);
+    width: 50%;
+`;
+
+S.NewButton = styled(NewButton)`
+    margin-top: 7%;
+    padding: 4%;
+    border-radius: 44px;
     font-size: 0.9rem;
 `;
 
-M.NewButton = styled.div`
+M.NewButton = styled(NewButton)`
     margin-top: 10vw;
-    width: 65%;
     padding: 4vw;
-    border: 0.1rem solid var(--blue);
-    font-weight: 500;
-    ${FlexCenter}
-    color: var(--blue);
     border-radius: 10vw;
-    background-color: var(--green);
-    font-size: 4.5vw;
+    font-size: 4vw;
 `;
 
 //rank
-S.RankNum = styled.div`
-    display: border-box;
+const RankNum = styled.div`
+    ${FlexCenter}
     margin-right: 1%;
+    border-radius: 50%;
+    font-weight: 600;
+    font-family: Montserrat;
+    background-color: ${({ isCurrentUser }) =>
+        isCurrentUser ? 'var(--green)' : 'white'};
+    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
+    border: 0.1rem solid
+        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
+`;
+S.RankNum = styled(RankNum)`
     width: 5rem;
     height: 4rem;
-    border-radius: 50%;
-    ${FlexCenter}
     font-size: 2rem;
-    font-weight: 700;
-    font-family: Montserrat;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
 `;
 
-M.RankNum = styled.div`
-    margin-right: 1%;
+M.RankNum = styled(RankNum)`
     width: 20%;
     height: 14vw;
-    border-radius: 50%;
-    ${FlexCenter}
     font-size: 8vw;
-    font-weight: 700;
-    font-family: Montserrat;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
 `;
 
-S.UserInfo = styled.div`
+//UserInfo
+const UserInfo = styled.div`
     width: 100%;
-    height: 4rem;
     background-color: ${({ isCurrentUser }) =>
         isCurrentUser ? 'var(--green)' : 'white'};
-    border: 0.1rem solid black;
-    border-radius: 60px;
-    ${FlexCenter}
-    position: relative;
     color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
     border: 0.1rem solid
         ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
+    ${FlexCenter}
+    position: relative;
+`;
+
+S.UserInfo = styled(UserInfo)`
+    height: 4rem;
+    border-radius: 60px;
     font-size: 1rem;
 `;
-M.UserInfo = styled.div`
-    width: 100%;
+
+M.UserInfo = styled(UserInfo)`
     height: 14vw;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    border: 0.1rem solid black;
     border-radius: 7vw;
-    ${FlexCenter}
-    position: relative;
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
 `;
+
 M.OneRankWrapper = styled.div`
     width: 100%;
     position: relative;
     ${FlexCenter}
     flex-direction:column;
 `;
-S.RankContainer = styled.div`
-    margin-top: 1rem;
+
+//개별 rank
+const RankContainer = styled.div`
     font-family: Montserrat;
-    width: 75%;
     height: 100%;
-    margin-bottom: 3%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 `;
 
-M.RankContainer = styled.div`
-    font-family: Montserrat;
+S.RankContainer = styled(RankContainer)`
+    margin-top: 1rem;
+    width: 75%;
+    margin-bottom: 3%;
+`;
+
+M.RankContainer = styled(RankContainer)`
     width: 85%;
-    height: 100%;
     margin-top: 7vw;
     margin-bottom: 2vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 `;
 
-//탭 css
+//탭
 S.TabContainer = styled.div`
     margin-top: 6%;
     width: 75%;
@@ -184,92 +166,87 @@ M.TabContainer = styled.div`
     ${FlexCenter};
 `;
 
-S.Tab = styled.div`
+const Tab = styled.div`
     width: 50%;
     padding-bottom: 3%;
-    font-size: 1rem;
     font-weight: 500;
     ${FlexCenter};
     border-bottom: ${({ active }) =>
         active ? '5px solid black' : '2.5px solid black'};
     cursor: pointer;
 `;
-M.Tab = styled.div`
-    width: 50%;
-    padding-bottom: 3%;
+
+S.Tab = styled(Tab)`
+    font-size: 1rem;
+`;
+M.Tab = styled(Tab)`
     font-size: 4vw;
-    font-weight: 500;
-    ${FlexCenter};
-    border-bottom: ${({ active }) =>
-        active ? '1.2vw solid black' : '0.6vw solid black'};
-    cursor: pointer;
 `;
 
-//토글 css
-S.ToggleContainer = styled.div`
-    ${FlexCenter}
-    margin-top: 10%;
-    margin-left: -30%;
-`;
-M.ToggleWrapper = styled.div`
+//토글
+const ToggleWrapper = styled.div`
     ${FlexCenter}
     width:100%;
-    height: 100%;
-    margin-top: 10%;
 `;
-M.ToggleContainer = styled.div`
+S.ToggleWrapper = styled(ToggleWrapper)`
+    height: 4rem;
+`;
+
+M.ToggleWrapper = styled(ToggleWrapper)`
+    margin-top: 5vw;
+    height: 100%;
+`;
+
+S.ToggleContainer = styled.div`
+    ${FlexCenter}
     margin-left: -30%;
     width: 12vw;
     height: 6vw;
-    ${FlexCenter}
 `;
 
-S.ToggleButton = styled.div`
+const ToggleButton = styled.div`
     position: relative;
+    background-color: white;
+    cursor: pointer;
+`;
+
+S.ToggleButton = styled(ToggleButton)`
     width: 2.2rem;
     height: 1.2rem;
-    background-color: white;
     border: 1.3px solid black;
     border-radius: 19px;
-    cursor: pointer;
 `;
 
-M.ToggleButton = styled.div`
-    position: relative;
+M.ToggleButton = styled(ToggleButton)`
     width: 100%;
     height: 100%;
-    background-color: white;
     border: 0.1rem solid black;
     border-radius: 3.5vw;
-    cursor: pointer;
 `;
 
-S.Slider = styled.div`
+//토글 슬라이더
+const Slider = styled.div`
+    background-color: ${props =>
+        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(0, -50%);
+    transition: left 0.2s ease;
+`;
+
+S.Slider = styled(Slider)`
     width: 15px;
     height: 15px;
-    background-color: ${props =>
-        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     border: 1.3px solid black;
-    border-radius: 50%;
-    top: 50%;
     left: ${props => (props.sort === 'lowest' ? '17px' : '1px')};
-    transform: translate(0, -50%);
-    transition: left 0.2s ease;
 `;
 
-M.Slider = styled.div`
-    position: absolute;
+M.Slider = styled(Slider)`
     width: 4.5vw;
     height: 4.5vw;
-    background-color: ${props =>
-        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     border: 1.3px solid black;
-    border-radius: 50%;
-    top: 50%;
     left: ${props => (props.sort === 'lowest' ? '6.2vw' : '1vw')};
-    transform: translate(0, -50%);
-    transition: left 0.2s ease;
 `;
 
 S.ToggleText = styled.div`
@@ -285,32 +262,29 @@ M.ToggleText = styled.div`
 `;
 
 //내 점수 보기
-S.MyScoreContainer = styled.div`
+const MyScoreContainer = styled.div`
     margin-top: 10%;
     width: 75%;
-    height: 5.1rem;
     border-radius: 20px;
     border: 0.1rem solid var(--blue);
     color: var(--blue);
     background: var(--background-green);
     ${FlexCenter};
+`;
+
+S.MyScoreContainer = styled(MyScoreContainer)`
+    height: 5.1rem;
     padding: 0.5rem 0;
 `;
+
+M.MyScoreContainer = styled(MyScoreContainer)`
+    padding: 2vw 0;
+`;
+
 M.MyScoreWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-`;
-M.MyScoreContainer = styled.div`
-    background-color: blue;
-    margin-top: 10%;
-    width: 75%;
-    border-radius: 20px;
-    border: 0.1rem solid var(--blue);
-    color: var(--blue);
-    background: var(--background-green);
-    ${FlexCenter};
-    padding: 2vw 0;
 `;
 
 //FlexBox
@@ -320,16 +294,9 @@ S.FlexBox = styled.div`
     flex-direction: column;
 `;
 
-M.FlexBox = styled.div`
-    margin: 0 2rem;
-    ${FlexCenter}
-    flex-direction: column;
-`;
-
 //내점수 보기 상단 제목
 S.Text = styled.div`
-    font-family: Montserrat;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
 `;
 
@@ -358,15 +325,8 @@ S.List = styled.div`
     margin-bottom: 10%;
     width: 100%;
 `;
-M.List = styled.div`
-    ${FlexCenter}
-    flex-direction:column;
-    margin-bottom: 10%;
-    width: 100%;
-`;
 
 //rightSection : 개별 유저 section
-
 S.RankUserContainer = styled.div`
     font-family: Montserrat;
     ${FlexCenter}
@@ -380,54 +340,55 @@ S.NameContainer = styled.div`
     left: 5%;
 `;
 
-S.Score = styled.div`
-    font-size: 1rem;
+const Score = styled.div`
     font-weight: 500;
     position: absolute;
     left: 5%;
+    font-family: Montserrat;
     width: 20%;
 `;
 
-M.Score = styled.div`
-    font-family: Montserrat;
+S.Score = styled(Score)`
+    font-size: 1rem;
+`;
+
+M.Score = styled(Score)`
     font-size: 4vw;
-    font-weight: 500;
-    position: absolute;
-    left: 5%;
 `;
 
 S.NameText = styled.div`
     font-size: 0.6rem;
 `;
 
-S.CategoryContainer = styled.div`
-    ${FlexCenter}
+const CategoryContainer = styled.div`
+    ${FlexCenter};
     flex-direction: column;
-    padding-left: 1.6rem;
     width: 80%;
 `;
 
-M.CategoryContainer = styled.div`
+S.CategoryContainer = styled(CategoryContainer)`
+    padding-left: 1.6rem;
+`;
+
+M.CategoryContainer = styled(CategoryContainer)`
     padding-left: 5vw;
-    display: flex;
-    ${FlexCenter}
-    flex-direction: column;
 `;
 
 S.Category = styled.div`
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
+    font-size: 1vw;
+    margin-bottom: 0.4rem;
 `;
 M.Category = styled.div`
     padding-top: 0.5rem;
     padding-bottom: 5px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 4.1vw;
     margin-bottom: 0.2rem;
 `;
+
 S.Nickname = styled.div`
-    font-size: 1.1rem;
+    font-size: 1vw;
 `;
 M.Nickname = styled.div`
     font-size: 4.2vw;
@@ -442,6 +403,14 @@ S.ButtonContainer = styled.div`
     position: relative;
     margin-top: 1.2rem;
 `;
+
+M.ButtonContainer = styled.div`
+    position: absolute;
+    bottom: 1vw;
+    right: 10vw;
+    display: flex;
+`;
+
 M.TimeTableWrapper = styled.div`
     ${FlexCenter}
     position: relative;
@@ -452,76 +421,57 @@ M.TimeTableWrapper = styled.div`
     }
 `;
 
-M.ButtonContainer = styled.div`
-    position: absolute;
-    bottom: 0;
-    right: 10vw;
-    height: 10vw;
-    display: flex;
-    div {
-        width: 40vw;
-    }
-    img {
-        width: 5vw;
-        height: 5vw;
-    }
-    p {
-        border-radius: 40%;
-        font-size: 4.5vw;
-    }
-`;
-
 M.DetailBtnContainer = styled.div`
     display: flex;
     margin-top: 5vw;
     margin-left: -50vw;
     margin-bottom: 2vw;
 `;
-S.IconButton = styled.button`
-    width: 4vw;
-    height: 2vw;
-    background-color: var(--red);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    color: white;
-    font-family: Montserrat;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin: 0 5px;
-    p {
-        font-size: 1rem;
-    }
-`;
 
-M.IconButton = styled.button`
-    width: 16vw;
-    height: 9vw;
+const IconButton = styled.button`
     background-color: var(--red);
-    border-radius: 2vw;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     color: white;
     font-family: Montserrat;
     font-weight: 500;
+`;
+
+S.IconButton = styled(IconButton)`
+    width: 4vw;
+    height: 2vw;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin: 0 5px;
+    p {
+        font-size: 1rem;
+    }
+`;
+
+M.IconButton = styled(IconButton)`
+    width: 16vw;
+    height: 8vw;
+    border-radius: 2vw;
     margin-right: 1vw;
     p {
         font-size: 4vw;
     }
 `;
 
-S.Icon = styled.img`
-    z-index: 10;
-    width: 2rem;
-    height: 2rem;
+S.EventIcon = styled.img`
+    width: ${props => (props.width ? props.width : '2vw')}rem;
     cursor: pointer;
     transition: transform 0.2s ease;
     &:hover {
         transform: scale(1.3);
     }
 `;
+
+S.NoEventIcon = styled.img`
+    width: ${props => (props.width ? props.width : '2vw')}rem;
+`;
+
 M.IconContainer = styled.div`
     ${FlexCenter}
 `;
@@ -537,53 +487,23 @@ M.HeartContainer = styled.div`
         padding-top: 1vw;
     }
 `;
-M.Icon = styled.img`
-    width: 7vw;
-    height: 7vw;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    &:hover {
-        transform: scale(1.3);
-    }
-`;
-
-S.CommentIcon = styled.img`
-    width: 7vw;
-    height: 7vw;
-    right: 3vw;
-`;
-
-M.CommentIcon = styled.img`
-    width: 8vw;
-    height: 8vw;
-`;
-
-M.HeartIcon = styled.img`
-    width: 8vw;
-    height: 8vw;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    &:hover {
-        transform: scale(1.3);
-    }
-`;
 
 //댓글
-M.OneCommentContainer = styled.div`
-    background-color: var(--white);
-    border-radius: 7px;
+const OneCommentContainer = styled.div`
+    background-color: white;
     border: 0.1rem solid black;
-    margin-top: 2vw;
+    border-radius: 7px;
+`;
+
+M.OneCommentContainer = styled(OneCommentContainer)`
+    margin-top: 1vw;
     margin-bottom: 2.4rem;
     padding: 2vw;
     display: flex;
     flex-direction: column;
 `;
 
-S.OneCommentContainer = styled.div`
-    background-color: white;
-    border-radius: 7px;
-    border: 0.1rem solid black;
+S.OneCommentContainer = styled(OneCommentContainer)`
     margin-top: 0.8rem;
     margin-bottom: 1rem;
     padding: 0.5rem 0.5rem;
@@ -605,7 +525,7 @@ M.CommentInfo = styled.div`
 
 S.CommentUserName = styled.div`
     padding-right: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 1vw;
     font-weight: 600;
 `;
 
@@ -625,13 +545,16 @@ M.CommentDate = styled.div`
 `;
 
 S.CommentText = styled.div`
-    font-size: 0.9rem;
+    font-size: 0.9vw;
     width: 80%;
+    font-family: 'Gothic A1', sans-serif;
+    line-height: normal;
 `;
 
 M.CommentText = styled.div`
     font-size: 4vw;
     width: 75%;
+    line-height: normal;
 `;
 
 S.FlexContainer = styled.div`
@@ -670,6 +593,7 @@ M.NewCommentWrapper = styled.div`
     height: 16vw;
     z-index: 100;
 `;
+
 M.NewCommentContainer = styled.div`
     width: 90%;
     background-color: white;
@@ -691,6 +615,7 @@ M.CommentInput = styled.input`
     padding: 3vw;
     width: 80%;
 `;
+
 S.UploadImg = styled.img`
     width: 1.5rem;
     height: 1.5rem;
@@ -750,13 +675,6 @@ S.CommentTextWrapper = styled.div`
     display: flex;
     padding-top: 0.5rem;
     width: 30vw;
-`;
-
-M.CommentTextWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    width: 5vw;
-    background-color: skyblue;
 `;
 
 S.CommentLikeWrapper = styled.div`
