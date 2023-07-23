@@ -31,9 +31,10 @@
 
 ```javascript
 api
-    _core.js 
+    http.js
+    members.js
+    timetables.js
     ranking.js
-    user.js
 assets
     _common 
     creatpage
