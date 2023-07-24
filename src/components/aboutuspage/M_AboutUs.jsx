@@ -1,15 +1,8 @@
 import { A } from './M_AboutUs.style';
 import logo from '../../assets/mainpage/시간표아티스트logo.png';
-import { AiOutlineLeft } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
 import BackBtn from '../_common/BackBtn';
 
 const MAboutUs = () => {
-    const navigate = useNavigate();
-    const handleMoveBack = () => {
-        navigate(-1);
-    };
-
     return (
         <A.Wrapper>
             <BackBtn />

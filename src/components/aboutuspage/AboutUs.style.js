@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 const A = {};
 A.Wrapper = styled.div`
     display: flex;
@@ -13,7 +13,11 @@ A.ContentWrapper = styled.div`
     width: 60%;
     height: 70%;
     border: 0.1rem solid var(--black);
-    background: linear-gradient(180deg, var(--green) 0%, var(--background) 100%);
+    background: linear-gradient(
+        180deg,
+        var(--green) 0%,
+        var(--background) 100%
+    );
     margin-left: 1%;
     display: flex;
     justify-content: center;

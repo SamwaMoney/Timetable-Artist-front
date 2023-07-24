@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 const S = {};
-S.Wrapper =styled.div`
+S.Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: auto;
@@ -30,7 +30,7 @@ S.InputWrapper = styled.div`
     .text {
         text-align: center;
         margin: 1vw auto;
-        
+
         color: var(--black);
         font-size: 0.8vw;
         font-style: normal;
@@ -47,7 +47,8 @@ S.InputWrapper = styled.div`
     .text-bottom {
         margin-top: 0;
     }
-    .alert-text { // 로그인 실패 시 뜨는 문구 
+    .alert-text {
+        // 로그인 실패 시 뜨는 문구
         color: var(--red);
         margin-bottom: 0;
     }
@@ -99,7 +100,7 @@ S.SubmitBtn = styled.button`
     border-radius: 38px;
     border: 0.1rem solid var(--black);
 
-    color: var(--white, #FFF);
+    color: var(--white, #fff);
     text-align: center;
     font-family: var(--white);
     font-size: 0.8vw;
@@ -115,4 +116,4 @@ S.SubmitBtn = styled.button`
         border: 0.05rem solid var(--black);
     }
 `;
-export {S};
+export { S };

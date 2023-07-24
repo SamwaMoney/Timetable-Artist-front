@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import cursor from "../../assets/mainpage/custom_cursor.png";
+import styled from 'styled-components';
+import cursor from '../../assets/mainpage/custom_cursor.png';
 const S = {};
 S.Wrapper = styled.div`
     display: flex;
@@ -10,7 +10,11 @@ S.Wrapper = styled.div`
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, var(--green) 0%, var(--background) 100%);
+    background: linear-gradient(
+        180deg,
+        var(--green) 0%,
+        var(--background) 100%
+    );
 `;
 S.Korean = styled.div`
     font-size: 1vw;
@@ -47,7 +51,7 @@ S.BackLogo = styled.img`
 `;
 S.HoverText = styled.div`
     width: max-content;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     text-align: center;
     font-size: 0.8vw;
     color: var(--white);
