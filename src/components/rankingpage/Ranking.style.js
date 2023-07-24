@@ -220,7 +220,7 @@ S.ToggleButton = styled(ToggleButton)`
 M.ToggleButton = styled(ToggleButton)`
     width: 100%;
     height: 100%;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     border-radius: 3.5vw;
 `;
 
@@ -266,7 +266,7 @@ const MyScoreContainer = styled.div`
     margin-top: 10%;
     width: 75%;
     border-radius: 20px;
-    border: 0.1rem solid var(--blue);
+    border: 0.05rem solid var(--blue);
     color: var(--blue);
     background: var(--background-green);
     ${FlexCenter};
@@ -491,7 +491,7 @@ M.HeartContainer = styled.div`
 //댓글
 const OneCommentContainer = styled.div`
     background-color: white;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     border-radius: 7px;
 `;
 
@@ -566,7 +566,7 @@ S.TimeTable = styled.img`
     width: 95%;
     height: 95%;
     background-color: #888;
-    border: 1px solid black;
+    border: 0.05rem solid black;
     margin-top: 0.8rem;
 `;
 
