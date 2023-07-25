@@ -28,12 +28,12 @@ export default CommentList;
 
 const CommentContainer = styled.div`
     margin-top: 0vw;
-    margin-bottom: 0vw;
+    margin-bottom: 10vw;
     width: 85%;
 `;
 
 const MCommentContainer = styled.div`
-    margin-top: 3vw;
-    margin-bottom: 13vw;
+    margin-top: 1vw;
+    margin-bottom: 15vw;
     width: 85%;
 `;
