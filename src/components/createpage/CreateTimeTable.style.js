@@ -20,7 +20,7 @@ S.Wrapper = styled(S.BasicContainer)`
 S.Hamburger = styled.div`
     width: 13.4%;
     height: 70%;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     background: var(
         --hamburger,
         linear-gradient(180deg, #b0ff00 0%, #e2e2e2 100%)
@@ -30,7 +30,7 @@ S.Container = styled(S.BasicContainer)`
     margin-left: 1%;
     width: 60%;
     height: 70%;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     background: linear-gradient(180deg, #b0ff00 0%, #e2e2e2 100%);
 
     display: flex;

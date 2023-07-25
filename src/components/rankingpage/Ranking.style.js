@@ -220,7 +220,7 @@ S.ToggleButton = styled(ToggleButton)`
 M.ToggleButton = styled(ToggleButton)`
     width: 100%;
     height: 100%;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     border-radius: 3.5vw;
 `;
 
@@ -266,7 +266,7 @@ const MyScoreContainer = styled.div`
     margin-top: 10%;
     width: 75%;
     border-radius: 20px;
-    border: 0.1rem solid var(--blue);
+    border: 0.05rem solid var(--blue);
     color: var(--blue);
     background: var(--background-green);
     ${FlexCenter};
@@ -491,13 +491,13 @@ M.HeartContainer = styled.div`
 //댓글
 const OneCommentContainer = styled.div`
     background-color: white;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     border-radius: 7px;
 `;
 
 M.OneCommentContainer = styled(OneCommentContainer)`
     margin-top: 1vw;
-    margin-bottom: 2.4rem;
+    margin-bottom: 4vw;
     padding: 2vw;
     display: flex;
     flex-direction: column;
@@ -566,7 +566,7 @@ S.TimeTable = styled.img`
     width: 95%;
     height: 95%;
     background-color: #888;
-    border: 1px solid black;
+    border: 0.05rem solid black;
     margin-top: 0.8rem;
 `;
 
@@ -599,11 +599,33 @@ M.NewCommentContainer = styled.div`
     background-color: white;
     height: 70%;
     border-radius: 10vw;
+    display: flex;
 `;
 
+S.checkBoxNoName = styled.div`
+    display: flex;
+    margin-left: 0.5rem;
+`;
+
+S.NoNameText = styled.div`
+    width: 2.2rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+`;
+M.checkBoxNoName = styled.div`
+    ${FlexCenter}
+    padding-left:1rem;
+`;
+S.NoNameText = styled.div``;
+M.NoNameText = styled.div`
+    font-size: 1rem;
+    margin-left: 0.5rem;
+`;
 S.CommentInput = styled.input`
     border: none;
     height: 2rem;
+    width: 75%;
+    font-size: 0.9rem;
 `;
 
 M.CommentInput = styled.input`
@@ -613,7 +635,7 @@ M.CommentInput = styled.input`
     border-radius: 5rem;
     z-index: 10;
     padding: 3vw;
-    width: 80%;
+    width: 70%;
 `;
 
 S.UploadImg = styled.img`

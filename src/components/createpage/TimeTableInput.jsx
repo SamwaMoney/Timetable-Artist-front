@@ -58,18 +58,54 @@ const TimeTableInput = () => {
         // 객체 형태로 가공하여 새로운 데이터 생성
         // 만약 추가했을 경우 객체 2개를 보내기
 
-        const newData = {
-            day: selectedDateTime.day,
-            startTime: selectedDateTime.startTime,
-            endTime: selectedDateTime.endTime,
-            place: selectedPlace,
-            name: selectedClassName,
-        };
+        let newData1, newData2;
 
-        console.log(newData);
+        if (isChecked) {
+            // 지정된 시간 없음인 경우
+            newData1 = {
+                day: selectedDateTime.day,
+                startTime: null,
+                endTime: null,
+                place: selectedPlace,
+                name: selectedClassName,
+            };
 
-        // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
-        dispatch(addSelectedData(newData));
+            // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
+            dispatch(addSelectedData(newData1));
+        } else if (isAddBtnPressed) {
+            // 강의 시간이 2개인 경우
+            newData1 = {
+                day: selectedDateTime.day,
+                startTime: selectedDateTime.startTime,
+                endTime: selectedDateTime.endTime,
+                place: selectedPlace,
+                name: selectedClassName,
+            };
+
+            newData2 = {
+                day: plusSelectedDateTime.day,
+                startTime: plusSelectedDateTime.startTime,
+                endTime: plusSelectedDateTime.endTime,
+                place: selectedPlace,
+                name: selectedClassName,
+            };
+
+            dispatch(addSelectedData(newData1));
+            dispatch(addSelectedData(newData2));
+        } else {
+            // 일반적인 경우 (강의 시간 1개)
+            newData1 = {
+                day: selectedDateTime.day,
+                startTime: selectedDateTime.startTime,
+                endTime: selectedDateTime.endTime,
+                place: selectedPlace,
+                name: selectedClassName,
+            };
+
+            dispatch(addSelectedData(newData1));
+        }
+
+        // 입력창 초기화
     };
 
     return (
@@ -100,7 +136,7 @@ const TimeTableInput = () => {
                 </S.InputDiv>
 
                 {isAddBtnPressed === true ? (
-                    <div style={{width: "72%"}}>
+                    <div style={{ width: '72%' }}>
                         <DateTimeDropdown
                             isOpen={isSecondOpen}
                             setIsOpen={setIsSecondOpen}
@@ -109,9 +145,13 @@ const TimeTableInput = () => {
                             isChecked={isChecked}
                             order='second'
                         />
-                        <S.MinusBtn src={subtract_course} alt="-버튼" onClick={() => {
+                        <S.MinusBtn
+                            src={subtract_course}
+                            alt='-버튼'
+                            onClick={() => {
                                 setIsAddBtnPressed(false);
-                            }}/>
+                            }}
+                        />
                     </div>
                 ) : (
                     <S.ButtonDiv>

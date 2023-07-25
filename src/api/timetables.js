@@ -38,7 +38,7 @@ export const CreateTable = async memberId => {
 };
 
 // 시간표 삭제
-export const DeleteTable = async () => {
+export const DeleteTable = async (memberId, timetableId) => {
     try {
         const res = await http.delete(
             `/members/${memberId}/timetables/${timetableId}`,
@@ -51,7 +51,7 @@ export const DeleteTable = async () => {
 };
 
 // 내 시간표 조회
-export const FindTable = async () => {
+export const FindTable = async (memberId, timetableId) => {
     try {
         const res = await http.get(`/timetables/${memberId}/${timetableId}`);
         console.log(res);
@@ -62,7 +62,7 @@ export const FindTable = async () => {
 };
 
 // 시간표 채점
-export const ScoreTable = async owner => {
+export const ScoreTable = async (owner, memberId) => {
     try {
         const res = await http.patch(`/timetables/${memberId}/score`, {
             owner: owner,
@@ -75,7 +75,7 @@ export const ScoreTable = async owner => {
 };
 
 // 시간표 채점 결과 조회
-export const TableResult = async () => {
+export const TableResult = async timetableId => {
     try {
         const res = await http.get(`/timetables/${timetableId}/result`);
         console.log(res);
@@ -86,7 +86,7 @@ export const TableResult = async () => {
 };
 
 // 시간표 게시
-export const UpdateTable = async (owner, classHide) => {
+export const UpdateTable = async (owner, classHide, timetableId) => {
     try {
         const res = await http.patch(`/timetables/${timetableId}/upload`, {
             owner: owner,
