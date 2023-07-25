@@ -64,8 +64,8 @@ const TimeTableInput = () => {
             // 지정된 시간 없음인 경우
             newData1 = {
                 day: selectedDateTime.day,
-                startTime: -1,
-                endTime: -1,
+                startTime: null,
+                endTime: null,
                 place: selectedPlace,
                 name: selectedClassName,
             };
