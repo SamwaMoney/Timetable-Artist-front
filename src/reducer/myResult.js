@@ -1,17 +1,22 @@
-import { ADD_RESULT, REPLACE_RESULT } from './action';
+import { ADD_MY_RESULT } from './action';
 
-//내 점수와 유형 저장하기
+//내 점수, 유형, 테이블 아이디 저장하기
 const initialState = {
     myScore: null,
-    myCategory: null,
+    myTableType: null,
+    myTimeTableId: null,
 };
 
 const myResultReducer = (state = initialState, action) => {
+    const { tableId, score, tableType } = action.payload | null;
     switch (action.type) {
-        case ADD_RESULT:
-            return action.payload;
-        case REPLACE_RESULT:
-            return action.payload;
+        case ADD_MY_RESULT:
+            return {
+                myScore: score,
+                myTableType: tableType,
+                myTimeTableId: tableId,
+            };
+
         default:
             return state;
     }

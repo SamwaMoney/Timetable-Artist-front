@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { styled } from 'styled-components';
-import { COURSE_PLACE, PickerOptions } from '../../consts/timeTableInput';
+import { COURSE_PLACE } from '../../consts/timeTableInput';
+import { PickerOptions } from '../../utils/picker-options';
 import { useState } from 'react';
 import { S } from './M_CreateTimeTable.style';
 

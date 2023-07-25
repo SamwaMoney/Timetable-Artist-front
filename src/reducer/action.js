@@ -1,4 +1,5 @@
 export const ADD_SELECTED_DATA = 'ADD_SELECTED_DATA';
+export const ADD_MY_RESULT = 'ADD_MY_RESULT';
 
 export const addSelectedData = data => {
     return {
@@ -7,6 +8,9 @@ export const addSelectedData = data => {
     };
 };
 
-export const ADD_RESULT = 'ADD_RESULT';
-
-export const REPLACE_RESULT = 'REPLACE_RESULT';
+export const addMyResult = data => {
+    return {
+        type: ADD_MY_RESULT,
+        payload: data,
+    };
+};

@@ -100,4 +100,4 @@ export const DeleteCommentLike = async (replyId, memberId) => {
     }
 };
 
-// 댓글 좋아요 목록 조회
+// 댓글 좋아요 목록 조회 api
