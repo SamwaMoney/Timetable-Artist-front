@@ -34,17 +34,3 @@ export const COURSE_PLACE = [
     '포스코관',
     '원격/비대면',
 ];
-
-export const PickerOptions = {
-    autoHeight: true,
-    slidesPerView: 5,
-    freeMode: true,
-    freeModeSticky: false,
-    mousewheelControl: false,
-    direction: 'vertical',
-    slideToClickedSlide: true,
-    centeredSlides: true,
-    resistance: false,
-    allowTouchMove: true,
-    nested: true,
-};

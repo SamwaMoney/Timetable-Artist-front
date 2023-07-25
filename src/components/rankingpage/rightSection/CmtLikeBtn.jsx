@@ -19,6 +19,11 @@ const CmtLikeBtn = ({ isMobile }) => {
         //좋아요 취소하는 api 로직
     };
 
+    //좋아요 가져오기
+    const onGetLike = () => {
+        //좋아요 가져오는 api 로직
+    };
+
     if (isMobile) {
         return (
             <M.HeartContainer>

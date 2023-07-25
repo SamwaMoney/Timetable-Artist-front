@@ -4,7 +4,8 @@ import CmtLikeBtn from './CmtLikeBtn';
 
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
 //현재 시간을 0시간전으로 계산해서 보여주기
-const OneComment = ({ isMobile }) => {
+const OneComment = ({ isMobile, data }) => {
+    const { content, createdAt, heart, replyCount } = data;
     return isMobile ? (
         <M.OneCommentContainer>
             <M.CommentInfo>
