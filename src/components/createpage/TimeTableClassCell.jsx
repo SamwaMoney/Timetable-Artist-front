@@ -44,7 +44,7 @@ const TimeTableClassCell = ({
             console.log('showClassBlock-----------');
 
             // 지정된 시간이 없는 경우
-            if (data.startTime === -1) {
+            if (data.startTime === null) {
                 etcDescDivRef.current.innerText = `${data.name} `;
                 return;
             } else {
