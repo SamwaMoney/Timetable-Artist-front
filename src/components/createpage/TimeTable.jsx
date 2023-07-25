@@ -3,6 +3,7 @@ import { isMobile } from 'react-device-detect';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
+import TimeTableClassCell from './TimeTableClassCell';
 
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
@@ -16,8 +17,6 @@ const TimeTable = () => {
         const hour = Math.floor(index * timeInterval) + startHour;
         return index % 2 === 0 ? hour : hour + 0.5;
     });
-
-    // console.log(timeSlots);
 
     const dayMappings = {
         월: 'Mon',
@@ -40,55 +39,7 @@ const TimeTable = () => {
         cellRefs.current[`${day}-${timeSlot}`] = ref;
     };
 
-    const AdditionalContent = ({ selectedData }) => (
-        <BlockText>
-            <div>{selectedData[0].name}</div>
-            <br />
-            <div>{selectedData[0].place}</div>
-        </BlockText>
-    );
-
-    const showClassBlock = selectedData => {
-        console.log('showClassBlock');
-        console.log(selectedData[0].startTime);
-        // 시작시간 시랑 분 분리
-        const [startH, startM] = selectedData[0].startTime
-            .split(':')
-            .map(str => parseInt(str, 10));
-
-        // id 변수
-        const findId = `${dayMappings[selectedData[0].day]}-${startH}`;
-
-        console.log(startH);
-        console.log(findId);
-
-        // 원하는 key를 가진 요소에 접근
-        const targetElement = cellRefs.current[findId];
-
-        // targetElement가 정상적으로 찾아졌을 때
-        if (targetElement) {
-            // class 추가
-            targetElement.classList.add('selected');
-
-            // rowSpan 속성 추가
-            targetElement.rowSpan = '3';
-
-            // AdditionalContent 컴포넌트를 생성하여 targetElement의 하위로 추가
-            ReactDOM.render(
-                <AdditionalContent selectedData={selectedData} />,
-                targetElement,
-            );
-        }
-    };
-
-    useEffect(() => {
-        console.log('시작');
-        if (selectedData && selectedData.length > 0) {
-            console.log(selectedData);
-            console.log('timetable 값 들어옴');
-            showClassBlock(selectedData);
-        }
-    }, [selectedData]);
+    const etcDescDivRef = useRef(null);
 
     return (
         <TimeTableContainer>
@@ -120,7 +71,15 @@ const TimeTable = () => {
                                     isfirst={index === 0}
                                     islast={index === numberOfSlots - 1}
                                     ref={ref => setCellRef(day, timeSlot, ref)}
-                                ></TableCell>
+                                >
+                                    {/* 각 시간 슬롯에 해당하는 선택된 데이터를 표시합니다. */}
+                                    <TimeTableClassCell
+                                        selectedData={selectedData}
+                                        dayMappings={dayMappings}
+                                        cellRefs={cellRefs}
+                                        etcDescDivRef={etcDescDivRef}
+                                    />
+                                </TableCell>
                             ))}
                         </tr>
                     ))}
@@ -128,7 +87,7 @@ const TimeTable = () => {
             </table>
             <EtcDiv>
                 <TableText>etc</TableText>
-                <EtcDescDiv></EtcDescDiv>
+                <EtcDescDiv ref={etcDescDivRef}></EtcDescDiv>
             </EtcDiv>
         </TimeTableContainer>
     );
@@ -200,7 +159,7 @@ const TableCell = styled.td`
             : 'none'};
 
     &.selected {
-        background-color: #5f96ff;
+        /* background-color: #5f96ff; */
         color: white;
         border-radius: 9px;
         font-size: 10px;
@@ -245,6 +204,10 @@ const EtcDescDiv = styled.div`
     border-radius: 8px;
     margin-top: 2px;
     margin-left: auto;
+
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1%;
 
     ${isMobile &&
     `

@@ -48,3 +48,15 @@ export const PickerOptions = {
     allowTouchMove: true,
     nested: true,
 };
+
+export const CLASS_BLOCK_COLOR = [
+    '#1962ED',
+    '#5F96FF',
+    '#B7C8E9',
+    '#494F5A',
+    '#949AA5',
+    '#646870',
+    '#A5F43F',
+    '#FF7E63',
+    '#84D71A',
+];
