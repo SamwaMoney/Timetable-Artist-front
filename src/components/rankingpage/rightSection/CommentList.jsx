@@ -28,7 +28,7 @@ export default CommentList;
 
 const CommentContainer = styled.div`
     margin-top: 0vw;
-    margin-bottom: 10vw;
+    margin-bottom: 1vw;
     width: 85%;
 `;
 
