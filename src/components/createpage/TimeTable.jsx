@@ -166,6 +166,17 @@ const TableCell = styled.td`
         font-weight: 600;
     }
 
+    &.isfirst {
+        border-top-left-radius: 9px;
+        border-top-right-radius: 9px;
+        position: relative;
+    }
+
+    &.islast {
+        border-bottom-left-radius: 9px;
+        border-bottom-right-radius: 9px;
+    }
+
     ${isMobile &&
     `
         border-radius: ${({ isfirst, islast }) =>
