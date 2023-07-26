@@ -41,4 +41,25 @@ A.Text = styled.p`
     line-height: normal;
     margin-bottom: 13%;
 `;
+A.TeamBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    p {
+        margin: 1vw 0;
+        color: var(--black);
+        text-align: center;
+        font-size: 3.5vw;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .team {
+        font-size: 5vw;
+        margin-bottom: 2vw;
+        margin-top: 7vw;
+    }
+    .top {
+        margin-top: 0;
+    }
+`;
 export { A };
