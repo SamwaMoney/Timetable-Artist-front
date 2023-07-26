@@ -114,5 +114,5 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
         </>
     );
 };
-
+//
 export default OneRanking;
