@@ -4,6 +4,7 @@ import { COURSE_TIME, DAYS_OF_WEEK } from '../../consts/timeTableInput';
 import { useState, useEffect } from 'react';
 import { S } from './M_CreateTimeTable.style';
 import { PickerOptions } from '../../utils/picker-options';
+import { Navigation, Pagination } from 'swiper/modules';
 
 //시간 고르는 창//
 const TimePicker = ({

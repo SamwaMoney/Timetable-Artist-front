@@ -101,6 +101,11 @@ M.RankNum = styled(RankNum)`
     width: 20%;
     height: 14vw;
     font-size: 8vw;
+    background-color: ${props =>
+        props.isShowTimeTable ? 'var(--green)' : 'white'};
+    color: ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
+    border: 1px solid
+        ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
 `;
 
 //UserInfo
@@ -124,6 +129,11 @@ S.UserInfo = styled(UserInfo)`
 M.UserInfo = styled(UserInfo)`
     height: 14vw;
     border-radius: 7vw;
+    background-color: ${props =>
+        props.isShowTimeTable ? 'var(--green)' : 'white'};
+    color: ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
+    border: 1px solid
+        ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
 `;
 
 M.OneRankWrapper = styled.div`
@@ -145,7 +155,7 @@ const RankContainer = styled.div`
 S.RankContainer = styled(RankContainer)`
     margin-top: 1rem;
     width: 75%;
-    margin-bottom: 3%;
+    margin-bottom: 0.05rem;
 `;
 
 M.RankContainer = styled(RankContainer)`
@@ -383,7 +393,7 @@ M.Category = styled.div`
     padding-top: 0.5rem;
     padding-bottom: 5px;
     font-weight: 600;
-    font-size: 4.1vw;
+    font-size: 3.8vw;
     margin-bottom: 0.2rem;
 `;
 
@@ -391,7 +401,7 @@ S.Nickname = styled.div`
     font-size: 1vw;
 `;
 M.Nickname = styled.div`
-    font-size: 4.2vw;
+    font-size: 3.8vw;
     margin-bottom: 2vw;
 `;
 
@@ -608,17 +618,21 @@ S.checkBoxNoName = styled.div`
 `;
 
 S.NoNameText = styled.div`
-    width: 2.2rem;
-    font-size: 1rem;
+    width: 2rem;
     margin-left: 0.5rem;
+    font-size: 0.5rem;
 `;
+
 M.checkBoxNoName = styled.div`
     ${FlexCenter}
     padding-left:1rem;
 `;
-S.NoNameText = styled.div``;
-M.NoNameText = styled.div`
+S.NoNameText = styled.div`
     font-size: 1rem;
+    margin-left: 0.5rem;
+`;
+M.NoNameText = styled.div`
+    font-size: 0.3rem;
     margin-left: 0.5rem;
 `;
 S.CommentInput = styled.input`
