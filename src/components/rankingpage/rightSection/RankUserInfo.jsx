@@ -28,8 +28,8 @@ const RankUserInfo = ({ data }) => {
     //또는 해당 tableId로 api요청보내서 받아오기 => 문제는 랭킹 정보가 없다는 것
     return (
         <S.RankContainer>
-            <S.RankNum isCurrentUser={true}>{ranking}</S.RankNum>
-            <S.UserInfo isCurrentUser={true}>
+            <S.RankNum iscurrentuser={'true'}>{ranking}</S.RankNum>
+            <S.UserInfo iscurrentuser={'true'}>
                 <S.Score>{score}</S.Score>
                 <S.CategoryContainer>
                     <S.Category>{tableType}</S.Category>
