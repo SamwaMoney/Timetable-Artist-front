@@ -46,7 +46,7 @@ S.InputWrapper = styled.div`
         font-size: 3vw;
     }
     .hidden {
-        //visibility: hidden;
+        visibility: hidden;
     }
 `;
 S.Text = styled.p`
@@ -102,6 +102,10 @@ S.SubmitBtn = styled.button`
     line-height: normal;
 
     cursor: pointer;
+
+    &.disabled {
+        background: var(--background);
+    }
     &.mobile-btn {
         width: 53.3vw;
         height: 7.3vh;

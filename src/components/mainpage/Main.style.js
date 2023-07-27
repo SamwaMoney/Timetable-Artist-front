@@ -24,8 +24,9 @@ S.Korean = styled.div`
     margin: 2.5% 0;
 `;
 S.LogoContainer = styled.div`
-    width: 25vw;
+    width: 22vw;
     perspective: 1000px;
+    margin-bottom: 3vw;
     cursor: url(${cursor}), auto;
 
     &:hover .hover-text {

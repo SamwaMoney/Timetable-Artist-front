@@ -91,6 +91,9 @@ S.InputBox = styled.input`
         font-size: 4.3vw;
         border: 0.05rem solid var(--black);
     }
+    &.red-inputbox {
+        border: 0.1rem solid var(--red);
+    }
 `;
 S.SubmitBtn = styled.button`
     width: 11vw;
@@ -100,7 +103,7 @@ S.SubmitBtn = styled.button`
     border-radius: 38px;
     border: 0.1rem solid var(--black);
 
-    color: var(--white, #fff);
+    color: var(--white);
     text-align: center;
     font-family: var(--white);
     font-size: 0.8vw;
@@ -109,6 +112,11 @@ S.SubmitBtn = styled.button`
     line-height: normal;
 
     cursor: pointer;
+
+    &.disabled {
+        background-color: var(--background);
+    }
+
     &.mobile-btn {
         width: 53.3vw;
         height: 7.3vh;
