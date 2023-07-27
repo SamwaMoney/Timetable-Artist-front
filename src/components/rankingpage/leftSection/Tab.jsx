@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { S } from '../Ranking.style';
 import { M } from '../Ranking.style';
 import { useLocation } from 'react-router-dom';
@@ -33,7 +33,7 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                active={currentSort !== 'like' ? true : false}
+                isactive={(currentSort !== 'like').toString()}
             >
                 {currentSort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
             </M.Tab>
@@ -41,7 +41,7 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                active={currentSort === 'like'}
+                isactive={(currentSort === 'like').toString()}
             >
                 인기 시간표
             </M.Tab>
@@ -52,7 +52,7 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                active={currentSort !== 'like' ? true : false}
+                isactive={(currentSort !== 'like').toString()}
             >
                 {currentSort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
             </S.Tab>
@@ -60,7 +60,7 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                active={currentSort === 'like'}
+                isactive={(currentSort === 'like').toString()}
             >
                 인기 시간표
             </S.Tab>

@@ -1,13 +1,18 @@
 import OneComment from './OneComment';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-
+import RankingApis from '../../../api/ranking';
+// import { GetTimeTableComments } from '../../../api/ranking';
 const CommentList = ({ isMobile, timetableId }) => {
     //좋아요 변경되면 순서도 바뀜
     //백 api 다시 불러와서 순서 변경할 것
 
     useEffect(() => {
         //timetableID로 댓글을 불러오는 api 로직
+        // const res = GetTimeTableComments(timetableId);
+        // console.log(res);
+        // const res = RankingApis.GetTimeTableComments(timetableId);
+        // console.log(res);
     }, []);
 
     return isMobile ? (
