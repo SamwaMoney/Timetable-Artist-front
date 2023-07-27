@@ -1,4 +1,5 @@
 import { S } from './SignUp.style';
+import { CreateMember } from '../../../api/members';
 
 import { useState, useEffect } from 'react';
 
@@ -8,20 +9,36 @@ const MSignUp = () => {
     const [pwCheck, setPwCheck] = useState('');
     const [isFilled, setIsFilled] = useState(false);
     const [isPwMatch, setIsPwMatch] = useState(true);
+    const [idLengthCheck, setIdLengthCheck] = useState(false);
+    const [pwLengthCheck, setPwLengthCheck] = useState(false);
     useEffect(() => {
         if (id !== '' && pw !== '' && pwCheck !== '') setIsFilled(true);
     }, [id, pw, pwCheck]);
 
+    // 회원가입 버튼 클릭 이벤트 핸들러
     const handleSubmit = e => {
         e.preventDefault();
         if (isFilled) {
-            // 회원가입 api 불러오기
+            CreateMember(id, pw);
         }
     };
+
+    // 아이디 입력 이벤트 핸들러
+    const handleIdChange = e => {
+        setId(e.target.value);
+        if (e.target.value.length < 4) setIdLengthCheck(true);
+        else setIdLengthCheck(false);
+    };
+
+    // 비밀번호 입력 이벤트 핸들러
     const handlePwChange = e => {
         setPw(e.target.value);
+        if (e.target.value.length < 6) setPwLengthCheck(true);
+        else setPwLengthCheck(false);
         setIsPwMatch(pwCheck === e.target.value);
     };
+
+    // 비밀번호 확인 입력 이벤트 핸들러
     const handlePwCheckChange = e => {
         setPwCheck(e.target.value);
         setIsPwMatch(pw === e.target.value);
@@ -35,11 +52,12 @@ const MSignUp = () => {
                         <div className='mobile-div'>
                             <S.Text className='mobile-Text'>ID</S.Text>
                             <S.InputBox
-                                className='mobile-inputbox'
+                                className={`mobile-inputbox ${
+                                    idLengthCheck && 'red-inputbox'
+                                }`}
                                 placeholder='아이디(4자~8자)'
                                 maxLength='8'
-                                minLength='4'
-                                onChange={e => setId(e.target.value)}
+                                onChange={handleIdChange}
                             />
                         </div>
                         <p className='text text-top mobile-text'>
@@ -53,10 +71,12 @@ const MSignUp = () => {
                         <div className='mobile-div'>
                             <S.Text className='mobile-Text'>PW</S.Text>
                             <S.InputBox
-                                className='mobile-inputbox'
-                                placeholder='비밀번호'
+                                className={`mobile-inputbox ${
+                                    pwLengthCheck && 'red-inputbox'
+                                }`}
+                                placeholder='비밀번호(6자 이상)'
                                 type='password'
-                                onChange={e => handlePwChange(e)}
+                                onChange={handlePwChange}
                             />
                         </div>
                         <p className='text mobile-text'>
@@ -70,12 +90,12 @@ const MSignUp = () => {
                                 className='mobile-inputbox'
                                 placeholder='비밀번호 확인'
                                 type='password'
-                                onChange={e => handlePwCheckChange(e)}
+                                onChange={handlePwCheckChange}
                             />
                         </div>
                         <p
                             className={`alert-text text mobile-text ${
-                                isPwMatch ? 'hidden' : ''
+                                (isPwMatch || !pwCheck) && 'hidden'
                             }`}
                         >
                             비밀번호가 일치하지 않습니다.
@@ -83,7 +103,13 @@ const MSignUp = () => {
                     </S.InputWrapper>
                 </div>
                 <S.SubmitBtn
-                    className='mobile-btn'
+                    className={`mobile-btn ${
+                        (!isFilled ||
+                            !isPwMatch ||
+                            idLengthCheck ||
+                            pwLengthCheck) &&
+                        'disabled'
+                    }`}
                     type='submit'
                     disabled={!isFilled || !isPwMatch}
                 >

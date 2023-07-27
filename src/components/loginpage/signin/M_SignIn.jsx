@@ -1,10 +1,15 @@
 import { S } from './SignIn.style';
+import { Login } from '../../../api/members';
+
 import { useState, useEffect } from 'react';
 
 const MSignIn = () => {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
     const [isFilled, setIsFilled] = useState(false);
+    const [notExistedId, setNotExistedId] = useState(true);
+    const [correctPw, setCorrectPw] = useState(true);
+
     useEffect(() => {
         if (id !== '' && pw !== '') setIsFilled(true);
     }, [id, pw]);
@@ -12,7 +17,15 @@ const MSignIn = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (isFilled) {
-            // 로그인 api 불러오기
+            const status = Login(id, pw);
+            /*
+            if (status === 200) {
+                navigate('/ranking');
+                //setNotExistedId(true);
+            } /* if (status === 401)* else {
+                setCorrectPw(false);
+            }
+            */
         }
     };
     return (
@@ -28,7 +41,11 @@ const MSignIn = () => {
                                 onChange={e => setId(e.target.value)}
                             />
                         </div>
-                        <p className='alert-text hidden mobile-text'>
+                        <p
+                            className={`alert-text mobile-text ${
+                                notExistedId && 'hidden'
+                            }`}
+                        >
                             존재하지 않는 아이디입니다.
                         </p>
                     </S.InputWrapper>
@@ -42,13 +59,17 @@ const MSignIn = () => {
                                 onChange={e => setPw(e.target.value)}
                             />
                         </div>
-                        <p className='alert-text hidden mobile-text'>
+                        <p
+                            className={`alert-text mobile-text ${
+                                correctPw && 'hidden'
+                            }`}
+                        >
                             비밀번호가 일치하지 않습니다.
                         </p>
                     </S.InputWrapper>
                 </div>
                 <S.SubmitBtn
-                    className='mobile-btn'
+                    className={`mobile-btn ${!isFilled && 'disabled'}`}
                     type='submit'
                     disabled={!isFilled}
                 >
