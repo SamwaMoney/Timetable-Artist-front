@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { isMobile } from 'react-device-detect';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import ReactDOM from 'react-dom';
-import TimeTableClassCell from './TimeTableClassCell';
+import TimeTableRow from './TimeTableRow';
 
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
@@ -26,20 +25,12 @@ const TimeTable = () => {
         금: 'Fri',
     };
 
+    const etcDescDivRef = useRef(null);
+
     // redux에서 값을 받아옴
     const selectedData = useSelector(
         state => state.timeTableReducer.selectedData,
     );
-
-    // ref 객체를 생성합니다.
-    const cellRefs = useRef({});
-
-    // 렌더링 시에 ref 객체에 각 td 요소를 할당합니다.
-    const setCellRef = (day, timeSlot, ref) => {
-        cellRefs.current[`${day}-${timeSlot}`] = ref;
-    };
-
-    const etcDescDivRef = useRef(null);
 
     return (
         <TimeTableContainer>
@@ -64,30 +55,29 @@ const TimeTable = () => {
                             >
                                 {timeSlot}
                             </TimeCell>
-                            {Object.values(dayMappings).map(day => (
-                                <TableCell
-                                    key={`${day}-${timeSlot}`}
-                                    id={`${day}-${timeSlot}`}
-                                    isfirst={index === 0}
-                                    islast={index === numberOfSlots - 1}
-                                    ref={ref => setCellRef(day, timeSlot, ref)}
-                                >
-                                    {/* 각 시간 슬롯에 해당하는 선택된 데이터를 표시합니다. */}
-                                    <TimeTableClassCell
-                                        selectedData={selectedData}
-                                        dayMappings={dayMappings}
-                                        cellRefs={cellRefs}
-                                        etcDescDivRef={etcDescDivRef}
-                                    />
-                                </TableCell>
-                            ))}
+
+                            <TimeTableRow
+                                timeSlot={timeSlot}
+                                index={index}
+                                numberOfSlots={numberOfSlots}
+                            />
                         </tr>
                     ))}
                 </tbody>
             </table>
             <EtcDiv>
                 <TableText>etc</TableText>
-                <EtcDescDiv ref={etcDescDivRef}></EtcDescDiv>
+                <EtcDescDiv ref={etcDescDivRef}>
+                    {selectedData &&
+                        selectedData.map(lecture => {
+                            if (lecture.startTime === null) {
+                                return (
+                                    <div key={lecture.name}>{lecture.name}</div>
+                                );
+                            }
+                            return null;
+                        })}
+                </EtcDescDiv>
             </EtcDiv>
         </TimeTableContainer>
     );
@@ -226,11 +216,4 @@ const EtcDescDiv = styled.div`
        height: 5rem;
        margin-top: 8px;
     `}
-`;
-
-const BlockText = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 `;
