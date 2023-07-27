@@ -1,7 +1,11 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 const M = {};
 M.Wrapper = styled.div`
-    background: linear-gradient(180deg, var(--green) 0%, var(--background) 100%);
+    background: linear-gradient(
+        180deg,
+        var(--green) 0%,
+        var(--background) 100%
+    );
     height: 100%;
     width: 100%;
     display: flex;
@@ -53,7 +57,7 @@ M.Btn = styled.button`
     text-align: center;
     border-radius: 22px;
     border: 0.05rem solid var(--black);
-    
+
     font-size: 5.5vw;
     font-style: normal;
     font-weight: 600;

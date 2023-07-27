@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 const L = {};
 L.Wrapper = styled.div`
     background: var(--background);

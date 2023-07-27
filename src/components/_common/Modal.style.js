@@ -12,7 +12,7 @@ M.Modal = styled.div`
     z-index: 999;
 
     &.mobile-background {
-        background: rgba(0, 0, 0, 0.40);
+        background: rgba(0, 0, 0, 0.4);
     }
 
     .modal {

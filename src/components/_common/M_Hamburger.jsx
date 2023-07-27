@@ -4,29 +4,42 @@ import WithdrawalModal from './WithdrawalModal';
 import EditModal from './EditModal';
 import S from './M_Hamburger.style';
 import BackBtn from './BackBtn';
+import { Logout, isLogin } from '../../api/members';
 
 const MHamburger = () => {
     const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [isLogin, setIsLogin] = useState(true); // 초기상태 false
-
-    //로그인 인증 api 불러오기
+    //const [isLogin(), setIsLogin] = useState(true); // 초기상태 false
     //setIsLogin(true);
 
     const navigate = useNavigate();
 
+    // 내 시간표 점수 버튼 클릭
     const handleScoreClick = e => {
         e.preventDefault();
-        if (isLogin) {
+        if (isLogin()) {
             navigate('/score');
+        } else {
+            alert('로그인이 필요합니다!');
         }
     };
+    // 내 시간표 수정 버튼 클릭
     const handleEditClick = e => {
         e.preventDefault();
-        if (isLogin) {
+        if (isLogin()) {
             setIsEditModalOpen(true);
+        } else {
+            alert('로그인이 필요합니다!');
         }
     };
+    // 로그아웃 버튼 클릭
+    const handleLogoutClick = () => {
+        const res = Logout();
+        if (res.status === 200) {
+            window.location.reload();
+        }
+    };
+    // 탈퇴 버튼 클릭
     const handleWithdrawalClick = () => {
         setIsWithdrawalModalOpen(true);
     };
@@ -34,16 +47,12 @@ const MHamburger = () => {
         background: 'var(--background)',
     };
 
-    const handleMoveBack = () => {
-        navigate(-1);
-    };
-
     return (
         <S.FlexContainer>
             <div
                 style={{
                     marginTop: '30%',
-                    borderBottom: ' 0.1rem solid black',
+                    borderBottom: ' 0.05rem solid black',
                 }}
             >
                 <BackBtn />
@@ -90,10 +99,15 @@ const MHamburger = () => {
                     <p>내 시간표 수정</p>
                 </NavLink>
             </S.MenuBtn>
-            {isLogin ? (
-                <S.WithdrawalBtn onClick={handleWithdrawalClick}>
-                    <p>회원탈퇴</p>
-                </S.WithdrawalBtn>
+            {isLogin() ? (
+                <S.BottomBox>
+                    <S.LogoutBtn onClick={handleLogoutClick}>
+                        <p>로그아웃</p>
+                    </S.LogoutBtn>
+                    <S.WithdrawalBtn onClick={handleWithdrawalClick}>
+                        <p>회원탈퇴</p>
+                    </S.WithdrawalBtn>
+                </S.BottomBox>
             ) : (
                 <S.MenuBtn className='login'>
                     <NavLink
