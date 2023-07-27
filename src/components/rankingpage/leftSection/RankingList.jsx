@@ -18,7 +18,7 @@ const RankingList = ({ isMobile, data, currentUser, setCurrentUser }) => {
                     return (
                         <OneRanking
                             isMobile={isMobile}
-                            key={user.id}
+                            key={Math.random() * 10000}
                             data={user}
                             index={index}
                             currentUser={currentUser}

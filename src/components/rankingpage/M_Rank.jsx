@@ -11,6 +11,7 @@ import { mock_ranking } from '../../_mock/ranking';
 //로그인 상태 => 시간표 있으면 내 점수, 내 랭킹 보여주기
 //로그인 상태 => 시간표 없으켠 새 시간표 만들기 클릭시 시간표 페이지로 이동
 //로그인 안된 상태 => 새 시간표 만들기 클릭시 로그인페이지 이동
+
 const MobileRank = ({ isMyData }) => {
     const [data, setData] = useState(mock_ranking);
     const [isLogin, setIsLogin] = useState(false);

@@ -70,7 +70,7 @@ const Rank = ({ isMyData }) => {
                         <LikeBtn number={currentUser.likeCount} />
                         <CmtTag number={currentUser.replyCount} />
                     </S.ButtonContainer>
-                    <NewComment />
+                    <NewComment currentTableId={currentUser.timetableId} />
                     <CommentList timetableId={currentUser.timetableId} />
                 </S.SmallContainer>
             </S.Container>

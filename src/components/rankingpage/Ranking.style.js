@@ -85,16 +85,17 @@ const RankNum = styled.div`
     border-radius: 50%;
     font-weight: 600;
     font-family: Montserrat;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
 `;
 S.RankNum = styled(RankNum)`
     width: 5rem;
     height: 4rem;
     font-size: 2rem;
+    background-color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--blue)' : 'black'};
+    border: 0.1rem solid
+        ${props => (props.iscurrentuser === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 M.RankNum = styled(RankNum)`
@@ -102,20 +103,16 @@ M.RankNum = styled(RankNum)`
     height: 14vw;
     font-size: 8vw;
     background-color: ${props =>
-        props.isShowTimeTable ? 'var(--green)' : 'white'};
-    color: ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
+        props.isshowtimetable === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.isshowtimetable === 'true' ? 'var(--blue)' : 'black'};
     border: 1px solid
-        ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
+        ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 //UserInfo
 const UserInfo = styled.div`
     width: 100%;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
     ${FlexCenter}
     position: relative;
 `;
@@ -124,16 +121,23 @@ S.UserInfo = styled(UserInfo)`
     height: 4rem;
     border-radius: 60px;
     font-size: 1rem;
+    background-color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--blue)' : 'black'};
+    border: 0.1rem solid
+        ${props => (props.iscurrentuser === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 M.UserInfo = styled(UserInfo)`
     height: 14vw;
     border-radius: 7vw;
     background-color: ${props =>
-        props.isShowTimeTable ? 'var(--green)' : 'white'};
-    color: ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
+        props.isshowtimetable === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.isshowtimetable === 'true' ? 'var(--blue)' : 'black'};
     border: 1px solid
-        ${props => (props.isShowTimeTable ? 'var(--blue)' : 'black')};
+        ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 M.OneRankWrapper = styled.div`
@@ -181,8 +185,8 @@ const Tab = styled.div`
     padding-bottom: 3%;
     font-weight: 500;
     ${FlexCenter};
-    border-bottom: ${({ active }) =>
-        active ? '5px solid black' : '2.5px solid black'};
+    border-bottom: ${props =>
+        props.isactive === 'true' ? '5px solid black' : '2.5px solid black'};
     cursor: pointer;
 `;
 
@@ -439,7 +443,8 @@ M.DetailBtnContainer = styled.div`
 `;
 
 const IconButton = styled.button`
-    background-color: var(--red);
+    background-color: var(--green);
+    border: 0.12rem solid black;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -451,7 +456,8 @@ const IconButton = styled.button`
 S.IconButton = styled(IconButton)`
     width: 4vw;
     height: 2vw;
-    border-radius: 5px;
+    color: black;
+    border-radius: 10px;
     font-size: 0.9rem;
     margin: 0 5px;
     p {
@@ -464,6 +470,7 @@ M.IconButton = styled(IconButton)`
     height: 8vw;
     border-radius: 2vw;
     margin-right: 1vw;
+    color: black;
     p {
         font-size: 4vw;
     }
@@ -492,8 +499,10 @@ M.HeartContainer = styled.div`
     align-items: center;
     padding-top: 4vw;
     padding-left: 2.5vw;
+    font-family: Montserrat;
+    font-weight: 500;
     div {
-        font-size: 4vw;
+        font-size: 4.5vw;
         padding-top: 1vw;
     }
 `;
@@ -720,6 +729,8 @@ S.CommentLikeWrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    font-family: Montserrat;
+    font-weight: 500;
 `;
 S.CommentLikeNum = styled.div`
     padding-top: 0.25rem;
