@@ -3,14 +3,22 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
 import LikeBtn from '../rightSection/LikeBtn';
 import CmtTag from '../rightSection/CmtTag';
-import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 //받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
-const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
-    const [isCurrentUser, setIsCurrentUser] = useState(false);
-
+const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    //현재 정렬 방식
+    const sort = searchParams.get('sort') || 'lowest';
+
+    //현재 선택된 유저인지(웹)
+    const [iscurrentuser, setIsCurrentUser] = useState(false);
+
+    //현재 시간표를 보여주고 있는지(모바일)
+    const [isshowtimetable, setIsShowTimeTable] = useState(
+        index === 0 ? true : false,
+    );
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
     const {
@@ -24,20 +32,16 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
         replyCount,
     } = data;
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [isShowTimeTable, setIsShowTimeTable] = useState(false);
-
-    const sort = searchParams.get('sort') || 'lowest';
-
     useEffect(() => {
         if (currentUser?.timetableId === timetableId) {
             setIsCurrentUser(true);
-            console.log(isCurrentUser);
+            console.log(iscurrentuser);
         } else {
             setIsCurrentUser(false);
-            console.log(isCurrentUser);
+            console.log(iscurrentuser);
         }
-    }, [isCurrentUser, currentUser, timetableId]);
+    }, [iscurrentuser, currentUser, timetableId]);
+
     //디테일 페이지 이동(웹)
     const onMoveDetail = id => {
         setCurrentUser(data);
@@ -57,35 +61,23 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
         <>
             <M.OneRankWrapper>
                 <M.RankContainer>
-                    <M.RankNum>{ranking}</M.RankNum>
+                    <M.RankNum isshowtimetable={isshowtimetable.toString()}>
+                        {ranking}
+                    </M.RankNum>
                     <M.UserInfo
                         onClick={() => {
                             onShowTimeTable();
                         }}
+                        isshowtimetable={isshowtimetable.toString()}
                     >
                         <M.Score>{score}점</M.Score>
                         <M.CategoryContainer>
                             <M.Category>{tableType}</M.Category>
                             <M.Nickname>{owner}</M.Nickname>
                         </M.CategoryContainer>
-                        {isShowTimeTable ? (
-                            <div style={{ position: 'absolute', right: 12 }}>
-                                <AiOutlineCaretUp
-                                    size={15}
-                                    color={`var(--blue)`}
-                                />
-                            </div>
-                        ) : (
-                            <div style={{ position: 'absolute', right: 12 }}>
-                                <AiOutlineCaretDown
-                                    size={15}
-                                    color={`var(--blue)`}
-                                />
-                            </div>
-                        )}
                     </M.UserInfo>
                 </M.RankContainer>
-                {isShowTimeTable ? (
+                {isshowtimetable ? (
                     <>
                         <M.TimeTableWrapper>
                             <S.TimeTable
@@ -107,15 +99,17 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
     ) : (
         <>
             <S.RankContainer>
-                <S.RankNum isCurrentUser={isCurrentUser}>{ranking}</S.RankNum>
+                <S.RankNum iscurrentuser={iscurrentuser.toString()}>
+                    {ranking}
+                </S.RankNum>
                 <S.UserInfo
-                    isCurrentUser={isCurrentUser}
+                    iscurrentuser={iscurrentuser.toString()}
                     onClick={() => {
                         onMoveDetail(timetableId);
                     }}
                 >
                     <S.Score>{score}점</S.Score>
-                    <S.CategoryContainer isCurrentUser={isCurrentUser}>
+                    <S.CategoryContainer>
                         <S.Category>{tableType}</S.Category>
                         <S.Nickname>{owner}</S.Nickname>
                     </S.CategoryContainer>
@@ -124,5 +118,5 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser }) => {
         </>
     );
 };
-
+//
 export default OneRanking;
