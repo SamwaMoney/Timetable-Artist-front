@@ -6,15 +6,13 @@ import add_course from '../../assets/createpage/add_course.png';
 import subtract_course from '../../assets/createpage/subtract_course.png';
 import DateTimeDropdown from './DateTimeDropdown';
 import PlaceDropdown from './PlaceDropdown';
+import { CLASS_BLOCK_COLOR } from '../../consts/timeTableInput';
 
 const TimeTableInput = () => {
     // dropdown open 여부
     const [isOpen, setIsOpen] = useState([false, false, false]);
     const [isSecondOpen, setIsSecondOpen] = useState([false, false, false]);
     const [isPlaceOpen, setIsPlaceOpen] = useState(false);
-
-    console.log('장소 상태');
-    console.log(isPlaceOpen);
 
     // +버튼이 눌린 상태인지
     const [isAddBtnPressed, setIsAddBtnPressed] = useState(false);
@@ -52,6 +50,9 @@ const TimeTableInput = () => {
         setSelectedClassName(e.target.value);
     };
 
+    // backgroundColor 적용 용도 변수
+    const [countColorIndex, setCountColorIndex] = useState(0);
+
     const dispatch = useDispatch();
 
     const handleButtonClick = () => {
@@ -68,10 +69,13 @@ const TimeTableInput = () => {
                 endTime: null,
                 place: selectedPlace,
                 name: selectedClassName,
+                backgroundColor: null,
             };
 
             // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
             dispatch(addSelectedData(newData1));
+
+            setCountColorIndex(countColorIndex + 1);
         } else if (isAddBtnPressed) {
             // 강의 시간이 2개인 경우
             newData1 = {
@@ -80,6 +84,7 @@ const TimeTableInput = () => {
                 endTime: selectedDateTime.endTime,
                 place: selectedPlace,
                 name: selectedClassName,
+                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             newData2 = {
@@ -88,10 +93,12 @@ const TimeTableInput = () => {
                 endTime: plusSelectedDateTime.endTime,
                 place: selectedPlace,
                 name: selectedClassName,
+                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             dispatch(addSelectedData(newData1));
             dispatch(addSelectedData(newData2));
+            setCountColorIndex(countColorIndex + 1);
         } else {
             // 일반적인 경우 (강의 시간 1개)
             newData1 = {
@@ -100,9 +107,11 @@ const TimeTableInput = () => {
                 endTime: selectedDateTime.endTime,
                 place: selectedPlace,
                 name: selectedClassName,
+                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             dispatch(addSelectedData(newData1));
+            setCountColorIndex(countColorIndex + 1);
         }
 
         // 입력창 초기화

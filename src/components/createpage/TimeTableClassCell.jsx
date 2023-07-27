@@ -62,18 +62,20 @@ const TimeTableClassCell = ({
                     .split(':')
                     .map(str => parseInt(str, 10));
 
-                // id 변수
-                const findId = `${dayMappings[data.day]}-${startH}`;
+                // id 변수 - startM이 30분이면 startH에 0.5 더하기
+                const findStartId = `${dayMappings[data.day]}-${
+                    startM === 30 ? startH + 0.5 : startH
+                }`;
 
                 // 원하는 key를 가진 요소에 접근
-                const targetElement = cellRefs.current[findId];
+                const targetElement = cellRefs.current[findStartId];
 
                 // targetElement가 정상적으로 찾아졌을 때
                 if (targetElement) {
                     // class 추가
                     targetElement.classList.add('selected');
                     targetElement.style.backgroundColor =
-                        CLASS_BLOCK_COLOR[index];
+                        data.backgroundColor;
 
                     // rowSpan 속성 추가
                     targetElement.rowSpan = calculateBlockLength(startH, endH);
@@ -93,6 +95,7 @@ const TimeTableClassCell = ({
         if (selectedData && selectedData.length > 0) {
             console.log(selectedData);
             console.log('timetable 값 들어옴');
+
             showClassBlock(selectedData);
         }
     }, [selectedData]);
