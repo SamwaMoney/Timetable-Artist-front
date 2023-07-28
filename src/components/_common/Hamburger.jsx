@@ -30,8 +30,11 @@ const Hamburger = () => {
     };
 
     // 로그아웃 버튼 클릭
-    const handleLogoutClick = () => {
-        Logout();
+    const handleLogoutClick = async () => {
+        const res = await Logout();
+        if (res.status === 200) {
+            window.location.replace('/ranking');
+        }
     };
 
     // 회원탈퇴 버튼 클릭

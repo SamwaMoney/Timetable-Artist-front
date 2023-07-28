@@ -67,11 +67,13 @@ http.interceptors.response.use(
 
                     window.location.reload();
                 } catch (err) {
-                    console.log(err);
+                    console.log(err, '에러에러');
                     // 상태 500 에러 뜨면 로그아웃시킴 (refreshToken이 expired된 상황)
+                    /*
                     if (status === 500) {
                         Logout();
                     }
+                    */
                 }
             }
             /* 리프레시가 만료될 일은 없다

@@ -7,14 +7,17 @@ import { isMobile } from 'react-device-detect';
 const WithdrawalModal = ({ setIsWithdrawalModalOpen }) => {
     const [isClicked, setIsClicked] = useState(false);
 
-    const handleCheckClick = () => {
-        const res = DeleteMember();
-        if (res === 500) {
-            alert('탈퇴 에러');
-        } else {
+    const handleCheckClick = async () => {
+        const res = await DeleteMember();
+        if (res.status === 200) {
             setIsClicked(true);
-            window.location.replace('/');
+        } else if (res.status === 500) {
+            alert('탈퇴 에러');
         }
+    };
+    const handleAfterCheckClick = () => {
+        setIsWithdrawalModalOpen(false);
+        window.location.replace('/');
     };
     return (
         <M.Modal className={`${isMobile && 'mobile-background'}`}>
@@ -31,7 +34,7 @@ const WithdrawalModal = ({ setIsWithdrawalModalOpen }) => {
                         탈퇴되었습니다.
                     </p>
                     <button
-                        onClick={() => setIsWithdrawalModalOpen(false)}
+                        onClick={handleAfterCheckClick}
                         className={`red-btn big-btn ${
                             isMobile && 'mobile-big-btn'
                         }`}
