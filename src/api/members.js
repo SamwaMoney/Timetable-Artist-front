@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { http } from './http';
 
 // 회원가입
@@ -12,10 +11,7 @@ export const CreateMember = async (id, pw) => {
         return res;
     } catch (err) {
         console.log(err, '회원가입 에러');
-        // 아이디 중복 시 상태 500 중복 alert 처리
-        if (err.response.status === 500) {
-            alert('이미 존재하는 아이디입니다.');
-        }
+        return err.response.data;
     }
 };
 
@@ -28,9 +24,10 @@ export const DeleteMember = async () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('memberId');
+        return res;
     } catch (err) {
         console.log(err);
-        return err.response.status;
+        return err.response.data;
     }
 };
 
@@ -48,11 +45,10 @@ export const Login = async (id, pw) => {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('memberId', memberId);
-        window.location.replace('/ranking');
+        return res;
     } catch (err) {
         console.log(err, '로그인 에러');
-        const status = err.response.status;
-        return status;
+        return err.response.data;
     }
 };
 
@@ -68,10 +64,10 @@ export const Logout = async () => {
         console.log(res);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        localStorage.removeItem('username');
-        window.location.replace('/ranking');
+        localStorage.removeItem('memberId');
+        return res;
     } catch (err) {
-        console.log(err);
+        console.log(err, '로그아웃 에러');
     }
 };
 

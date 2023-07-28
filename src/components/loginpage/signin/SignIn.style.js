@@ -27,9 +27,6 @@ S.InputWrapper = styled.div`
             width: 75vw;
         }
     }
-    .id-input {
-        padding-bottom: 3vw;
-    }
     .alert-text {
         // 로그인 실패 시 뜨는 문구
         text-align: center;

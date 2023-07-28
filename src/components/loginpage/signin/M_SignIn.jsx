@@ -14,18 +14,20 @@ const MSignIn = () => {
         if (id !== '' && pw !== '') setIsFilled(true);
     }, [id, pw]);
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         if (isFilled) {
-            const status = Login(id, pw);
-            /*
-            if (status === 200) {
-                navigate('/ranking');
-                //setNotExistedId(true);
-            } /* if (status === 401)* else {
+            const res = await Login(id, pw);
+
+            if (res.status === 200) {
+                window.location.replace('/ranking');
+            } else if (
+                res.message === `username ${id}은 이미 존재하는 회원명입니다!`
+            ) {
+                setNotExistedId(true);
+            } else if (res.message === '잘못된 비밀번호입니다!') {
                 setCorrectPw(false);
             }
-            */
         }
     };
     return (
