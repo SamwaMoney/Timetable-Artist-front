@@ -13,14 +13,14 @@ const Loading = () => {
                     <Waviy style={{ '--i': 2 }}>간</Waviy>
                     <Waviy style={{ '--i': 3 }}>표</Waviy>
                     <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 5 }} color='red'>
+                    <Waviy style={{ '--i': 5 }} color='blue'>
                         채
                     </Waviy>
-                    <Waviy style={{ '--i': 6 }} color='red'>
+                    <Waviy style={{ '--i': 6 }} color='blue'>
                         점
                     </Waviy>
                     <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 8 }} color='red'>
+                    <Waviy style={{ '--i': 8 }} color='blue'>
                         중
                     </Waviy>
                     <span style={{ marginLeft: '5px' }}></span>
@@ -46,7 +46,7 @@ const LoadingWrapper = styled.div`
     width: 100%;
     height: 100%;
     border: 0.1rem solid black;
-    background: linear-gradient(to bottom, #e2e2e2, #84afff);
+    background: linear-gradient(to bottom, #e2e2e2, var(--green));
     ${FlexCenter}
     flex-direction:column;
 `;

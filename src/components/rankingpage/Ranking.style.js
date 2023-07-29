@@ -85,32 +85,34 @@ const RankNum = styled.div`
     border-radius: 50%;
     font-weight: 600;
     font-family: Montserrat;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
 `;
 S.RankNum = styled(RankNum)`
     width: 5rem;
     height: 4rem;
     font-size: 2rem;
+    background-color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--blue)' : 'black'};
+    border: 0.1rem solid
+        ${props => (props.iscurrentuser === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 M.RankNum = styled(RankNum)`
     width: 20%;
     height: 14vw;
     font-size: 8vw;
+    background-color: ${props =>
+        props.isshowtimetable === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.isshowtimetable === 'true' ? 'var(--blue)' : 'black'};
+    border: 1px solid
+        ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 //UserInfo
 const UserInfo = styled.div`
     width: 100%;
-    background-color: ${({ isCurrentUser }) =>
-        isCurrentUser ? 'var(--green)' : 'white'};
-    color: ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
-    border: 0.1rem solid
-        ${({ isCurrentUser }) => (isCurrentUser ? 'var(--blue)' : 'black')};
     ${FlexCenter}
     position: relative;
 `;
@@ -119,11 +121,23 @@ S.UserInfo = styled(UserInfo)`
     height: 4rem;
     border-radius: 60px;
     font-size: 1rem;
+    background-color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.iscurrentuser === 'true' ? 'var(--blue)' : 'black'};
+    border: 0.1rem solid
+        ${props => (props.iscurrentuser === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 M.UserInfo = styled(UserInfo)`
     height: 14vw;
     border-radius: 7vw;
+    background-color: ${props =>
+        props.isshowtimetable === 'true' ? 'var(--green)' : 'white'};
+    color: ${props =>
+        props.isshowtimetable === 'true' ? 'var(--blue)' : 'black'};
+    border: 1px solid
+        ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
 `;
 
 M.OneRankWrapper = styled.div`
@@ -145,7 +159,7 @@ const RankContainer = styled.div`
 S.RankContainer = styled(RankContainer)`
     margin-top: 1rem;
     width: 75%;
-    margin-bottom: 3%;
+    margin-bottom: 0.05rem;
 `;
 
 M.RankContainer = styled(RankContainer)`
@@ -171,8 +185,8 @@ const Tab = styled.div`
     padding-bottom: 3%;
     font-weight: 500;
     ${FlexCenter};
-    border-bottom: ${({ active }) =>
-        active ? '5px solid black' : '2.5px solid black'};
+    border-bottom: ${props =>
+        props.isactive === 'true' ? '5px solid black' : '2.5px solid black'};
     cursor: pointer;
 `;
 
@@ -220,7 +234,7 @@ S.ToggleButton = styled(ToggleButton)`
 M.ToggleButton = styled(ToggleButton)`
     width: 100%;
     height: 100%;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     border-radius: 3.5vw;
 `;
 
@@ -266,7 +280,7 @@ const MyScoreContainer = styled.div`
     margin-top: 10%;
     width: 75%;
     border-radius: 20px;
-    border: 0.1rem solid var(--blue);
+    border: 0.05rem solid var(--blue);
     color: var(--blue);
     background: var(--background-green);
     ${FlexCenter};
@@ -383,7 +397,7 @@ M.Category = styled.div`
     padding-top: 0.5rem;
     padding-bottom: 5px;
     font-weight: 600;
-    font-size: 4.1vw;
+    font-size: 3.8vw;
     margin-bottom: 0.2rem;
 `;
 
@@ -391,7 +405,7 @@ S.Nickname = styled.div`
     font-size: 1vw;
 `;
 M.Nickname = styled.div`
-    font-size: 4.2vw;
+    font-size: 3.8vw;
     margin-bottom: 2vw;
 `;
 
@@ -429,7 +443,8 @@ M.DetailBtnContainer = styled.div`
 `;
 
 const IconButton = styled.button`
-    background-color: var(--red);
+    background-color: var(--green);
+    border: 0.12rem solid black;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -441,7 +456,8 @@ const IconButton = styled.button`
 S.IconButton = styled(IconButton)`
     width: 4vw;
     height: 2vw;
-    border-radius: 5px;
+    color: black;
+    border-radius: 10px;
     font-size: 0.9rem;
     margin: 0 5px;
     p {
@@ -454,6 +470,7 @@ M.IconButton = styled(IconButton)`
     height: 8vw;
     border-radius: 2vw;
     margin-right: 1vw;
+    color: black;
     p {
         font-size: 4vw;
     }
@@ -482,8 +499,10 @@ M.HeartContainer = styled.div`
     align-items: center;
     padding-top: 4vw;
     padding-left: 2.5vw;
+    font-family: Montserrat;
+    font-weight: 500;
     div {
-        font-size: 4vw;
+        font-size: 4.5vw;
         padding-top: 1vw;
     }
 `;
@@ -491,13 +510,13 @@ M.HeartContainer = styled.div`
 //댓글
 const OneCommentContainer = styled.div`
     background-color: white;
-    border: 0.1rem solid black;
+    border: 0.05rem solid black;
     border-radius: 7px;
 `;
 
 M.OneCommentContainer = styled(OneCommentContainer)`
     margin-top: 1vw;
-    margin-bottom: 2.4rem;
+    margin-bottom: 4vw;
     padding: 2vw;
     display: flex;
     flex-direction: column;
@@ -566,7 +585,7 @@ S.TimeTable = styled.img`
     width: 95%;
     height: 95%;
     background-color: #888;
-    border: 1px solid black;
+    border: 0.05rem solid black;
     margin-top: 0.8rem;
 `;
 
@@ -599,11 +618,37 @@ M.NewCommentContainer = styled.div`
     background-color: white;
     height: 70%;
     border-radius: 10vw;
+    display: flex;
 `;
 
+S.checkBoxNoName = styled.div`
+    display: flex;
+    margin-left: 0.5rem;
+`;
+
+S.NoNameText = styled.div`
+    width: 2rem;
+    margin-left: 0.5rem;
+    font-size: 0.5rem;
+`;
+
+M.checkBoxNoName = styled.div`
+    ${FlexCenter}
+    padding-left:1rem;
+`;
+S.NoNameText = styled.div`
+    font-size: 1rem;
+    margin-left: 0.5rem;
+`;
+M.NoNameText = styled.div`
+    font-size: 0.3rem;
+    margin-left: 0.5rem;
+`;
 S.CommentInput = styled.input`
     border: none;
     height: 2rem;
+    width: 75%;
+    font-size: 0.9rem;
 `;
 
 M.CommentInput = styled.input`
@@ -613,7 +658,7 @@ M.CommentInput = styled.input`
     border-radius: 5rem;
     z-index: 10;
     padding: 3vw;
-    width: 80%;
+    width: 70%;
 `;
 
 S.UploadImg = styled.img`
@@ -684,6 +729,8 @@ S.CommentLikeWrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    font-family: Montserrat;
+    font-weight: 500;
 `;
 S.CommentLikeNum = styled.div`
     padding-top: 0.25rem;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { isMobile } from 'react-device-detect';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import ReactDOM from 'react-dom';
+import TimeTableRow from './TimeTableRow';
 
 // props로 초기화 버튼 null 처리하기
 const TimeTable = () => {
@@ -17,8 +17,6 @@ const TimeTable = () => {
         return index % 2 === 0 ? hour : hour + 0.5;
     });
 
-    // console.log(timeSlots);
-
     const dayMappings = {
         월: 'Mon',
         화: 'Tue',
@@ -27,68 +25,12 @@ const TimeTable = () => {
         금: 'Fri',
     };
 
+    const etcDescDivRef = useRef(null);
+
     // redux에서 값을 받아옴
     const selectedData = useSelector(
         state => state.timeTableReducer.selectedData,
     );
-
-    // ref 객체를 생성합니다.
-    const cellRefs = useRef({});
-
-    // 렌더링 시에 ref 객체에 각 td 요소를 할당합니다.
-    const setCellRef = (day, timeSlot, ref) => {
-        cellRefs.current[`${day}-${timeSlot}`] = ref;
-    };
-
-    const AdditionalContent = ({ selectedData }) => (
-        <BlockText>
-            <div>{selectedData[0].name}</div>
-            <br />
-            <div>{selectedData[0].place}</div>
-        </BlockText>
-    );
-
-    const showClassBlock = selectedData => {
-        console.log('showClassBlock');
-        console.log(selectedData[0].startTime);
-        // 시작시간 시랑 분 분리
-        const [startH, startM] = selectedData[0].startTime
-            .split(':')
-            .map(str => parseInt(str, 10));
-
-        // id 변수
-        const findId = `${dayMappings[selectedData[0].day]}-${startH}`;
-
-        console.log(startH);
-        console.log(findId);
-
-        // 원하는 key를 가진 요소에 접근
-        const targetElement = cellRefs.current[findId];
-
-        // targetElement가 정상적으로 찾아졌을 때
-        if (targetElement) {
-            // class 추가
-            targetElement.classList.add('selected');
-
-            // rowSpan 속성 추가
-            targetElement.rowSpan = '3';
-
-            // AdditionalContent 컴포넌트를 생성하여 targetElement의 하위로 추가
-            ReactDOM.render(
-                <AdditionalContent selectedData={selectedData} />,
-                targetElement,
-            );
-        }
-    };
-
-    useEffect(() => {
-        console.log('시작');
-        if (selectedData && selectedData.length > 0) {
-            console.log(selectedData);
-            console.log('timetable 값 들어옴');
-            showClassBlock(selectedData);
-        }
-    }, [selectedData]);
 
     return (
         <TimeTableContainer>
@@ -113,22 +55,29 @@ const TimeTable = () => {
                             >
                                 {timeSlot}
                             </TimeCell>
-                            {Object.values(dayMappings).map(day => (
-                                <TableCell
-                                    key={`${day}-${timeSlot}`}
-                                    id={`${day}-${timeSlot}`}
-                                    isfirst={index === 0}
-                                    islast={index === numberOfSlots - 1}
-                                    ref={ref => setCellRef(day, timeSlot, ref)}
-                                ></TableCell>
-                            ))}
+
+                            <TimeTableRow
+                                timeSlot={timeSlot}
+                                index={index}
+                                numberOfSlots={numberOfSlots}
+                            />
                         </tr>
                     ))}
                 </tbody>
             </table>
             <EtcDiv>
                 <TableText>etc</TableText>
-                <EtcDescDiv></EtcDescDiv>
+                <EtcDescDiv ref={etcDescDivRef}>
+                    {selectedData &&
+                        selectedData.map(lecture => {
+                            if (lecture.startTime === null) {
+                                return (
+                                    <div key={lecture.name}>{lecture.name}</div>
+                                );
+                            }
+                            return null;
+                        })}
+                </EtcDescDiv>
             </EtcDiv>
         </TimeTableContainer>
     );
@@ -200,11 +149,22 @@ const TableCell = styled.td`
             : 'none'};
 
     &.selected {
-        background-color: #5f96ff;
+        /* background-color: #5f96ff; */
         color: white;
         border-radius: 9px;
         font-size: 10px;
         font-weight: 600;
+    }
+
+    &.isfirst {
+        border-top-left-radius: 9px;
+        border-top-right-radius: 9px;
+        position: relative;
+    }
+
+    &.islast {
+        border-bottom-left-radius: 9px;
+        border-bottom-right-radius: 9px;
     }
 
     ${isMobile &&
@@ -246,17 +206,14 @@ const EtcDescDiv = styled.div`
     margin-top: 2px;
     margin-left: auto;
 
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1%;
+
     ${isMobile &&
     `
        width: 55rem;
        height: 5rem;
        margin-top: 8px;
     `}
-`;
-
-const BlockText = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 `;

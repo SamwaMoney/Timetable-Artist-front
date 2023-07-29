@@ -35,16 +35,14 @@ export const COURSE_PLACE = [
     '원격/비대면',
 ];
 
-export const PickerOptions = {
-    autoHeight: true,
-    slidesPerView: 5,
-    freeMode: true,
-    freeModeSticky: false,
-    mousewheelControl: false,
-    direction: 'vertical',
-    slideToClickedSlide: true,
-    centeredSlides: true,
-    resistance: false,
-    allowTouchMove: true,
-    nested: true,
-};
+export const CLASS_BLOCK_COLOR = [
+    '#1962ED',
+    '#5F96FF',
+    '#B7C8E9',
+    '#494F5A',
+    '#949AA5',
+    '#646870',
+    '#A5F43F',
+    '#FF7E63',
+    '#84D71A',
+];

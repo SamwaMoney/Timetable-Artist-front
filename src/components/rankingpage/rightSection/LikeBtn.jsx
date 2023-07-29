@@ -1,6 +1,6 @@
 import { S, M } from '../Ranking.style';
 import NoLike from '../../../assets/rankingpage/heart1.png';
-import BlueLike from '../../../assets/rankingpage/heart2.png';
+import YesLike from '../../../assets/rankingpage/heart2.png';
 import { useState } from 'react';
 
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
@@ -26,7 +26,7 @@ const LikeBtn = ({ isMobile, number }) => {
             {isLike ? (
                 <S.EventIcon
                     width={2}
-                    src={BlueLike}
+                    src={YesLike}
                     alt='하트'
                     onClick={onCancelLike}
                 />
@@ -46,7 +46,7 @@ const LikeBtn = ({ isMobile, number }) => {
                 <>
                     <S.EventIcon
                         width={2}
-                        src={BlueLike}
+                        src={YesLike}
                         alt='하트'
                         onClick={onCancelLike}
                     />

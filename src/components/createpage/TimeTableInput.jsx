@@ -6,15 +6,13 @@ import add_course from '../../assets/createpage/add_course.png';
 import subtract_course from '../../assets/createpage/subtract_course.png';
 import DateTimeDropdown from './DateTimeDropdown';
 import PlaceDropdown from './PlaceDropdown';
+import { CLASS_BLOCK_COLOR } from '../../consts/timeTableInput';
 
 const TimeTableInput = () => {
     // dropdown open 여부
     const [isOpen, setIsOpen] = useState([false, false, false]);
     const [isSecondOpen, setIsSecondOpen] = useState([false, false, false]);
     const [isPlaceOpen, setIsPlaceOpen] = useState(false);
-
-    console.log('장소 상태');
-    console.log(isPlaceOpen);
 
     // +버튼이 눌린 상태인지
     const [isAddBtnPressed, setIsAddBtnPressed] = useState(false);
@@ -52,24 +50,80 @@ const TimeTableInput = () => {
         setSelectedClassName(e.target.value);
     };
 
+    // backgroundColor 적용 용도 변수
+    const [countColorIndex, setCountColorIndex] = useState(0);
+
     const dispatch = useDispatch();
 
     const handleButtonClick = () => {
         // 객체 형태로 가공하여 새로운 데이터 생성
         // 만약 추가했을 경우 객체 2개를 보내기
 
-        const newData = {
-            day: selectedDateTime.day,
-            startTime: selectedDateTime.startTime,
-            endTime: selectedDateTime.endTime,
-            place: selectedPlace,
-            name: selectedClassName,
-        };
+        let newData1, newData2;
 
-        console.log(newData);
+        if (isChecked) {
+            // 지정된 시간 없음인 경우
+            newData1 = {
+                day: selectedDateTime.day,
+                startTime: null,
+                endTime: null,
+                place: selectedPlace,
+                name: selectedClassName,
+                backgroundColor: null,
+            };
 
-        // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
-        dispatch(addSelectedData(newData));
+            // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
+            dispatch(addSelectedData(newData1));
+
+            setCountColorIndex(countColorIndex + 1);
+        } else if (isAddBtnPressed) {
+            // 강의 시간이 2개인 경우
+            newData1 = {
+                day: selectedDateTime.day,
+                startTime: selectedDateTime.startTime,
+                endTime: selectedDateTime.endTime,
+                place: selectedPlace,
+                name: selectedClassName,
+                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
+            };
+
+            newData2 = {
+                day: plusSelectedDateTime.day,
+                startTime: plusSelectedDateTime.startTime,
+                endTime: plusSelectedDateTime.endTime,
+                place: selectedPlace,
+                name: selectedClassName,
+                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
+            };
+
+            dispatch(addSelectedData(newData1));
+            dispatch(addSelectedData(newData2));
+            setCountColorIndex(countColorIndex + 1);
+        } else {
+            // 일반적인 경우 (강의 시간 1개)
+            newData1 = {
+                day: selectedDateTime.day,
+                startTime: selectedDateTime.startTime,
+                endTime: selectedDateTime.endTime,
+                place: selectedPlace,
+                name: selectedClassName,
+                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
+            };
+
+            dispatch(addSelectedData(newData1));
+            setCountColorIndex(countColorIndex + 1);
+        }
+
+        // 입력창 초기화
+        // setSelectedClassName('');
+        // console.log(selectedClassName);
+    };
+
+    // 엔터 키 입력 시 강의 추가
+    const handleKeyDown = (e) => {
+        if(e.key === "Enter") {
+            handleButtonClick();
+        }
     };
 
     return (
@@ -100,7 +154,7 @@ const TimeTableInput = () => {
                 </S.InputDiv>
 
                 {isAddBtnPressed === true ? (
-                    <div style={{width: "72%"}}>
+                    <div style={{ width: '72%' }}>
                         <DateTimeDropdown
                             isOpen={isSecondOpen}
                             setIsOpen={setIsSecondOpen}
@@ -109,9 +163,13 @@ const TimeTableInput = () => {
                             isChecked={isChecked}
                             order='second'
                         />
-                        <S.MinusBtn src={subtract_course} alt="-버튼" onClick={() => {
+                        <S.MinusBtn
+                            src={subtract_course}
+                            alt='-버튼'
+                            onClick={() => {
                                 setIsAddBtnPressed(false);
-                            }}/>
+                            }}
+                        />
                     </div>
                 ) : (
                     <S.ButtonDiv>
@@ -154,6 +212,7 @@ const TimeTableInput = () => {
                         type='text'
                         placeholder='강의명을 입력하세요'
                         onChange={changeNameInput}
+                        onKeyDown={handleKeyDown}
                     />
                 </S.InputDiv>
 

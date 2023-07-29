@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { styled } from 'styled-components';
-import { COURSE_PLACE, PickerOptions } from '../../consts/timeTableInput';
+import { COURSE_PLACE } from '../../consts/timeTableInput';
+import { PickerOptions } from '../../utils/picker-options';
 import { useState } from 'react';
 import { S } from './M_CreateTimeTable.style';
-
+import 'swiper/css';
 //요일 고르는 창
 const PlacePicker = ({
     setIsPlacePickerOpen,
@@ -30,6 +31,18 @@ const PlacePicker = ({
         setIsPlacePickerOpen(prev => !prev);
         //선택한 시간을 객체로 만들어 저장하는 로직
     };
+
+    // const swiper = new Swiper('.swiper-container', {
+    //     pagination: '.swiper-pagination',
+    //     direction: 'vertical',
+    //     slidesPerView: 1,
+    //     paginationClickable: true,
+    //     spaceBetween: 30,
+    //     mousewheelControl: true,
+    //     parallax: true,
+    //     speed: 600,
+
+    // });
 
     return (
         <Wrapper>

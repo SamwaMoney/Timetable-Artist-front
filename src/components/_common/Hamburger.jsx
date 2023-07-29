@@ -1,6 +1,7 @@
 import EditModal from './EditModal';
 import { S } from './Hamburger.style';
 import WithdrawalModal from './WithdrawalModal';
+import { Logout, isLogin } from '../../api/members';
 
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -8,25 +9,35 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const Hamburger = () => {
     const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [isLogin, setIsLogin] = useState(true); // 초기상태 false
-
-    //로그인 인증 api 불러오기
-    //setIsLogin(true);
 
     const navigate = useNavigate();
 
     const handleScoreClick = e => {
         e.preventDefault();
-        if (isLogin) {
+        if (isLogin()) {
             navigate('/score');
+        } else {
+            alert('로그인이 필요합니다!');
         }
     };
     const handleEditClick = e => {
         e.preventDefault();
-        if (isLogin) {
+        if (isLogin()) {
             setIsEditModalOpen(true);
+        } else {
+            alert('로그인이 필요합니다!');
         }
     };
+
+    // 로그아웃 버튼 클릭
+    const handleLogoutClick = async () => {
+        const res = await Logout();
+        if (res.status === 200) {
+            window.location.replace('/ranking');
+        }
+    };
+
+    // 회원탈퇴 버튼 클릭
     const handleWithdrawalClick = () => {
         setIsWithdrawalModalOpen(true);
     };
@@ -81,10 +92,15 @@ const Hamburger = () => {
                     </NavLink>
                 </S.MenuBtn>
             </div>
-            {isLogin ? (
-                <S.WithdrawalBtn onClick={handleWithdrawalClick}>
-                    <p>회원탈퇴</p>
-                </S.WithdrawalBtn>
+            {isLogin() ? (
+                <S.BottomBox>
+                    <S.LogoutBtn onClick={handleLogoutClick}>
+                        <p>로그아웃</p>
+                    </S.LogoutBtn>
+                    <S.WithdrawalBtn onClick={handleWithdrawalClick}>
+                        <p>회원탈퇴</p>
+                    </S.WithdrawalBtn>
+                </S.BottomBox>
             ) : (
                 <S.MenuBtn className='login'>
                     <NavLink
