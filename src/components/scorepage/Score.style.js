@@ -18,6 +18,7 @@ S.Wrapper = styled(S.BasicContainer)`
 S.Hamburger = styled.div`
     width: 13.4%;
     height: 70%;
+    width: ${props => props.width};
     border: 0.1rem solid black;
     background: var(
         --hamburger,
@@ -27,7 +28,7 @@ S.Hamburger = styled.div`
 S.Container = styled(S.BasicContainer)`
     margin-left: 1%;
     width: 60%;
-    height: 70%;
+    height: ${props => props.height || '70%'};
     border: 0.1rem solid black;
     background: linear-gradient(180deg, #e2e2e2 0%, #b0ff00 100%);
 `;
