@@ -16,17 +16,10 @@ const MSignUp = () => {
     }, [id, pw, pwCheck]);
 
     // 회원가입 버튼 클릭 이벤트 핸들러
-    const handleSubmit = async e => {
+    const handleSubmit = e => {
         e.preventDefault();
         if (isFilled) {
-            const res = await CreateMember(id, pw);
-            if (res.status === 200) {
-                alert('회원가입되었습니다. 로그인해주세요.');
-                window.location.reload();
-            } else if (res.status === 500) {
-                // 아이디 중복 시 상태 500 중복 alert 처리
-                alert('이미 존재하는 아이디입니다.');
-            }
+            CreateMember(id, pw);
         }
     };
 

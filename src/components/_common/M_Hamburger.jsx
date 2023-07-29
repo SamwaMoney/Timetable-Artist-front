@@ -23,6 +23,7 @@ const MHamburger = () => {
             alert('로그인이 필요합니다!');
         }
     };
+
     // 내 시간표 수정 버튼 클릭
     const handleEditClick = e => {
         e.preventDefault();
@@ -32,13 +33,10 @@ const MHamburger = () => {
             alert('로그인이 필요합니다!');
         }
     };
+
     // 로그아웃 버튼 클릭
-    const handleLogoutClick = () => {
-        const res = Logout();
-        if (res.status === 200) {
-            window.location.reload();
-        }
-    };
+    const handleLogoutClick = () => Logout();
+
     // 탈퇴 버튼 클릭
     const handleWithdrawalClick = () => {
         setIsWithdrawalModalOpen(true);
