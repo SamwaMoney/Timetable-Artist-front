@@ -23,6 +23,10 @@ S.TypeContainer = styled(S.BasicContainer)`
     width: 100%;
     background: linear-gradient(180deg, #e2e2e2 0%, #b0ff00 100%);
 `;
+S.ShareContainer = styled(S.BasicContainer)`
+    width: 100%;
+    background: var(--green);
+`;
 S.Title = styled.div`
     color: var(--black);
     font-size: 5.5vw;
