@@ -9,10 +9,8 @@ const WithdrawalModal = ({ setIsWithdrawalModalOpen }) => {
 
     const handleCheckClick = async () => {
         const res = await DeleteMember();
-        if (res.status === 200) {
+        if (res === 'Account deletion successful') {
             setIsClicked(true);
-        } else if (res.status === 500) {
-            alert('탈퇴 에러');
         }
     };
     const handleAfterCheckClick = () => {

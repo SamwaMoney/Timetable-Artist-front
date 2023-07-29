@@ -7,7 +7,7 @@ const MSignIn = () => {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
     const [isFilled, setIsFilled] = useState(false);
-    const [notExistedId, setNotExistedId] = useState(true);
+    const [existedId, setExistedId] = useState(true);
     const [correctPw, setCorrectPw] = useState(true);
 
     useEffect(() => {
@@ -16,16 +16,13 @@ const MSignIn = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        setCorrectPw(true);
+        setExistedId(true);
         if (isFilled) {
             const res = await Login(id, pw);
-
-            if (res.status === 200) {
-                window.location.replace('/ranking');
-            } else if (
-                res.message === `username ${id}은 이미 존재하는 회원명입니다!`
-            ) {
-                setNotExistedId(true);
-            } else if (res.message === '잘못된 비밀번호입니다!') {
+            if (res === 'notExisedId') {
+                setExistedId(false);
+            } else if (res === 'notCorrectPw') {
                 setCorrectPw(false);
             }
         }
@@ -45,7 +42,7 @@ const MSignIn = () => {
                         </div>
                         <p
                             className={`alert-text mobile-text ${
-                                notExistedId && 'hidden'
+                                existedId && 'hidden'
                             }`}
                         >
                             존재하지 않는 아이디입니다.
