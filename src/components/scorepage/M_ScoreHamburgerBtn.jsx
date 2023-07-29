@@ -22,8 +22,10 @@ const Wrapper = styled.div`
     align-items: center;
     padding-top: 6vh;
     padding-left: 5vw;
+    background: var(--background);
 `;
 const HamburgerButton = styled.img`
     position: relative;
     width: 10vw;
+    background: transparent;
 `;
