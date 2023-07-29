@@ -115,6 +115,15 @@ const TimeTableInput = () => {
         }
 
         // 입력창 초기화
+        // setSelectedClassName('');
+        // console.log(selectedClassName);
+    };
+
+    // 엔터 키 입력 시 강의 추가
+    const handleKeyDown = (e) => {
+        if(e.key === "Enter") {
+            handleButtonClick();
+        }
     };
 
     return (
@@ -203,6 +212,7 @@ const TimeTableInput = () => {
                         type='text'
                         placeholder='강의명을 입력하세요'
                         onChange={changeNameInput}
+                        onKeyDown={handleKeyDown}
                     />
                 </S.InputDiv>
 
