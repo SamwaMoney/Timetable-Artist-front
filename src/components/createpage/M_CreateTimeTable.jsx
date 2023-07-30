@@ -9,6 +9,7 @@ const MCreateTimeTable = () => {
     const nickname = '삼와머니';
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [colorIndex, setColorIndex] = useState(0);
 
     return (
         <>
@@ -40,6 +41,8 @@ const MCreateTimeTable = () => {
                 <MTimeTableInputModal
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
+                    colorIndex={colorIndex}
+                    setColorIndex={setColorIndex}
                 />
             )}
         </>

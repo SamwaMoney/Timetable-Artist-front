@@ -56,3 +56,9 @@ export const change12To24 = arr => {
     console.log(timeArr);
     return timeArr;
 };
+
+export const TimeResetObj = {
+    day: '월',
+    startTime: '8:00',
+    endTime: '9:30',
+};
