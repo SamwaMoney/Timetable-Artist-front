@@ -1,15 +1,18 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { styled } from 'styled-components';
-import { COURSE_TIME, DAYS_OF_WEEK } from '../../consts/timeTableInput';
+import {
+    COURSE_TIME,
+    DAYS_OF_WEEK,
+    END_COURSE_TIME,
+} from '../../consts/timeTableInput';
 import { useState, useEffect } from 'react';
 import { S } from './M_CreateTimeTable.style';
 import { PickerOptions } from '../../utils/picker-options';
-import { Navigation, Pagination } from 'swiper/modules';
+
 import 'swiper/css';
 //시간 고르는 창//
 const TimePicker = ({
     setIsTimePickerOpen,
-    selectedDateTime,
     isTimePickerOpen,
     setSelectedDateTime,
     setPlusSelectedDateTime,
@@ -45,14 +48,14 @@ const TimePicker = ({
             setSelectedDateTime({
                 day: DAYS_OF_WEEK[selectedDayIndex],
                 startTime: COURSE_TIME[selectedTimeStartIndex],
-                endTime: COURSE_TIME[selectedTimeEndIndex],
+                endTime: END_COURSE_TIME[selectedTimeEndIndex],
             });
             setIsTimePickerOpen(false);
         } else if (isTimePickerOpen[1] === 2) {
             setPlusSelectedDateTime({
                 day: DAYS_OF_WEEK[selectedDayIndex],
                 startTime: COURSE_TIME[selectedTimeStartIndex],
-                endTime: COURSE_TIME[selectedTimeEndIndex],
+                endTime: END_COURSE_TIME[selectedTimeEndIndex],
             });
             setIsTimePickerOpen(false);
         }
@@ -122,7 +125,7 @@ const TimePicker = ({
                     ))}
                 </Swiper>
                 <Swiper {...PickerOptions} onSlideChange={onChangeEndTime}>
-                    {COURSE_TIME.map((time, index) => (
+                    {END_COURSE_TIME.map((time, index) => (
                         <SwiperSlide
                             key={index}
                             style={{

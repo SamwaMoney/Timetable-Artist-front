@@ -13,6 +13,7 @@ const PlaceDropdown = ({
         setSelectedPlace(content);
         setIsPlaceOpen(false);
     };
+
     return (
         <>
             <S.DescDiv>

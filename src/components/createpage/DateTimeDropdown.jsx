@@ -1,7 +1,11 @@
 // 요일 - 시작시간 - 끝시간 dropdown
 import { S } from './Dropdown.style';
 import ic_dropdown from '../../assets/createpage/ic_dropdown.png';
-import { DAYS_OF_WEEK, COURSE_TIME } from '../../consts/timeTableInput';
+import {
+    DAYS_OF_WEEK,
+    COURSE_TIME,
+    END_COURSE_TIME,
+} from '../../consts/timeTableInput';
 
 const DateTimeDropdown = ({
     isOpen,
@@ -13,6 +17,7 @@ const DateTimeDropdown = ({
 }) => {
     // dropdown 여부 바꾸기
     const changeOpen = (openIndex, tf) => {
+        console.log(isOpen);
         const copyIsOpen = [...isOpen];
         copyIsOpen[openIndex] = tf;
         setIsOpen(copyIsOpen);
@@ -30,6 +35,10 @@ const DateTimeDropdown = ({
         }
         changeOpen(openIndex, false);
     };
+    // 드롭다운을 토글하는 함수
+    const toggleDropdown = openIndex => {
+        changeOpen(openIndex, !isOpen[openIndex]);
+    };
 
     return (
         <>
@@ -43,7 +52,7 @@ const DateTimeDropdown = ({
                 }
             >
                 {/* 요일 dropdown */}
-                <S.DayDropdownDiv isopen={isOpen[0]}>
+                <S.DayDropdownDiv isopen={isOpen[0]} className='dropdown-div'>
                     <div
                         style={{
                             display: 'flex',
@@ -75,7 +84,7 @@ const DateTimeDropdown = ({
                 </S.DayDropdownDiv>
 
                 {/* 시작 시간 dropdown */}
-                <S.TimeDropdownDiv isopen={isOpen[1]}>
+                <S.TimeDropdownDiv isopen={isOpen[1]} className='dropdown-div'>
                     <div
                         style={{
                             display: 'flex',
@@ -109,7 +118,7 @@ const DateTimeDropdown = ({
                 </S.TimeDropdownDiv>
                 <S.DescText>-</S.DescText>
                 {/* 끝 시간 dropdown */}
-                <S.TimeDropdownDiv isopen={isOpen[2]}>
+                <S.TimeDropdownDiv isopen={isOpen[2]} className='dropdown-div'>
                     <div
                         style={{
                             display: 'flex',
@@ -128,7 +137,7 @@ const DateTimeDropdown = ({
                         />
                     </div>
                     {isOpen[2] === true
-                        ? COURSE_TIME.map((time, _) => {
+                        ? END_COURSE_TIME.map((time, _) => {
                               return (
                                   <div
                                       onClick={() =>
@@ -147,4 +156,3 @@ const DateTimeDropdown = ({
 };
 
 export default DateTimeDropdown;
-
