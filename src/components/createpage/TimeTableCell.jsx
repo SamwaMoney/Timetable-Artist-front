@@ -32,7 +32,7 @@ const TimeTableCell = ({ day, timeSlot, index, numberOfSlots }) => {
         time => time.startTime <= timeSlot && timeSlot < time.endTime,
     );
 
-    console.log(timeData);
+    // console.log(timeData);
 
     return (
         <>

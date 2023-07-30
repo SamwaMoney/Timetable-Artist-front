@@ -11,6 +11,16 @@ export const COURSE_TIME = [
     '18:30',
 ];
 
+export const END_COURSE_TIME = [
+    '9:30',
+    '11:00',
+    '12:30',
+    '14:00',
+    '15:30',
+    '17:00',
+    '18:30',
+];
+
 export const COURSE_PLACE = [
     'ECC',
     '공학관',

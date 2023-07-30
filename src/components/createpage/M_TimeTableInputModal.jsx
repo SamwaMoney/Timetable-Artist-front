@@ -5,13 +5,28 @@ import add_course_mobile from '../../assets/createpage/add_course_mobile.png';
 import TimePicker from './M_TimePicker';
 import PlacePicker from './M_PlacePicker';
 import subtract_course from '../../assets/createpage/subtract_course.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addSelectedData } from '../../reducer/action';
+import { CLASS_BLOCK_COLOR } from '../../consts/timeTableInput';
+import { TimeResetObj } from '../../utils/time-helper';
+import {
+    isValidateTime,
+    isNoTimeOverlapped,
+    isNotTwoTimeOverlapped,
+} from '../../utils/time-validation';
 
-const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
+const MTimeTableInputModal = ({
+    setIsModalOpen,
+    colorIndex,
+    setColorIndex,
+}) => {
     // 지정된 시간 없음 체크박스 선택
     const [isChecked, setIsChecked] = useState(false);
     const dispatch = useDispatch();
+    //기존에 있는 시간표 데이터 가져오기
+    const timetableData = useSelector(
+        state => state.timeTableReducer,
+    ).selectedData;
 
     //시간 정하는 타임 픽커 열리는지
     //두번쨰 인자 숫자는 몇번째 인풋의 타임픽커 인지 알려줌
@@ -23,17 +38,13 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
 
     // 선택된 요일, 시작 시간, 끝 시간
     const [selectedDateTime, setSelectedDateTime] = useState({
-        day: '월',
-        startTime: '8:00',
-        endTime: '9:30',
+        ...TimeResetObj,
     });
 
     // 두번째 선택된 요일, 시작 시간, 끝 시간
     //두번째 인풋창이 열려있으면 기본값, 아니면 null
     const [plusSelectedDateTime, setPlusSelectedDateTime] = useState({
-        day: '월',
-        startTime: '8:00',
-        endTime: '9:30',
+        ...TimeResetObj,
     });
 
     //장소 선택
@@ -41,17 +52,6 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
 
     //강의명 input
     const [courseName, setCourseName] = useState('');
-
-    //두번째 인풋의 경우 열려있지 않으면 null로 처리해야 함 (아직 안함)
-
-    //결과 확인용
-    useEffect(() => {
-        console.log('________________________');
-        console.log('시간확인', selectedDateTime);
-        console.log('두번째시간확인', plusSelectedDateTime);
-        console.log('장소확인', selectedPlace);
-        console.log('강의명', courseName);
-    }, [selectedDateTime, selectedPlace, plusSelectedDateTime, courseName]);
 
     //강의명 onChange
     const onChangeCourseName = e => {
@@ -76,35 +76,114 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
         }
     };
 
-    //플러스 버튼을 눌러서 2번쨰 input 창이 생기게 함
-    const onAddTimeInput = () => {
+    //2번쨰 input 창이 열리고 닫히게 함(+,-버튼)
+    const onToggleInput = () => {
         if (!isSecondTimeInputOpen) {
             return setIsSecondTimeInputOpen(true);
         }
+        return setIsSecondTimeInputOpen(false);
     };
 
-    //마이너스 버튼을 눌러서 2번쨰 input이 닫히게 함
-    const onCloseTimeInput = () => {
-        if (isSecondTimeInputOpen) {
-            return setIsSecondTimeInputOpen(false);
+    //강의 색상 바꾸기
+    const onChangeColor = index => {
+        if (index >= 8) {
+            return setColorIndex(0);
         }
+        return setColorIndex(index + 1);
     };
 
-    //시간표에 추가
+    //강의 추가 버튼
     const handleButtonClick = () => {
-        // 객체 형태로 가공하여 새로운 데이터 생성
-        const newData = {
-            day: selectedDateTime.day,
-            startTime: selectedDateTime.startTime,
-            endTime: selectedDateTime.endTime,
-            place: selectedPlace,
-            name: courseName,
-        };
+        //강의명입력 안했을 시 리턴
+        if (!courseName) {
+            return alert('강의명을 입력해주세요!');
+        }
+        let newData1;
+        let newData2;
+        if (isChecked & !isSecondTimeInputOpen) {
+            // 지정된 시간 없음인 경우
+            newData1 = {
+                day: null, //요일도 null
+                startTime: null,
+                endTime: null,
+                place: selectedPlace,
+                name: courseName,
+                backgroundColor: null,
+            };
+            // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
+            dispatch(addSelectedData(newData1));
+        } else if (isSecondTimeInputOpen) {
+            // 강의 시간이 2개인 경우
+            newData1 = {
+                ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
+                place: selectedPlace,
+                name: courseName,
+                backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
+            };
 
-        console.log(newData);
+            newData2 = {
+                ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
+                place: selectedPlace,
+                name: courseName,
+                backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
+            };
 
-        // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
-        dispatch(addSelectedData(newData));
+            //두개의 시간인풋의 시간이 겹치는지 확인하는 로직
+            if (!isNotTwoTimeOverlapped(newData1, newData2)) {
+                return alert('두 시간표 입력란의 시간이 겹칩니다!');
+            }
+            //시간 검사 로직
+            if (
+                isValidateTime(newData1.startTime, newData1.endTime) &&
+                isNoTimeOverlapped(newData1, timetableData)
+            ) {
+                dispatch(addSelectedData(newData1));
+            } else if (!isNoTimeOverlapped(newData1, timetableData)) {
+                alert('첫번째 시간 입력란과 시간표에 겹치는 시간이 있습니다!');
+            } else {
+                alert('종료시간이 시작시간보다 늦어야 합니다!');
+            }
+            //두번째 시간 검사 로직
+            if (
+                isValidateTime(newData2.startTime, newData2.endTime) &&
+                isNoTimeOverlapped(newData2, timetableData)
+            ) {
+                dispatch(addSelectedData(newData2));
+            } else if (!isNoTimeOverlapped(newData2, timetableData)) {
+                alert('두번째 시간 입력란과 시간표에 겹치는 시간이 있습니다!');
+            } else {
+                alert('종료시간이 시작시간보다 늦어야 합니다!');
+            }
+
+            onChangeColor(colorIndex);
+        } else {
+            // 일반적인 경우 (강의 시간 1개)
+            newData1 = {
+                ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
+                place: selectedPlace,
+                name: courseName,
+                backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
+            };
+            //시간 검사 로직
+            if (
+                isValidateTime(newData1.startTime, newData1.endTime) &&
+                isNoTimeOverlapped(newData1, timetableData)
+            ) {
+                //검사 성공시 dispatch
+                dispatch(addSelectedData(newData1));
+                onChangeColor(colorIndex);
+            } else if (!isValidateTime(newData1.startTime, newData1.endTime)) {
+                alert('종료시간이 시작시간보다 늦어야 합니다!');
+            } else {
+                alert('시간표에 겹치는 시간이 있습니다!');
+            }
+        }
+
+        setSelectedDateTime({ ...TimeResetObj });
+        setCourseName('');
+        setSelectedPlace('ECC');
+        setIsSecondTimeInputOpen(false); //두번째 인풋창 다시 닫기
+        setIsModalOpen(false);
     };
 
     return (
@@ -164,7 +243,7 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                                         ? 'ischecked'
                                                         : ''
                                                 }
-                                                onClick={onAddTimeInput}
+                                                onClick={onToggleInput}
                                             />
                                             <S.MCheckBoxDiv>
                                                 <S.MCheckBox
@@ -213,7 +292,7 @@ const MTimeTableInputModal = ({ isModalOpen, setIsModalOpen }) => {
                                         <S.MinusBtn
                                             src={subtract_course}
                                             alt='-버튼'
-                                            onClick={onCloseTimeInput}
+                                            onClick={onToggleInput}
                                         />
                                     </div>
                                 )}
