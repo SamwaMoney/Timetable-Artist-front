@@ -2,22 +2,30 @@ import { S, M } from '../Ranking.style';
 import NoLike from '../../../assets/rankingpage/heart1.png';
 import YesLike from '../../../assets/rankingpage/heart2.png';
 import { useState } from 'react';
-
+import RankingApis from '../../../api/ranking';
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
 //시간표
-const LikeBtn = ({ isMobile, number }) => {
+const LikeBtn = ({ isMobile, number, timetableId }) => {
     const [isLike, setIsLike] = useState(false);
 
+    const memberId = localStorage.getItem('memberId');
     //낙관적 업데이트 => 서버 실패 요청시 원래 하트로 롤백
     //좋아요 누르기
-    const onGiveLike = () => {
+    const onGiveLike = async () => {
         setIsLike(true);
         //좋아요 누르는 api 로직
+        const res = await RankingApis.PostTimeTableLike(timetableId, memberId);
+        console.log(res);
     };
 
     //좋아요 취소
-    const onCancelLike = () => {
+    const onCancelLike = async () => {
         setIsLike(false);
+        const res = await RankingApis.DeleteTimeTableLike(
+            timetableId,
+            memberId,
+        );
+        console.log(res);
         //좋아요 취소하는 api 로직
     };
 

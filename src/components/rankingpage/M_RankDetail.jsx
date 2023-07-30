@@ -7,8 +7,11 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import NewComment from './rightSection/NewComment';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { mock_ranking } from '../../_mock/ranking';
+import RankingApis from '../../api/ranking';
+import { useParams } from 'react-router-dom';
+import { RESULT_COMMENTS } from '../../consts/resultComments';
 
 //해당 유저의 아이디를 params로 가져오고, rank의 경우는 쿼리스트링으로 가져옴
 //시간표 채점 결과 조회 api를 사용함.
@@ -17,27 +20,35 @@ const MRankDetail = () => {
     //유저의 랭크
     const rank = searchParams.get('rank');
     const navigate = useNavigate();
-
+    const [detailData, setDetailData] = useState();
     const handleMoveBack = () => {
         navigate(-1);
     };
-    const {
-        timetableId,
-        owner,
-        score,
-        tableType,
-        tableImg,
-        likeCount,
-        replyCount,
-    } = mock_ranking[0];
+    const params = useParams();
+    const timetableId = params.id;
+    // const { owner, score, tableType, tableImg, likeCount, replyCount } =
+    //     mock_ranking[0];
+
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         //timetableId로 해당 유저의 정보 검색
         //comment는 따로 검색
+
+        const fetch = async () => {
+            const res = await getDetailData(timetableId);
+            setDetailData(res?.data);
+        };
+        fetch();
+        setLoading(false);
     }, []);
 
+    const getDetailData = timetableId => {
+        return RankingApis.GetOneRankingDetail(timetableId);
+    };
+
     return (
-        mock_ranking[0] && (
+        !loading && (
             <div>
                 <Wrapper>
                     <div style={{ marginTop: '7vw', marginLeft: '4vw' }}>
@@ -48,18 +59,32 @@ const MRankDetail = () => {
                     <M.RankContainer>
                         <M.RankNum>{rank}</M.RankNum>
                         <M.UserInfo>
-                            <M.Score>{score}</M.Score>
+                            <M.Score>{detailData?.score}</M.Score>
 
                             <M.CategoryContainer>
-                                <M.Category>{tableType}</M.Category>
-                                <M.Nickname>{owner}</M.Nickname>
+                                <M.Category>
+                                    {
+                                        RESULT_COMMENTS.special[
+                                            detailData?.tableType
+                                        ]
+                                    }
+                                </M.Category>
+                                {/* <M.Nickname>{owner}</M.Nickname> */}
                             </M.CategoryContainer>
                         </M.UserInfo>
                     </M.RankContainer>
-                    <S.TimeTable src={tableImg} alt='사진' />
+                    <S.TimeTable src={detailData?.tableImg} alt='사진' />
                     <M.DetailBtnContainer>
-                        <LikeBtn isMobile={true} number={likeCount} />
-                        <CmtTag isMobile={true} number={replyCount} />
+                        <LikeBtn
+                            isMobile={true}
+                            timetableId={timetableId}
+                            number={1}
+                        />
+                        <CmtTag
+                            isMobile={true}
+                            timetableId={timetableId}
+                            number={1}
+                        />
                     </M.DetailBtnContainer>
                     {/*뎃글 적는 인풋창 */}
                     <NewComment isMobile={true} />

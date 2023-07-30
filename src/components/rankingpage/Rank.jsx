@@ -67,7 +67,10 @@ const Rank = ({ isMyData }) => {
                     <S.TimeTable src={currentUser.tableImg} alt='사진' />
                     {/*버튼 컨테이너*/}
                     <S.ButtonContainer>
-                        <LikeBtn number={currentUser.likeCount} />
+                        <LikeBtn
+                            number={currentUser.likeCount}
+                            timetableId={currentUser.timetableId}
+                        />
                         <CmtTag number={currentUser.replyCount} />
                     </S.ButtonContainer>
                     <NewComment currentTableId={currentUser.timetableId} />

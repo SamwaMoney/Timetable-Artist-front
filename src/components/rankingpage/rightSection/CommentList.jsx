@@ -9,9 +9,8 @@ const CommentList = ({ isMobile, timetableId }) => {
 
     useEffect(() => {
         //timetableID로 댓글을 불러오는 api 로직
-        // const res = GetTimeTableComments(timetableId);
-        // console.log(res);
-        // const res = RankingApis.GetTimeTableComments(timetableId);
+        const memberId = localStorage.getItem('memeberId');
+        // const res = RankingApis.GetTimeTableComments(timetableId, memberId);
         // console.log(res);
     }, []);
 

@@ -6,18 +6,28 @@ import { http } from './http';
 const RankingApis = {
     GetRanking: async sortType => {
         try {
-            const res = await http.get(`/tables/board?sortType=${sortType}`);
+            const res = await http.get(
+                `/timetables/board?sortType=${sortType}`,
+            );
+            console.log(res);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    GetOneRankingDetail: async timetableId => {
+        try {
+            const res = await http.get(`/timetables/${timetableId}`);
             console.log(res);
         } catch (err) {
             console.log(err);
         }
     },
 
-    // 시간표 좋아요 등록
+    // 시간표 좋아요 등록✅
     PostTimeTableLike: async (timetableId, memberId) => {
         try {
             const res = await http.post(`/tables/${timetableId}/likes`, {
-                memberId: memberId,
+                memberId,
             });
             console.log(res);
             return res;
@@ -26,7 +36,7 @@ const RankingApis = {
         }
     },
 
-    // 시간표 좋아요 취소
+    // 시간표 좋아요 취소✅
     DeleteTimeTableLike: async (timetableId, memberId) => {
         try {
             const res = await http.delete(
@@ -41,12 +51,14 @@ const RankingApis = {
 
     // 시간표 좋아요 목록 조회
 
-    // 댓글 작성
-    PostComment: async ({ tableId, memberId, content }) => {
+    // 댓글 작성✅
+    PostComment: async ({ tableId, memberId, content, nameHide }) => {
+        console.log(tableId, memberId, content, nameHide);
         try {
-            const res = await http.post(`/tables/${tableId}/replies`, {
-                memberId: memberId,
-                content: content,
+            const res = await http.post(`/timetables/${tableId}/replies`, {
+                memberId,
+                content,
+                nameHide,
             });
             console.log(res);
             return res;
@@ -66,10 +78,15 @@ const RankingApis = {
         }
     },
 
-    // 시간표의 댓글 조회 => 좋아요 많은 순으로 정렬
-    GetTimeTableComments: async timetableId => {
+    // 시간표의 댓글 조회 => 좋아요 많은 순으로 정렬 🔄
+    GetTimeTableComments: async (memberId, timetableId) => {
+        const params = {
+            memberId,
+        };
         try {
-            const res = http.get(`timetables/2/replies`);
+            const res = await http.get(`/timetables/${timetableId}/replies`, {
+                params,
+            });
             console.log(res);
             return res;
         } catch (err) {

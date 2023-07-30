@@ -22,12 +22,13 @@ const NewComment = ({ isMobile, currentTableId }) => {
 
     //새로운 댓글 보내는 로직 (익명 프로퍼티 추가되야 함)
     const onSubmitNewComment = async () => {
-        // const res = await RankingApis.PostComment({
-        //     tableId,
-        //     memberId,
-        //     content: newText,
-        // });
-        // console.log(res);
+        const res = await RankingApis.PostComment({
+            tableId,
+            memberId,
+            content: newText,
+            nameHide: isNoName,
+        });
+        console.log(res);
     };
 
     //익명 체크 이벤트 함수
