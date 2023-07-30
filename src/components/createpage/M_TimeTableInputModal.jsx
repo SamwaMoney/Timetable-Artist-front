@@ -94,7 +94,7 @@ const MTimeTableInputModal = ({
 
     //강의 추가 버튼
     const handleButtonClick = () => {
-        //강의명 입력 안했을 시 리턴
+        //강의명입력 안했을 시 리턴
         if (!courseName) {
             return alert('강의명을 입력해주세요!');
         }
