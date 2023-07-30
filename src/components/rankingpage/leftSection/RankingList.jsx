@@ -6,15 +6,15 @@ import { S, M } from '../Ranking.style';
 const RankingList = ({ isMobile, data, currentUser, setCurrentUser }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
-    //선택한 정렬방식대로 순위 바꿔줌
     const sort = searchParams.get('sort') || 'lowest';
+    //선택한 정렬방식대로 순위 바꿔줌
 
     return (
-        <S.List>
-            {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
-            {sort === 'like' ? null : <Toggle isMobile={isMobile} />}
-            {data &&
-                data.map((user, index) => {
+        data && (
+            <S.List>
+                {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
+                {sort === 'like' ? null : <Toggle isMobile={isMobile} />}
+                {data.map((user, index) => {
                     return (
                         <OneRanking
                             isMobile={isMobile}
@@ -26,7 +26,8 @@ const RankingList = ({ isMobile, data, currentUser, setCurrentUser }) => {
                         />
                     );
                 })}
-        </S.List>
+            </S.List>
+        )
     );
 };
 export default RankingList;

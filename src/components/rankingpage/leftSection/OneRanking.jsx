@@ -19,14 +19,14 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
     const [isshowtimetable, setIsShowTimeTable] = useState(
         index === 0 ? true : false,
     );
+    const newSearchParams = new URLSearchParams(searchParams);
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
     const {
         timetableId,
-        owner,
+        username,
         score,
-        tableType,
-        ranking,
+        tableTypeContent,
         tableImg,
         likeCount,
         replyCount,
@@ -35,21 +35,21 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
     useEffect(() => {
         if (currentUser?.timetableId === timetableId) {
             setIsCurrentUser(true);
-            console.log(iscurrentuser);
         } else {
             setIsCurrentUser(false);
-            console.log(iscurrentuser);
         }
     }, [iscurrentuser, currentUser, timetableId]);
 
     //디테일 페이지 이동(웹)
-    const onMoveDetail = id => {
+    const onMoveDetail = () => {
         setCurrentUser(data);
+        searchParams.set('rank', index + 1);
+        setSearchParams(searchParams);
     };
 
     //디테일 페이지 이동(모바일)
     const onMoveMDetail = timetableId => {
-        navigate(`/ranking/detail/${timetableId}?rank=${ranking}`);
+        navigate(`/ranking/detail/${timetableId}?rank=${index + 1}`);
     };
 
     //시간표 보기(모바일)
@@ -62,7 +62,7 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
             <M.OneRankWrapper>
                 <M.RankContainer>
                     <M.RankNum isshowtimetable={isshowtimetable.toString()}>
-                        {ranking}
+                        {index + 1}
                     </M.RankNum>
                     <M.UserInfo
                         onClick={() => {
@@ -72,8 +72,10 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
                     >
                         <M.Score>{score}점</M.Score>
                         <M.CategoryContainer>
-                            <M.Category>{tableType}</M.Category>
-                            <M.Nickname>{owner}</M.Nickname>
+                            <M.Category>
+                                {tableTypeContent || '유형 정보 없음'}
+                            </M.Category>
+                            <M.Nickname>{username}</M.Nickname>
                         </M.CategoryContainer>
                     </M.UserInfo>
                 </M.RankContainer>
@@ -89,7 +91,11 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
                             />
                         </M.TimeTableWrapper>
                         <M.ButtonContainer>
-                            <LikeBtn number={likeCount} isMobile={true} />
+                            <LikeBtn
+                                timetableId={timetableId}
+                                number={likeCount}
+                                isMobile={true}
+                            />
                             <CmtTag number={replyCount} isMobile={true} />
                         </M.ButtonContainer>
                     </>
@@ -100,7 +106,7 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
         <>
             <S.RankContainer>
                 <S.RankNum iscurrentuser={iscurrentuser.toString()}>
-                    {ranking}
+                    {index + 1}
                 </S.RankNum>
                 <S.UserInfo
                     iscurrentuser={iscurrentuser.toString()}
@@ -110,8 +116,10 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
                 >
                     <S.Score>{score}점</S.Score>
                     <S.CategoryContainer>
-                        <S.Category>{tableType}</S.Category>
-                        <S.Nickname>{owner}</S.Nickname>
+                        <S.Category>
+                            {tableTypeContent || '유형 정보 없음'}
+                        </S.Category>
+                        <S.Nickname>{username}</S.Nickname>
                     </S.CategoryContainer>
                 </S.UserInfo>
             </S.RankContainer>

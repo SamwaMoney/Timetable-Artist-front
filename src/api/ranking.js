@@ -4,12 +4,17 @@ import { http } from './http';
 //오름차순 : LOWEST
 //인기순  : LIKE
 const RankingApis = {
-    GetRanking: async sortType => {
+    GetRanking: async (sortType, memberId) => {
+        console.log(sortType, '랭킹 불러오기');
         try {
-            const res = await http.get(
-                `/timetables/board?sortType=${sortType}`,
-            );
+            const res = await http.get(`/timetables/rankingboard`, {
+                params: {
+                    sortType,
+                    memberId,
+                },
+            });
             console.log(res);
+            return res;
         } catch (err) {
             console.log(err);
         }
@@ -18,6 +23,7 @@ const RankingApis = {
         try {
             const res = await http.get(`/timetables/${timetableId}`);
             console.log(res);
+            return res;
         } catch (err) {
             console.log(err);
         }
@@ -26,7 +32,7 @@ const RankingApis = {
     // 시간표 좋아요 등록✅
     PostTimeTableLike: async (timetableId, memberId) => {
         try {
-            const res = await http.post(`/tables/${timetableId}/likes`, {
+            const res = await http.post(`/timetables/${timetableId}/likes`, {
                 memberId,
             });
             console.log(res);
@@ -97,7 +103,7 @@ const RankingApis = {
     // 댓글 좋아요 등록
     PostCommentLike: async (replyId, memberId) => {
         try {
-            const res = await http.get(`/${replyId}/likes`, {
+            const res = await http.post(`/${replyId}/likes`, {
                 memberId: memberId,
             });
             console.log(res);

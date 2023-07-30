@@ -34,7 +34,6 @@ const MRankDetail = () => {
     useEffect(() => {
         //timetableId로 해당 유저의 정보 검색
         //comment는 따로 검색
-
         const fetch = async () => {
             const res = await getDetailData(timetableId);
             setDetailData(res?.data);
@@ -59,7 +58,7 @@ const MRankDetail = () => {
                     <M.RankContainer>
                         <M.RankNum>{rank}</M.RankNum>
                         <M.UserInfo>
-                            <M.Score>{detailData?.score}</M.Score>
+                            <M.Score>{detailData?.score}점</M.Score>
 
                             <M.CategoryContainer>
                                 <M.Category>

@@ -185,14 +185,21 @@ const Tab = styled.div`
     padding-bottom: 3%;
     font-weight: 500;
     ${FlexCenter};
-    border-bottom: ${props =>
-        props.isactive === 'true' ? '5px solid black' : '2.5px solid black'};
     cursor: pointer;
 `;
 
 S.Tab = styled(Tab)`
     font-size: 1rem;
+    border-bottom: ${({ currentSort }) =>
+        currentSort !== 'like' ? '5px solid black' : '2.5px solid black'};
 `;
+
+S.LikeTab = styled(Tab)`
+    font-size: 1rem;
+    border-bottom: ${({ currentSort }) =>
+        currentSort === 'like' ? '5px solid black' : '2.5px solid black'};
+`;
+
 M.Tab = styled(Tab)`
     font-size: 4vw;
 `;
@@ -479,10 +486,11 @@ M.IconButton = styled(IconButton)`
 S.EventIcon = styled.img`
     width: ${props => (props.width ? props.width : '2vw')}rem;
     cursor: pointer;
+    transform: scale(1);
     transition: transform 0.2s ease;
-    &:hover {
+    /* &:hover {
         transform: scale(1.3);
-    }
+    } */
 `;
 
 S.NoEventIcon = styled.img`

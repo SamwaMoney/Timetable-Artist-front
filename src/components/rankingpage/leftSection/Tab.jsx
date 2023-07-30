@@ -4,13 +4,11 @@ import { S } from '../Ranking.style';
 import { M } from '../Ranking.style';
 import { useLocation } from 'react-router-dom';
 
-const TabContainer = ({ isMobile }) => {
+const TabContainer = ({ isMobile, setLoading }) => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
-    const currentSort = params.get('sort');
+    const sort = params.get('sort');
     const [searchParams, setSearchParams] = useSearchParams();
-
-    useEffect(() => {}, [currentSort]);
 
     /*정렬 기준대로 쿼리스트링을 바꿔줌*/
     const onMoveSortPage = e => {
@@ -33,15 +31,15 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort !== 'like').toString()}
+                isactive={(sort !== 'like').toString()}
             >
-                {currentSort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
+                {sort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
             </M.Tab>
             <M.Tab
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort === 'like').toString()}
+                isactive={(sort === 'like').toString()}
             >
                 인기 시간표
             </M.Tab>
@@ -52,18 +50,18 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort !== 'like').toString()}
+                currentSort={sort}
             >
-                {currentSort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
+                {sort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
             </S.Tab>
-            <S.Tab
+            <S.LikeTab
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort === 'like').toString()}
+                currentSort={sort}
             >
                 인기 시간표
-            </S.Tab>
+            </S.LikeTab>
         </S.TabContainer>
     );
 };
