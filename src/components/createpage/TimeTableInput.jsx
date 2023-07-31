@@ -88,7 +88,7 @@ const TimeTableInput = () => {
                 startTime: null,
                 endTime: null,
                 location: selectedPlace,
-                name: selectedClassName,
+                className: selectedClassName,
                 backgroundColor: null,
             };
 
@@ -100,7 +100,7 @@ const TimeTableInput = () => {
                 //⭐️디스트럭쳐로 수정
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
-                name: selectedClassName,
+                className: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
@@ -108,7 +108,7 @@ const TimeTableInput = () => {
                 //⭐️디스트럭쳐로 수정
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
-                name: selectedClassName,
+                className: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
@@ -145,7 +145,7 @@ const TimeTableInput = () => {
                 //⭐️디스트럭쳐로 수정
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
-                name: selectedClassName,
+                className: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 

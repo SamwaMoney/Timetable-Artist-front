@@ -107,7 +107,7 @@ const MTimeTableInputModal = ({
                 startTime: null,
                 endTime: null,
                 location: selectedPlace,
-                name: courseName,
+                className: courseName,
                 backgroundColor: null,
             };
             // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
@@ -117,14 +117,14 @@ const MTimeTableInputModal = ({
             newData1 = {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
-                name: courseName,
+                className: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
             newData2 = {
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
-                name: courseName,
+                className: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
@@ -161,7 +161,7 @@ const MTimeTableInputModal = ({
             newData1 = {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
-                name: courseName,
+                className: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
             //시간 검사 로직

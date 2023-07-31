@@ -52,7 +52,7 @@ const TimeTableCell = ({
 
     // 강의를 삭제하는 함수
     const handleDeleteLectureData = () => {
-        const lectureName = timeData.name;
+        const lectureName = timeData.className;
         if (lectureName) {
             dispatch(deleteSelectedData(lectureName));
             console.log(dayLectureData);
@@ -82,7 +82,7 @@ const TimeTableCell = ({
                     }}
                 >
                     <BlockText>
-                        <BlockNameText>{timeData.name}</BlockNameText>
+                        <BlockNameText>{timeData.className}</BlockNameText>
                         <BlockPlaceText>{timeData.location}</BlockPlaceText>
                     </BlockText>
                 </TableCell>
@@ -99,7 +99,7 @@ const TimeTableCell = ({
             {isDeleteModalOpen && timeData && (
                 <DeleteConfirmModal
                     setIsDeleteModalOpen={setIsDeleteModalOpen}
-                    lectureName={timeData.name}
+                    lectureName={timeData.className}
                     setIsDoubleDeleteModalOpen={setIsDoubleDeleteModalOpen}
                     handleDeleteLectureData={handleDeleteLectureData}
                 />
