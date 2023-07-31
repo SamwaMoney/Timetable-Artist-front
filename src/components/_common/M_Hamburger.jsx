@@ -94,7 +94,7 @@ const MHamburger = () => {
                     }
                     onClick={e => handleEditClick(e)}
                 >
-                    <p>내 시간표 수정</p>
+                    <p>새 시간표 만들기</p>
                 </NavLink>
             </S.MenuBtn>
             {isLogin() ? (
