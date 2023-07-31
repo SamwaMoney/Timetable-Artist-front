@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 const MyScore = ({ isMobile }) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const sort = searchParams.get('sort') || 'lowest';
+    const sort = searchParams.get('sort') || 'LOWEST';
     const [myRanking, setMyRanking] = useState();
 
     useEffect(() => {

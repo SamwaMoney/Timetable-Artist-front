@@ -18,9 +18,11 @@ S.BasicContainer = styled.div`
 M.FlexContainer = styled.div`
     margin-top: 15vw;
     font-style: var(--korean);
-    ${FlexCenter}
+display:flex;
+align-items:center;
     flex-direction: column;
     background-color: var(--background);
+    min-height:100vh;
 `;
 
 S.Wrapper = styled(S.BasicContainer)`
@@ -68,7 +70,7 @@ S.NewButton = styled(NewButton)`
     margin-top: 7%;
     padding: 4%;
     border-radius: 44px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 `;
 
 M.NewButton = styled(NewButton)`
@@ -153,13 +155,21 @@ const RankContainer = styled.div`
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 `;
 
 S.RankContainer = styled(RankContainer)`
     margin-top: 1rem;
     width: 75%;
-    margin-bottom: 0.05rem;
+    display: flex;
+    align-items: center;
+`;
+
+S.RankUserWrapper = styled.div`
+    padding-top: 2vw;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    width: 75%;
 `;
 
 M.RankContainer = styled(RankContainer)`
@@ -191,17 +201,25 @@ const Tab = styled.div`
 S.Tab = styled(Tab)`
     font-size: 1rem;
     border-bottom: ${({ currentSort }) =>
-        currentSort !== 'like' ? '5px solid black' : '2.5px solid black'};
+        currentSort !== 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
 
 S.LikeTab = styled(Tab)`
     font-size: 1rem;
     border-bottom: ${({ currentSort }) =>
-        currentSort === 'like' ? '5px solid black' : '2.5px solid black'};
+        currentSort === 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
 
 M.Tab = styled(Tab)`
     font-size: 4vw;
+    border-bottom: ${({ currentSort }) =>
+        currentSort !== 'LIKE' ? '5px solid black' : '2.5px solid black'};
+`;
+
+M.LikeTab = styled(Tab)`
+    font-size: 4vw;
+    border-bottom: ${({ currentSort }) =>
+        currentSort === 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
 
 //토글
@@ -247,8 +265,6 @@ M.ToggleButton = styled(ToggleButton)`
 
 //토글 슬라이더
 const Slider = styled.div`
-    background-color: ${props =>
-        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     position: absolute;
     border-radius: 50%;
     top: 50%;
@@ -260,14 +276,18 @@ S.Slider = styled(Slider)`
     width: 15px;
     height: 15px;
     border: 1.3px solid black;
-    left: ${props => (props.sort === 'lowest' ? '17px' : '1px')};
+    background-color: ${props =>
+        props.sort === 'LOWEST' ? '#f22b02' : '#1962ed'};
+    left: ${props => (props.sort === 'LOWEST' ? '17px' : '1px')};
 `;
 
 M.Slider = styled(Slider)`
     width: 4.5vw;
     height: 4.5vw;
     border: 1.3px solid black;
-    left: ${props => (props.sort === 'lowest' ? '6.2vw' : '1vw')};
+    background-color: ${props =>
+        props.sort === 'LOWEST' ? '#f22b02' : '#1962ed'};
+    left: ${props => (props.sort === 'LOWEST' ? '6.2vw' : '1vw')};
 `;
 
 S.ToggleText = styled.div`
@@ -294,7 +314,7 @@ const MyScoreContainer = styled.div`
 `;
 
 S.MyScoreContainer = styled(MyScoreContainer)`
-    height: 5.1rem;
+    height: 4vw;
     padding: 0.5rem 0;
 `;
 
@@ -591,11 +611,20 @@ S.FlexContainer = styled.div`
 //시간표 목업 사진
 S.TimeTable = styled.img`
     width: 95%;
+    height: 30vw;
+    background-color: #888;
+    border: 0.05rem solid black;
+    margin-top: 0.8rem;
+`;
+
+M.TimeTable = styled.img`
+    width: 95%;
     height: 95%;
     background-color: #888;
     border: 0.05rem solid black;
     margin-top: 0.8rem;
 `;
+
 
 //댓글 쓰기 컴포넌트
 S.NewCommentWrapper = styled.div`
@@ -658,7 +687,17 @@ S.CommentInput = styled.input`
     width: 75%;
     font-size: 0.9rem;
 `;
-
+S.CommentDisabled = styled.div`
+    border: none;
+    height: 2rem;
+    width: 75%;
+    font-size: 0.9rem;
+    background-color:white;
+    color:grey;
+    padding-left:1vw;
+    display:flex;
+    align-items:center;
+`;
 M.CommentInput = styled.input`
     padding-left: 10vw;
     font-size: 4.3vw;
@@ -669,12 +708,15 @@ M.CommentInput = styled.input`
     width: 70%;
 `;
 
-S.UploadImg = styled.img`
+S.UploadButton = styled.button`
     width: 1.5rem;
     height: 1.5rem;
     margin-left: 5rem;
     position: absolute;
     right: 1rem;
+    img {
+        width: 100%;
+    }
 `;
 M.UploadImg = styled.img`
     position: absolute;

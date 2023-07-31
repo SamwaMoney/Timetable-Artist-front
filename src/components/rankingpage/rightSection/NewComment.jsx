@@ -1,19 +1,18 @@
 import Write from '../../../assets/rankingpage/write.png';
 import { S, M } from '../Ranking.style';
-import { useState } from 'react';
-import RankingApis from '../../../api/ranking';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const NewComment = ({ isMobile, currentTableId }) => {
+const NewComment = ({ isMobile, currentUserId, updateComment }) => {
     const params = useParams();
     //현재 시간표 id => 모바일일 경우 파람으로, 웹에서는 props로 전달받음
-    const tableId = isMobile ? params.id : currentTableId;
+    const tableId = isMobile ? params.id : currentUserId;
     //댓글
     const [newText, setNewText] = useState();
     //익명 체크했는지
     const [isNoName, setIsNoName] = useState(false);
     //내 멤버ID 가져오기 (키값 확인)
-    const memberId = localStorage.getItem('myId') | 1;
+    const memberId = localStorage.getItem('memberId') || -1;
 
     const onChangeText = e => {
         setNewText(e.target.value);
@@ -21,14 +20,16 @@ const NewComment = ({ isMobile, currentTableId }) => {
     };
 
     //새로운 댓글 보내는 로직 (익명 프로퍼티 추가되야 함)
-    const onSubmitNewComment = async () => {
-        const res = await RankingApis.PostComment({
+    const onSubmitNewComment = () => {
+        const newComment = {
             tableId,
             memberId,
             content: newText,
             nameHide: isNoName,
-        });
-        console.log(res);
+        };
+        updateComment(newComment);
+        setNewText('');
+        setIsNoName(false);
     };
 
     //익명 체크 이벤트 함수
@@ -39,6 +40,10 @@ const NewComment = ({ isMobile, currentTableId }) => {
         }
         return setIsNoName(false);
     };
+
+    useEffect(()=>{
+        console.log('memberId',memberId);
+    },[])
 
     return isMobile ? (
         <M.NewCommentWrapper>
@@ -70,15 +75,21 @@ const NewComment = ({ isMobile, currentTableId }) => {
                 />
                 <S.NoNameText>익명</S.NoNameText>
             </S.checkBoxNoName>
+            {(memberId !== -1)?
+            (
             <S.CommentInput
                 placeholder='댓글 쓰기...'
                 onChange={onChangeText}
-            />
-            <S.UploadImg
+                value={newText}
+            />):(
+            <S.CommentDisabled>로그인 후에 댓글을 쓸 수 있습니다.</S.CommentDisabled>)}
+            <S.UploadButton
                 onClick={onSubmitNewComment}
-                src={Write}
-                alt='올리기'
-            />
+                type='button'
+                disabled={!newText}
+            >
+                <img src={Write} alt='올리기' />
+            </S.UploadButton>
         </S.NewCommentWrapper>
     );
 };

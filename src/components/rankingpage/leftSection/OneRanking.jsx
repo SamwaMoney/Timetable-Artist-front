@@ -3,14 +3,21 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
 import LikeBtn from '../rightSection/LikeBtn';
 import CmtTag from '../rightSection/CmtTag';
-
+import Timetable from '../../../assets/scorepage/timetable.png';
+import RankingApis from '../../../api/ranking';
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 //받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
-const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
+const OneRanking = ({
+    data,
+    isMobile,
+    index,
+    currentUserId,
+    setCurrentUserId,
+}) => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     //현재 정렬 방식
-    const sort = searchParams.get('sort') || 'lowest';
+    const sort = searchParams.get('sort') || 'LOWEST';
 
     //현재 선택된 유저인지(웹)
     const [iscurrentuser, setIsCurrentUser] = useState(false);
@@ -19,7 +26,26 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
     const [isshowtimetable, setIsShowTimeTable] = useState(
         index === 0 ? true : false,
     );
-    const newSearchParams = new URLSearchParams(searchParams);
+
+    const [loading,setLoading] = useState(true);
+    //⭐️모바일 like 떄매 필요함
+    const [currentUser, setCurrentUser] = useState();
+    const getDetailData = timetableId => {
+        return RankingApis.GetOneRankingDetail(timetableId);
+    };
+    useEffect(() => {
+        const fetchData = async timetableId => {
+            const res = await getDetailData(timetableId);
+            setCurrentUser(res?.data);
+        };
+        fetchData(currentUserId);
+        console.log('+++++++개별 데이터 불러옴');
+        setLoading(false);
+    }, [currentUserId]);
+    const getRankingList = (sort, memberId) => {
+        return RankingApis.GetRanking(sort, memberId);
+    };
+
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
     const {
@@ -33,16 +59,16 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
     } = data;
 
     useEffect(() => {
-        if (currentUser?.timetableId === timetableId) {
+        if (currentUserId === timetableId) {
             setIsCurrentUser(true);
         } else {
             setIsCurrentUser(false);
         }
-    }, [iscurrentuser, currentUser, timetableId]);
+    }, [iscurrentuser, currentUserId, timetableId]);
 
     //디테일 페이지 이동(웹)
     const onMoveDetail = () => {
-        setCurrentUser(data);
+        setCurrentUserId(data.timetableId);
         searchParams.set('rank', index + 1);
         setSearchParams(searchParams);
     };
@@ -83,7 +109,7 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
                     <>
                         <M.TimeTableWrapper>
                             <S.TimeTable
-                                src={tableImg}
+                                src={Timetable}
                                 alt='사진'
                                 onClick={() => {
                                     onMoveMDetail(timetableId);
@@ -95,6 +121,8 @@ const OneRanking = ({ data, isMobile, currentUser, setCurrentUser, index }) => {
                                 timetableId={timetableId}
                                 number={likeCount}
                                 isMobile={true}
+                                currentUser={currentUser}
+                                getRankingList={getRankingList}
                             />
                             <CmtTag number={replyCount} isMobile={true} />
                         </M.ButtonContainer>

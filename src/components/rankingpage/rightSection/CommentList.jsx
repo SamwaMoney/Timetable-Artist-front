@@ -1,32 +1,76 @@
 import OneComment from './OneComment';
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import RankingApis from '../../../api/ranking';
-// import { GetTimeTableComments } from '../../../api/ranking';
-const CommentList = ({ isMobile, timetableId }) => {
-    //좋아요 변경되면 순서도 바뀜
-    //백 api 다시 불러와서 순서 변경할 것
+import NewComment from './NewComment';
 
+const CommentList = ({ isMobile, currentUserId }) => {
+    const memberId = localStorage.getItem('memberId') || -1;
+    const [CommentData, setCommentData] = useState();
+
+    //댓글 가져온 후에 댓글 state에 데이터 추가하는 로직
+    const getCommentData = async () => {
+        const res = await getComment(currentUserId, memberId);
+        setCommentData(res?.data?.replies);
+    };
+
+    //처음에 댓글 불러오는 로직
     useEffect(() => {
-        //timetableID로 댓글을 불러오는 api 로직
-        const memberId = localStorage.getItem('memeberId');
-        // const res = RankingApis.GetTimeTableComments(timetableId, memberId);
-        // console.log(res);
-    }, []);
+        getCommentData();
+    }, [currentUserId]);
 
-    return isMobile ? (
-        <MCommentContainer>
-            <OneComment isMobile={true} />
-            <OneComment isMobile={true} />
-            <OneComment isMobile={true} />
-        </MCommentContainer>
-    ) : (
-        <CommentContainer>
-            <OneComment />
-            <OneComment />
-            <OneComment />
-        </CommentContainer>
-    );
+    //댓글 가져오는 로직
+    const getComment = async (timetableId, memberId) => {
+        return await RankingApis.GetTimeTableComments(timetableId, memberId);
+    };
+
+    //댓글 삭제후 업데이트 로직
+    const deleteMyComment = async (memberId, replyId) => {
+        await RankingApis.DeleteComment(memberId, replyId);
+        await getCommentData();
+    };
+
+    //댓글 추가후 업데이트 로직
+    const updateComment = async newComment => {
+        await RankingApis.PostComment(newComment);
+        await getCommentData();
+    };
+
+    return isMobile
+        ? CommentData && (
+              <MCommentContainer>
+                  {CommentData.map(reply => {
+                      return (
+                          <OneComment
+                              data={reply}
+                              deleteMyComment={deleteMyComment}
+                              key={Math.random() * 1000}
+                          />
+                      );
+                  })}
+              </MCommentContainer>
+          )
+        :  (
+              <>
+                  <NewComment
+                      currentUserId={currentUserId}
+                      updateComment={updateComment}
+                  />
+                  {CommentData &&
+                  <CommentContainer>
+                      {CommentData.map(reply => {
+                          return (
+                              <OneComment
+                                  data={reply}
+                                  deleteMyComment={deleteMyComment}
+                                  getComment={getComment}
+                                  key={Math.random() * 1000}
+                              />
+                          );
+                      })}
+                  </CommentContainer>}
+              </>
+          );
 };
 export default CommentList;
 

@@ -2,38 +2,36 @@ import Hamburger from '../_common/Hamburger';
 import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
-import { useSearchParams } from 'react-router-dom';
-import CommentList from './rightSection/CommentList';
-import NewComment from './rightSection/NewComment';
-import LikeBtn from './rightSection/LikeBtn';
-import CmtTag from './rightSection/CmtTag';
 import { S } from './Ranking.style';
-import RankUserInfo from './rightSection/RankUserInfo';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RankingApis from '../../api/ranking';
 import Loading from '../_common/Loading';
-//여기서 mock_ranking을 보여줌
-//여기서 랭킹 api를 요청후 뿌려줌
+import RankDetail from './RankDetail';
+import { useLocation } from 'react-router-dom';
+
 const Rank = ({ isMyData }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const sort = searchParams.get('sort') || 'lowest';
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const sort = params.get('sort') || 'LOWEST';
     const navigate = useNavigate();
     //api로 받아온 데이터 관리하는 곳
-    const [isLogin, setIsLogin] = useState(false);
     const [rankingData, setRankingData] = useState();
-    const [currentUser, setCurrentUser] = useState();
-    const memberId = localStorage.getItem('memberId');
+    const [currentUserId, setCurrentUserId] = useState();
+    const memberId = localStorage.getItem('memberId') || -1;
+    let isLogin = memberId !== -1;
     const [loading, setLoading] = useState(true);
 
+    //sort에 따라 랭킹 정보 불러오기
     useEffect(() => {
+        console.log('sort바뀜', sort);
         setRankingData();
         setLoading(true);
         const fetchData = async sort => {
             const res = await getRankingList(sort, memberId);
             console.log('받아온 랭킹정보', sort, res);
             setRankingData(res?.data);
-            setCurrentUser(res?.data[0]);
+            setCurrentUserId(res?.data[0].timetableId);
         };
         fetchData(sort);
         setLoading(false);
@@ -42,58 +40,47 @@ const Rank = ({ isMyData }) => {
     const getRankingList = (sort, memberId) => {
         return RankingApis.GetRanking(sort, memberId);
     };
+
     return (
         <S.Wrapper>
             <Hamburger />
             {/*랭킹 보여주는 left section*/}
-            {loading || !currentUser || !rankingData ? (
+            {!currentUserId || loading ? (
                 <Loading />
             ) : (
                 <S.Container>
                     <S.SmallContainer>
-                        {isMyData ? (
-                            <MyScore isMobile={false} />
-                        ) : isLogin ? (
+                        {
+                        !isLogin? (
                             <S.NewButton
-                                onClick={() => {
-                                    navigate('/create');
-                                }}
-                                isMobile={false}
-                            >
-                                시간표 등록하기
-                            </S.NewButton>
-                        ) : (
-                            <S.NewButton
-                                isMobile={false}
-                                onClick={() => {
-                                    navigate('/login');
-                                }}
-                            >
-                                시간표 등록하기
-                            </S.NewButton>
-                        )}
-                        <TabContainer setLoading={setLoading} />
+                            onClick={() => {
+                                navigate('/login');
+                            }}
+                            isMobile={false}
+                        >
+                            시간표 등록하기
+                        </S.NewButton>
+                        ) : isMyData? (<MyScore isMobile={false} />) : (    
+                             <S.NewButton
+                            onClick={() => {
+                                navigate('/create');
+                            }}
+                            isMobile={false}
+                        />)
+                        }
+                        <TabContainer />
                         <RankingList
                             data={rankingData}
-                            currentUser={currentUser}
-                            setCurrentUser={setCurrentUser}
+                            currentUserId={currentUserId}
+                            setCurrentUserId={setCurrentUserId}
                         />
                     </S.SmallContainer>
                     {/*개별 유저 데이터 보여주는 right section*/}
-                    <S.SmallContainer>
-                        <RankUserInfo data={currentUser} />
-                        <S.TimeTable src={currentUser?.tableImg} alt='사진' />
-                        {/*버튼 컨테이너*/}
-                        <S.ButtonContainer>
-                            <LikeBtn
-                                number={currentUser?.likeCount}
-                                timetableId={currentUser?.timetableId}
-                            />
-                            <CmtTag number={currentUser?.replyCount} />
-                        </S.ButtonContainer>
-                        <NewComment currentTableId={currentUser?.timetableId} />
-                        <CommentList timetableId={currentUser?.timetableId} />
-                    </S.SmallContainer>
+                    <RankDetail
+                        memberId={memberId}
+                        currentUserId={currentUserId}
+                        getRankingList={getRankingList}
+                    />
                 </S.Container>
             )}
         </S.Wrapper>

@@ -4,19 +4,18 @@ import { S, M } from '../Ranking.style';
 import { useLocation } from 'react-router-dom';
 
 const Toggle = ({ isMobile }) => {
-    // const [sort, setSort] = useState('lowest');
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
     const params = new URLSearchParams(location.search);
+    let sort = params.get('sort') || 'LOWEST';
 
-    let sort = params.get('sort');
-
-    console.log(params);
     const handleChange = () => {
-        if (sort === 'highest') {
-            searchParams.set('sort', 'lowest');
-        } else if (sort === 'lowest') {
-            searchParams.set('sort', 'highest');
+        if (sort === 'HIGHEST') {
+            searchParams.set('sort', 'LOWEST');
+            searchParams.set('rank', 1);
+        } else if (sort === 'LOWEST') {
+            searchParams.set('sort', 'HIGHEST');
+            searchParams.set('rank', 1);
         }
         setSearchParams(searchParams);
     };
@@ -29,7 +28,7 @@ const Toggle = ({ isMobile }) => {
                 </M.ToggleButton>
             </S.ToggleContainer>
             <M.ToggleText>
-                {sort === 'lowest'
+                {sort === 'LOWEST'
                     ? '최고의 시간표 보기'
                     : '최악의 시간표 보기'}
             </M.ToggleText>
@@ -41,7 +40,7 @@ const Toggle = ({ isMobile }) => {
                     <S.Slider sort={sort} />
                 </S.ToggleButton>
                 <S.ToggleText>
-                    {sort === 'lowest'
+                    {sort === 'LOWEST'
                         ? '최고의 시간표 보기'
                         : '최악의 시간표 보기'}
                 </S.ToggleText>

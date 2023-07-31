@@ -7,12 +7,9 @@ const RankingApis = {
     GetRanking: async (sortType, memberId) => {
         console.log(sortType, '랭킹 불러오기');
         try {
-            const res = await http.get(`/timetables/rankingboard`, {
-                params: {
-                    sortType,
-                    memberId,
-                },
-            });
+            const res = await http.get(
+                `/timetables/rankingboard?sortType=${sortType}&memberId=${memberId}`,
+            );
             console.log(res);
             return res;
         } catch (err) {
@@ -46,7 +43,7 @@ const RankingApis = {
     DeleteTimeTableLike: async (timetableId, memberId) => {
         try {
             const res = await http.delete(
-                `/tables/${timetableId}/likes?memberId=${memberId}`,
+                `/timetables/${timetableId}/likes?memberId=${memberId}`,
             );
             console.log(res);
             return res;
@@ -85,14 +82,11 @@ const RankingApis = {
     },
 
     // 시간표의 댓글 조회 => 좋아요 많은 순으로 정렬 🔄
-    GetTimeTableComments: async (memberId, timetableId) => {
-        const params = {
-            memberId,
-        };
+    GetTimeTableComments: async (timetableId, memberId) => {
         try {
-            const res = await http.get(`/timetables/${timetableId}/replies`, {
-                params,
-            });
+            const res = await http.get(
+                `/timetables/${timetableId}/replies?memberId=${memberId}`,
+            );
             console.log(res);
             return res;
         } catch (err) {
@@ -104,7 +98,7 @@ const RankingApis = {
     PostCommentLike: async (replyId, memberId) => {
         try {
             const res = await http.post(`/${replyId}/likes`, {
-                memberId: memberId,
+                memberId,
             });
             console.log(res);
             return res;
@@ -116,8 +110,8 @@ const RankingApis = {
     // 댓글 좋아요 취소 => memberId가 들어가야 하는데 => header있는지 확인
     DeleteCommentLike: async (replyId, memberId) => {
         try {
-            const res = await http.delete(`/${replyId}/likes`, {
-                memberId: memberId,
+            const res = await http.delete(`/${replyId}/likes`,{
+                memberId
             });
             console.log(res);
             return res;
