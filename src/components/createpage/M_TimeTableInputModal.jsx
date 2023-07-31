@@ -103,7 +103,7 @@ const MTimeTableInputModal = ({
         if (isChecked & !isSecondTimeInputOpen) {
             // 지정된 시간 없음인 경우
             newData1 = {
-                day: null, //요일도 null
+                weekday: null, //요일도 null
                 startTime: null,
                 endTime: null,
                 place: selectedPlace,
@@ -225,7 +225,7 @@ const MTimeTableInputModal = ({
                                     }}
                                 >
                                     {/*첫번째 시간input => 선택한 결과값이 인풋에 반영됨*/}
-                                    <div>{selectedDateTime.day}</div>
+                                    <div>{selectedDateTime.weekday}</div>
                                     <div>
                                         {selectedDateTime.startTime} -
                                         {selectedDateTime.endTime}
@@ -276,7 +276,9 @@ const MTimeTableInputModal = ({
                                             >
                                                 {/*두번째 input => 선택한 결과값이 인풋에 반영됨*/}
                                                 <div>
-                                                    {plusSelectedDateTime.day}
+                                                    {
+                                                        plusSelectedDateTime.weekday
+                                                    }
                                                 </div>
                                                 <div>
                                                     {

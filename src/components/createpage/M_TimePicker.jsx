@@ -46,14 +46,14 @@ const TimePicker = ({
     const onPickerComplete = () => {
         if (isTimePickerOpen[1] === 1) {
             setSelectedDateTime({
-                day: DAYS_OF_WEEK[selectedDayIndex],
+                weekday: DAYS_OF_WEEK[selectedDayIndex],
                 startTime: COURSE_TIME[selectedTimeStartIndex],
                 endTime: END_COURSE_TIME[selectedTimeEndIndex],
             });
             setIsTimePickerOpen(false);
         } else if (isTimePickerOpen[1] === 2) {
             setPlusSelectedDateTime({
-                day: DAYS_OF_WEEK[selectedDayIndex],
+                weekday: DAYS_OF_WEEK[selectedDayIndex],
                 startTime: COURSE_TIME[selectedTimeStartIndex],
                 endTime: END_COURSE_TIME[selectedTimeEndIndex],
             });

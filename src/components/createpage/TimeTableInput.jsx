@@ -84,7 +84,7 @@ const TimeTableInput = () => {
         if (isChecked) {
             // 지정된 시간 없음인 경우
             newData1 = {
-                day: null,
+                weekday: null,
                 startTime: null,
                 endTime: null,
                 place: selectedPlace,
