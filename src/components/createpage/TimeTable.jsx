@@ -82,7 +82,7 @@ const TimeTable = () => {
                         selectedData.map(lecture => {
                             if (lecture.startTime === null) {
                                 return (
-                                    <div key={lecture.name}>{lecture.name}</div>
+                                    <div key={lecture.className}>{lecture.className}</div>
                                 );
                             }
                             return null;

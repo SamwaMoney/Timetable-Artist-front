@@ -2,7 +2,7 @@ import TimeTableCell from './TimeTableCell';
 
 const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
     const getDayData = day => {
-        return selectedData.filter(lecture => lecture.day === day);
+        return selectedData.filter(lecture => lecture.weekday === day);
     };
 
     return (

@@ -26,7 +26,7 @@ const DateTimeDropdown = ({
     // state 업데이트 함수
     const changeContent = (openIndex, category, content) => {
         if (category === 'day') {
-            setSelectedDateTime({ ...selectedDateTime, day: content });
+            setSelectedDateTime({ ...selectedDateTime, weekday: content });
             // 요일 업데이트 후 드롭다운 닫기
         } else if (category === 'start') {
             setSelectedDateTime({ ...selectedDateTime, startTime: content });
@@ -61,7 +61,9 @@ const DateTimeDropdown = ({
                         }}
                         onClick={() => changeOpen(0, true)}
                     >
-                        <S.DescDayText>{selectedDateTime.day}</S.DescDayText>
+                        <S.DescDayText>
+                            {selectedDateTime.weekday}
+                        </S.DescDayText>
                         <S.DownIcon
                             src={ic_dropdown}
                             isopen={isOpen[0]}

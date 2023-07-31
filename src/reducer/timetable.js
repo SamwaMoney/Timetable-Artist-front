@@ -16,7 +16,7 @@ const timeTableReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedData: state.selectedData.filter(
-                    lecture => lecture.name !== lectureNameToDelete,
+                    lecture => lecture.className !== lectureNameToDelete,
                 ),
             };
         default:

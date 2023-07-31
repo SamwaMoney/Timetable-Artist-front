@@ -103,11 +103,11 @@ const MTimeTableInputModal = ({
         if (isChecked & !isSecondTimeInputOpen) {
             // 지정된 시간 없음인 경우
             newData1 = {
-                day: null, //요일도 null
+                weekday: null, //요일도 null
                 startTime: null,
                 endTime: null,
-                place: selectedPlace,
-                name: courseName,
+                location: selectedPlace,
+                className: courseName,
                 backgroundColor: null,
             };
             // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
@@ -116,15 +116,15 @@ const MTimeTableInputModal = ({
             // 강의 시간이 2개인 경우
             newData1 = {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
-                name: courseName,
+                location: selectedPlace,
+                className: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
             newData2 = {
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
-                name: courseName,
+                location: selectedPlace,
+                className: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
@@ -160,8 +160,8 @@ const MTimeTableInputModal = ({
             // 일반적인 경우 (강의 시간 1개)
             newData1 = {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
-                name: courseName,
+                location: selectedPlace,
+                className: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
             //시간 검사 로직
@@ -225,7 +225,7 @@ const MTimeTableInputModal = ({
                                     }}
                                 >
                                     {/*첫번째 시간input => 선택한 결과값이 인풋에 반영됨*/}
-                                    <div>{selectedDateTime.day}</div>
+                                    <div>{selectedDateTime.weekday}</div>
                                     <div>
                                         {selectedDateTime.startTime} -
                                         {selectedDateTime.endTime}
@@ -276,7 +276,9 @@ const MTimeTableInputModal = ({
                                             >
                                                 {/*두번째 input => 선택한 결과값이 인풋에 반영됨*/}
                                                 <div>
-                                                    {plusSelectedDateTime.day}
+                                                    {
+                                                        plusSelectedDateTime.weekday
+                                                    }
                                                 </div>
                                                 <div>
                                                     {
