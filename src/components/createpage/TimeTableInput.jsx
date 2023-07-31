@@ -87,7 +87,7 @@ const TimeTableInput = () => {
                 weekday: null,
                 startTime: null,
                 endTime: null,
-                place: selectedPlace,
+                location: selectedPlace,
                 name: selectedClassName,
                 backgroundColor: null,
             };
@@ -99,7 +99,7 @@ const TimeTableInput = () => {
             newData1 = {
                 //⭐️디스트럭쳐로 수정
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
+                location: selectedPlace,
                 name: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
@@ -107,7 +107,7 @@ const TimeTableInput = () => {
             newData2 = {
                 //⭐️디스트럭쳐로 수정
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
+                location: selectedPlace,
                 name: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
@@ -144,7 +144,7 @@ const TimeTableInput = () => {
             newData1 = {
                 //⭐️디스트럭쳐로 수정
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
+                location: selectedPlace,
                 name: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };

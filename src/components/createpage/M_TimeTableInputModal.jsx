@@ -106,7 +106,7 @@ const MTimeTableInputModal = ({
                 weekday: null, //요일도 null
                 startTime: null,
                 endTime: null,
-                place: selectedPlace,
+                location: selectedPlace,
                 name: courseName,
                 backgroundColor: null,
             };
@@ -116,14 +116,14 @@ const MTimeTableInputModal = ({
             // 강의 시간이 2개인 경우
             newData1 = {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
+                location: selectedPlace,
                 name: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
             newData2 = {
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
+                location: selectedPlace,
                 name: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };
@@ -160,7 +160,7 @@ const MTimeTableInputModal = ({
             // 일반적인 경우 (강의 시간 1개)
             newData1 = {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
+                location: selectedPlace,
                 name: courseName,
                 backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
             };

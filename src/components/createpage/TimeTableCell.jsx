@@ -83,7 +83,7 @@ const TimeTableCell = ({
                 >
                     <BlockText>
                         <BlockNameText>{timeData.name}</BlockNameText>
-                        <BlockPlaceText>{timeData.place}</BlockPlaceText>
+                        <BlockPlaceText>{timeData.location}</BlockPlaceText>
                     </BlockText>
                 </TableCell>
             ) : timeData?.startTime < timeSlot &&
