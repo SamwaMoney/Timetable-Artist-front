@@ -1,11 +1,15 @@
 import { S } from './M_Score.style';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useScript } from './useScript';
 import html2canvas from 'html2canvas';
+import { TwitterShareButton } from 'react-share';
+import { RWebShare } from 'react-web-share';
+
 import timetable from '../../assets/scorepage/timetable.png';
 import type from '../../assets/scorepage/Rectangle 98.png';
 import sharing_icon from '../../assets/scorepage/sharing_option.svg';
 import sharing_none from '../../assets/scorepage/sharing_none.svg';
-import instagram from '../../assets/scorepage/instagram.svg';
+import share from '../../assets/scorepage/share.svg';
 import kakaotalk from '../../assets/scorepage/kakaotalk.svg';
 import twitter from '../../assets/scorepage/twitter.svg';
 import RangkingModal from '../_common/RankingModal';
@@ -19,6 +23,9 @@ const M_Score = () => {
     const [isUploaded, setIsUploaded] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isHidden, setIsHidden] = useState(true);
+
+    const mainURL = window.location.href.slice(0, -5);
+    const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
 
     const handleRankingClick = () => {
         setRankingModalOpen(true);
@@ -45,6 +52,40 @@ const M_Score = () => {
         link.click();
         document.body.removeChild(link);
     };
+
+    const handleKakaoBtn = () => {
+        window.Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: '시간표 아티스트',
+                description:
+                    '시간표 아티스트: 저는 시간표 망한 대학생이 아니라 시간표 아티스트예요',
+                imageUrl:
+                    'https://drive.google.com/uc?id=18ZyvFcQzvbXVzI6CrOfCGCuRmv1-QtWM',
+                link: {
+                    mobileWebUrl: mainURL,
+                },
+            },
+            buttons: [
+                {
+                    title: '내 시간표 점수 알아보기',
+                    link: {
+                        mobileWebUrl: mainURL,
+                    },
+                },
+            ],
+        });
+    };
+
+    useEffect(() => {
+        if (status === 'ready' && window.Kakao) {
+            // 중복 initialization 방지
+            if (!window.Kakao.isInitialized()) {
+                // 두번째 step 에서 가져온 javascript key 를 이용하여 initialize
+                window.Kakao.init('81f4f8b9cbc538a663be91f33d013ba1');
+            }
+        }
+    }, [status]);
 
     return (
         <S.Wrapper>
@@ -155,9 +196,34 @@ const M_Score = () => {
 
                         <S.BasicFont>SNS에 공유하기</S.BasicFont>
                         <S.IconContainer>
-                            <S.Icon src={instagram} width={'12vw'} />
-                            <S.Icon src={kakaotalk} width={'12vw'} />
-                            <S.Icon src={twitter} width={'12vw'} />
+                            <RWebShare
+                                data={{
+                                    text: '저는 시간표 망한 대학생이 아니라 시간표 아티스트예요',
+                                    url: mainURL,
+                                    title: '시간표 아티스트',
+                                }}
+                            >
+                                <S.Icon src={share} width={'38px'} />
+                            </RWebShare>
+
+                            <S.Icon
+                                src={kakaotalk}
+                                width={'38px'}
+                                onClick={handleKakaoBtn}
+                            />
+
+                            <TwitterShareButton
+                                url={mainURL}
+                                title={
+                                    '시간표 아티스트: 저는 시간표 망한 대학생이 아니라 시간표 아티스트예요'
+                                }
+                            >
+                                <S.Icon
+                                    src={twitter}
+                                    width={'38px'}
+                                    style={{ marginTop: '0.8vw' }}
+                                />
+                            </TwitterShareButton>
                         </S.IconContainer>
                         {isUploaded && (
                             <S.UploadBtn onClick={e => handleEditClick(e)}>

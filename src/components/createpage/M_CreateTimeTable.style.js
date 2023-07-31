@@ -104,10 +104,10 @@ S.PickerWrapper = styled.div`
 
 //장소 피커
 S.PlacePickerWrapper = styled.div`
-    z-index:200;
+    z-index: 200;
     position: fixed;
     bottom: 0;
-    background-color:var(--background);
+    background-color: var(--background);
     height: 20vw;
     display: flex;
     flex-direction: column;
@@ -130,10 +130,6 @@ S.SelectedContainer = styled.div`
 `;
 
 //타임피커
-
-// S.PickerBtnWrapper = styled.div`
-//     padding-bottom: 30vw;
-// `;
 
 S.PlacePickerBtnWrapper = styled.div`
     padding-bottom: 20vw;

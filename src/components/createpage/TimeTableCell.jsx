@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 import { isMobile } from 'react-device-detect';
-import { useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import DeleteConfirmModal from '../_common/DeleteConfirmModal';
+import { deleteSelectedData } from '../../reducer/action';
+import DeleteNoticeModal from '../_common/DeleteNoticeModal';
 
-const TimeTableCell = ({ day, timeSlot, index, numberOfSlots }) => {
+const TimeTableCell = ({
+    day,
+    timeSlot,
+    index,
+    numberOfSlots,
+    dayLectureData,
+}) => {
     // startTime과 endTime을 float 형태로 변환하는 함수
     const convertToFloatTime = timeString => {
         if (!timeString) return 0; // null인 경우 0 또는 다른 기본 값 반환
@@ -12,13 +21,13 @@ const TimeTableCell = ({ day, timeSlot, index, numberOfSlots }) => {
         return floatTime;
     };
 
-    // redux에서 값을 받아옴
-    const selectedData = useSelector(
-        state => state.timeTableReducer.selectedData,
-    );
+    // // redux에서 값을 받아옴
+    // const selectedData = useSelector(
+    //     state => state.timeTableReducer.selectedData,
+    // );
 
     // 요일에 맞는 데이터만 추리기
-    const dayLectureData = selectedData.filter(lecture => lecture.day === day);
+    // const dayLectureData = selectedData.filter(lecture => lecture.day === day);
 
     // startTime과 endTime을 float 형태로 변경
     const floatDayLectureData = dayLectureData.map(lecture => ({
@@ -32,7 +41,23 @@ const TimeTableCell = ({ day, timeSlot, index, numberOfSlots }) => {
         time => time.startTime <= timeSlot && timeSlot < time.endTime,
     );
 
-    console.log(timeData);
+    // 삭제 모달 open 여부
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    // 삭제되었습니다 모달 띄우기 위한 state
+    const [isDoubleDeleteModalOpen, setIsDoubleDeleteModalOpen] =
+        useState(false);
+
+    const dispatch = useDispatch();
+
+    // 강의를 삭제하는 함수
+    const handleDeleteLectureData = () => {
+        const lectureName = timeData.name;
+        if (lectureName) {
+            dispatch(deleteSelectedData(lectureName));
+            console.log(dayLectureData);
+        }
+    };
 
     return (
         <>
@@ -52,6 +77,9 @@ const TimeTableCell = ({ day, timeSlot, index, numberOfSlots }) => {
                     }
                     style={{ backgroundColor: timeData.backgroundColor }}
                     className='selected'
+                    onClick={() => {
+                        setIsDeleteModalOpen(true);
+                    }}
                 >
                     <BlockText>
                         <BlockNameText>{timeData.name}</BlockNameText>
@@ -66,6 +94,21 @@ const TimeTableCell = ({ day, timeSlot, index, numberOfSlots }) => {
                     isfirst={index === 0}
                     islast={index === numberOfSlots - 1}
                 ></TableCell>
+            )}
+            {/* 삭제하시겠습니까? 모달 */}
+            {isDeleteModalOpen && timeData && (
+                <DeleteConfirmModal
+                    setIsDeleteModalOpen={setIsDeleteModalOpen}
+                    lectureName={timeData.name}
+                    setIsDoubleDeleteModalOpen={setIsDoubleDeleteModalOpen}
+                    handleDeleteLectureData={handleDeleteLectureData}
+                />
+            )}
+            {/* 삭제하였습니다 모달 */}
+            {isDoubleDeleteModalOpen && (
+                <DeleteNoticeModal
+                    setIsDoubleDeleteModalOpen={setIsDoubleDeleteModalOpen}
+                />
             )}
         </>
     );
