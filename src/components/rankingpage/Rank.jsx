@@ -2,78 +2,131 @@ import Hamburger from '../_common/Hamburger';
 import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
-import { useSearchParams } from 'react-router-dom';
-import CommentList from './rightSection/CommentList';
-import NewComment from './rightSection/NewComment';
-import LikeBtn from './rightSection/LikeBtn';
-import CmtTag from './rightSection/CmtTag';
 import { S } from './Ranking.style';
-import RankUserInfo from './rightSection/RankUserInfo';
-import { mock_ranking } from '../../_mock/ranking';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//여기서 mock_ranking을 보여줌
-//여기서 랭킹 api를 요청후 뿌려줌
+import RankingApis from '../../api/ranking';
+import Loading from '../_common/Loading';
+import RankDetail from './RankDetail';
+import { useLocation } from 'react-router-dom';
+import RankingListSkeleton from '../../skeleton/RankingListSkeleton';
+
 const Rank = ({ isMyData }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const sort = searchParams.get('sort') || 'lowest';
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const sort = params.get('sort') || 'LOWEST';
     const navigate = useNavigate();
     //api로 받아온 데이터 관리하는 곳
-    const [data, setData] = useState(mock_ranking);
-    const [isLogin, setIsLogin] = useState(false);
-    const [currentUser, setCurrentUser] = useState(mock_ranking[0]);
+    const [rankingData, setRankingData] = useState();
+    const [currentUserId, setCurrentUserId] = useState();
+    const memberId = localStorage.getItem('memberId') || -1;
+    let isLogin = memberId !== -1;
+    const [loading, setLoading] = useState(true);
+    const [rankLoading, setRankLoading] = useState(true);
 
+    //디테일 유저 정보
+    const [currentUser, setCurrentUser] = useState();
+    //sort에 따라 랭킹 정보 불러오기
     useEffect(() => {
-        //랭킹보드 불러오는 로직 (sort에 따라 바뀜)
+        console.log('sort바뀜', sort);
+        setRankingData();
+        setLoading(true);
+        setRankLoading(true);
+        const fetchData = async sort => {
+            const res = await getRankingList(sort, memberId);
+            console.log('받아온 랭킹정보', sort, res);
+            setRankingData(res?.data);
+            setCurrentUserId(res?.data[0].timetableId);
+        };
+        fetchData(sort);
     }, [sort]);
+
+    const getRankingList = (sort, memberId) => {
+        return RankingApis.GetRanking(sort, memberId);
+    };
+
+    const getDetailData = timetableId => {
+        return RankingApis.GetOneRankingDetail(timetableId);
+    };
+
+    //디테일 유저 정보 불러오기
+    useEffect(() => {
+        setCurrentUser();
+        const fetchDetailData = async timetableId => {
+            const res = await getDetailData(timetableId);
+            setCurrentUser(res?.data);
+        };
+        //현재 유저 아이디가 있을때만 데이터 요청
+        if (currentUserId) {
+            fetchDetailData(currentUserId);
+        }
+    }, [currentUserId]);
+
+    //로딩 상태 보여주는 UI
+    useEffect(() => {
+        if (loading && currentUser) {
+            setLoading(false);
+        }
+    }, [loading, currentUser]);
+
+    //랭킹 로딩 중일떄
+    useEffect(() => {
+        console.log('랭킹 로딩중', rankLoading);
+        if (rankLoading && rankingData) {
+            setRankLoading(false);
+        }
+    }, [rankLoading, rankingData]);
 
     return (
         <S.Wrapper>
             <Hamburger />
             {/*랭킹 보여주는 left section*/}
-            <S.Container>
-                <S.SmallContainer>
-                    {isMyData ? (
-                        <MyScore isMobile={false} />
-                    ) : isLogin ? (
-                        <S.NewButton
-                            onClick={() => {
-                                navigate('/create');
-                            }}
-                            isMobile={false}
-                        >
-                            시간표 등록하기
-                        </S.NewButton>
-                    ) : (
-                        <S.NewButton
-                            isMobile={false}
-                            onClick={() => {
-                                navigate('/login');
-                            }}
-                        >
-                            시간표 등록하기
-                        </S.NewButton>
-                    )}
-                    <TabContainer />
-                    <RankingList
-                        data={data}
+            {!currentUserId || loading ? (
+                <Loading />
+            ) : (
+                <S.Container>
+                    <S.SmallContainer>
+                        {!isLogin ? (
+                            <S.NewButton
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
+                                isMobile={false}
+                            >
+                                시간표 등록하기
+                            </S.NewButton>
+                        ) : isMyData ? (
+                            <MyScore isMobile={false} />
+                        ) : (
+                            <S.NewButton
+                                onClick={() => {
+                                    navigate('/create');
+                                }}
+                                isMobile={false}
+                            />
+                        )}
+                        <TabContainer />
+                        {rankLoading ? (
+                            <RankingListSkeleton />
+                        ) : (
+                            <RankingList
+                                data={rankingData}
+                                currentUserId={currentUserId}
+                                setCurrentUserId={setCurrentUserId}
+                            />
+                        )}
+                    </S.SmallContainer>
+                    {/*개별 유저 데이터 보여주는 right section*/}
+                    <RankDetail
+                        memberId={memberId}
+                        currentUserId={currentUserId}
+                        getRankingList={getRankingList}
+                        setLoading={setLoading}
+                        loading={loading}
                         currentUser={currentUser}
-                        setCurrentUser={setCurrentUser}
                     />
-                </S.SmallContainer>
-                {/*개별 유저 데이터 보여주는 right section*/}
-                <S.SmallContainer>
-                    <RankUserInfo data={currentUser} />
-                    <S.TimeTable src={currentUser.tableImg} alt='사진' />
-                    {/*버튼 컨테이너*/}
-                    <S.ButtonContainer>
-                        <LikeBtn number={currentUser.likeCount} />
-                        <CmtTag number={currentUser.replyCount} />
-                    </S.ButtonContainer>
-                    <NewComment currentTableId={currentUser.timetableId} />
-                    <CommentList timetableId={currentUser.timetableId} />
-                </S.SmallContainer>
-            </S.Container>
+                </S.Container>
+            )}
         </S.Wrapper>
     );
 };

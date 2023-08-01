@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 //로그인 + 시간표 채점 정보가 있을때 생김
 //점수 랭킹 조회 => 내 id와 일치하는 객체의 ranking을 가져와서 보여주기
 
+//랭킹 없음을 보여주는 경우는 없다
 const MyScore = ({ isMobile }) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const sort = searchParams.get('sort') || 'lowest';
+    const sort = searchParams.get('sort') || 'LOWEST';
     const [myRanking, setMyRanking] = useState();
 
     useEffect(() => {

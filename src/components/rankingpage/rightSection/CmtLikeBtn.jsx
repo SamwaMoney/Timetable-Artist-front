@@ -2,26 +2,42 @@ import { useState } from 'react';
 import NoLike from '../../../assets/rankingpage/heart1.png';
 import GetLike from '../../../assets/rankingpage/heart2.png';
 import { M, S } from '../Ranking.style';
+import RankingApis from '../../../api/ranking';
 
-const CmtLikeBtn = ({ isMobile }) => {
-    const [isLike, setIsLike] = useState(false);
+const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
+    const [isLike, setIsLike] = useState(heart);
+    const [likeCount, setLikeCount] = useState(replyLikeCount);
 
-    //낙관적 업데이트 => 서버 실패 요청시 원래 하트로 롤백
+    const memberId = localStorage.getItem('memberId') || -1;
+
     //좋아요 누르기
-    const onGiveLike = () => {
+    const onGiveLike = async () => {
+        if (memberId === -1) {
+            return alert('로그인이 필요한 기능입니다.');
+        }
         setIsLike(true);
-        //좋아요 누르는 api 로직
+        setLikeCount(prev => prev + 1);
+        const res = await RankingApis.PostCommentLike(replyId, memberId);
+        console.log('댓글 좋아요 결과', res);
+        //서버 요청 실패시 롤백
+        if (res.status !== 201) {
+            setIsLike(false);
+            setLikeCount(prev => prev - 1);
+        }
     };
 
     //좋아요 취소
-    const onCancelLike = () => {
+    const onCancelLike = async () => {
         setIsLike(false);
+        setLikeCount(prev => {
+            if (prev === 0) {
+                return prev;
+            }
+            return prev - 1;
+        });
         //좋아요 취소하는 api 로직
-    };
-
-    //좋아요 가져오기
-    const onGetLike = () => {
-        //좋아요 가져오는 api 로직
+        const res = await RankingApis.DeleteCommentLike(replyId, memberId);
+        console.log('댓글 좋아요 취소 결과', res);
     };
 
     if (isMobile) {
@@ -36,7 +52,7 @@ const CmtLikeBtn = ({ isMobile }) => {
                 ) : (
                     <S.EventIcon width={2} src={NoLike} onClick={onGiveLike} />
                 )}
-                <div>0</div>
+                <div>{likeCount}</div>
             </M.HeartContainer>
         );
     } else {
@@ -55,7 +71,7 @@ const CmtLikeBtn = ({ isMobile }) => {
                         onClick={onGiveLike}
                     />
                 )}
-                <div>0</div>
+                <div>{likeCount}</div>
             </S.CommentLikeWrapper>
         );
     }

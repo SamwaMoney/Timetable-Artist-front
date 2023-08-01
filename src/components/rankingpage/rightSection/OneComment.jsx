@@ -1,49 +1,97 @@
 import { S, M } from '../Ranking.style';
 import { TiDelete } from 'react-icons/ti';
 import CmtLikeBtn from './CmtLikeBtn';
+import { timeHelper } from '../../../utils/time-helper';
+import { useEffect } from 'react';
+import RankingApis from '../../../api/ranking';
 
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
 //현재 시간을 0시간전으로 계산해서 보여주기
-const OneComment = ({ isMobile, data }) => {
-    const { content, createdAt, heart, replyCount } = data ? data : {};
+const OneComment = ({ isMobile, data, deleteMyComment }) => {
+    const {
+        replyId,
+        timetableId,
+        memberId,
+        content,
+        createdAt,
+        heart,
+        replyName,
+        replyLikeCount,
+    } = data;
+
+    const myMemberId = localStorage.getItem('memberId') || -1;
+
     return isMobile ? (
         <M.OneCommentContainer>
             <M.CommentInfo>
                 <M.IconContainer>
-                    <M.CommentUserName>익명</M.CommentUserName>
-                    <M.CommentDate>3시간 전</M.CommentDate>
+                    <M.CommentUserName>{replyName}</M.CommentUserName>
+                    <M.CommentDate>{timeHelper(createdAt)}</M.CommentDate>
                 </M.IconContainer>
                 <M.IconContainer>
-                    <TiDelete size='8vw' color='var(--background)' />
-                    <CmtLikeBtn isMobile={true} />
+                    {memberId === myMemberId ? (
+                        <TiDelete
+                            size='8vw'
+                            color='var(--background)'
+                            onClick={() => {
+                                deleteMyComment(myMemberId, replyId);
+                            }}
+                        />
+                    ) : null}
+                    <CmtLikeBtn
+                        isMobile={true}
+                        heart={heart}
+                        replyLikeCount={replyLikeCount}
+                    />
                 </M.IconContainer>
             </M.CommentInfo>
-            <M.CommentText>
-                그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
-                Spotlight 날 봐 I'm a star star star
-            </M.CommentText>
+            <M.CommentText>{content}</M.CommentText>
         </M.OneCommentContainer>
     ) : (
-        <S.OneCommentContainer>
-            <S.CommentInfo>
-                <S.CommentTextWrapper>
-                    <S.CommentUserName>익명</S.CommentUserName>
-                    <S.CommentDate>2023.7.9</S.CommentDate>
-                </S.CommentTextWrapper>
-            </S.CommentInfo>
-            <S.CommentText>
-                그래 내가 봐도 난 퀀카 i'm hot My boob and booty is hot
-                Spotlight 날 봐 I'm a star star star
-            </S.CommentText>
-            <div style={{ position: 'absolute', right: '3rem', top: '0.4rem' }}>
-                <TiDelete size='2rem' color='var(--background)' />
-            </div>
-            <div
-                style={{ position: 'absolute', right: '0.5rem', top: '0.4rem' }}
-            >
-                <CmtLikeBtn isMobile={false} />
-            </div>
-        </S.OneCommentContainer>
+        data && (
+            <S.OneCommentContainer>
+                <S.CommentInfo>
+                    <S.CommentTextWrapper>
+                        <S.CommentUserName>{replyName}</S.CommentUserName>
+                        <S.CommentDate>{timeHelper(createdAt)}</S.CommentDate>
+                    </S.CommentTextWrapper>
+                </S.CommentInfo>
+                <S.CommentText>{content}</S.CommentText>
+                {/*내 댓글일떄만 삭제 버튼*/}
+                {memberId == myMemberId ? (
+                    <div
+                        style={{
+                            position: 'absolute',
+                            right: '3rem',
+                            top: '0.4rem',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        <TiDelete
+                            size='2rem'
+                            color='var(--background)'
+                            onClick={() => {
+                                deleteMyComment(myMemberId, replyId);
+                            }}
+                        />
+                    </div>
+                ) : null}
+                <div
+                    style={{
+                        position: 'absolute',
+                        right: '0.5rem',
+                        top: '0.4rem',
+                    }}
+                >
+                    <CmtLikeBtn
+                        isMobile={false}
+                        heart={heart}
+                        replyId={replyId}
+                        replyLikeCount={replyLikeCount}
+                    />
+                </div>
+            </S.OneCommentContainer>
+        )
     );
 };
 
