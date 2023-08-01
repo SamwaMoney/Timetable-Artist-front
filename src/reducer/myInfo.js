@@ -7,7 +7,7 @@ const initialState = {
     myTimeTableId: null,
 };
 
-const myResultReducer = (state = initialState, action) => {
+const myInfoReducer = (state = initialState, action) => {
     const { tableId, score, tableType } = action.payload | null;
     switch (action.type) {
         case ADD_MY_RESULT:
@@ -22,4 +22,4 @@ const myResultReducer = (state = initialState, action) => {
     }
 };
 
-export default myResultReducer;
+export default myInfoReducer;

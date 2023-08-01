@@ -36,6 +36,12 @@ SK.RankNum = styled(SkeletonDiv)`
     z-index: 100;
 `;
 
+SK.RankContainer = styled.div`
+    width: 75%;
+    display: flex;
+    align-items: center;
+    padding-top: ${props => (props.padding ? `${props.padding}rem` : '14vw')};
+`;
 SK.UserInfo = styled(SkeletonDiv)`
     width: 100%;
     ${FlexCenter}
@@ -62,4 +68,20 @@ SK.CommentInfo = styled(SkeletonDiv)`
     height: ${props => (props.height ? `${props.height}vw` : '15vw')};
     border-radius: ${props => (props.height ? `${props.radius}vw` : '3vw')};
     margin-bottom: 3vw;
+`;
+
+SK.SmallContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 49.5%;
+    height: 100%;
+    border: 0.1rem solid black;
+`;
+
+SK.TimaTableImg = styled(SkeletonDiv)`
+    width: 90%;
+    height: ${props => (props.height ? `${props.height}rem` : '40rem')};
+    margin-top: 3vw;
+    border-radius: 1vw;
 `;

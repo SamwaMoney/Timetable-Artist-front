@@ -6,6 +6,7 @@ import NewComment from './NewComment';
 import CommentSkeleton from '../../../skeleton/CommentSkeleton';
 import MCommentSkeleton from '../../../skeleton/MCommentSkeleton';
 const CommentList = ({ isMobile, currentUserId }) => {
+    const [isDeleteCmtModalOpen, setIsDeleteCmtModalOpen] = useState(false);
     const memberId = localStorage.getItem('memberId') || -1;
     const [CommentData, setCommentData] = useState();
     const [loading, setLoading] = useState(true);
@@ -50,21 +51,30 @@ const CommentList = ({ isMobile, currentUserId }) => {
     };
 
     return isMobile ? (
-        <MCommentContainer>
-            {loading ? (
-                <MCommentSkeleton />
-            ) : CommentData.length > 0 ? (
-                CommentData.map(reply => (
-                    <OneComment
-                        data={reply}
-                        deleteMyComment={deleteMyComment}
-                        key={Math.random() * 1000}
-                    />
-                ))
-            ) : (
-                <MNoComment>댓글이 없습니다.</MNoComment>
-            )}
-        </MCommentContainer>
+        <>
+            <NewComment
+                currentUserId={currentUserId}
+                updateComment={updateComment}
+                isMobile={true}
+            />
+            <MCommentContainer>
+                {loading ? (
+                    <MCommentSkeleton />
+                ) : CommentData.length > 0 ? (
+                    CommentData.map(reply => (
+                        <OneComment
+                            data={reply}
+                            deleteMyComment={deleteMyComment}
+                            key={Math.random() * 1000}
+                            setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
+                            isDeleteCmtModalOpen={isDeleteCmtModalOpen}
+                        />
+                    ))
+                ) : (
+                    <MNoComment>댓글이 없습니다.</MNoComment>
+                )}
+            </MCommentContainer>
+        </>
     ) : (
         <>
             <NewComment
@@ -74,12 +84,14 @@ const CommentList = ({ isMobile, currentUserId }) => {
             <CommentContainer>
                 {loading ? (
                     <CommentSkeleton />
-                ) : CommentData.length > 0 ? (
+                ) : CommentData?.length > 0 ? (
                     CommentData.map(reply => (
                         <OneComment
                             data={reply}
                             deleteMyComment={deleteMyComment}
                             key={Math.random() * 1000}
+                            setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
+                            isDeleteCmtModalOpen={isDeleteCmtModalOpen}
                         />
                     ))
                 ) : (

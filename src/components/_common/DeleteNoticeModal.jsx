@@ -10,7 +10,7 @@ const DeleteNoticeModal = ({ setIsDoubleDeleteModalOpen }) => {
                 className={`red-background modal ${isMobile && 'mobile-modal'}`}
             >
                 <p className={`emoji ${isMobile && 'mobile-emoji'}`}>
-                    (´-_ゝ-`)
+                    s(￣∇￣)V
                 </p>
                 <p className={`text ${isMobile && 'mobile-text'}`}>
                     삭제되었습니다.

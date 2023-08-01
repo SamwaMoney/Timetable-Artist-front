@@ -124,6 +124,7 @@ const Rank = ({ isMyData }) => {
                         setLoading={setLoading}
                         loading={loading}
                         currentUser={currentUser}
+                        rankLoading={rankLoading}
                     />
                 </S.Container>
             )}

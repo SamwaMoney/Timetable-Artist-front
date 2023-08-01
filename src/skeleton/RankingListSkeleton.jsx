@@ -3,7 +3,7 @@ import { SK } from './skeleton.style';
 import { styled } from 'styled-components';
 const RankingListSkeleton = () => {
     return (
-        <SK.List margin={4}>
+        <SK.List margin={1}>
             {Array(6)
                 .fill()
                 .map(el => {
@@ -16,8 +16,8 @@ const RankingListSkeleton = () => {
                                     paddingTop: '1vw',
                                 }}
                             >
-                                <SK.RankNum height={5.5} width={7} />
-                                <SK.UserInfo height={5.5} />
+                                <SK.RankNum height={3.6} width={4.2} />
+                                <SK.UserInfo height={3.6} />
                             </div>
                         </S.RankContainer>
                     );

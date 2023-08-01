@@ -2,15 +2,19 @@ import { S, M } from '../Ranking.style';
 import { TiDelete } from 'react-icons/ti';
 import CmtLikeBtn from './CmtLikeBtn';
 import { timeHelper } from '../../../utils/time-helper';
-import { useEffect } from 'react';
-import RankingApis from '../../../api/ranking';
+import DeleteCmtConfirmModal from '../../_common/DeleteCmtConfirmModal';
 
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
 //현재 시간을 0시간전으로 계산해서 보여주기
-const OneComment = ({ isMobile, data, deleteMyComment }) => {
+const OneComment = ({
+    isMobile,
+    data,
+    deleteMyComment,
+    setIsDeleteCmtModalOpen,
+    isDeleteCmtModalOpen,
+}) => {
     const {
         replyId,
-        timetableId,
         memberId,
         content,
         createdAt,
@@ -34,7 +38,7 @@ const OneComment = ({ isMobile, data, deleteMyComment }) => {
                             size='8vw'
                             color='var(--background)'
                             onClick={() => {
-                                deleteMyComment(myMemberId, replyId);
+                                setIsDeleteCmtModalOpen(true);
                             }}
                         />
                     ) : null}
@@ -46,6 +50,14 @@ const OneComment = ({ isMobile, data, deleteMyComment }) => {
                 </M.IconContainer>
             </M.CommentInfo>
             <M.CommentText>{content}</M.CommentText>
+            {isDeleteCmtModalOpen && (
+                <DeleteCmtConfirmModal
+                    setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
+                    deleteMyComment={deleteMyComment}
+                    replyId={replyId}
+                    memberId={myMemberId}
+                />
+            )}
         </M.OneCommentContainer>
     ) : (
         data && (
@@ -71,7 +83,7 @@ const OneComment = ({ isMobile, data, deleteMyComment }) => {
                             size='2rem'
                             color='var(--background)'
                             onClick={() => {
-                                deleteMyComment(myMemberId, replyId);
+                                setIsDeleteCmtModalOpen(true);
                             }}
                         />
                     </div>
@@ -90,6 +102,14 @@ const OneComment = ({ isMobile, data, deleteMyComment }) => {
                         replyLikeCount={replyLikeCount}
                     />
                 </div>
+                {isDeleteCmtModalOpen && (
+                    <DeleteCmtConfirmModal
+                        setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
+                        deleteMyComment={deleteMyComment}
+                        replyId={replyId}
+                        memberId={myMemberId}
+                    />
+                )}
             </S.OneCommentContainer>
         )
     );
