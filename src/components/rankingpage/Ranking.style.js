@@ -160,8 +160,7 @@ const RankContainer = styled.div`
 S.RankContainer = styled(RankContainer)`
     margin-top: 1rem;
     width: 75%;
-    display: flex;
-    align-items: center;
+    margin-top: 2vw;
 `;
 
 S.RankUserWrapper = styled.div`

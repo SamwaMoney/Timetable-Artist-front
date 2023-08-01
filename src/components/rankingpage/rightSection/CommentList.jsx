@@ -74,7 +74,7 @@ const CommentList = ({ isMobile, currentUserId }) => {
             <CommentContainer>
                 {loading ? (
                     <CommentSkeleton />
-                ) : CommentData.length > 0 ? (
+                ) : CommentData?.length > 0 ? (
                     CommentData.map(reply => (
                         <OneComment
                             data={reply}

@@ -29,18 +29,25 @@ SK.RankNum = styled(SkeletonDiv)`
     ${FlexCenter}
     margin-right: 1%;
     border-radius: 50%;
-    width: ${props => (props.width ? `${props.width}vw` : '20%')};
-    height: ${props => (props.height ? `${props.height}vw` : '14vw')};
+    width: ${props => (props.width ? `${props.width}rem` : '20%')};
+    height: ${props => (props.height ? `${props.height}rem` : '14vw')};
     font-size: 8vw;
     ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
     z-index: 100;
 `;
 
+SK.RankContainer = styled.div`
+    margin-top: 1rem;
+    width: 75%;
+    margin-top: 2vw;
+    display: flex;
+    align-items: center;
+`;
 SK.UserInfo = styled(SkeletonDiv)`
     width: 100%;
     ${FlexCenter}
     position: relative;
-    height: ${props => (props.height ? `${props.height}vw` : '14vw')};
+    height: ${props => (props.height ? `${props.height}rem` : '14vw')};
     border-radius: 7vw;
     ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
     z-index: 100;
@@ -62,4 +69,20 @@ SK.CommentInfo = styled(SkeletonDiv)`
     height: ${props => (props.height ? `${props.height}vw` : '15vw')};
     border-radius: ${props => (props.height ? `${props.radius}vw` : '3vw')};
     margin-bottom: 3vw;
+`;
+
+SK.SmallContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 49.5%;
+    height: 100%;
+    border: 0.1rem solid black;
+`;
+
+SK.TimaTableImg = styled(SkeletonDiv)`
+    width: 90%;
+    height: 40rem;
+    margin-top: 3vw;
+    border-radius: 1vw;
 `;
