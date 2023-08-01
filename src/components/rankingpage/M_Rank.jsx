@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import RankingApis from '../../api/ranking';
 import { useLocation } from 'react-router-dom';
+import MRankingListSkeleton from '../../skeleton/MRankingListSkeleton';
 
 //전역 변수 => 현재 시간표가 있는가?
 //로그인 상태 => 시간표 있으면 내 점수, 내 랭킹 보여주기
@@ -23,25 +24,30 @@ const MobileRank = ({ isMyData }) => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-        //sort에 따라 랭킹 정보 불러오기
-        useEffect(() => {
-            console.log('sort바뀜', sort);
-            setRankingData();
-            setLoading(true);
-            const fetchData = async sort => {
-                const res = await getRankingList(sort, memberId);
-                console.log('받아온 랭킹정보', sort, res);
-                setRankingData(res?.data);
-            };
-            fetchData(sort);
-            setLoading(false);
-        }, [sort]);
-    
-        const getRankingList = (sort, memberId) => {
-            return RankingApis.GetRanking(sort, memberId);
+    //sort에 따라 랭킹 정보 불러오기
+    useEffect(() => {
+        console.log('sort바뀜', sort);
+        setRankingData('');
+        setLoading(true);
+        const fetchData = async sort => {
+            const res = await getRankingList(sort, memberId);
+            console.log('받아온 랭킹정보', sort, res);
+            setRankingData(res?.data);
         };
+        fetchData(sort);
+    }, [sort]);
 
-        
+    const getRankingList = (sort, memberId) => {
+        return RankingApis.GetRanking(sort, memberId);
+    };
+
+    useEffect(() => {
+        console.log('로딩상태', loading);
+        if (loading && rankingData) {
+            setLoading(false);
+        }
+    }, [loading, rankingData]);
+
     return (
         <M.FlexContainer>
             <MHamburgerButton />
@@ -67,7 +73,11 @@ const MobileRank = ({ isMyData }) => {
                 </M.NewButton>
             )}
             <TabContainer isMobile={true} />
-            <RankingList isMobile={true} data={rankingData} />
+            {loading ? (
+                <MRankingListSkeleton />
+            ) : (
+                <RankingList isMobile={true} data={rankingData} />
+            )}
         </M.FlexContainer>
     );
 };

@@ -2,11 +2,12 @@ import React from 'react';
 import { FlexCenter, S } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
 // ٩( ᐛ )و  ◡
-const MLoading = () => {
+const MRankingLoading = () => {
     return (
         <Wrapper>
             <LoadingWrapper>
-                <Emoticon> __〆(･⌄･;) </Emoticon>
+                <div>로딩 중...</div>
+                {/* <Emoticon> __〆(･⌄･;) </Emoticon>
 
                 <div className='waviy'>
                     <Waviy style={{ '--i': 1 }}>시</Waviy>
@@ -33,13 +34,12 @@ const MLoading = () => {
                     <span style={{ marginLeft: '5px' }}></span>
                     <Waviy style={{ '--i': 18 }}>.</Waviy>
                     {/* <span>☆ƪ(˘⌣˘)ʃ☆</span> */}
-                </div>
             </LoadingWrapper>
         </Wrapper>
     );
 };
 
-export default MLoading;
+export default MRankingLoading;
 
 const Wrapper = styled.div`
     width: 100%;
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
 const LoadingWrapper = styled.div`
     height: 100vh;
     width: 100%;
-    background: linear-gradient(to bottom, #e2e2e2, #84afff);
+    background: var(--background);
     ${FlexCenter}
     flex-direction: column;
 `;

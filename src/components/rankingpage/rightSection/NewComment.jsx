@@ -41,9 +41,9 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
         return setIsNoName(false);
     };
 
-    useEffect(()=>{
-        console.log('memberId',memberId);
-    },[])
+    useEffect(() => {
+        console.log('memberId', memberId);
+    }, []);
 
     return isMobile ? (
         <M.NewCommentWrapper>
@@ -57,10 +57,17 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                     />
                     <M.NoNameText>익명</M.NoNameText>
                 </M.checkBoxNoName>
-                <M.CommentInput
-                    placeholder='댓글 쓰기...'
-                    onChange={onChangeText}
-                />
+                {memberId !== -1 ? (
+                    <M.CommentInput
+                        placeholder='댓글 쓰기...'
+                        onChange={onChangeText}
+                        value={newText}
+                    />
+                ) : (
+                    <M.CommentDisabled>
+                        로그인 후에 댓글을 쓸 수 있습니다.
+                    </M.CommentDisabled>
+                )}
                 <M.UploadImg src={Write} alt='올리기' />
             </M.NewCommentContainer>
         </M.NewCommentWrapper>
@@ -75,14 +82,17 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                 />
                 <S.NoNameText>익명</S.NoNameText>
             </S.checkBoxNoName>
-            {(memberId !== -1)?
-            (
-            <S.CommentInput
-                placeholder='댓글 쓰기...'
-                onChange={onChangeText}
-                value={newText}
-            />):(
-            <S.CommentDisabled>로그인 후에 댓글을 쓸 수 있습니다.</S.CommentDisabled>)}
+            {memberId !== -1 ? (
+                <S.CommentInput
+                    placeholder='댓글 쓰기...'
+                    onChange={onChangeText}
+                    value={newText}
+                />
+            ) : (
+                <S.CommentDisabled>
+                    로그인 후에 댓글을 쓸 수 있습니다.
+                </S.CommentDisabled>
+            )}
             <S.UploadButton
                 onClick={onSubmitNewComment}
                 type='button'

@@ -29,7 +29,7 @@ const TabContainer = ({ isMobile }) => {
     return isMobile ? (
         <M.TabContainer>
             <M.Tab
-            currentSort={sort}
+                currentSort={sort}
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
@@ -38,11 +38,10 @@ const TabContainer = ({ isMobile }) => {
                 {sort !== 'HIGHEST' ? '최악의 시간표' : '최고의 시간표'}
             </M.Tab>
             <M.LikeTab
-                       currentSort={sort}
+                currentSort={sort}
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                // isactive={(sort === 'LIKE').toString()}
             >
                 인기 시간표
             </M.LikeTab>

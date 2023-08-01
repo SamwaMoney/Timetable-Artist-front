@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
-import LikeBtn from '../rightSection/LikeBtn';
 import CmtTag from '../rightSection/CmtTag';
 import Timetable from '../../../assets/scorepage/timetable.png';
-import RankingApis from '../../../api/ranking';
+import LikeTag from '../rightSection/LikeTag';
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 //받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
 const OneRanking = ({
@@ -27,25 +26,7 @@ const OneRanking = ({
         index === 0 ? true : false,
     );
 
-    const [loading,setLoading] = useState(true);
-    //⭐️모바일 like 떄매 필요함
-    const [currentUser, setCurrentUser] = useState();
-    const getDetailData = timetableId => {
-        return RankingApis.GetOneRankingDetail(timetableId);
-    };
-    useEffect(() => {
-        const fetchData = async timetableId => {
-            const res = await getDetailData(timetableId);
-            setCurrentUser(res?.data);
-        };
-        fetchData(currentUserId);
-        console.log('+++++++개별 데이터 불러옴');
-        setLoading(false);
-    }, [currentUserId]);
-    const getRankingList = (sort, memberId) => {
-        return RankingApis.GetRanking(sort, memberId);
-    };
-
+    const [loading, setLoading] = useState(true);
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
     const {
@@ -56,6 +37,7 @@ const OneRanking = ({
         tableImg,
         likeCount,
         replyCount,
+        liked,
     } = data;
 
     useEffect(() => {
@@ -117,13 +99,7 @@ const OneRanking = ({
                             />
                         </M.TimeTableWrapper>
                         <M.ButtonContainer>
-                            <LikeBtn
-                                timetableId={timetableId}
-                                number={likeCount}
-                                isMobile={true}
-                                currentUser={currentUser}
-                                getRankingList={getRankingList}
-                            />
+                            <LikeTag number={likeCount} liked={liked} />
                             <CmtTag number={replyCount} isMobile={true} />
                         </M.ButtonContainer>
                     </>

@@ -16,13 +16,13 @@ S.BasicContainer = styled.div`
 `;
 
 M.FlexContainer = styled.div`
-    margin-top: 15vw;
     font-style: var(--korean);
-display:flex;
-align-items:center;
+    display: flex;
+    align-items: center;
     flex-direction: column;
     background-color: var(--background);
-    min-height:100vh;
+    min-height: 100vh;
+    z-index: -10;
 `;
 
 S.Wrapper = styled(S.BasicContainer)`
@@ -326,6 +326,7 @@ M.MyScoreWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 14vw;
 `;
 
 //FlexBox
@@ -563,6 +564,7 @@ S.CommentInfo = styled.div`
     width: 100%;
     position: relative;
 `;
+
 M.CommentInfo = styled.div`
     ${FlexCenter}
     justify-content:space-between;
@@ -625,7 +627,6 @@ M.TimeTable = styled.img`
     margin-top: 0.8rem;
 `;
 
-
 //댓글 쓰기 컴포넌트
 S.NewCommentWrapper = styled.div`
     margin-top: 5%;
@@ -678,7 +679,7 @@ S.NoNameText = styled.div`
     margin-left: 0.5rem;
 `;
 M.NoNameText = styled.div`
-    font-size: 0.3rem;
+    font-size: 0.9rem;
     margin-left: 0.5rem;
 `;
 S.CommentInput = styled.input`
@@ -692,11 +693,11 @@ S.CommentDisabled = styled.div`
     height: 2rem;
     width: 75%;
     font-size: 0.9rem;
-    background-color:white;
-    color:grey;
-    padding-left:1vw;
-    display:flex;
-    align-items:center;
+    background-color: white;
+    color: grey;
+    padding-left: 1vw;
+    display: flex;
+    align-items: center;
 `;
 M.CommentInput = styled.input`
     padding-left: 10vw;
@@ -706,6 +707,19 @@ M.CommentInput = styled.input`
     z-index: 10;
     padding: 3vw;
     width: 70%;
+`;
+
+M.CommentDisabled = styled.div`
+    padding-left: 10vw;
+    font-size: 0.7rem;
+    border: none;
+    border-radius: 5rem;
+    z-index: 10;
+    padding: 3vw;
+    width: 70%;
+    color: grey;
+    display: flex;
+    align-items: center;
 `;
 
 S.UploadButton = styled.button`

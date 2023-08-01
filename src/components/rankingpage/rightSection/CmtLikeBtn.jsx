@@ -12,8 +12,8 @@ const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
 
     //좋아요 누르기
     const onGiveLike = async () => {
-        if(memberId === -1){
-           return alert('로그인이 필요한 서비스입니다!')
+        if (memberId === -1) {
+            return alert('로그인이 필요한 기능입니다.');
         }
         setIsLike(true);
         setLikeCount(prev => prev + 1);

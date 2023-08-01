@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react';
 import RankingApis from '../../api/ranking';
 import { useParams } from 'react-router-dom';
 import Timetable from '../../assets/scorepage/timetable.png';
+import MRankingLoading from '../_common/M_RankingLoading';
+
 //해당 유저의 아이디를 params로 가져오고, rank의 경우는 쿼리스트링으로 가져옴
 //시간표 채점 결과 조회 api를 사용함.
 const MRankDetail = () => {
@@ -24,27 +26,35 @@ const MRankDetail = () => {
     const params = useParams();
     const timetableId = params.id;
     const [currentUser, setCurrentUser] = useState();
-
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         //timetableId로 해당 유저의 정보 검색
         //comment는 따로 검색
+        setLoading(true);
         const fetch = async () => {
             const res = await getDetailData(timetableId);
             setCurrentUser(res?.data);
         };
         fetch();
-        setLoading(false);
     }, []);
+
+    //로딩 상태 보여주는 UI
+    useEffect(() => {
+        console.log('로딩상태', loading);
+        if (loading && currentUser) {
+            setLoading(false);
+        }
+    }, [loading, currentUser]);
 
     const getDetailData = timetableId => {
         return RankingApis.GetOneRankingDetail(timetableId);
     };
 
-
-    return (
-        !loading && currentUser && (
+    return loading ? (
+        <MRankingLoading />
+    ) : (
+        currentUser && (
             <Wrapper>
                 <Header>
                     <div style={{ marginTop: '7vw', marginLeft: '4vw' }}>
@@ -59,7 +69,8 @@ const MRankDetail = () => {
 
                             <M.CategoryContainer>
                                 <M.Category>
-                                   {currentUser?.tableTypeContent || '유형 정보 없음'}
+                                    {currentUser?.tableTypeContent ||
+                                        '유형 정보 없음'}
                                 </M.Category>
                                 <M.Nickname>{currentUser?.owner}</M.Nickname>
                             </M.CategoryContainer>
@@ -81,7 +92,7 @@ const MRankDetail = () => {
                     </M.DetailBtnContainer>
                     {/*뎃글 적는 인풋창 */}
                     <NewComment isMobile={true} />
-                    <CommentList isMobile={true} />
+                    <CommentList isMobile={true} currentUserId={timetableId} />
                 </M.DetailWrapper>
             </Wrapper>
         )
@@ -90,9 +101,10 @@ const MRankDetail = () => {
 export default MRankDetail;
 
 const Wrapper = styled.div`
-min-height:100vh;
-background-color: var(--background);
-z-index: -10`
+    min-height: 100vh;
+    background-color: var(--background);
+    z-index: -10;
+`;
 const Header = styled.div`
     position: fixed;
     z-index: 10;

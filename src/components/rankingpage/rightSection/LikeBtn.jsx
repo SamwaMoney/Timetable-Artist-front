@@ -6,8 +6,7 @@ import RankingApis from '../../../api/ranking';
 import { useLocation } from 'react-router-dom';
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
 //시간표
-const LikeBtn = ({ isMobile, timetableId, currentUser,getRankingList }) => {
-    console.log('좋아요 currentUser',currentUser);
+const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
     const [isLike, setIsLike] = useState(false);
     const [likeNum, setLikeNum] = useState(0);
     const location = useLocation();
@@ -16,15 +15,15 @@ const LikeBtn = ({ isMobile, timetableId, currentUser,getRankingList }) => {
 
     const memberId = localStorage.getItem('memberId') || -1;
 
-    useEffect(()=>{
+    useEffect(() => {
         setIsLike(currentUser?.liked);
         setLikeNum(currentUser?.likeCount);
-    },[currentUser])
+    }, [currentUser]);
 
     //좋아요 누르기 (낙관적 업데이트)
     const onGiveLike = async () => {
-        if(memberId === -1){
-            return alert('로그인이 필요한 기능입니다.')
+        if (memberId === -1) {
+            return alert('로그인이 필요한 기능입니다.');
         }
         setIsLike(true);
         setLikeNum(prev => prev + 1);
@@ -34,9 +33,9 @@ const LikeBtn = ({ isMobile, timetableId, currentUser,getRankingList }) => {
         if (res?.status !== 201) {
             setIsLike(false);
             setLikeNum(prev => prev - 1);
-        }else{
-            if(sort === 'LIKE'){
-                getRankingList(sort,memberId)
+        } else {
+            if (sort === 'LIKE') {
+                getRankingList(sort, memberId);
             }
         }
     };
@@ -54,9 +53,9 @@ const LikeBtn = ({ isMobile, timetableId, currentUser,getRankingList }) => {
         if (res?.status !== 200) {
             setIsLike(true);
             setLikeNum(prev => prev + 1);
-        }else{
-            if(sort === 'LIKE'){
-                getRankingList(sort,memberId)
+        } else {
+            if (sort === 'LIKE') {
+                getRankingList(sort, memberId);
             }
         }
     };
@@ -81,28 +80,30 @@ const LikeBtn = ({ isMobile, timetableId, currentUser,getRankingList }) => {
             <p>{likeNum}</p>
         </M.IconButton>
     ) : (
-        currentUser && <S.IconButton>
-            {isLike ? (
-                <>
-                    <S.EventIcon
-                        width={2}
-                        src={YesLike}
-                        alt='하트'
-                        onClick={onCancelLike}
-                    />
-                </>
-            ) : (
-                <>
-                    <S.EventIcon
-                        width={2}
-                        src={NoLike}
-                        alt='하트'
-                        onClick={onGiveLike}
-                    />
-                </>
-            )}
-            <p>{likeNum}</p>
-        </S.IconButton>
+        currentUser && (
+            <S.IconButton>
+                {isLike ? (
+                    <>
+                        <S.EventIcon
+                            width={2}
+                            src={YesLike}
+                            alt='하트'
+                            onClick={onCancelLike}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <S.EventIcon
+                            width={2}
+                            src={NoLike}
+                            alt='하트'
+                            onClick={onGiveLike}
+                        />
+                    </>
+                )}
+                <p>{likeNum}</p>
+            </S.IconButton>
+        )
     );
 };
 export default LikeBtn;

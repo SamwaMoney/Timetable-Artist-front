@@ -11,10 +11,9 @@ const RankingList = ({ isMobile, data, setCurrentUserId, currentUserId }) => {
 
     return (
         <S.List>
-        {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
-        {sort === 'LIKE' ? null : <Toggle isMobile={isMobile} />}
-        {data && (
-        
+            {/*최악, 최고의 시간표일 때만 토글을 보여줌*/}
+            {sort === 'LIKE' ? null : <Toggle isMobile={isMobile} />}
+            {data &&
                 data.map((user, index) => {
                     return (
                         <OneRanking
@@ -26,8 +25,7 @@ const RankingList = ({ isMobile, data, setCurrentUserId, currentUserId }) => {
                             setCurrentUserId={setCurrentUserId}
                         />
                     );
-                })
-        )}
+                })}
         </S.List>
     );
 };

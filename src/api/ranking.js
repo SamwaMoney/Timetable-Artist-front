@@ -110,8 +110,8 @@ const RankingApis = {
     // 댓글 좋아요 취소 => memberId가 들어가야 하는데 => header있는지 확인
     DeleteCommentLike: async (replyId, memberId) => {
         try {
-            const res = await http.delete(`/${replyId}/likes`,{
-                memberId
+            const res = await http.delete(`/${replyId}/likes`, {
+                memberId,
             });
             console.log(res);
             return res;
