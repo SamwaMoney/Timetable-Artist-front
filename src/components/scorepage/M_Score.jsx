@@ -196,7 +196,9 @@ const M_Score = () => {
                             </S.UploadBtn>
                         )}
 
-                        <S.BasicFont>SNS에 공유하기</S.BasicFont>
+                        <S.BasicFont style={{ fontWeight: '700' }}>
+                            SNS에 공유하기
+                        </S.BasicFont>
                         <S.IconContainer>
                             <RWebShare
                                 data={{

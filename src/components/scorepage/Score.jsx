@@ -204,7 +204,9 @@ const Score = () => {
                                         </S.UploadBtn>
                                     )}
 
-                                    <S.BasicFont>SNS에 공유하기</S.BasicFont>
+                                    <S.BasicFont style={{ fontWeight: '700' }}>
+                                        SNS에 공유하기
+                                    </S.BasicFont>
                                     <S.IconContainer>
                                         <RWebShare
                                             data={{
@@ -213,15 +215,12 @@ const Score = () => {
                                                 title: '시간표 아티스트',
                                             }}
                                         >
-                                            <S.Icon
-                                                src={share}
-                                                width={'2.5vw'}
-                                            />
+                                            <S.Icon src={share} width={'38'} />
                                         </RWebShare>
 
                                         <S.Icon
                                             src={kakaotalk}
-                                            width={'2.5vw'}
+                                            width={'38'}
                                             onClick={handleKakaoBtn}
                                         />
 
@@ -233,8 +232,8 @@ const Score = () => {
                                         >
                                             <S.Icon
                                                 src={twitter}
-                                                width={'2.5vw'}
-                                                style={{ marginTop: '0.25vw' }}
+                                                width={'38'}
+                                                style={{ marginTop: '0.1vw' }}
                                             />
                                         </TwitterShareButton>
                                     </S.IconContainer>
