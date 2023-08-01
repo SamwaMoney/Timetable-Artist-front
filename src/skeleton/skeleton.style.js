@@ -40,7 +40,7 @@ SK.RankContainer = styled.div`
     width: 75%;
     display: flex;
     align-items: center;
-    padding-top: 15vw;
+    padding-top: ${props => (props.padding ? `${props.padding}rem` : '14vw')};
 `;
 SK.UserInfo = styled(SkeletonDiv)`
     width: 100%;

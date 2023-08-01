@@ -3,7 +3,7 @@ import { SK } from './skeleton.style';
 const RightSectionSkeleton = () => {
     return (
         <SK.SmallContainer>
-            <SK.RankContainer>
+            <SK.RankContainer padding={6}>
                 <SK.RankNum height={4} width={5} />
                 <SK.UserInfo height={4} />
             </SK.RankContainer>
