@@ -1,6 +1,7 @@
 import { S } from './Score.style';
 import { useState, useEffect } from 'react';
 import { useScript } from './useScript';
+import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { TwitterShareButton } from 'react-share';
 import { RWebShare } from 'react-web-share';
@@ -26,6 +27,7 @@ const Score = () => {
 
     const mainURL = window.location.href.slice(0, -5);
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
+    const navigate = useNavigate();
 
     const handleRankingClick = () => {
         setRankingModalOpen(true);
@@ -202,7 +204,9 @@ const Score = () => {
                                         </S.UploadBtn>
                                     )}
 
-                                    <S.BasicFont>SNS에 공유하기</S.BasicFont>
+                                    <S.BasicFont style={{ fontWeight: '700' }}>
+                                        SNS에 공유하기
+                                    </S.BasicFont>
                                     <S.IconContainer>
                                         <RWebShare
                                             data={{
@@ -211,15 +215,12 @@ const Score = () => {
                                                 title: '시간표 아티스트',
                                             }}
                                         >
-                                            <S.Icon
-                                                src={share}
-                                                width={'2.5vw'}
-                                            />
+                                            <S.Icon src={share} width={'38'} />
                                         </RWebShare>
 
                                         <S.Icon
                                             src={kakaotalk}
-                                            width={'2.5vw'}
+                                            width={'38'}
                                             onClick={handleKakaoBtn}
                                         />
 
@@ -231,8 +232,8 @@ const Score = () => {
                                         >
                                             <S.Icon
                                                 src={twitter}
-                                                width={'2.5vw'}
-                                                style={{ marginTop: '0.25vw' }}
+                                                width={'38'}
+                                                style={{ marginTop: '0.1vw' }}
                                             />
                                         </TwitterShareButton>
                                     </S.IconContainer>
@@ -251,7 +252,9 @@ const Score = () => {
                     <S.NoData>
                         <S.NoDataText>Σ(‘⊙ₒ ⊙’；)</S.NoDataText>
                         <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
-                        <S.Button>시간표 만들러 가기</S.Button>
+                        <S.Button onClick={() => navigate('/create')}>
+                            시간표 만들러 가기
+                        </S.Button>
                     </S.NoData>
                 )}
             </S.Container>

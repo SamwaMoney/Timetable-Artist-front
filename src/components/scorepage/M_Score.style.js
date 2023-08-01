@@ -57,7 +57,7 @@ S.Save = styled.button`
     margin-top: 8%;
     background-color: rgba(255, 255, 255, 0);
     color: var(--black);
-    font-size: 2.5vw;
+    font-size: 4vw;
     font-weight: 500;
     text-align: center;
 `;
@@ -195,8 +195,8 @@ S.UploadedBtn = styled.button`
 S.IconContainer = styled(S.BasicContainer)`
     flex-direction: row;
     justify-content: center;
-    margin: 5% 3% 10% 3%;
-    gap: 15%;
+    margin: 3% 3% 10% 3%;
+    gap: 20%;
 `;
 S.NoData = styled(S.BasicContainer)`
     flex-direction: column;
