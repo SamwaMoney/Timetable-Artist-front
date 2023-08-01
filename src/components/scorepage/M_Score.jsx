@@ -1,6 +1,7 @@
 import { S } from './M_Score.style';
 import { useState, useEffect } from 'react';
 import { useScript } from './useScript';
+import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { TwitterShareButton } from 'react-share';
 import { RWebShare } from 'react-web-share';
@@ -26,6 +27,7 @@ const M_Score = () => {
 
     const mainURL = window.location.href.slice(0, -5);
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
+    const navigate = useNavigate();
 
     const handleRankingClick = () => {
         setRankingModalOpen(true);
@@ -237,7 +239,9 @@ const M_Score = () => {
                     <BackBtn />
                     <S.NoDataText>Σ(‘⊙ₒ ⊙’；)</S.NoDataText>
                     <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
-                    <S.Button>시간표 만들러 가기</S.Button>
+                    <S.Button onClick={() => navigate('/create')}>
+                        시간표 만들러 가기
+                    </S.Button>
                 </S.NoData>
             )}
             {isRankingModalOpen && (
