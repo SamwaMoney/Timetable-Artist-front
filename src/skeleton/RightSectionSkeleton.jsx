@@ -1,4 +1,3 @@
-import { S } from '../components/rankingpage/Ranking.style';
 import { SK } from './skeleton.style';
 
 const RightSectionSkeleton = () => {

@@ -8,7 +8,9 @@ const MRankingListSkeleton = () => {
                 .fill()
                 .map(el => {
                     return (
-                        <M.OneRankWrapper>
+                        <M.OneRankWrapper
+                            key={Math.floor(Math.random() * 10000)}
+                        >
                             <M.RankContainer>
                                 <SK.RankNum />
                                 <SK.UserInfo />

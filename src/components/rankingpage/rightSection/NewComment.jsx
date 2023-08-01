@@ -68,7 +68,13 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                         로그인 후에 댓글을 쓸 수 있습니다.
                     </M.CommentDisabled>
                 )}
-                <M.UploadImg src={Write} alt='올리기' />
+                <M.UploadImg
+                    src={Write}
+                    alt='올리기'
+                    onClick={onSubmitNewComment}
+                    type='button'
+                    disabled={!newText}
+                />
             </M.NewCommentContainer>
         </M.NewCommentWrapper>
     ) : (

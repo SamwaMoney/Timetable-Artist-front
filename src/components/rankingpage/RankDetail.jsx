@@ -5,6 +5,7 @@ import CommentList from './rightSection/CommentList';
 import CmtTag from './rightSection/CmtTag';
 import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
+
 const RankDetail = ({
     memberId,
     currentUserId,

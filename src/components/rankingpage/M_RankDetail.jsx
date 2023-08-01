@@ -6,7 +6,7 @@ import CommentList from './rightSection/CommentList';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import NewComment from './rightSection/NewComment';
+import MDetailSectionSkeleton from '../../skeleton/MDetailSectionSkeleton';
 import { useEffect, useState } from 'react';
 import RankingApis from '../../api/ranking';
 import { useParams } from 'react-router-dom';
@@ -52,7 +52,7 @@ const MRankDetail = () => {
     };
 
     return loading ? (
-        <MRankingLoading />
+        <MDetailSectionSkeleton />
     ) : (
         currentUser && (
             <Wrapper>
@@ -91,7 +91,7 @@ const MRankDetail = () => {
                         />
                     </M.DetailBtnContainer>
                     {/*뎃글 적는 인풋창 */}
-                    <NewComment isMobile={true} />
+                    {/* <NewComment isMobile={true} currentUserId={timetableId} /> */}
                     <CommentList isMobile={true} currentUserId={timetableId} />
                 </M.DetailWrapper>
             </Wrapper>

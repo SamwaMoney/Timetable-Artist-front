@@ -37,11 +37,10 @@ SK.RankNum = styled(SkeletonDiv)`
 `;
 
 SK.RankContainer = styled.div`
-    margin-top: 1rem;
     width: 75%;
-    margin-top: 2vw;
     display: flex;
     align-items: center;
+    padding-top: 15vw;
 `;
 SK.UserInfo = styled(SkeletonDiv)`
     width: 100%;
@@ -82,7 +81,7 @@ SK.SmallContainer = styled.div`
 
 SK.TimaTableImg = styled(SkeletonDiv)`
     width: 90%;
-    height: 40rem;
+    height: ${props => (props.height ? `${props.height}rem` : '40rem')};
     margin-top: 3vw;
     border-radius: 1vw;
 `;

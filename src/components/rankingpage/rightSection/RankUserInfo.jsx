@@ -8,12 +8,12 @@ const RankUserInfo = ({ data, loading }) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     // const { owner, score, tableTypeContent } = data;
-    const rank = searchParams.get('rank');
+    const rank = searchParams.get('rank') || 1;
 
     return (
         (data || !loading) && (
             <S.RankUserWrapper>
-                <S.RankNum iscurrentuser={'true'}>{data?.rank || 1}</S.RankNum>
+                <S.RankNum iscurrentuser={'true'}>{rank}</S.RankNum>
                 <S.UserInfo iscurrentuser={'true'}>
                     <S.Score>{data?.score}점</S.Score>
                     <S.CategoryContainer>
