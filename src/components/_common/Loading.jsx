@@ -65,7 +65,6 @@ const waviyAnimation = keyframes`
 `;
 
 const Waviy = styled.span`
-    font-family: 'Alfa Slab One', cursive;
     position: relative;
     display: inline-block;
     color: ${props => props.color || '#000'};
