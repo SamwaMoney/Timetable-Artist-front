@@ -13,16 +13,16 @@ export const isValidateTime = (startTime, endTime) => {
 //겹치는 시간인지 알려주는 함수
 //SH => 시작 시간, EH => 끝나는 시간
 export const isNoTimeOverlapped = (newData, existingData) => {
-    const { startTime, endTime, day } = newData;
+    const { startTime, endTime, weekday } = newData;
 
     const newSH = startTime.split(':')[0] / 1; //새롭게 추가한 시간표 시작 시
     const newEH = endTime.split(':')[0] / 1; //새롭게 추가한 시간표 종료 시
 
-    console.log('시간안겹침', newSH, newEH, day);
+    console.log('시간안겹침', newSH, newEH, weekday);
 
     //시작 수업 시간이 기존startTime보다 같은경우
     //시작 수업 시간이 기존 startTime과 endTime가 겹치는 경우
-    const sameDayData = existingData.filter(data => data.day === day);
+    const sameDayData = existingData.filter(data => data.weekday === weekday);
 
     console.log('같은 요일 데이터', sameDayData);
     if (!existingData.length) {
@@ -59,8 +59,8 @@ export const isNoTimeOverlapped = (newData, existingData) => {
 
 //두개의 시간이 서로 겹치치 않는지 확인하는 로직
 export const isNotTwoTimeOverlapped = (firstTime, secondTime) => {
-    const { startTime: firstST, endTime: firstET, day: firstDay } = firstTime;
-    const { startTime: endST, endTime: endET, day: secondDay } = secondTime;
+    const { startTime: firstST, endTime: firstET, weekday: firstDay } = firstTime;
+    const { startTime: endST, endTime: endET, weekday: secondDay } = secondTime;
 
     const firstSH = firstST.split(':')[0] / 1;
     const firstEH = firstET.split(':')[0] / 1;

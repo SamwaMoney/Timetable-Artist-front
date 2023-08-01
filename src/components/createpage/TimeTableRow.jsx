@@ -1,13 +1,47 @@
 import TimeTableCell from './TimeTableCell';
 
-const TimeTableRow = ({ ...props }) => {
+const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
+    const getDayData = day => {
+        return selectedData.filter(lecture => lecture.weekday === day);
+    };
+
     return (
         <>
-            <TimeTableCell day='월' {...props} />
-            <TimeTableCell day='화' {...props} />
-            <TimeTableCell day='수' {...props} />
-            <TimeTableCell day='목' {...props} />
-            <TimeTableCell day='금' {...props} />
+            <TimeTableCell
+                day='월'
+                timeSlot={timeSlot}
+                index={index}
+                numberOfSlots={numberOfSlots}
+                dayLectureData={getDayData('월')}
+            />
+            <TimeTableCell
+                day='화'
+                timeSlot={timeSlot}
+                index={index}
+                numberOfSlots={numberOfSlots}
+                dayLectureData={getDayData('화')}
+            />
+            <TimeTableCell
+                day='수'
+                timeSlot={timeSlot}
+                index={index}
+                numberOfSlots={numberOfSlots}
+                dayLectureData={getDayData('수')}
+            />
+            <TimeTableCell
+                day='목'
+                timeSlot={timeSlot}
+                index={index}
+                numberOfSlots={numberOfSlots}
+                dayLectureData={getDayData('목')}
+            />
+            <TimeTableCell
+                day='금'
+                timeSlot={timeSlot}
+                index={index}
+                numberOfSlots={numberOfSlots}
+                dayLectureData={getDayData('금')}
+            />
         </>
     );
 };

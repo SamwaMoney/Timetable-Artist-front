@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { isMobile } from 'react-device-detect';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import TimeTableRow from './TimeTableRow';
 
@@ -28,9 +28,18 @@ const TimeTable = () => {
     const etcDescDivRef = useRef(null);
 
     // redux에서 값을 받아옴
-    const selectedData = useSelector(
+    const reduxSelectedData = useSelector(
         state => state.timeTableReducer.selectedData,
     );
+
+    // useState를 사용하여 selectedData 상태 저장
+    const [selectedData, setSelectedData] = useState(reduxSelectedData);
+
+    // useEffect를 사용하여 Redux store의 selectedData가 변경될 때마다 selectedData 상태 업데이트
+    useEffect(() => {
+        setSelectedData(reduxSelectedData);
+        console.log(selectedData);
+    }, [reduxSelectedData]);
 
     return (
         <TimeTableContainer>
@@ -60,6 +69,7 @@ const TimeTable = () => {
                                 timeSlot={timeSlot}
                                 index={index}
                                 numberOfSlots={numberOfSlots}
+                                selectedData={selectedData}
                             />
                         </tr>
                     ))}
@@ -72,7 +82,7 @@ const TimeTable = () => {
                         selectedData.map(lecture => {
                             if (lecture.startTime === null) {
                                 return (
-                                    <div key={lecture.name}>{lecture.name}</div>
+                                    <div key={lecture.className}>{lecture.className}</div>
                                 );
                             }
                             return null;

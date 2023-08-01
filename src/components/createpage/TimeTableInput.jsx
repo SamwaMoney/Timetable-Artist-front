@@ -84,11 +84,11 @@ const TimeTableInput = () => {
         if (isChecked) {
             // 지정된 시간 없음인 경우
             newData1 = {
-                day: selectedDateTime.day,
+                weekday: null,
                 startTime: null,
                 endTime: null,
-                place: selectedPlace,
-                name: selectedClassName,
+                location: selectedPlace,
+                className: selectedClassName,
                 backgroundColor: null,
             };
 
@@ -99,16 +99,16 @@ const TimeTableInput = () => {
             newData1 = {
                 //⭐️디스트럭쳐로 수정
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
-                name: selectedClassName,
+                location: selectedPlace,
+                className: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             newData2 = {
                 //⭐️디스트럭쳐로 수정
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
-                name: selectedClassName,
+                location: selectedPlace,
+                className: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
@@ -144,8 +144,8 @@ const TimeTableInput = () => {
             newData1 = {
                 //⭐️디스트럭쳐로 수정
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
-                place: selectedPlace,
-                name: selectedClassName,
+                location: selectedPlace,
+                className: selectedClassName,
                 backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
