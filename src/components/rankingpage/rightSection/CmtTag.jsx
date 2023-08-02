@@ -1,6 +1,5 @@
 import { S, M } from '../Ranking.style';
 import Comment from '../../../assets/rankingpage/comment.png';
-
 const CmtTag = ({ isMobile, number }) => {
     return isMobile ? (
         <M.IconButton>

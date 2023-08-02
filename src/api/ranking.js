@@ -6,6 +6,7 @@ import { http } from './http';
 const RankingApis = {
     GetRanking: async (sortType, memberId) => {
         console.log(sortType, '랭킹 불러오기');
+        memberId = memberId || -1;
         try {
             const res = await http.get(
                 `/timetables/rankingboard?sortType=${sortType}&memberId=${memberId}`,
@@ -16,10 +17,12 @@ const RankingApis = {
             console.log(err);
         }
     },
-    GetOneRankingDetail: async timetableId => {
+    GetOneRankingDetail: async (timetableId, memberId) => {
         try {
-            const res = await http.get(`/timetables/${timetableId}`);
-            console.log(res);
+            const res = await http.get(
+                `/timetables/${timetableId}?memberId=${memberId}`,
+            );
+            console.log('디테일', res);
             return res;
         } catch (err) {
             console.log(err);
@@ -43,7 +46,7 @@ const RankingApis = {
     DeleteTimeTableLike: async (timetableId, memberId) => {
         try {
             const res = await http.delete(
-                `/timetables/${timetableId}/likes?memberId=${memberId}`,
+                `/timetables/${timetableId}/likes?memberId=4`,
             );
             console.log(res);
             return res;
@@ -111,7 +114,9 @@ const RankingApis = {
     DeleteCommentLike: async (replyId, memberId) => {
         try {
             const res = await http.delete(`/${replyId}/likes`, {
-                memberId,
+                data: {
+                    memberId,
+                },
             });
             console.log(res);
             return res;

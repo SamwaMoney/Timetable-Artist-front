@@ -363,7 +363,7 @@ M.RankText = styled.div`
 S.List = styled.div`
     ${FlexCenter}
     flex-direction:column;
-    margin-bottom: 10%;
+    margin-bottom: 13%;
     width: 100%;
 `;
 
@@ -467,6 +467,7 @@ M.DetailBtnContainer = styled.div`
     margin-top: 5vw;
     margin-left: -50vw;
     margin-bottom: 2vw;
+    position: relative;
 `;
 
 const IconButton = styled.button`
@@ -545,7 +546,7 @@ const OneCommentContainer = styled.div`
 M.OneCommentContainer = styled(OneCommentContainer)`
     margin-top: 1vw;
     margin-bottom: 4vw;
-    padding: 2vw;
+    padding: 2vw 2vw 2vw 2vw;
     display: flex;
     flex-direction: column;
 `;
@@ -553,7 +554,7 @@ M.OneCommentContainer = styled(OneCommentContainer)`
 S.OneCommentContainer = styled(OneCommentContainer)`
     margin-top: 0.8rem;
     margin-bottom: 1rem;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0.8rem;
     position: relative;
 `;
 
@@ -590,6 +591,7 @@ M.CommentDate = styled.div`
     font-size: 4vw;
     padding-left: 3vw;
     color: var(--grey);
+    padding-top: 1vw;
 `;
 
 S.CommentText = styled.div`

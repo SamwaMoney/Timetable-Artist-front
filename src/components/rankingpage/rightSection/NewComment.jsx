@@ -45,6 +45,13 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
         console.log('memberId', memberId);
     }, []);
 
+    // 엔터 키 입력 시 강의 추가
+    const handleKeyDown = e => {
+        if (e.key === 'Enter') {
+            onSubmitNewComment();
+        }
+    };
+
     return isMobile ? (
         <M.NewCommentWrapper>
             <M.NewCommentContainer>
@@ -93,6 +100,7 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                     placeholder='댓글 쓰기...'
                     onChange={onChangeText}
                     value={newText}
+                    onKeyDown={handleKeyDown}
                 />
             ) : (
                 <S.CommentDisabled>

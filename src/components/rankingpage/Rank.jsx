@@ -46,14 +46,14 @@ const Rank = ({ isMyData }) => {
     };
 
     const getDetailData = timetableId => {
-        return RankingApis.GetOneRankingDetail(timetableId);
+        return RankingApis.GetOneRankingDetail(timetableId, memberId);
     };
 
     //디테일 유저 정보 불러오기
     useEffect(() => {
         setCurrentUser();
         const fetchDetailData = async timetableId => {
-            const res = await getDetailData(timetableId);
+            const res = await getDetailData(timetableId, memberId);
             setCurrentUser(res?.data);
         };
         //현재 유저 아이디가 있을때만 데이터 요청
@@ -125,6 +125,7 @@ const Rank = ({ isMyData }) => {
                         loading={loading}
                         currentUser={currentUser}
                         rankLoading={rankLoading}
+                        getDetailData={getDetailData}
                     />
                 </S.Container>
             )}

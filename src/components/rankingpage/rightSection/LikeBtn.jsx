@@ -16,7 +16,16 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
     const memberId = localStorage.getItem('memberId') || -1;
 
     useEffect(() => {
+        console.log('좋아요 여부', isLike);
         setIsLike(currentUser?.liked);
+        console.log('좋아요 여부 바뀜', isLike);
+        setLikeNum(currentUser?.likeCount);
+    }, [currentUser]);
+
+    useEffect(() => {
+        console.log('좋아요 여부', isLike);
+        setIsLike(currentUser?.liked);
+        console.log('좋아요 여부 바뀜', isLike);
         setLikeNum(currentUser?.likeCount);
     }, [currentUser]);
 
@@ -28,12 +37,13 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
         setIsLike(true);
         setLikeNum(prev => prev + 1);
         const res = await RankingApis.PostTimeTableLike(timetableId, memberId);
+        console.log('좋아요 기능', res);
         //서버 요청 실패시 롤백
-        console.log('좋아요 결과', res?.status);
         if (res?.status !== 201) {
             setIsLike(false);
             setLikeNum(prev => prev - 1);
         } else {
+            setIsLike(true);
             if (sort === 'LIKE') {
                 getRankingList(sort, memberId);
             }
@@ -54,6 +64,7 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
             setIsLike(true);
             setLikeNum(prev => prev + 1);
         } else {
+            setIsLike(false);
             if (sort === 'LIKE') {
                 getRankingList(sort, memberId);
             }
@@ -83,14 +94,12 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
         currentUser && (
             <S.IconButton>
                 {isLike ? (
-                    <>
-                        <S.EventIcon
-                            width={2}
-                            src={YesLike}
-                            alt='하트'
-                            onClick={onCancelLike}
-                        />
-                    </>
+                    <S.EventIcon
+                        width={2}
+                        src={YesLike}
+                        alt='하트'
+                        onClick={onCancelLike}
+                    />
                 ) : (
                     <>
                         <S.EventIcon

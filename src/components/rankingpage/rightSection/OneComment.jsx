@@ -23,7 +23,7 @@ const OneComment = ({
         replyLikeCount,
     } = data;
 
-    const myMemberId = localStorage.getItem('memberId') || -1;
+    const myMemberId = localStorage.getItem('memberId') / 1 || -1;
 
     return isMobile ? (
         <M.OneCommentContainer>
@@ -70,7 +70,7 @@ const OneComment = ({
                 </S.CommentInfo>
                 <S.CommentText>{content}</S.CommentText>
                 {/*내 댓글일떄만 삭제 버튼*/}
-                {memberId == myMemberId ? (
+                {memberId === myMemberId ? (
                     <div
                         style={{
                             position: 'absolute',
