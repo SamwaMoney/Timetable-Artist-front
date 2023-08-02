@@ -13,6 +13,8 @@ import {
     isNotTwoTimeOverlapped,
 } from '../../utils/time-validation';
 import { TimeResetObj } from '../../utils/time-helper';
+import { CreateClasses } from '../../api/timetables';
+import { useNavigate } from 'react-router-dom';
 
 const TimeTableInput = () => {
     // dropdown open 여부
@@ -177,6 +179,59 @@ const TimeTableInput = () => {
         }
     };
 
+    // navigate
+    const navigate = useNavigate();
+
+    // 시간표 완성 버튼 클릭 시 제출하는 함수
+    const handleSubmitClassData = async () => {
+        console.log('시간표 완성');
+
+        // 만약 수업 개수가 없으면 강의가 없습니다 alert 띄우기
+        if (timetableData.length <= 0) {
+            alert('현재 추가된 강의가 없습니다. 강의를 추가해주세요!');
+        }
+        // memberId, timetableId 받아오기
+        const memberId = localStorage.getItem('memberId');
+        const timeTableId = 1;
+
+        // - 반복문 돌면서 memberId, timetableId 추가, 배경색 삭제, startTime, endTime 시간과 분 분리, startTime, endTime 삭제
+        const finalTimeTableData = timetableData.map(classData => {
+            // 새로운 객체를 생성하여 원본 객체의 프로퍼티를 복사
+            const newClassData = { ...classData };
+
+            // memberId, timetableId 추가
+            newClassData.memberId = parseInt(memberId, 10);
+            newClassData.timetable = timeTableId;
+
+            // startTime에서 시간과 분 분리하여 숫자 형태로 프로퍼티 추가
+            const startTimeParts = newClassData.startTime.split(':');
+            newClassData.startH = parseInt(startTimeParts[0], 10);
+            newClassData.startM = parseInt(startTimeParts[1], 10);
+
+            // endTime에서 시간과 분 분리하여 숫자 형태로 프로퍼티 추가
+            const endTimeParts = newClassData.endTime.split(':');
+            newClassData.endH = parseInt(endTimeParts[0], 10);
+            newClassData.endM = parseInt(endTimeParts[1], 10);
+
+            // startTime, endTime, backgroundColor 삭제
+            delete newClassData.startTime;
+            delete newClassData.endTime;
+            delete newClassData.backgroundColor;
+
+            return newClassData;
+        });
+
+        console.log(finalTimeTableData);
+
+        // post
+        const res = await CreateClasses(finalTimeTableData);
+
+        // - 결과 페이지로 이동
+        if (res) {
+            navigate('/score');
+        }
+    };
+
     return (
         <>
             <S.InputContainer>
@@ -268,7 +323,9 @@ const TimeTableInput = () => {
                     />
                 </S.InputDiv>
 
-                <S.CompleteBtn>시간표 완성</S.CompleteBtn>
+                <S.CompleteBtn onClick={handleSubmitClassData}>
+                    시간표 완성
+                </S.CompleteBtn>
             </S.InputContainer>
         </>
     );
