@@ -1,39 +1,38 @@
 import React from 'react';
 import { FlexCenter, S } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
-// ٩( ᐛ )و  ◡
+//☆ƪ(˘⌣˘)ʃ☆
 const Loading = () => {
     return (
         <S.Container>
             <LoadingWrapper>
-                <Emoticon> __〆(･⌄･;) </Emoticon>
+                <Emoticon> ٩( ᐛ )و </Emoticon>
 
                 <div className='waviy'>
-                    <Waviy style={{ '--i': 1 }}>시</Waviy>
-                    <Waviy style={{ '--i': 2 }}>간</Waviy>
-                    <Waviy style={{ '--i': 3 }}>표</Waviy>
-                    <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 5 }} color='blue'>
-                        채
+                    <Waviy style={{ '--i': 1 }} color='blue'>
+                        랭
                     </Waviy>
-                    <Waviy style={{ '--i': 6 }} color='blue'>
-                        점
+                    <Waviy style={{ '--i': 2 }} color='blue'>
+                        킹
                     </Waviy>
-                    <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 8 }} color='blue'>
-                        중
+                    <Waviy style={{ '--i': 3 }} color='blue'>
+                        보
                     </Waviy>
-                    <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 10 }}>입</Waviy>
-                    <Waviy style={{ '--i': 11 }}>니</Waviy>
-                    <Waviy style={{ '--i': 12 }}>다</Waviy>
-                    <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 14 }}>.</Waviy>
-                    <span style={{ marginLeft: '5px' }}></span>
+                    <Waviy style={{ '--i': 4 }} color='blue'>
+                        드
+                    </Waviy>
+                    <Waviy style={{ '--i': 5 }}>를</Waviy>
+                    <Waviy style={{ marginLeft: '5px' }}></Waviy>
+                    <Waviy style={{ '--i': 7 }}>불</Waviy>
+                    <Waviy style={{ '--i': 8 }}>러</Waviy>
+                    <Waviy style={{ '--i': 9 }}>오</Waviy>
+                    <Waviy style={{ '--i': 10 }}>고</Waviy>
+                    <Waviy style={{ marginLeft: '5px' }}></Waviy>
+                    <Waviy style={{ '--i': 12 }}>있</Waviy>
+                    <Waviy style={{ '--i': 13 }}>습</Waviy>
+                    <Waviy style={{ '--i': 14 }}>니</Waviy>
+                    <Waviy style={{ '--i': 15 }}>다</Waviy>
                     <Waviy style={{ '--i': 16 }}>.</Waviy>
-                    <span style={{ marginLeft: '5px' }}></span>
-                    <Waviy style={{ '--i': 18 }}>.</Waviy>
-                    {/* <span>☆ƪ(˘⌣˘)ʃ☆</span> */}
                 </div>
             </LoadingWrapper>
         </S.Container>
@@ -66,11 +65,11 @@ const waviyAnimation = keyframes`
 `;
 
 const Waviy = styled.span`
-    font-family: 'Alfa Slab One', cursive;
     position: relative;
     display: inline-block;
     color: ${props => props.color || '#000'};
     text-transform: uppercase;
-    animation: ${waviyAnimation} 4.6s infinite;
+    animation: ${waviyAnimation} 6s infinite;
     animation-delay: calc(0.1s * var(--i));
+    padding: 1px;
 `;

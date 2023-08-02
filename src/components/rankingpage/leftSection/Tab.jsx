@@ -7,44 +7,44 @@ import { useLocation } from 'react-router-dom';
 const TabContainer = ({ isMobile }) => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
-    const currentSort = params.get('sort');
+    const sort = params.get('sort');
     const [searchParams, setSearchParams] = useSearchParams();
-
-    useEffect(() => {}, [currentSort]);
 
     /*정렬 기준대로 쿼리스트링을 바꿔줌*/
     const onMoveSortPage = e => {
         const { innerText } = e.target;
-        /*변경될 url*/
-        const newSearchParams = new URLSearchParams(searchParams);
         if (innerText === '최악의 시간표') {
-            newSearchParams.set('sort', 'lowest');
+            searchParams.set('sort', 'LOWEST');
+            searchParams.set('rank', 1);
         } else if (innerText === '최고의 시간표') {
-            newSearchParams.set('sort', 'highest');
+            searchParams.set('sort', 'HIGHEST');
+            searchParams.set('rank', 1);
         } else {
-            newSearchParams.set('sort', 'like');
+            searchParams.set('sort', 'LIKE');
+            searchParams.set('rank', 1);
         }
-        setSearchParams(newSearchParams, toString());
+        setSearchParams(searchParams);
     };
 
     return isMobile ? (
         <M.TabContainer>
             <M.Tab
+                currentSort={sort}
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort !== 'like').toString()}
+                // isactive={(sort !== 'LIKE').toString()}
             >
-                {currentSort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
+                {sort !== 'HIGHEST' ? '최악의 시간표' : '최고의 시간표'}
             </M.Tab>
-            <M.Tab
+            <M.LikeTab
+                currentSort={sort}
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort === 'like').toString()}
             >
                 인기 시간표
-            </M.Tab>
+            </M.LikeTab>
         </M.TabContainer>
     ) : (
         <S.TabContainer>
@@ -52,18 +52,18 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort !== 'like').toString()}
+                currentSort={sort}
             >
-                {currentSort !== 'highest' ? '최악의 시간표' : '최고의 시간표'}
+                {sort !== 'HIGHEST' ? '최악의 시간표' : '최고의 시간표'}
             </S.Tab>
-            <S.Tab
+            <S.LikeTab
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                isactive={(currentSort === 'like').toString()}
+                currentSort={sort}
             >
                 인기 시간표
-            </S.Tab>
+            </S.LikeTab>
         </S.TabContainer>
     );
 };

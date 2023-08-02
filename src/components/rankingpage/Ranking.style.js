@@ -16,11 +16,13 @@ S.BasicContainer = styled.div`
 `;
 
 M.FlexContainer = styled.div`
-    margin-top: 15vw;
     font-style: var(--korean);
-    ${FlexCenter}
+    display: flex;
+    align-items: center;
     flex-direction: column;
     background-color: var(--background);
+    min-height: 100vh;
+    z-index: -10;
 `;
 
 S.Wrapper = styled(S.BasicContainer)`
@@ -68,7 +70,7 @@ S.NewButton = styled(NewButton)`
     margin-top: 7%;
     padding: 4%;
     border-radius: 44px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 `;
 
 M.NewButton = styled(NewButton)`
@@ -153,13 +155,20 @@ const RankContainer = styled.div`
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 `;
 
 S.RankContainer = styled(RankContainer)`
     margin-top: 1rem;
     width: 75%;
-    margin-bottom: 0.05rem;
+    margin-top: 2vw;
+`;
+
+S.RankUserWrapper = styled.div`
+    padding-top: 2vw;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    width: 75%;
 `;
 
 M.RankContainer = styled(RankContainer)`
@@ -185,16 +194,31 @@ const Tab = styled.div`
     padding-bottom: 3%;
     font-weight: 500;
     ${FlexCenter};
-    border-bottom: ${props =>
-        props.isactive === 'true' ? '5px solid black' : '2.5px solid black'};
     cursor: pointer;
 `;
 
 S.Tab = styled(Tab)`
     font-size: 1rem;
+    border-bottom: ${({ currentSort }) =>
+        currentSort !== 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
+
+S.LikeTab = styled(Tab)`
+    font-size: 1rem;
+    border-bottom: ${({ currentSort }) =>
+        currentSort === 'LIKE' ? '5px solid black' : '2.5px solid black'};
+`;
+
 M.Tab = styled(Tab)`
     font-size: 4vw;
+    border-bottom: ${({ currentSort }) =>
+        currentSort !== 'LIKE' ? '5px solid black' : '2.5px solid black'};
+`;
+
+M.LikeTab = styled(Tab)`
+    font-size: 4vw;
+    border-bottom: ${({ currentSort }) =>
+        currentSort === 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
 
 //토글
@@ -240,8 +264,6 @@ M.ToggleButton = styled(ToggleButton)`
 
 //토글 슬라이더
 const Slider = styled.div`
-    background-color: ${props =>
-        props.sort === 'lowest' ? '#f22b02' : '#1962ed'};
     position: absolute;
     border-radius: 50%;
     top: 50%;
@@ -253,14 +275,18 @@ S.Slider = styled(Slider)`
     width: 15px;
     height: 15px;
     border: 1.3px solid black;
-    left: ${props => (props.sort === 'lowest' ? '17px' : '1px')};
+    background-color: ${props =>
+        props.sort === 'LOWEST' ? '#f22b02' : '#1962ed'};
+    left: ${props => (props.sort === 'LOWEST' ? '17px' : '1px')};
 `;
 
 M.Slider = styled(Slider)`
     width: 4.5vw;
     height: 4.5vw;
     border: 1.3px solid black;
-    left: ${props => (props.sort === 'lowest' ? '6.2vw' : '1vw')};
+    background-color: ${props =>
+        props.sort === 'LOWEST' ? '#f22b02' : '#1962ed'};
+    left: ${props => (props.sort === 'LOWEST' ? '6.2vw' : '1vw')};
 `;
 
 S.ToggleText = styled.div`
@@ -287,7 +313,7 @@ const MyScoreContainer = styled.div`
 `;
 
 S.MyScoreContainer = styled(MyScoreContainer)`
-    height: 5.1rem;
+    height: 4vw;
     padding: 0.5rem 0;
 `;
 
@@ -299,6 +325,7 @@ M.MyScoreWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 14vw;
 `;
 
 //FlexBox
@@ -479,10 +506,11 @@ M.IconButton = styled(IconButton)`
 S.EventIcon = styled.img`
     width: ${props => (props.width ? props.width : '2vw')}rem;
     cursor: pointer;
+    transform: scale(1);
     transition: transform 0.2s ease;
-    &:hover {
+    /* &:hover {
         transform: scale(1.3);
-    }
+    } */
 `;
 
 S.NoEventIcon = styled.img`
@@ -535,6 +563,7 @@ S.CommentInfo = styled.div`
     width: 100%;
     position: relative;
 `;
+
 M.CommentInfo = styled.div`
     ${FlexCenter}
     justify-content:space-between;
@@ -582,6 +611,14 @@ S.FlexContainer = styled.div`
 
 //시간표 목업 사진
 S.TimeTable = styled.img`
+    width: 95%;
+    height: 30vw;
+    background-color: #888;
+    border: 0.05rem solid black;
+    margin-top: 0.8rem;
+`;
+
+M.TimeTable = styled.img`
     width: 95%;
     height: 95%;
     background-color: #888;
@@ -641,7 +678,7 @@ S.NoNameText = styled.div`
     margin-left: 0.5rem;
 `;
 M.NoNameText = styled.div`
-    font-size: 0.3rem;
+    font-size: 0.9rem;
     margin-left: 0.5rem;
 `;
 S.CommentInput = styled.input`
@@ -650,7 +687,17 @@ S.CommentInput = styled.input`
     width: 75%;
     font-size: 0.9rem;
 `;
-
+S.CommentDisabled = styled.div`
+    border: none;
+    height: 2rem;
+    width: 75%;
+    font-size: 0.9rem;
+    background-color: white;
+    color: grey;
+    padding-left: 1vw;
+    display: flex;
+    align-items: center;
+`;
 M.CommentInput = styled.input`
     padding-left: 10vw;
     font-size: 4.3vw;
@@ -661,12 +708,28 @@ M.CommentInput = styled.input`
     width: 70%;
 `;
 
-S.UploadImg = styled.img`
+M.CommentDisabled = styled.div`
+    padding-left: 10vw;
+    font-size: 0.7rem;
+    border: none;
+    border-radius: 5rem;
+    z-index: 10;
+    padding: 3vw;
+    width: 70%;
+    color: grey;
+    display: flex;
+    align-items: center;
+`;
+
+S.UploadButton = styled.button`
     width: 1.5rem;
     height: 1.5rem;
     margin-left: 5rem;
     position: absolute;
     right: 1rem;
+    img {
+        width: 100%;
+    }
 `;
 M.UploadImg = styled.img`
     position: absolute;

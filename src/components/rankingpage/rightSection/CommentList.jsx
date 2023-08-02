@@ -1,32 +1,104 @@
 import OneComment from './OneComment';
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import RankingApis from '../../../api/ranking';
-// import { GetTimeTableComments } from '../../../api/ranking';
-const CommentList = ({ isMobile, timetableId }) => {
-    //좋아요 변경되면 순서도 바뀜
-    //백 api 다시 불러와서 순서 변경할 것
+import NewComment from './NewComment';
+import CommentSkeleton from '../../../skeleton/CommentSkeleton';
+import MCommentSkeleton from '../../../skeleton/MCommentSkeleton';
+const CommentList = ({ isMobile, currentUserId }) => {
+    const [isDeleteCmtModalOpen, setIsDeleteCmtModalOpen] = useState(false);
+    const memberId = localStorage.getItem('memberId') || -1;
+    const [CommentData, setCommentData] = useState();
+    const [loading, setLoading] = useState(true);
 
+    console.log(isMobile);
+
+    //댓글 가져온 후에 댓글 state에 데이터 추가하는 로직
+    const getCommentData = async () => {
+        const res = await getComment(currentUserId, memberId);
+        setCommentData(res?.data?.replies);
+        setLoading(false);
+    };
+
+    //처음에 댓글 불러오는 로직
     useEffect(() => {
-        //timetableID로 댓글을 불러오는 api 로직
-        // const res = GetTimeTableComments(timetableId);
-        // console.log(res);
-        // const res = RankingApis.GetTimeTableComments(timetableId);
-        // console.log(res);
-    }, []);
+        setCommentData();
+        getCommentData();
+    }, [currentUserId]);
+
+    //로딩 상태 보여주는 UI
+    useEffect(() => {
+        if (loading && CommentData) {
+            setLoading(false);
+        }
+    }, [loading, CommentData]);
+
+    //댓글 가져오는 로직
+    const getComment = async (timetableId, memberId) => {
+        return await RankingApis.GetTimeTableComments(timetableId, memberId);
+    };
+
+    //댓글 삭제후 업데이트 로직
+    const deleteMyComment = async (memberId, replyId) => {
+        await RankingApis.DeleteComment(memberId, replyId);
+        await getCommentData();
+    };
+
+    //댓글 추가후 업데이트 로직
+    const updateComment = async newComment => {
+        await RankingApis.PostComment(newComment);
+        await getCommentData();
+    };
 
     return isMobile ? (
-        <MCommentContainer>
-            <OneComment isMobile={true} />
-            <OneComment isMobile={true} />
-            <OneComment isMobile={true} />
-        </MCommentContainer>
+        <>
+            <NewComment
+                currentUserId={currentUserId}
+                updateComment={updateComment}
+                isMobile={true}
+            />
+            <MCommentContainer>
+                {loading ? (
+                    <MCommentSkeleton />
+                ) : CommentData.length > 0 ? (
+                    CommentData.map(reply => (
+                        <OneComment
+                            data={reply}
+                            deleteMyComment={deleteMyComment}
+                            key={Math.random() * 1000}
+                            setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
+                            isDeleteCmtModalOpen={isDeleteCmtModalOpen}
+                        />
+                    ))
+                ) : (
+                    <MNoComment>댓글이 없습니다.</MNoComment>
+                )}
+            </MCommentContainer>
+        </>
     ) : (
-        <CommentContainer>
-            <OneComment />
-            <OneComment />
-            <OneComment />
-        </CommentContainer>
+        <>
+            <NewComment
+                currentUserId={currentUserId}
+                updateComment={updateComment}
+            />
+            <CommentContainer>
+                {loading ? (
+                    <CommentSkeleton />
+                ) : CommentData?.length > 0 ? (
+                    CommentData.map(reply => (
+                        <OneComment
+                            data={reply}
+                            deleteMyComment={deleteMyComment}
+                            key={Math.random() * 1000}
+                            setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
+                            isDeleteCmtModalOpen={isDeleteCmtModalOpen}
+                        />
+                    ))
+                ) : (
+                    <SNoComment>댓글이 없습니다.</SNoComment>
+                )}
+            </CommentContainer>
+        </>
     );
 };
 export default CommentList;
@@ -41,4 +113,15 @@ const MCommentContainer = styled.div`
     margin-top: 1vw;
     margin-bottom: 15vw;
     width: 85%;
+`;
+
+const MNoComment = styled.div`
+    text-align: center;
+    margin-top: 10vw;
+`;
+
+const SNoComment = styled.div`
+    text-align: center;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
 `;
