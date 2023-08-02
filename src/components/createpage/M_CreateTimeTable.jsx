@@ -24,7 +24,7 @@ const MCreateTimeTable = () => {
                         <S.MNicknameText>{nickname}</S.MNicknameText>의 시간표
                     </S.MTimeTableText>
 
-                    <TimeTable />
+                    <TimeTable isScorePage="false"/>
 
                     <S.MAddButtonDiv>
                         <S.MAddButton
