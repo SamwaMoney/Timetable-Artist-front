@@ -5,10 +5,10 @@ import RankingApis from '../../../api/ranking';
 import NewComment from './NewComment';
 import CommentSkeleton from '../../../skeleton/CommentSkeleton';
 import MCommentSkeleton from '../../../skeleton/MCommentSkeleton';
-const CommentList = ({ isMobile, currentUserId }) => {
+const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
     const [isDeleteCmtModalOpen, setIsDeleteCmtModalOpen] = useState(false);
     const memberId = localStorage.getItem('memberId') || -1;
-    const [CommentData, setCommentData] = useState();
+    const [commentData, setCommentData] = useState();
     const [loading, setLoading] = useState(true);
 
     console.log(isMobile);
@@ -22,16 +22,24 @@ const CommentList = ({ isMobile, currentUserId }) => {
 
     //처음에 댓글 불러오는 로직
     useEffect(() => {
-        setCommentData();
+        setLoading(true); //댓글 불러올떄마다 loading 띄우기
+        setCommentData(); //댓글 초기화
         getCommentData();
     }, [currentUserId]);
 
     //로딩 상태 보여주는 UI
     useEffect(() => {
-        if (loading && CommentData) {
+        if (loading && commentData) {
             setLoading(false);
         }
-    }, [loading, CommentData]);
+    }, [loading, commentData]);
+
+    //댓글 개수 업데이트해주는 로직
+    useEffect(() => {
+        if (commentData) {
+        }
+        setCommentNum(commentData?.length);
+    }, [commentData]);
 
     //댓글 가져오는 로직
     const getComment = async (timetableId, memberId) => {
@@ -40,6 +48,7 @@ const CommentList = ({ isMobile, currentUserId }) => {
 
     //댓글 삭제후 업데이트 로직
     const deleteMyComment = async (memberId, replyId) => {
+        console.log('댓글삭제', memberId, replyId);
         await RankingApis.DeleteComment(memberId, replyId);
         await getCommentData();
     };
@@ -60,9 +69,10 @@ const CommentList = ({ isMobile, currentUserId }) => {
             <MCommentContainer>
                 {loading ? (
                     <MCommentSkeleton />
-                ) : CommentData.length > 0 ? (
-                    CommentData.map(reply => (
+                ) : commentData.length > 0 ? (
+                    commentData.map(reply => (
                         <OneComment
+                            isMobile={true}
                             data={reply}
                             deleteMyComment={deleteMyComment}
                             key={Math.random() * 1000}
@@ -84,8 +94,8 @@ const CommentList = ({ isMobile, currentUserId }) => {
             <CommentContainer>
                 {loading ? (
                     <CommentSkeleton />
-                ) : CommentData?.length > 0 ? (
-                    CommentData.map(reply => (
+                ) : commentData?.length > 0 ? (
+                    commentData.map(reply => (
                         <OneComment
                             data={reply}
                             deleteMyComment={deleteMyComment}
