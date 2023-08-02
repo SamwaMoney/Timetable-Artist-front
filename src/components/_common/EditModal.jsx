@@ -1,6 +1,6 @@
 import { M } from './Modal.style';
+import { CreateTable, DeleteTable, GetTableId } from '../../api/timetables';
 
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
@@ -8,9 +8,14 @@ const EditModal = ({ setIsEditModalOpen }) => {
     const navigate = useNavigate();
 
     const handleCheckClick = () => {
-        navigate('/create');
+        const tableId = localStorage.getItem('tableId');
+        DeleteTable(tableId);
+        CreateTable();
+        GetTableId();
         setIsEditModalOpen(false);
+        navigate('/create');
     };
+
     return (
         <M.Modal className={`${isMobile && 'mobile-background'}`}>
             <div
@@ -24,11 +29,11 @@ const EditModal = ({ setIsEditModalOpen }) => {
                         isMobile && 'mobile-edit-text'
                     }`}
                 >
-                    시간표를 수정하면
+                    새 시간표를 만들면
                     <br />
                     기존의 시간표와 랭킹 기록이 사라져요!
                     <br />
-                    그래도 수정할까요?
+                    그래도 새로 만들까요?
                 </p>
                 <div>
                     <button
@@ -41,7 +46,7 @@ const EditModal = ({ setIsEditModalOpen }) => {
                         onClick={handleCheckClick}
                         className={`btn red-btn ${isMobile && 'mobile-btn'}`}
                     >
-                        수정
+                        생성
                     </button>
                 </div>
             </div>
