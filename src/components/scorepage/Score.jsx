@@ -22,7 +22,20 @@ import twitter from '../../assets/scorepage/twitter.svg';
 import Hamburger from '../_common/Hamburger';
 import RangkingModal from '../_common/RankingModal';
 import EditModal from '../_common/EditModal';
-import test from '../../assets/scorepage/Rectangle 98.png';
+import type1 from '../../assets/scorepage/typeImg/type1.png';
+import type2 from '../../assets/scorepage/typeImg/type2.png';
+import type3 from '../../assets/scorepage/typeImg/type3.png';
+import type4 from '../../assets/scorepage/typeImg/type4.png';
+import type5 from '../../assets/scorepage/typeImg/type5.png';
+import type6 from '../../assets/scorepage/typeImg/type6.png';
+import type7 from '../../assets/scorepage/typeImg/type7.png';
+import type8 from '../../assets/scorepage/typeImg/type8.png';
+import type9 from '../../assets/scorepage/typeImg/type9.png';
+import type10 from '../../assets/scorepage/typeImg/type10.png';
+import type11 from '../../assets/scorepage/typeImg/type11.png';
+import type12 from '../../assets/scorepage/typeImg/type12.png';
+import type13 from '../../assets/scorepage/typeImg/type13.png';
+import type14 from '../../assets/scorepage/typeImg/type14.png';
 
 const Score = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +52,22 @@ const Score = () => {
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
     const navigate = useNavigate();
     const memberId = localStorage.getItem('memberId');
+    const typeImage = [
+        type1,
+        type2,
+        type3,
+        type4,
+        type5,
+        type6,
+        type7,
+        type8,
+        type9,
+        type10,
+        type11,
+        type12,
+        type13,
+        type14,
+    ];
 
     const handleRankingClick = () => {
         setRankingModalOpen(true);
@@ -207,7 +236,9 @@ const Score = () => {
                                         {data.tableTypeContent}
                                     </div>
                                 </S.Score>
-                                <S.TypeImg src={data.photo}></S.TypeImg>
+                                <S.TypeImg
+                                    src={typeImage[data.tableType]}
+                                ></S.TypeImg>
                                 {data.plusComments.length > 0 && (
                                     <S.ResultContainer>
                                         <S.Part>
