@@ -2,7 +2,7 @@ import React from 'react';
 import { FlexCenter, S } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
 //☆ƪ(˘⌣˘)ʃ☆
-const Loading = () => {
+const Loading = props => {
     return (
         <S.Container>
             <LoadingWrapper>
@@ -10,16 +10,16 @@ const Loading = () => {
 
                 <div className='waviy'>
                     <Waviy style={{ '--i': 1 }} color='blue'>
-                        랭
+                        {props.title[0]}
                     </Waviy>
                     <Waviy style={{ '--i': 2 }} color='blue'>
-                        킹
+                        {props.title[1]}
                     </Waviy>
                     <Waviy style={{ '--i': 3 }} color='blue'>
-                        보
+                        {props.title[2]}
                     </Waviy>
                     <Waviy style={{ '--i': 4 }} color='blue'>
-                        드
+                        {props.title[3]}
                     </Waviy>
                     <Waviy style={{ '--i': 5 }}>를</Waviy>
                     <Waviy style={{ marginLeft: '5px' }}></Waviy>
