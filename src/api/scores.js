@@ -1,4 +1,5 @@
 import { http } from './http';
+import { test } from './test';
 
 // 내 timetableId 조회
 export const GetTimetableId = async memberId => {
@@ -44,7 +45,7 @@ export const UploadTable = async (image, dto, timetableId) => {
             'dto',
             new Blob([JSON.stringify(dto)], { type: 'application/json' }),
         );
-        const res = await http.put(
+        const res = await test.put(
             `/timetables/${timetableId}/upload`,
             formData,
             {

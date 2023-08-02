@@ -136,25 +136,18 @@ const Score = () => {
         const canvas = await html2canvas(document.getElementById('tableImage'));
         let timetableImg = canvas.toDataURL('image/png');
         timetableImg = await dataURLtoBlob(timetableImg);
-        /*
-            timetableImg = new File(
-                [timetableImg],
-                `timetable_${memberId}.png`,
-                {
-                    type: 'image/png',
-                },
-            );*/
-        console.log(timetableImg);
-        localStorage.setItem('image', timetableImg);
 
-        const image = localStorage.getItem('image');
+        timetableImg = new File([timetableImg], `timetable_${memberId}.png`, {
+            type: 'image/png',
+        });
+        console.log(timetableImg);
         const dto = {
             classHide: isHidden,
             ranking: true,
         };
         console.log(dto);
 
-        const res = await UploadTable(image, dto, 1);
+        const res = await UploadTable(timetableImg, dto, 1);
         handleRankingClick();
     };
 
