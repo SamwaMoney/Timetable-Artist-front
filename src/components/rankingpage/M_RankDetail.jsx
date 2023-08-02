@@ -19,6 +19,7 @@ const MRankDetail = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     //유저의 랭크
     const rank = searchParams.get('rank');
+    const memberId = localStorage.getItem('memberId') || -1;
     const navigate = useNavigate();
     const handleMoveBack = () => {
         navigate(-1);
@@ -27,13 +28,14 @@ const MRankDetail = () => {
     const timetableId = params.id;
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
+    const [commentNum, setCommentNum] = useState();
 
     useEffect(() => {
         //timetableId로 해당 유저의 정보 검색
         //comment는 따로 검색
         setLoading(true);
         const fetch = async () => {
-            const res = await getDetailData(timetableId);
+            const res = await getDetailData(timetableId, memberId);
             setCurrentUser(res?.data);
         };
         fetch();
@@ -47,8 +49,8 @@ const MRankDetail = () => {
         }
     }, [loading, currentUser]);
 
-    const getDetailData = timetableId => {
-        return RankingApis.GetOneRankingDetail(timetableId);
+    const getDetailData = (timetableId, memberId) => {
+        return RankingApis.GetOneRankingDetail(timetableId, memberId);
     };
 
     return loading ? (
@@ -85,14 +87,15 @@ const MRankDetail = () => {
                             currentUser={currentUser}
                             getDetailData={getDetailData}
                         />
-                        <CmtTag
-                            isMobile={true}
-                            number={currentUser?.replyCount}
-                        />
+                        <CmtTag isMobile={true} number={commentNum} />
                     </M.DetailBtnContainer>
                     {/*뎃글 적는 인풋창 */}
                     {/* <NewComment isMobile={true} currentUserId={timetableId} /> */}
-                    <CommentList isMobile={true} currentUserId={timetableId} />
+                    <CommentList
+                        isMobile={true}
+                        currentUserId={timetableId}
+                        setCommentNum={setCommentNum}
+                    />
                 </M.DetailWrapper>
             </Wrapper>
         )

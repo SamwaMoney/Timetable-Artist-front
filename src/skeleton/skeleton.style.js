@@ -40,7 +40,7 @@ SK.RankContainer = styled.div`
     width: 75%;
     display: flex;
     align-items: center;
-    padding-top: ${props => (props.padding ? `${props.padding}rem` : '14vw')};
+    padding-top: ${props => (props.padding ? `${props.padding}rem` : '20vw')};
 `;
 SK.UserInfo = styled(SkeletonDiv)`
     width: 100%;
@@ -58,7 +58,7 @@ SK.List = styled.div`
     flex-direction: column;
     margin-bottom: 10%;
     width: 100%;
-    margin-top: ${props => (props.margin ? `${props.margin}vw` : '8vw')};
+    margin-top: ${props => (props.margin ? `${props.margin}rem` : '8vw')};
 `;
 
 SK.CommentInfo = styled(SkeletonDiv)`
@@ -82,6 +82,20 @@ SK.SmallContainer = styled.div`
 SK.TimaTableImg = styled(SkeletonDiv)`
     width: 90%;
     height: ${props => (props.height ? `${props.height}rem` : '40rem')};
-    margin-top: 3vw;
+    margin-top: ${props => (props.margin ? `${props.margin}rem` : '3vw')};
     border-radius: 1vw;
+`;
+
+SK.Button = styled(SkeletonDiv)`
+    width: 16vw;
+    height: 8vw;
+    border-radius: 2vw;
+    margin-right: 1vw;
+`;
+
+SK.BtnContainer = styled.div`
+    display: flex;
+    margin-top: 5vw;
+    margin-left: -50vw;
+    margin-bottom: 2vw;
 `;

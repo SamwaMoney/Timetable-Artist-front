@@ -15,8 +15,6 @@ const OneRanking = ({
 }) => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    //현재 정렬 방식
-    const sort = searchParams.get('sort') || 'LOWEST';
 
     //현재 선택된 유저인지(웹)
     const [iscurrentuser, setIsCurrentUser] = useState(false);
@@ -26,7 +24,7 @@ const OneRanking = ({
         index === 0 ? true : false,
     );
 
-    const [loading, setLoading] = useState(true);
+    const [commentCount, setCommentCount] = useState(0);
 
     //받아온 데이터에 해당 프로퍼티를 꺼내줌
     const {
@@ -36,7 +34,6 @@ const OneRanking = ({
         tableTypeContent,
         tableImg,
         likeCount,
-        replyCount,
         liked,
     } = data;
 
@@ -48,6 +45,10 @@ const OneRanking = ({
         }
     }, [iscurrentuser, currentUserId, timetableId]);
 
+    useEffect(() => {
+        setCommentCount(data?.replyCount);
+    }, [data]);
+
     //디테일 페이지 이동(웹)
     const onMoveDetail = () => {
         setCurrentUserId(data.timetableId);
@@ -56,7 +57,7 @@ const OneRanking = ({
     };
 
     //디테일 페이지 이동(모바일)
-    const onMoveMDetail = timetableId => {
+    const onMoveMDetail = (timetableId, index) => {
         navigate(`/ranking/detail/${timetableId}?rank=${index + 1}`);
     };
 
@@ -64,6 +65,10 @@ const OneRanking = ({
     const onShowTimeTable = () => {
         setIsShowTimeTable(prev => !prev);
     };
+
+    useEffect(() => {
+        console.log(commentCount);
+    }, [commentCount]);
 
     return isMobile ? (
         <>
@@ -94,13 +99,23 @@ const OneRanking = ({
                                 src={Timetable}
                                 alt='사진'
                                 onClick={() => {
-                                    onMoveMDetail(timetableId);
+                                    onMoveMDetail(timetableId, index);
                                 }}
                             />
                         </M.TimeTableWrapper>
                         <M.ButtonContainer>
-                            <LikeTag number={likeCount} liked={liked} />
-                            <CmtTag number={replyCount} isMobile={true} />
+                            <LikeTag
+                                number={likeCount}
+                                liked={liked}
+                                timetableId={timetableId}
+                                index={index}
+                            />
+                            <CmtTag
+                                number={commentCount}
+                                isMobile={true}
+                                timetableId={timetableId}
+                                index={index}
+                            />
                         </M.ButtonContainer>
                     </>
                 ) : null}

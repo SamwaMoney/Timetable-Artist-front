@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import S from './M_Hamburger.style';
 import WithdrawalModal from './WithdrawalModal';
 import EditModal from './EditModal';
-import S from './M_Hamburger.style';
 import BackBtn from './BackBtn';
 import { Logout, isLogin } from '../../api/members';
+import { CreateTable, GetTableId } from '../../api/timetables';
+
+import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const MHamburger = () => {
     const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    //const [isLogin(), setIsLogin] = useState(true); // 초기상태 false
-    //setIsLogin(true);
 
     const navigate = useNavigate();
 
@@ -28,7 +28,16 @@ const MHamburger = () => {
     const handleEditClick = e => {
         e.preventDefault();
         if (isLogin()) {
-            setIsEditModalOpen(true);
+            const tableId = localStorage.getItem('tableId');
+            // tableId 가져오기
+            // 'null'인지 null인지 체크
+            if (tableId !== 'null') {
+                setIsEditModalOpen(true);
+            } else {
+                CreateTable();
+                GetTableId();
+                navigate('/create');
+            }
         } else {
             alert('로그인이 필요합니다!');
         }
@@ -37,10 +46,9 @@ const MHamburger = () => {
     // 로그아웃 버튼 클릭
     const handleLogoutClick = () => Logout();
 
-    // 탈퇴 버튼 클릭
-    const handleWithdrawalClick = () => {
-        setIsWithdrawalModalOpen(true);
-    };
+    // 회원탈퇴 버튼 클릭
+    const handleWithdrawalClick = () => setIsWithdrawalModalOpen(true);
+
     const activeStyle = {
         background: 'var(--background)',
     };

@@ -19,28 +19,27 @@ export const CreateClasses = async classes => {
 };
 
 // 시간표 생성
-export const CreateTable = async memberId => {
+export const CreateTable = async () => {
     try {
+        const memberId = localStorage.getItem('memberId');
         const res = await http.post('/timetables', {
             memberId: memberId,
         });
         console.log(res);
-        return res;
     } catch (err) {
-        console.log(err);
+        console.log('시간표 생성 에러', err);
     }
 };
 
 // 시간표 삭제
-export const DeleteTable = async (memberId, timetableId) => {
+export const DeleteTable = async tableId => {
     try {
-        const res = await http.delete(
-            `/members/${memberId}/timetables/${timetableId}`,
-        );
+        const memberId = localStorage.getItem('memberId');
+        const res = await http.delete(`/timetables/${memberId}/${tableId}`);
         console.log(res);
-        return res;
+        localStorage.setItem('tableId', 'null');
     } catch (err) {
-        console.log(err);
+        console.log('시간표 삭제 에러', err);
     }
 };
 
@@ -90,5 +89,18 @@ export const UpdateTable = async (owner, classHide, timetableId) => {
         return res;
     } catch (err) {
         console.log(err);
+    }
+};
+
+// tableId 가져오기
+export const GetTableId = async () => {
+    try {
+        const memberId = localStorage.getItem('memberId');
+        const res = await http.get(`/timetables?memberId=${memberId}`);
+        const tableId = res.data.timetableId;
+        localStorage.setItem('tableId', tableId);
+        alert(localStorage.getItem('tableId'));
+    } catch (err) {
+        console.log('테이블아이디 가져오기 오류', err);
     }
 };

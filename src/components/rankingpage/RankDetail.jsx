@@ -5,7 +5,7 @@ import CommentList from './rightSection/CommentList';
 import CmtTag from './rightSection/CmtTag';
 import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
-
+import { useState } from 'react';
 const RankDetail = ({
     memberId,
     currentUserId,
@@ -13,7 +13,10 @@ const RankDetail = ({
     currentUser,
     loading,
     rankLoading,
+    getDetailData,
 }) => {
+    const [commentNum, setCommentNum] = useState();
+    console.log(currentUser);
     return loading || rankLoading ? (
         <RightSectionSkeleton />
     ) : (
@@ -28,12 +31,14 @@ const RankDetail = ({
                     timetableId={currentUserId}
                     getRankingList={getRankingList}
                 />
-                <CmtTag number={currentUser?.replyCount} />
+                <CmtTag number={commentNum} />
             </S.ButtonContainer>
             <CommentList
                 memberId={memberId}
                 currentUserId={currentUserId}
                 isMobile={false}
+                setCommentNum={setCommentNum}
+                getDetailData={getDetailData}
             />
         </S.SmallContainer>
     );
