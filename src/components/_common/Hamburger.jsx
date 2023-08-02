@@ -1,7 +1,8 @@
-import EditModal from './EditModal';
 import { S } from './Hamburger.style';
+import EditModal from './EditModal';
 import WithdrawalModal from './WithdrawalModal';
 import { Logout, isLogin } from '../../api/members';
+import { CreateTable, GetTableId } from '../../api/timetables';
 
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -12,6 +13,7 @@ const Hamburger = () => {
 
     const navigate = useNavigate();
 
+    // 내 시간표 점수 버튼 클릭
     const handleScoreClick = e => {
         e.preventDefault();
         if (isLogin()) {
@@ -20,10 +22,19 @@ const Hamburger = () => {
             alert('로그인이 필요합니다!');
         }
     };
+
+    // 내 시간표 수정 버튼 클릭
     const handleEditClick = e => {
         e.preventDefault();
         if (isLogin()) {
-            setIsEditModalOpen(true);
+            const tableId = localStorage.getItem('tableId');
+            if (tableId !== 'null') {
+                setIsEditModalOpen(true);
+            } else {
+                CreateTable();
+                GetTableId();
+                navigate('/create');
+            }
         } else {
             alert('로그인이 필요합니다!');
         }
@@ -33,9 +44,8 @@ const Hamburger = () => {
     const handleLogoutClick = () => Logout();
 
     // 회원탈퇴 버튼 클릭
-    const handleWithdrawalClick = () => {
-        setIsWithdrawalModalOpen(true);
-    };
+    const handleWithdrawalClick = () => setIsWithdrawalModalOpen(true);
+
     const activeStyle = {
         background: 'var(--background)',
     };

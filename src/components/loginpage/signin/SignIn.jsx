@@ -1,7 +1,10 @@
 import { S } from './SignIn.style';
 import { Login } from '../../../api/members';
+import { GetTableId } from '../../../api/timetables';
 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 const SignIn = () => {
     const [id, setId] = useState('');
@@ -9,6 +12,8 @@ const SignIn = () => {
     const [isFilled, setIsFilled] = useState(false);
     const [existedId, setExistedId] = useState(true);
     const [correctPw, setCorrectPw] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id !== '' && pw !== '') setIsFilled(true);
@@ -20,13 +25,17 @@ const SignIn = () => {
         setExistedId(true);
         if (isFilled) {
             const res = await Login(id, pw);
-            if (res === 'notExisedId') {
+            if (res === 'Login Success') {
+                GetTableId();
+                navigate('/ranking');
+            } else if (res === 'notExisedId') {
                 setExistedId(false);
             } else if (res === 'notCorrectPw') {
                 setCorrectPw(false);
             }
         }
     };
+
     return (
         <S.Wrapper>
             <form onSubmit={e => handleSubmit(e)}>
