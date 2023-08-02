@@ -5,9 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { TwitterShareButton } from 'react-share';
 import { RWebShare } from 'react-web-share';
+import {
+    GetTimetableId,
+    FindTable,
+    ScoreTable,
+    UploadTable,
+} from '../../api/scores';
 
-import timetable from '../../assets/scorepage/timetable.png';
-import type from '../../assets/scorepage/Rectangle 98.png';
+import Timetable from '../createpage/TimeTable';
+import Loading from '../_common/Loading';
 import sharing_icon from '../../assets/scorepage/sharing_option.svg';
 import sharing_none from '../../assets/scorepage/sharing_none.svg';
 import share from '../../assets/scorepage/share.svg';
@@ -16,9 +22,13 @@ import twitter from '../../assets/scorepage/twitter.svg';
 import Hamburger from '../_common/Hamburger';
 import RangkingModal from '../_common/RankingModal';
 import EditModal from '../_common/EditModal';
+import test from '../../assets/scorepage/Rectangle 98.png';
 
 const Score = () => {
-    const [data, setData] = useState([1]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isScored, setIsScored] = useState(true);
+    const [data, setData] = useState();
+    const [timetableId, setTimeTableId] = useState(null);
     const [isRankingModalOpen, setRankingModalOpen] = useState(false);
     const [isUploaded, setIsUploaded] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -28,6 +38,7 @@ const Score = () => {
     const mainURL = window.location.href.slice(0, -5);
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
     const navigate = useNavigate();
+    const memberId = localStorage.getItem('memberId');
 
     const handleRankingClick = () => {
         setRankingModalOpen(true);
@@ -80,7 +91,76 @@ const Score = () => {
         });
     };
 
+    const dataURLtoBlob = dataurl => {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+    };
+
+    const onUploadBtnClick = async () => {
+        const canvas = await html2canvas(document.getElementById('tableImage'));
+        let timetableImg = canvas.toDataURL('image/png');
+        timetableImg = await dataURLtoBlob(timetableImg);
+        /*
+            timetableImg = new File(
+                [timetableImg],
+                `timetable_${memberId}.png`,
+                {
+                    type: 'image/png',
+                },
+            );*/
+        console.log(timetableImg);
+        localStorage.setItem('image', timetableImg);
+
+        const image = localStorage.getItem('image');
+        const dto = {
+            classHide: isHidden,
+            ranking: true,
+        };
+        console.log(dto);
+
+        const res = await UploadTable(image, dto, 1);
+        handleRankingClick();
+    };
+
+    const CallGetTimetableId = async memberId => {
+        const res = await GetTimetableId(memberId);
+        setTimeTableId(res.data.timetableId);
+        console.log(res);
+        if (res.data.timetableId === null) setIsLoading(false);
+    };
+
+    const CallScoreTable = async timetableId => {
+        const res = await ScoreTable(timetableId);
+        console.log('채점됨');
+        setIsScored(true);
+    };
+
+    const CallFindTable = async (memberId, timetableId) => {
+        const res = await FindTable(memberId, timetableId);
+        console.log(res.data);
+        if (res.data.tableType === null) {
+            setIsScored(false);
+        } else {
+            setData(res.data);
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
+        if (isLoading) {
+            if (timetableId === null) CallGetTimetableId(1);
+            else {
+                if (!isScored) CallScoreTable(timetableId);
+                else CallFindTable(1, 1);
+            }
+        }
         if (status === 'ready' && window.Kakao) {
             // 중복 initialization 방지
             if (!window.Kakao.isInitialized()) {
@@ -89,175 +169,223 @@ const Score = () => {
             }
         }
         if (height === 'auto') onCapture();
-    }, [height, status]);
+    }, [height, status, isLoading, isScored, timetableId]);
 
     return (
         <S.Wrapper>
             {/*햄버거*/}
             <Hamburger />
-            <S.Container id='capture' height={height}>
-                {data.length !== 0 ? (
-                    <>
-                        <S.SmallContainer>
-                            <S.Title>내 시간표의 점수는...</S.Title>
-                            <S.Score>76점!</S.Score>
-                            <S.Img src={timetable} />
-                            <S.Save
-                                onClick={() => {
-                                    setHeight('auto');
-                                }}
-                            >
-                                📁 결과_이미지_저장하기
-                            </S.Save>
-                        </S.SmallContainer>
-                        <S.SmallContainer>
-                            <S.Title>내 시간표 유형은?</S.Title>
-                            <S.Score>
-                                <div className='type'>전공 마스터</div>
-                            </S.Score>
-                            <S.TypeImg src={type}></S.TypeImg>
-                            <S.ResultContainer>
-                                <S.Part>
-                                    <div className='good'>
-                                        {'짱!\n\n\nദി(☆⸝⸝ᵔ‿ᵔ⸝⸝)\n\n'}
+            {isLoading ? (
+                <Loading title='채점결과' />
+            ) : (
+                <S.Container id='capture' height={height}>
+                    {timetableId !== null ? (
+                        <>
+                            <S.SmallContainer>
+                                <S.Title>내 시간표의 점수는...</S.Title>
+                                <S.Score>{data.score}점!</S.Score>
+                                <S.TimeTable id='tableImage'>
+                                    <Timetable
+                                        isScorePage='true'
+                                        classList={data.classList}
+                                        isHidden={isHidden}
+                                    />
+                                </S.TimeTable>
+
+                                <S.Save
+                                    onClick={() => {
+                                        setHeight('auto');
+                                    }}
+                                >
+                                    📁 결과_이미지_저장하기
+                                </S.Save>
+                            </S.SmallContainer>
+                            <S.SmallContainer>
+                                <S.Title>내 시간표 유형은?</S.Title>
+                                <S.Score>
+                                    <div className='type'>
+                                        {data.tableTypeContent}
                                     </div>
-                                </S.Part>
-                                <S.ResultBox>
-                                    <div className='text'>
-                                        <span className='plus'>+ </span>
-                                        최고 인기, 금공강!
-                                    </div>
-                                    <div className='text'>
-                                        <span className='plus'>+ </span>1교시
-                                        제로
-                                    </div>
-                                    <div className='text'>
-                                        <span className='plus'>+ </span>
-                                        2연강까지만 용납
-                                    </div>
-                                </S.ResultBox>
-                            </S.ResultContainer>
-                            <S.ResultContainer>
-                                <S.Part>
-                                    <div className='bad'>
-                                        {'음...\n\n\n(?・・);σ   \n\n'}
-                                    </div>
-                                </S.Part>
-                                <S.ResultBox>
-                                    <div className='text'>
-                                        <span className='minus'>- </span>
-                                        퐁당퐁당 수요일
-                                    </div>
-                                </S.ResultBox>
-                            </S.ResultContainer>
-                            <S.Special>*。・✩━스페-셜━ ✩・*。</S.Special>
-                            <S.SpecialBox>
-                                <div className='text'>
-                                    ✔ 아침잠 사수! 저녁형 시간표
-                                </div>
-                                <div className='text'>
-                                    ✔ 채플? 그게 뭐죠. -.- 채플자유인
-                                </div>
-                                <div className='text'>✔ 6전공! 전공마스터</div>
-                            </S.SpecialBox>
-                            {height === '70%' && (
-                                <>
-                                    <S.Hide>
-                                        {isHidden ? (
-                                            <button
-                                                onClick={() => {
-                                                    setIsHidden(false);
-                                                }}
-                                                style={{ background: 'none' }}
-                                            >
-                                                <S.Icon
-                                                    src={sharing_icon}
-                                                    width={'1.5vw'}
-                                                />
-                                            </button>
+                                </S.Score>
+                                <S.TypeImg src={data.photo}></S.TypeImg>
+                                {data.plusComments.length > 0 && (
+                                    <S.ResultContainer>
+                                        <S.Part>
+                                            <div className='good'>
+                                                {'짱!\n\n\nദി(☆⸝⸝ᵔ‿ᵔ⸝⸝)\n\n'}
+                                            </div>
+                                        </S.Part>
+                                        <S.ResultBox>
+                                            {data.plusComments.map(item => {
+                                                return (
+                                                    <div
+                                                        className='text'
+                                                        key={item.commentId}
+                                                    >
+                                                        <span className='plus'>
+                                                            +{' '}
+                                                        </span>
+                                                        {item.content}
+                                                    </div>
+                                                );
+                                            })}
+                                        </S.ResultBox>
+                                    </S.ResultContainer>
+                                )}
+                                {data.minusComments.length > 0 && (
+                                    <S.ResultContainer>
+                                        <S.Part>
+                                            <div className='bad'>
+                                                {'음...\n\n\n(?・・);σ   \n\n'}
+                                            </div>
+                                        </S.Part>
+                                        <S.ResultBox>
+                                            {data.minusComments.map(item => {
+                                                return (
+                                                    <div
+                                                        className='text'
+                                                        key={item.commentId}
+                                                    >
+                                                        <span className='minus'>
+                                                            -{' '}
+                                                        </span>
+                                                        {item.content}
+                                                    </div>
+                                                );
+                                            })}
+                                        </S.ResultBox>
+                                    </S.ResultContainer>
+                                )}
+                                {data.specialComments.length > 0 && (
+                                    <>
+                                        <S.Special>
+                                            *。・✩━스페-셜━ ✩・*。
+                                        </S.Special>
+                                        <S.SpecialBox>
+                                            {data.specialComments.map(item => {
+                                                return (
+                                                    <div className='text'>
+                                                        ✔ {item.content}
+                                                    </div>
+                                                );
+                                            })}
+                                        </S.SpecialBox>
+                                    </>
+                                )}
+
+                                {height === '70%' && (
+                                    <>
+                                        <S.Hide>
+                                            {isHidden ? (
+                                                <button
+                                                    onClick={() => {
+                                                        setIsHidden(false);
+                                                    }}
+                                                    style={{
+                                                        background: 'none',
+                                                    }}
+                                                >
+                                                    <S.Icon
+                                                        src={sharing_icon}
+                                                        width={'1.5vw'}
+                                                    />
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => {
+                                                        setIsHidden(true);
+                                                    }}
+                                                    style={{
+                                                        background: 'none',
+                                                    }}
+                                                >
+                                                    <S.Icon
+                                                        src={sharing_none}
+                                                        width={'1.5vw'}
+                                                    />
+                                                </button>
+                                            )}
+                                            <div className='text'>
+                                                강의명을 숨기고 게시할래요.
+                                            </div>
+                                        </S.Hide>
+                                        {isUploaded ? (
+                                            <S.UploadedBtn>
+                                                이미 랭킹보드에 게시
+                                                완료되었어요
+                                            </S.UploadedBtn>
                                         ) : (
-                                            <button
-                                                onClick={() => {
-                                                    setIsHidden(true);
+                                            <S.UploadBtn
+                                                onClick={onUploadBtnClick}
+                                            >
+                                                랭킹보드에 게시하기
+                                            </S.UploadBtn>
+                                        )}
+
+                                        <S.BasicFont
+                                            style={{ fontWeight: '700' }}
+                                        >
+                                            SNS에 공유하기
+                                        </S.BasicFont>
+                                        <S.IconContainer>
+                                            <RWebShare
+                                                data={{
+                                                    text: '저는 시간표 망한 대학생이 아니라 시간표 아티스트예요',
+                                                    url: mainURL,
+                                                    title: '시간표 아티스트',
                                                 }}
-                                                style={{ background: 'none' }}
                                             >
                                                 <S.Icon
-                                                    src={sharing_none}
-                                                    width={'1.5vw'}
+                                                    src={share}
+                                                    width={'38'}
                                                 />
-                                            </button>
-                                        )}
-                                        <div className='text'>
-                                            강의명을 숨기고 게시할래요.
-                                        </div>
-                                    </S.Hide>
-                                    {isUploaded ? (
-                                        <S.UploadedBtn>
-                                            이미 랭킹보드에 게시 완료되었어요
-                                        </S.UploadedBtn>
-                                    ) : (
-                                        <S.UploadBtn
-                                            onClick={handleRankingClick}
-                                        >
-                                            랭킹보드에 게시하기
-                                        </S.UploadBtn>
-                                    )}
+                                            </RWebShare>
 
-                                    <S.BasicFont style={{ fontWeight: '700' }}>
-                                        SNS에 공유하기
-                                    </S.BasicFont>
-                                    <S.IconContainer>
-                                        <RWebShare
-                                            data={{
-                                                text: '저는 시간표 망한 대학생이 아니라 시간표 아티스트예요',
-                                                url: mainURL,
-                                                title: '시간표 아티스트',
-                                            }}
-                                        >
-                                            <S.Icon src={share} width={'38'} />
-                                        </RWebShare>
-
-                                        <S.Icon
-                                            src={kakaotalk}
-                                            width={'38'}
-                                            onClick={handleKakaoBtn}
-                                        />
-
-                                        <TwitterShareButton
-                                            url={mainURL}
-                                            title={
-                                                '시간표 아티스트: 저는 시간표 망한 대학생이 아니라 시간표 아티스트예요'
-                                            }
-                                        >
                                             <S.Icon
-                                                src={twitter}
+                                                src={kakaotalk}
                                                 width={'38'}
-                                                style={{ marginTop: '0.1vw' }}
+                                                onClick={handleKakaoBtn}
                                             />
-                                        </TwitterShareButton>
-                                    </S.IconContainer>
-                                    {isUploaded && (
-                                        <S.UploadBtn
-                                            onClick={e => handleEditClick(e)}
-                                        >
-                                            시간표 수정하기
-                                        </S.UploadBtn>
-                                    )}
-                                </>
-                            )}
-                        </S.SmallContainer>
-                    </>
-                ) : (
-                    <S.NoData>
-                        <S.NoDataText>Σ(‘⊙ₒ ⊙’；)</S.NoDataText>
-                        <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
-                        <S.Button onClick={() => navigate('/create')}>
-                            시간표 만들러 가기
-                        </S.Button>
-                    </S.NoData>
-                )}
-            </S.Container>
+
+                                            <TwitterShareButton
+                                                url={mainURL}
+                                                title={
+                                                    '시간표 아티스트: 저는 시간표 망한 대학생이 아니라 시간표 아티스트예요'
+                                                }
+                                            >
+                                                <S.Icon
+                                                    src={twitter}
+                                                    width={'38'}
+                                                    style={{
+                                                        marginTop: '0.1vw',
+                                                    }}
+                                                />
+                                            </TwitterShareButton>
+                                        </S.IconContainer>
+                                        {isUploaded && (
+                                            <S.UploadBtn
+                                                onClick={e =>
+                                                    handleEditClick(e)
+                                                }
+                                            >
+                                                시간표 수정하기
+                                            </S.UploadBtn>
+                                        )}
+                                    </>
+                                )}
+                            </S.SmallContainer>
+                        </>
+                    ) : (
+                        <S.NoData>
+                            <S.NoDataText>Σ(‘⊙ₒ ⊙’；)</S.NoDataText>
+                            <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
+                            <S.Button onClick={() => navigate('/create')}>
+                                시간표 만들러 가기
+                            </S.Button>
+                        </S.NoData>
+                    )}
+                </S.Container>
+            )}
             {isRankingModalOpen && (
                 <RangkingModal setRankingModalOpen={setRankingModalOpen} />
             )}
