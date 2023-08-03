@@ -1,5 +1,5 @@
 import { M } from './Modal.style';
-import { CreateTable, DeleteTable, GetTableId } from '../../api/timetables';
+import { CreateTable, DeleteTable } from '../../api/timetables';
 
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
@@ -11,7 +11,6 @@ const EditModal = ({ setIsEditModalOpen }) => {
         const tableId = localStorage.getItem('tableId');
         DeleteTable(tableId);
         CreateTable();
-        GetTableId();
         setIsEditModalOpen(false);
         navigate('/create');
     };

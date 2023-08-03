@@ -30,10 +30,7 @@ export const DeleteMember = async () => {
         const memberId = localStorage.getItem('memberId');
         const res = await http.delete(`/members/${memberId}`);
         console.log(res, '탈퇴 성공');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('memberId');
-        localStorage.removeItem('expireAt');
+        localStorage.clear();
         return 'Account deletion successful';
     } catch (err) {
         console.log(err);
@@ -87,12 +84,7 @@ export const Logout = async () => {
             },
         });
         console.log(res, '로그아웃 성공');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('memberId');
-        localStorage.removeItem('expireAt');
-        localStorage.removeItem('username');
-        localStorage.removeItem('tableId');
+        localStorage.clear();
         window.location.replace('/ranking');
         return res;
     } catch (err) {
