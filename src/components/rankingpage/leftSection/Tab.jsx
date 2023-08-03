@@ -33,7 +33,6 @@ const TabContainer = ({ isMobile }) => {
                 onClick={e => {
                     onMoveSortPage(e);
                 }}
-                // isactive={(sort !== 'LIKE').toString()}
             >
                 {sort !== 'HIGHEST' ? '최악의 시간표' : '최고의 시간표'}
             </M.Tab>

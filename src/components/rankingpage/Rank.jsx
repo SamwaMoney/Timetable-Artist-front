@@ -14,7 +14,7 @@ import RankingListSkeleton from '../../skeleton/RankingListSkeleton';
 const Rank = ({ isMyData }) => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
-    const sort = params.get('sort') || 'LOWEST';
+    const sort = params.get('sort');
     const navigate = useNavigate();
     //api로 받아온 데이터 관리하는 곳
     const [rankingData, setRankingData] = useState();
@@ -81,7 +81,7 @@ const Rank = ({ isMyData }) => {
         <S.Wrapper>
             <Hamburger />
             {/*랭킹 보여주는 left section*/}
-            {!currentUserId || loading ? (
+            {(!currentUserId || loading) && !sort ? (
                 <Loading />
             ) : (
                 <S.Container>
@@ -106,15 +106,16 @@ const Rank = ({ isMyData }) => {
                             />
                         )}
                         <TabContainer />
-                        {rankLoading ? (
+                        {/* {rankLoading ? (
                             <RankingListSkeleton />
-                        ) : (
-                            <RankingList
-                                data={rankingData}
-                                currentUserId={currentUserId}
-                                setCurrentUserId={setCurrentUserId}
-                            />
-                        )}
+                        ) : ( */}
+                        <RankingList
+                            rankLoading={rankLoading}
+                            data={rankingData}
+                            currentUserId={currentUserId}
+                            setCurrentUserId={setCurrentUserId}
+                        />
+                        {/* )} */}
                     </S.SmallContainer>
                     {/*개별 유저 데이터 보여주는 right section*/}
                     <RankDetail

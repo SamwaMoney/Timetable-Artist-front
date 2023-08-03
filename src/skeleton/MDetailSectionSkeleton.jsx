@@ -11,8 +11,8 @@ const MDetailSectionSkeleton = () => {
         >
             <SK.List margin={0.01}>
                 <SK.RankContainer>
-                    <SK.RankNum height={15} width={20} />
-                    <SK.UserInfo height={15} />
+                    <SK.RankNum width={4.5} />
+                    <SK.UserInfo />
                 </SK.RankContainer>
                 <SK.TimaTableImg height={25} margin={2} />
                 <SK.BtnContainer>

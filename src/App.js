@@ -14,8 +14,8 @@ import ErrorPage from './pages/ErrorPage';
 import MRankDetail from './components/rankingpage/M_RankDetail';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import MRankingListSkeleton from './skeleton/MRankingListSkeleton';
-import CommentSkeleton from './skeleton/CommentSkeleton';
+import Loading2Page from './pages/Loading2';
+import LoadingPage from './pages/LoadingPage';
 function App() {
     return (
         <>
@@ -51,6 +51,11 @@ function App() {
                             element={<AboutUsPage />}
                         />
                         <Route path='/menu' element={<MenuPage />} />
+                        <Route
+                            path='/loading2'
+                            element={<Loading2Page />}
+                        />{' '}
+                        <Route path='/loading1' element={<LoadingPage />} />
                         <Route path='/*' element={<ErrorPage />} />
                     </Routes>
                 </BrowserRouter>

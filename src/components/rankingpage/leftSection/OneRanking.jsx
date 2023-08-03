@@ -123,7 +123,7 @@ const OneRanking = ({
         </>
     ) : (
         <>
-            <S.RankContainer>
+            <S.RankContainer top={2}>
                 <S.RankNum iscurrentuser={iscurrentuser.toString()}>
                     {index + 1}
                 </S.RankNum>

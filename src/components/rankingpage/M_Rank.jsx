@@ -73,11 +73,11 @@ const MobileRank = ({ isMyData }) => {
                 </M.NewButton>
             )}
             <TabContainer isMobile={true} />
-            {loading ? (
+            {/* {loading ? (
                 <MRankingListSkeleton />
-            ) : (
-                <RankingList isMobile={true} data={rankingData} />
-            )}
+            ) : ( */}
+            <RankingList isMobile={true} data={rankingData} loading={loading} />
+            {/* )} */}
         </M.FlexContainer>
     );
 };
