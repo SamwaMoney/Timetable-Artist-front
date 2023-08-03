@@ -48,7 +48,7 @@ const Wrapper = styled.div`
 const LoadingWrapper = styled.div`
     height: 100vh;
     width: 100%;
-    background: linear-gradient(to bottom, #e2e2e2, #84afff);
+    background: linear-gradient(to bottom, #e2e2e2, var(--green));
     ${FlexCenter}
     flex-direction: column;
 `;

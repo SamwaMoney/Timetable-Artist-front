@@ -137,7 +137,6 @@ const Score = () => {
     const onUploadBtnClick = async () => {
         const canvas = await html2canvas(document.getElementById('tableImage'));
         let timetableImg = canvas.toDataURL('image/png');
-        onSaveAs(timetableImg, 'time.png');
         timetableImg = await dataURLtoBlob(timetableImg);
 
         timetableImg = new File([timetableImg], `timetable_${memberId}.png`, {
@@ -196,10 +195,7 @@ const Score = () => {
             }
         }
         if (height === 'auto') onCapture();
-        if (width === '320px') {
-            onUploadBtnClick();
-            console.log('실행');
-        }
+        if (width === '320px') onUploadBtnClick();
     }, [height, width, status, isLoading, isScored, timetableId]);
 
     return (
@@ -305,7 +301,6 @@ const Score = () => {
                                         </S.SpecialBox>
                                     </>
                                 )}
-
                                 {height === '70%' && (
                                     <>
                                         <S.Hide>
