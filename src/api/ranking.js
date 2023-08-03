@@ -46,7 +46,7 @@ const RankingApis = {
     DeleteTimeTableLike: async (timetableId, memberId) => {
         try {
             const res = await http.delete(
-                `/timetables/${timetableId}/likes?memberId=4`,
+                `/timetables/${timetableId}/likes?memberId=${memberId}`,
             );
             console.log(res);
             return res;

@@ -18,7 +18,9 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
 
     useEffect(() => {
         console.log('좋아요 여부', isLike);
-        console.log('좋아요 여부 바뀜', likeNum);
+        setIsLike(currentUser?.liked);
+        console.log('좋아요 여부 바뀜', isLike);
+        setLikeNum(currentUser?.likeCount);
     }, [currentUser]);
 
     //좋아요 누르기 (낙관적 업데이트)
