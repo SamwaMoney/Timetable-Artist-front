@@ -26,6 +26,7 @@ export const CreateTable = async () => {
             memberId: memberId,
         });
         console.log(res);
+        GetTableId();
     } catch (err) {
         console.log('시간표 생성 에러', err);
     }
@@ -35,9 +36,10 @@ export const CreateTable = async () => {
 export const DeleteTable = async tableId => {
     try {
         const memberId = localStorage.getItem('memberId');
-        const res = await http.delete(`/timetables/${memberId}/${tableId}`);
+        const res = await http.delete(`/timetables/${tableId}/${memberId}`);
         console.log(res);
         localStorage.setItem('tableId', 'null');
+        return res;
     } catch (err) {
         console.log('시간표 삭제 에러', err);
     }
@@ -99,7 +101,6 @@ export const GetTableId = async () => {
         const res = await http.get(`/timetables?memberId=${memberId}`);
         const tableId = res.data.timetableId;
         localStorage.setItem('tableId', tableId);
-        alert(localStorage.getItem('tableId'));
     } catch (err) {
         console.log('테이블아이디 가져오기 오류', err);
     }

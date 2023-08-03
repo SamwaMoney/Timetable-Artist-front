@@ -4,7 +4,7 @@ import { SK } from './skeleton.style';
 const MRankingListSkeleton = () => {
     return (
         <SK.List>
-            {Array(6)
+            {Array(7)
                 .fill()
                 .map(el => {
                     return (

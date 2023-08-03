@@ -14,8 +14,7 @@ import ErrorPage from './pages/ErrorPage';
 import MRankDetail from './components/rankingpage/M_RankDetail';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import MRankingListSkeleton from './skeleton/MRankingListSkeleton';
-import CommentSkeleton from './skeleton/CommentSkeleton';
+
 function App() {
     return (
         <>

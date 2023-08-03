@@ -48,10 +48,7 @@ http.interceptors.request.use(
     async error => {
         // ex) refreshToken이 만료된 경우
         console.log('리프레시 에러', error);
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('memberId');
-        localStorage.removeItem('expireAt');
+        localStorage.clear();
         window.location.reload();
         return Promise.reject(error);
     },

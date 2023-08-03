@@ -1,5 +1,5 @@
 import { M } from './Modal.style';
-import { CreateTable, DeleteTable, GetTableId } from '../../api/timetables';
+import { CreateTable, DeleteTable } from '../../api/timetables';
 
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
@@ -7,13 +7,16 @@ import { isMobile } from 'react-device-detect';
 const EditModal = ({ setIsEditModalOpen }) => {
     const navigate = useNavigate();
 
-    const handleCheckClick = () => {
+    const handleCheckClick = async () => {
         const tableId = localStorage.getItem('tableId');
-        DeleteTable(tableId);
-        CreateTable();
-        GetTableId();
-        setIsEditModalOpen(false);
-        navigate('/create');
+        const res = await DeleteTable(tableId);
+        if (res.status === 200) {
+            CreateTable();
+            setIsEditModalOpen(false);
+            navigate('/create');
+        } else {
+            alert('시간표 삭제 오류');
+        }
     };
 
     return (
