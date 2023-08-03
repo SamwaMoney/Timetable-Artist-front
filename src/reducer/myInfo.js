@@ -24,7 +24,7 @@ const myInfoReducer = (state = initialState, action) => {
             const score_state = { ...state };
             return {
                 ...score_state,
-                myUserName: action.payload,
+                myScore: action.payload,
             };
 
         default:
