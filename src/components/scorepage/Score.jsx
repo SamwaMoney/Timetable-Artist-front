@@ -149,7 +149,7 @@ const Score = () => {
         };
         console.log(dto);
 
-        const res = await UploadTable(timetableImg, dto, memberId);
+        const res = await UploadTable(timetableImg, dto, timetableId);
         handleRankingClick();
         setWidth('70%');
     };
