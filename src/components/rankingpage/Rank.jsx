@@ -9,7 +9,6 @@ import RankingApis from '../../api/ranking';
 import Loading from '../_common/Loading';
 import RankDetail from './RankDetail';
 import { useLocation } from 'react-router-dom';
-import RankingListSkeleton from '../../skeleton/RankingListSkeleton';
 
 const Rank = ({ isMyData }) => {
     const location = useLocation();
