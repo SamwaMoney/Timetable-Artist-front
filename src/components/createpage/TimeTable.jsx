@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import TimeTableRow from './TimeTableRow';
 
 // props로 초기화 버튼 null 처리하기
-const TimeTable = ({ isScorePage }) => {
+const TimeTable = ({ isScorePage, isHidden }) => {
     const startHour = 8;
     const endHour = 20;
     const timeInterval = 0.5;
@@ -43,7 +43,7 @@ const TimeTable = ({ isScorePage }) => {
 
     return (
         <TimeTableContainer
-            className={isScorePage === "true" ? 'isScorePage' : ''}
+            className={isScorePage === true ? 'isScorePage' : ''}
         >
             <table>
                 <thead>
@@ -72,6 +72,7 @@ const TimeTable = ({ isScorePage }) => {
                                 index={index}
                                 numberOfSlots={numberOfSlots}
                                 selectedData={selectedData}
+                                isHidden={isHidden}
                             />
                         </tr>
                     ))}

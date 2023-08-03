@@ -213,7 +213,7 @@ const Score = () => {
                                 <S.Score>{data.score}점!</S.Score>
                                 <S.TimeTable id='tableImage' width={width}>
                                     <Timetable
-                                        isScorePage='true'
+                                        isScorePage={true}
                                         classList={data.classList}
                                         isHidden={isHidden}
                                     />
