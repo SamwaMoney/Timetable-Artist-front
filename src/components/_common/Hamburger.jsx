@@ -2,7 +2,7 @@ import { S } from './Hamburger.style';
 import EditModal from './EditModal';
 import WithdrawalModal from './WithdrawalModal';
 import { Logout, isLogin } from '../../api/members';
-import { CreateTable, GetTableId } from '../../api/timetables';
+import { CreateTable } from '../../api/timetables';
 
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -32,7 +32,6 @@ const Hamburger = () => {
                 setIsEditModalOpen(true);
             } else {
                 CreateTable();
-                GetTableId();
                 navigate('/create');
             }
         } else {

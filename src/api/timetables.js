@@ -26,6 +26,7 @@ export const CreateTable = async () => {
             memberId: memberId,
         });
         console.log(res);
+        GetTableId();
     } catch (err) {
         console.log('시간표 생성 에러', err);
     }
