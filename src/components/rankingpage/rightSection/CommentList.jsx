@@ -11,7 +11,8 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
     const [commentData, setCommentData] = useState();
     const [loading, setLoading] = useState(true);
 
-    console.log(isMobile);
+    //댓글을 요청하는 중
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     //댓글 가져온 후에 댓글 state에 데이터 추가하는 로직
     const getCommentData = async () => {
@@ -37,8 +38,8 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
     //댓글 개수 업데이트해주는 로직
     useEffect(() => {
         if (commentData) {
+            setCommentNum(commentData?.length);
         }
-        setCommentNum(commentData?.length);
     }, [commentData]);
 
     //댓글 가져오는 로직
@@ -48,15 +49,23 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
 
     //댓글 삭제후 업데이트 로직
     const deleteMyComment = async (memberId, replyId) => {
-        console.log('댓글삭제', memberId, replyId);
+        // console.log('댓글삭제', memberId, replyId);
         await RankingApis.DeleteComment(memberId, replyId);
         await getCommentData();
     };
 
     //댓글 추가후 업데이트 로직
     const updateComment = async newComment => {
-        await RankingApis.PostComment(newComment);
-        await getCommentData();
+        // console.log('추가된 댓글', newComment);
+        setIsSubmitting(true); // 요청이 시작되었음을 나타내기 위해 상태를 true로 설정
+        try {
+            await RankingApis.PostComment(newComment);
+            await getCommentData();
+            setIsSubmitting(false);
+        } catch (error) {
+            console.error('댓글 업로드 실패:', error);
+            setIsSubmitting(false);
+        }
     };
 
     return isMobile ? (
@@ -90,6 +99,7 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
             <NewComment
                 currentUserId={currentUserId}
                 updateComment={updateComment}
+                isSubmitting={isSubmitting}
             />
             <CommentContainer>
                 {loading ? (

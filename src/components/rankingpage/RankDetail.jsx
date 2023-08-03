@@ -16,14 +16,14 @@ const RankDetail = ({
     getDetailData,
 }) => {
     const [commentNum, setCommentNum] = useState();
-    console.log(currentUser);
+    console.log('imgUrl', currentUser?.photo);
     return loading || rankLoading ? (
         <RightSectionSkeleton />
     ) : (
         <S.SmallContainer>
             <RankUserInfo data={currentUser} loading={loading} />
             <S.TimeTable src={Timetable} />
-            {/* <S.TimeTable src={currentUser?.tableImg} alt='사진' /> */}
+            {/* <S.TimeTable src={currentUser?.photo} alt='사진' /> */}
             {/*버튼 컨테이너*/}
             <S.ButtonContainer>
                 <LikeBtn

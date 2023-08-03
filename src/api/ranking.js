@@ -66,7 +66,7 @@ const RankingApis = {
                 content,
                 nameHide,
             });
-            console.log(res);
+            console.log('댓글작성', res);
             return res;
         } catch (err) {
             console.log(err);

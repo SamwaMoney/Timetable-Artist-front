@@ -7,13 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import RankingApis from '../../api/ranking';
 import { useLocation } from 'react-router-dom';
-import MRankingListSkeleton from '../../skeleton/MRankingListSkeleton';
-
-//전역 변수 => 현재 시간표가 있는가?
-//로그인 상태 => 시간표 있으면 내 점수, 내 랭킹 보여주기
-//로그인 상태 => 시간표 없으켠 새 시간표 만들기 클릭시 시간표 페이지로 이동
-//로그인 안된 상태 => 새 시간표 만들기 클릭시 로그인페이지 이동
-
+import MLoading from '../_common/M_Loading';
 const MobileRank = ({ isMyData }) => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
@@ -26,7 +20,6 @@ const MobileRank = ({ isMyData }) => {
 
     //sort에 따라 랭킹 정보 불러오기
     useEffect(() => {
-        console.log('sort바뀜', sort);
         setRankingData('');
         setLoading(true);
         const fetchData = async sort => {
@@ -35,6 +28,7 @@ const MobileRank = ({ isMyData }) => {
             setRankingData(res?.data);
         };
         fetchData(sort);
+        setLoading(false);
     }, [sort]);
 
     const getRankingList = (sort, memberId) => {
@@ -42,7 +36,6 @@ const MobileRank = ({ isMyData }) => {
     };
 
     useEffect(() => {
-        console.log('로딩상태', loading);
         if (loading && rankingData) {
             setLoading(false);
         }
@@ -52,7 +45,7 @@ const MobileRank = ({ isMyData }) => {
         <M.FlexContainer>
             <MHamburgerButton />
             {isMyData ? (
-                <MyScore isMobile={true} />
+                <MyScore isMobile={true} datas={rankingData} />
             ) : isLogin ? (
                 <M.NewButton
                     isMobile={true}
@@ -73,11 +66,7 @@ const MobileRank = ({ isMyData }) => {
                 </M.NewButton>
             )}
             <TabContainer isMobile={true} />
-            {/* {loading ? (
-                <MRankingListSkeleton />
-            ) : ( */}
             <RankingList isMobile={true} data={rankingData} loading={loading} />
-            {/* )} */}
         </M.FlexContainer>
     );
 };

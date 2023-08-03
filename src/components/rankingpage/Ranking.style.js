@@ -733,11 +733,13 @@ S.UploadButton = styled.button`
         width: 100%;
     }
 `;
-M.UploadImg = styled.img`
-    position: absolute;
-    top: 4vw;
-    right: 6.5vw;
-    height: 7.7vw;
+M.UploadButton = styled.button`
+    img {
+        position: absolute;
+        top: 4vw;
+        right: 6.5vw;
+        height: 7.7vw;
+    }
 `;
 
 S.OneUserName = styled.div`

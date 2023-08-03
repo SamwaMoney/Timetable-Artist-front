@@ -1,6 +1,7 @@
 import { S, M } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 //로그인 + 시간표 채점 정보가 있을때 생김
 //점수 랭킹 조회 => 내 id와 일치하는 객체의 ranking을 가져와서 보여주기
@@ -9,26 +10,42 @@ import { useEffect, useState } from 'react';
 const MyScore = ({ isMobile, datas }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const sort = searchParams.get('sort') || 'LOWEST';
+    const [myRankingData, setMyRankingData] = useState();
+    const [myScore, setMyScore] = useState();
     const [myRanking, setMyRanking] = useState();
-    const timetableId = localStorage.getItem('timetableId') || -1;
+    const timetableId = localStorage.getItem('tableId') || -1;
+    //리덕스
+    // const score = useSelector(state => state.myInfoReducer);
+    // console.log(score);
+
+    //내 점수랑 랭킹 업데이트
+    useEffect(() => {
+        setMyRanking('-');
+        setMyScore('-');
+        if (datas) {
+            datas.forEach((data, index) => {
+                if (data.timetableId / 1 === timetableId / 1) {
+                    setMyScore(data.score);
+                    return setMyRanking(index + 1);
+                }
+            });
+        }
+    }, [sort, datas, timetableId]);
 
     useEffect(() => {
-        console.log('dataat', datas);
-        //내 순위 검색하는 api 로직 => sort가 바뀌면 실행
-        //timetableId를 전역에서 조회해서 받아온 객체에서 timetableId와 일치하는 나의 데이터를 찾아서 ranking 받아오기
-    }, [sort]);
+        console.log('myScore', myScore);
+    }, [myScore]);
 
-    //내 점수는 전역 상태로 관리해서 가져오기 => redux
     return isMobile ? (
         <M.MyScoreWrapper>
             <M.MyScoreContainer>
                 <S.FlexBox>
                     <M.Text>내 점수</M.Text>
-                    <M.RankText>80점</M.RankText>
+                    {myScore && <M.RankText>{myScore}점</M.RankText>}
                 </S.FlexBox>
                 <S.FlexBox>
                     <M.Text>내 랭킹</M.Text>
-                    <M.RankText>258위</M.RankText>
+                    <M.RankText>{myRanking}위</M.RankText>
                 </S.FlexBox>
             </M.MyScoreContainer>
         </M.MyScoreWrapper>
@@ -36,11 +53,11 @@ const MyScore = ({ isMobile, datas }) => {
         <S.MyScoreContainer>
             <S.FlexBox>
                 <S.Text>내 점수</S.Text>
-                <S.RankText>80점</S.RankText>
+                {myScore && <S.RankText>{myScore}점</S.RankText>}
             </S.FlexBox>
             <S.FlexBox>
                 <S.Text>내 랭킹</S.Text>
-                <S.RankText>258위</S.RankText>
+                <S.RankText>{myRanking}위</S.RankText>
             </S.FlexBox>
         </S.MyScoreContainer>
     );
