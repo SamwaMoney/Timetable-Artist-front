@@ -35,7 +35,7 @@ const OneRanking = ({
         tableImg,
         likeCount,
         liked,
-    } = data;
+    } = data ? data : null;
 
     useEffect(() => {
         if (currentUserId === timetableId) {
