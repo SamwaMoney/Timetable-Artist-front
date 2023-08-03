@@ -2,6 +2,7 @@ import { S } from './M_Score.style';
 import { useState, useEffect } from 'react';
 import { useScript } from './useScript';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import html2canvas from 'html2canvas';
 import { TwitterShareButton } from 'react-share';
 import { RWebShare } from 'react-web-share';
@@ -38,6 +39,7 @@ import type11 from '../../assets/scorepage/typeImg/type11.png';
 import type12 from '../../assets/scorepage/typeImg/type12.png';
 import type13 from '../../assets/scorepage/typeImg/type13.png';
 import type14 from '../../assets/scorepage/typeImg/type14.png';
+import { addMyScore } from '../../reducer/action';
 
 const M_Score = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +54,7 @@ const M_Score = () => {
     const mainURL = window.location.href.slice(0, -5);
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const memberId = localStorage.getItem('memberId');
     const typeImage = [
         type1,
@@ -173,7 +176,7 @@ const M_Score = () => {
             setData(res.data);
             setIsLoading(false);
             setIsUploaded(res.data.ranking);
-            console.log(isUploaded);
+            dispatch(addMyScore(res.data.score));
         }
     };
 
