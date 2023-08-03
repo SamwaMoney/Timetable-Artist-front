@@ -11,6 +11,7 @@ import {
     ScoreTable,
     UploadTable,
 } from '../../api/scores';
+import { CreateTable } from '../../api/timetables';
 
 import Timetable from '../createpage/TimeTable';
 import Loading from '../_common/Loading';
@@ -47,6 +48,7 @@ const Score = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isHidden, setIsHidden] = useState(true);
     const [height, setHeight] = useState('70%');
+    const [width, setWidth] = useState('70%');
 
     const mainURL = window.location.href.slice(0, -5);
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');
@@ -147,8 +149,9 @@ const Score = () => {
         };
         console.log(dto);
 
-        const res = await UploadTable(timetableImg, dto, 1);
+        const res = await UploadTable(timetableImg, dto, timetableId);
         handleRankingClick();
+        setWidth('70%');
     };
 
     const CallGetTimetableId = async memberId => {
@@ -172,15 +175,16 @@ const Score = () => {
         } else {
             setData(res.data);
             setIsLoading(false);
+            setIsUploaded(res.data.ranking);
         }
     };
 
     useEffect(() => {
         if (isLoading) {
-            if (timetableId === null) CallGetTimetableId(1);
+            if (timetableId === null) CallGetTimetableId(memberId);
             else {
                 if (!isScored) CallScoreTable(timetableId);
-                else CallFindTable(1, 1);
+                else CallFindTable(memberId, timetableId);
             }
         }
         if (status === 'ready' && window.Kakao) {
@@ -191,7 +195,8 @@ const Score = () => {
             }
         }
         if (height === 'auto') onCapture();
-    }, [height, status, isLoading, isScored, timetableId]);
+        if (width === '320px') onUploadBtnClick();
+    }, [height, width, status, isLoading, isScored, timetableId]);
 
     return (
         <S.Wrapper>
@@ -206,7 +211,7 @@ const Score = () => {
                             <S.SmallContainer>
                                 <S.Title>내 시간표의 점수는...</S.Title>
                                 <S.Score>{data.score}점!</S.Score>
-                                <S.TimeTable id='tableImage'>
+                                <S.TimeTable id='tableImage' width={width}>
                                     <Timetable
                                         isScorePage='true'
                                         classList={data.classList}
@@ -296,7 +301,6 @@ const Score = () => {
                                         </S.SpecialBox>
                                     </>
                                 )}
-
                                 {height === '70%' && (
                                     <>
                                         <S.Hide>
@@ -334,13 +338,15 @@ const Score = () => {
                                             </div>
                                         </S.Hide>
                                         {isUploaded ? (
-                                            <S.UploadedBtn>
+                                            <S.UploadedBtn disabled>
                                                 이미 랭킹보드에 게시
                                                 완료되었어요
                                             </S.UploadedBtn>
                                         ) : (
                                             <S.UploadBtn
-                                                onClick={onUploadBtnClick}
+                                                onClick={() => {
+                                                    setWidth('320px');
+                                                }}
                                             >
                                                 랭킹보드에 게시하기
                                             </S.UploadBtn>
@@ -403,7 +409,12 @@ const Score = () => {
                         <S.NoData>
                             <S.NoDataText>Σ(‘⊙ₒ ⊙’；)</S.NoDataText>
                             <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
-                            <S.Button onClick={() => navigate('/create')}>
+                            <S.Button
+                                onClick={() => {
+                                    CreateTable();
+                                    navigate('/create');
+                                }}
+                            >
                                 시간표 만들러 가기
                             </S.Button>
                         </S.NoData>

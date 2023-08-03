@@ -58,7 +58,7 @@ S.Score = styled.div`
     }
 `;
 S.TimeTable = styled.div`
-    width: 70%;
+    width: ${props => props.width};
 `;
 S.Save = styled.button`
     margin-top: 4%;
@@ -71,7 +71,7 @@ S.Save = styled.button`
 S.TypeImg = styled.img`
     background-color: var(--background);
     border-radius: 22px;
-    width: 40%;
+    width: 45%;
     margin-bottom: 7%;
 `;
 S.ResultContainer = styled.div`

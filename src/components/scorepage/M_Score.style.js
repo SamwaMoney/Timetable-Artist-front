@@ -50,8 +50,9 @@ S.Score = styled.div`
         margin-bottom: -10%;
     }
 `;
-S.Img = styled.img`
-    width: 95%;
+S.TimeTable = styled.div`
+    width: 100vw;
+    padding-left: 5vw;
 `;
 S.Save = styled.button`
     margin-top: 8%;
@@ -64,8 +65,8 @@ S.Save = styled.button`
 S.TypeImg = styled.img`
     background-color: var(--background);
     border-radius: 22px;
-    width: 40%;
-    margin-bottom: 7%;
+    width: 50%;
+    margin: 4% 0 7% 0;
 `;
 S.ResultContainer = styled.div`
     display: flex;
