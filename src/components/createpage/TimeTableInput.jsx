@@ -205,14 +205,24 @@ const TimeTableInput = () => {
             newClassData.timetable = timeTableId;
 
             // startTime에서 시간과 분 분리하여 숫자 형태로 프로퍼티 추가
-            const startTimeParts = newClassData.startTime.split(':');
-            newClassData.startH = parseInt(startTimeParts[0], 10);
-            newClassData.startM = parseInt(startTimeParts[1], 10);
-
+            if (newClassData.startTime) {
+                const startTimeParts = newClassData.startTime.split(':');
+                newClassData.startH = parseInt(startTimeParts[0], 10);
+                newClassData.startM = parseInt(startTimeParts[1], 10);
+            } else {
+                newClassData.startH = null;
+                newClassData.startM = null;
+            }
+            
             // endTime에서 시간과 분 분리하여 숫자 형태로 프로퍼티 추가
-            const endTimeParts = newClassData.endTime.split(':');
-            newClassData.endH = parseInt(endTimeParts[0], 10);
-            newClassData.endM = parseInt(endTimeParts[1], 10);
+            if (newClassData.endTime) {
+                const endTimeParts = newClassData.endTime.split(':');
+                newClassData.endH = parseInt(endTimeParts[0], 10);
+                newClassData.endM = parseInt(endTimeParts[1], 10);
+            } else {
+                newClassData.endH = null;
+                newClassData.endM = null;
+            }
 
             // startTime, endTime, backgroundColor 삭제
             delete newClassData.startTime;
