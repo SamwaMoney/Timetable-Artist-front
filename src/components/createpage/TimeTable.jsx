@@ -3,9 +3,10 @@ import { isMobile } from 'react-device-detect';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import TimeTableRow from './TimeTableRow';
+import { CLASS_BLOCK_COLOR } from '../../consts/timeTableInput';
 
 // props로 초기화 버튼 null 처리하기
-const TimeTable = ({ isScorePage, isHidden }) => {
+const TimeTable = ({ isScorePage, isHidden, classList }) => {
     const startHour = 8;
     const endHour = 20;
     const timeInterval = 0.5;
@@ -18,11 +19,11 @@ const TimeTable = ({ isScorePage, isHidden }) => {
     });
 
     const dayMappings = {
-        월: 'Mon',
-        화: 'Tue',
-        수: 'Wed',
-        목: 'Thu',
-        금: 'Fri',
+        월: 'MON',
+        화: 'TUE',
+        수: 'WED',
+        목: 'THU',
+        금: 'FRI',
     };
 
     const etcDescDivRef = useRef(null);
@@ -38,8 +39,38 @@ const TimeTable = ({ isScorePage, isHidden }) => {
     // useEffect를 사용하여 Redux store의 selectedData가 변경될 때마다 selectedData 상태 업데이트
     useEffect(() => {
         setSelectedData(reduxSelectedData);
-        console.log(selectedData);
     }, [reduxSelectedData]);
+
+    // dayMapping에서 value를 입력하면 key를 찾아줌
+    const getKeyByValue = (object, value) => {
+        return Object.keys(object).find(key => object[key] === value);
+    };
+
+    // 점수 페이지 용 데이터 가공
+    const scorePageClassData = classList
+        ? classList.map((classData, index) => {
+              // 새로운 객체를 생성하여 원본 객체의 프로퍼티를 복사
+              const newClassData = { ...classData };
+
+              // 요일 한글로 바꿔주기
+              newClassData.weekday = getKeyByValue(
+                  dayMappings,
+                  newClassData.weekday,
+              );
+
+              // startTime, endTime 추가
+              newClassData.startTime = `${newClassData.startH}:${newClassData.startM}`;
+              newClassData.endTime = `${newClassData.endH}:${newClassData.endM}`;
+
+              // 배경색 추가
+              newClassData.backgroundColor =
+                  CLASS_BLOCK_COLOR[index >= 8 ? index - 8 : index];
+
+              return newClassData;
+          })
+        : [];
+
+    console.log(scorePageClassData);
 
     return (
         <TimeTableContainer
@@ -71,7 +102,11 @@ const TimeTable = ({ isScorePage, isHidden }) => {
                                 timeSlot={timeSlot}
                                 index={index}
                                 numberOfSlots={numberOfSlots}
-                                selectedData={selectedData}
+                                selectedData={
+                                    isScorePage === true
+                                        ? scorePageClassData
+                                        : selectedData
+                                }
                                 isHidden={isHidden}
                             />
                         </tr>
@@ -85,7 +120,15 @@ const TimeTable = ({ isScorePage, isHidden }) => {
                         selectedData.map(lecture => {
                             if (lecture.startTime === null) {
                                 return (
-                                    <div key={lecture.className}>
+                                    <div
+                                        key={lecture.className}
+                                        style={{
+                                            display:
+                                                isHidden === true
+                                                    ? 'none'
+                                                    : 'block',
+                                        }}
+                                    >
                                         {lecture.className}
                                     </div>
                                 );
