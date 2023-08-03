@@ -57,8 +57,8 @@ S.Score = styled.div`
         color: var(--black);
     }
 `;
-S.Img = styled.img`
-    width: 45vh;
+S.TimeTable = styled.div`
+    width: 70%;
 `;
 S.Save = styled.button`
     margin-top: 4%;

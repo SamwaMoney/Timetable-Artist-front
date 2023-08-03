@@ -82,7 +82,7 @@ const Rank = ({ isMyData }) => {
             <Hamburger />
             {/*랭킹 보여주는 left section*/}
             {(!currentUserId || loading) && !sort ? (
-                <Loading />
+                <Loading title='랭킹보드' />
             ) : (
                 <S.Container>
                     <S.SmallContainer>

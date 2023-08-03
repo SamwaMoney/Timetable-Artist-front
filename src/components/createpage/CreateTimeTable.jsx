@@ -16,7 +16,7 @@ const CreateTimeTable = () => {
                                 *강의 블록을 클릭하면 하나씩 삭제할 수 있어요.
                             </S.NoticeText>
                         </S.ResetDiv>
-                        <TimeTable />
+                        <TimeTable isScorePage='false' />
                     </S.TimeTableDiv>
 
                     <TimeTableInput />

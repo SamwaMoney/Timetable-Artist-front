@@ -30,10 +30,7 @@ export const DeleteMember = async () => {
         const memberId = localStorage.getItem('memberId');
         const res = await http.delete(`/members/${memberId}`);
         console.log(res, '탈퇴 성공');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('memberId');
-        localStorage.removeItem('expireAt');
+        localStorage.clear();
         return 'Account deletion successful';
     } catch (err) {
         console.log(err);
@@ -52,14 +49,16 @@ export const Login = async (id, pw) => {
         const accessToken = res.data.accessToken;
         const refreshToken = res.data.refreshToken;
         const memberId = res.data.memberId;
+        const username = res.data.username;
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('memberId', memberId);
+        localStorage.setItem('username', username);
         localStorage.setItem(
             'expireAt',
             moment().add(1, 'hour').format('yyyy-MM-DD HH:mm:ss'),
         );
-        window.location.replace('/ranking');
+        return 'Login Success';
     } catch (err) {
         console.log(err, '로그인 에러');
         if (
@@ -69,6 +68,8 @@ export const Login = async (id, pw) => {
             return 'notExisedId';
         } else if (err.response?.data.message === '잘못된 비밀번호입니다!') {
             return 'notCorrectPw';
+        } else {
+            alert('로그인 오류');
         }
     }
 };
@@ -83,10 +84,7 @@ export const Logout = async () => {
             },
         });
         console.log(res, '로그아웃 성공');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('memberId');
-        localStorage.removeItem('expireAt');
+        localStorage.clear();
         window.location.replace('/ranking');
         return res;
     } catch (err) {
