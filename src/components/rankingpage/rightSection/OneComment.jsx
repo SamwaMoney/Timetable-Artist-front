@@ -25,6 +25,8 @@ const OneComment = ({
 
     const myMemberId = localStorage.getItem('memberId') / 1 || -1;
 
+    console.log('oneComment', replyId);
+
     return isMobile ? (
         <M.OneCommentContainer>
             <M.CommentInfo>
@@ -38,7 +40,7 @@ const OneComment = ({
                             size='8vw'
                             color='var(--background)'
                             onClick={() => {
-                                setIsDeleteCmtModalOpen(true);
+                                deleteMyComment(memberId, replyId);
                             }}
                         />
                     ) : null}
@@ -50,14 +52,14 @@ const OneComment = ({
                 </M.IconContainer>
             </M.CommentInfo>
             <M.CommentText>{content}</M.CommentText>
-            {isDeleteCmtModalOpen && (
+            {/* {isDeleteCmtModalOpen && (
                 <DeleteCmtConfirmModal
                     setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
                     deleteMyComment={deleteMyComment}
                     replyId={replyId}
                     memberId={myMemberId}
                 />
-            )}
+            )} */}
         </M.OneCommentContainer>
     ) : (
         data && (
@@ -83,8 +85,15 @@ const OneComment = ({
                             size='2rem'
                             color='var(--background)'
                             onClick={() => {
-                                setIsDeleteCmtModalOpen(true);
+                                const confirmDelete =
+                                    window.confirm('댓글을 삭제하시겠습니까?');
+                                if (confirmDelete) {
+                                    deleteMyComment(memberId, replyId);
+                                }
                             }}
+                            // onClick={() => {
+                            //     setIsDeleteCmtModalOpen(true);
+                            // }}
                         />
                     </div>
                 ) : null}
@@ -102,14 +111,14 @@ const OneComment = ({
                         replyLikeCount={replyLikeCount}
                     />
                 </div>
-                {isDeleteCmtModalOpen && (
+                {/* {isDeleteCmtModalOpen && (
                     <DeleteCmtConfirmModal
                         setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
                         deleteMyComment={deleteMyComment}
                         replyId={replyId}
                         memberId={myMemberId}
                     />
-                )}
+                )} */}
             </S.OneCommentContainer>
         )
     );

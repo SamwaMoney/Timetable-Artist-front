@@ -95,7 +95,7 @@ const Rank = ({ isMyData }) => {
                                 시간표 등록하기
                             </S.NewButton>
                         ) : isMyData ? (
-                            <MyScore isMobile={false} />
+                            <MyScore isMobile={false} data={rankingData} />
                         ) : (
                             <S.NewButton
                                 onClick={() => {
