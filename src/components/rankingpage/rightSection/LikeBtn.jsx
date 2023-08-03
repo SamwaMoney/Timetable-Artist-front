@@ -22,13 +22,6 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
         setLikeNum(currentUser?.likeCount);
     }, [currentUser]);
 
-    useEffect(() => {
-        console.log('좋아요 여부', isLike);
-        setIsLike(currentUser?.liked);
-        console.log('좋아요 여부 바뀜', isLike);
-        setLikeNum(currentUser?.likeCount);
-    }, [currentUser]);
-
     //좋아요 누르기 (낙관적 업데이트)
     const onGiveLike = async () => {
         if (memberId === -1) {

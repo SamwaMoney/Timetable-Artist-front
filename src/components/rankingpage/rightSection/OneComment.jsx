@@ -40,7 +40,11 @@ const OneComment = ({
                             size='8vw'
                             color='var(--background)'
                             onClick={() => {
-                                deleteMyComment(memberId, replyId);
+                                const confirmDelete =
+                                    window.confirm('댓글을 삭제하시겠습니까?');
+                                if (confirmDelete) {
+                                    deleteMyComment(memberId, replyId);
+                                }
                             }}
                         />
                     ) : null}
@@ -91,9 +95,6 @@ const OneComment = ({
                                     deleteMyComment(memberId, replyId);
                                 }
                             }}
-                            // onClick={() => {
-                            //     setIsDeleteCmtModalOpen(true);
-                            // }}
                         />
                     </div>
                 ) : null}
