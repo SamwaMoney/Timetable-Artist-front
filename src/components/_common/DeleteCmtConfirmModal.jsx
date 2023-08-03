@@ -8,6 +8,7 @@ const DeleteCmtConfirmModal = ({
     memberId,
     replyId,
 }) => {
+    console.log('삭제 모달 댓글아이디', replyId);
     return (
         <M.Modal className={`${isMobile && 'mobile-background'}`}>
             <div

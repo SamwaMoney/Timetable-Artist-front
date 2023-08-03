@@ -7,8 +7,9 @@ import { useLocation } from 'react-router-dom';
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
 //시간표
 const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
-    const [isLike, setIsLike] = useState(false);
-    const [likeNum, setLikeNum] = useState(0);
+    const [isLike, setIsLike] = useState(currentUser?.liked);
+    const [likeNum, setLikeNum] = useState(currentUser?.likeCount);
+
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const sort = params.get('sort') || 'LOWEST';
@@ -17,16 +18,7 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
 
     useEffect(() => {
         console.log('좋아요 여부', isLike);
-        setIsLike(currentUser?.liked);
-        console.log('좋아요 여부 바뀜', isLike);
-        setLikeNum(currentUser?.likeCount);
-    }, [currentUser]);
-
-    useEffect(() => {
-        console.log('좋아요 여부', isLike);
-        setIsLike(currentUser?.liked);
-        console.log('좋아요 여부 바뀜', isLike);
-        setLikeNum(currentUser?.likeCount);
+        console.log('좋아요 여부 바뀜', likeNum);
     }, [currentUser]);
 
     //좋아요 누르기 (낙관적 업데이트)

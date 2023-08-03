@@ -12,6 +12,7 @@ const TimeTableCell = ({
     index,
     numberOfSlots,
     dayLectureData,
+    isHidden,
 }) => {
     // startTime과 endTime을 float 형태로 변환하는 함수
     const convertToFloatTime = timeString => {
@@ -20,14 +21,6 @@ const TimeTableCell = ({
         const floatTime = parseFloat(hour) + parseFloat(minute) / 60;
         return floatTime;
     };
-
-    // // redux에서 값을 받아옴
-    // const selectedData = useSelector(
-    //     state => state.timeTableReducer.selectedData,
-    // );
-
-    // 요일에 맞는 데이터만 추리기
-    // const dayLectureData = selectedData.filter(lecture => lecture.day === day);
 
     // startTime과 endTime을 float 형태로 변경
     const floatDayLectureData = dayLectureData.map(lecture => ({
@@ -82,7 +75,11 @@ const TimeTableCell = ({
                     }}
                 >
                     <BlockText>
-                        <BlockNameText>{timeData.className}</BlockNameText>
+                        <BlockNameText
+                            className={isHidden === true ? 'isHidden' : ''}
+                        >
+                            {timeData.className}
+                        </BlockNameText>
                         <BlockPlaceText>{timeData.location}</BlockPlaceText>
                     </BlockText>
                 </TableCell>
@@ -160,9 +157,13 @@ const BlockText = styled.div`
 
 const BlockNameText = styled.div`
     font-weight: 700;
+    margin-bottom: 10%;
+
+    &.isHidden {
+        display: none;
+    }
 `;
 
 const BlockPlaceText = styled.div`
     font-weight: 500;
-    margin-top: 10%;
 `;

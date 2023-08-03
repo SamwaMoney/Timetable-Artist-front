@@ -1,6 +1,6 @@
 import TimeTableCell from './TimeTableCell';
 
-const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
+const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData, isHidden }) => {
     const getDayData = day => {
         return selectedData.filter(lecture => lecture.weekday === day);
     };
@@ -13,6 +13,7 @@ const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
                 index={index}
                 numberOfSlots={numberOfSlots}
                 dayLectureData={getDayData('월')}
+                isHidden={isHidden}
             />
             <TimeTableCell
                 day='화'
@@ -20,6 +21,7 @@ const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
                 index={index}
                 numberOfSlots={numberOfSlots}
                 dayLectureData={getDayData('화')}
+                isHidden={isHidden}
             />
             <TimeTableCell
                 day='수'
@@ -27,6 +29,7 @@ const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
                 index={index}
                 numberOfSlots={numberOfSlots}
                 dayLectureData={getDayData('수')}
+                isHidden={isHidden}
             />
             <TimeTableCell
                 day='목'
@@ -34,6 +37,7 @@ const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
                 index={index}
                 numberOfSlots={numberOfSlots}
                 dayLectureData={getDayData('목')}
+                isHidden={isHidden}
             />
             <TimeTableCell
                 day='금'
@@ -41,6 +45,7 @@ const TimeTableRow = ({ timeSlot, index, numberOfSlots, selectedData }) => {
                 index={index}
                 numberOfSlots={numberOfSlots}
                 dayLectureData={getDayData('금')}
+                isHidden={isHidden}
             />
         </>
     );

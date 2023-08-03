@@ -1,6 +1,6 @@
 import Write from '../../../assets/rankingpage/write.png';
 import { S, M } from '../Ranking.style';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 const NewComment = ({ isMobile, currentUserId, updateComment }) => {
@@ -13,6 +13,8 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
     const [isNoName, setIsNoName] = useState(false);
     //내 멤버ID 가져오기 (키값 확인)
     const memberId = localStorage.getItem('memberId') || -1;
+
+    const noNameBox = useRef();
 
     const onChangeText = e => {
         setNewText(e.target.value);
@@ -30,15 +32,15 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
         updateComment(newComment);
         setNewText('');
         setIsNoName(false);
+        noNameBox.current.checked = false;
     };
 
     //익명 체크 이벤트 함수
     const onChangeChecked = e => {
-        console.log(e.target.checked);
+        console.log('체크된 상태', e.target.checked);
         if (e.target.checked) {
             return setIsNoName(true);
         }
-        return setIsNoName(false);
     };
 
     useEffect(() => {
@@ -58,6 +60,7 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                 <M.checkBoxNoName>
                     <input
                         type='checkbox'
+                        checked={isNoName}
                         onChange={e => {
                             onChangeChecked(e);
                         }}
@@ -92,6 +95,7 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                     onChange={e => {
                         onChangeChecked(e);
                     }}
+                    ref={noNameBox}
                 />
                 <S.NoNameText>익명</S.NoNameText>
             </S.checkBoxNoName>

@@ -390,11 +390,11 @@ const Score = styled.div`
 `;
 
 S.Score = styled(Score)`
-    font-size: 1rem;
+    font-size: 1.1rem;
 `;
 
 M.Score = styled(Score)`
-    font-size: 4vw;
+    font-size: 4.3vw;
 `;
 
 S.NameText = styled.div`

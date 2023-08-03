@@ -214,7 +214,7 @@ const M_Score = () => {
                                     <S.TimeTable>
                                         <div id='tableImage'>
                                             <Timetable
-                                                isScorePage='true'
+                                                isScorePage={true}
                                                 classList={data.classList}
                                                 isHidden={isHidden}
                                             />
