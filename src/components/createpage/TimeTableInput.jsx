@@ -189,10 +189,11 @@ const TimeTableInput = () => {
         // 만약 수업 개수가 없으면 강의가 없습니다 alert 띄우기
         if (timetableData.length <= 0) {
             alert('현재 추가된 강의가 없습니다. 강의를 추가해주세요!');
+            return;
         }
         // memberId, timetableId 받아오기
         const memberId = localStorage.getItem('memberId');
-        const timeTableId = 1;
+        const timeTableId = localStorage.getItem('tableId');
 
         // - 반복문 돌면서 memberId, timetableId 추가, 배경색 삭제, startTime, endTime 시간과 분 분리, startTime, endTime 삭제
         const finalTimeTableData = timetableData.map(classData => {
@@ -226,8 +227,8 @@ const TimeTableInput = () => {
         // post
         const res = await CreateClasses(finalTimeTableData);
 
-        // - 결과 페이지로 이동
-        if (res) {
+        // post 성공 시 결과 페이지로 이동
+        if (res.status === 200 || res.status === 201) {
             navigate('/score');
         }
     };
