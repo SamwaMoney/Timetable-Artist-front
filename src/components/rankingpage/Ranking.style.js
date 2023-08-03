@@ -158,9 +158,8 @@ const RankContainer = styled.div`
 `;
 
 S.RankContainer = styled(RankContainer)`
-    margin-top: 1rem;
+    margin-top: ${props => (props.top ? `${props.top}rem` : '1.5vw')};
     width: 75%;
-    margin-top: 2vw;
 `;
 
 S.RankUserWrapper = styled.div`
@@ -227,7 +226,7 @@ const ToggleWrapper = styled.div`
     width:100%;
 `;
 S.ToggleWrapper = styled(ToggleWrapper)`
-    height: 4rem;
+    height: 2.5rem;
 `;
 
 M.ToggleWrapper = styled(ToggleWrapper)`
@@ -238,8 +237,9 @@ M.ToggleWrapper = styled(ToggleWrapper)`
 S.ToggleContainer = styled.div`
     ${FlexCenter}
     margin-left: -30%;
-    width: 12vw;
-    height: 6vw;
+    width: ${props => (props.width ? `${props.width}vw` : '12vw')};
+    padding-top: 2vw;
+    height: 8vw;
 `;
 
 const ToggleButton = styled.div`
@@ -290,7 +290,7 @@ M.Slider = styled(Slider)`
 `;
 
 S.ToggleText = styled.div`
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin-left: 10px;
     color: black;
 `;

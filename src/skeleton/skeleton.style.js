@@ -29,8 +29,8 @@ SK.RankNum = styled(SkeletonDiv)`
     ${FlexCenter}
     margin-right: 1%;
     border-radius: 50%;
-    width: ${props => (props.width ? `${props.width}vw` : '20%')};
-    height: ${props => (props.height ? `${props.height}vw` : '14vw')};
+    width: ${props => (props.width ? `${props.width}rem` : '20%')};
+    height: ${props => (props.height ? `${props.height}rem` : '14vw')};
     font-size: 8vw;
     ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
     z-index: 100;
@@ -46,7 +46,7 @@ SK.UserInfo = styled(SkeletonDiv)`
     width: 100%;
     ${FlexCenter}
     position: relative;
-    height: ${props => (props.height ? `${props.height}vw` : '14vw')};
+    height: ${props => (props.height ? `${props.height}rem` : '14vw')};
     border-radius: 7vw;
     ${props => (props.isshowtimetable === 'true' ? 'var(--blue)' : 'black')};
     z-index: 100;
@@ -58,7 +58,7 @@ SK.List = styled.div`
     flex-direction: column;
     margin-bottom: 10%;
     width: 100%;
-    margin-top: ${props => (props.margin ? `${props.margin}rem` : '8vw')};
+    margin-top: ${props => (props.margin ? `${props.margin}rem` : '3vw')};
 `;
 
 SK.CommentInfo = styled(SkeletonDiv)`

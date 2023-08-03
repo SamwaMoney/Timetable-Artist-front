@@ -3,12 +3,12 @@ import { SK } from './skeleton.style';
 import { styled } from 'styled-components';
 const RankingListSkeleton = () => {
     return (
-        <SK.List margin={1}>
+        <SK.List margin={0.1}>
             {Array(6)
                 .fill()
                 .map(el => {
                     return (
-                        <S.RankContainer>
+                        <S.RankContainer top={1}>
                             <div
                                 style={{
                                     display: 'flex',
@@ -16,8 +16,8 @@ const RankingListSkeleton = () => {
                                     paddingTop: '1vw',
                                 }}
                             >
-                                <SK.RankNum height={3.6} width={4.2} />
-                                <SK.UserInfo height={3.6} />
+                                <SK.RankNum height={4} width={5} />
+                                <SK.UserInfo height={4} />
                             </div>
                         </S.RankContainer>
                     );

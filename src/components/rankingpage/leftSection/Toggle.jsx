@@ -35,7 +35,7 @@ const Toggle = ({ isMobile }) => {
         </M.ToggleWrapper>
     ) : (
         <S.ToggleWrapper>
-            <S.ToggleContainer>
+            <S.ToggleContainer width={20}>
                 <S.ToggleButton onClick={handleChange}>
                     <S.Slider sort={sort} />
                 </S.ToggleButton>

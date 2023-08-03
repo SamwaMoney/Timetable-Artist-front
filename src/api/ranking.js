@@ -5,8 +5,8 @@ import { http } from './http';
 //인기순  : LIKE
 const RankingApis = {
     GetRanking: async (sortType, memberId) => {
-        console.log(sortType, '랭킹 불러오기');
         memberId = memberId || -1;
+        sortType = sortType || 'LOWEST';
         try {
             const res = await http.get(
                 `/timetables/rankingboard?sortType=${sortType}&memberId=${memberId}`,
