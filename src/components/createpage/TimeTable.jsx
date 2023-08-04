@@ -197,48 +197,6 @@ const TimeCell = styled.td`
     `}
 `;
 
-const TableCell = styled.td`
-    &:not(:first-child) {
-        background-color: white;
-    }
-
-    border-radius: ${({ isfirst, islast }) =>
-        isfirst
-            ? '0.5625rem 0.5625rem 0 0'
-            : islast
-            ? '0 0 0.5625rem 0.5625rem'
-            : 'none'};
-
-    &.selected {
-        /* background-color: #5f96ff; */
-        color: white;
-        border-radius: 9px;
-        font-size: 10px;
-        font-weight: 600;
-    }
-
-    &.isfirst {
-        border-top-left-radius: 9px;
-        border-top-right-radius: 9px;
-        position: relative;
-    }
-
-    &.islast {
-        border-bottom-left-radius: 9px;
-        border-bottom-right-radius: 9px;
-    }
-
-    ${isMobile &&
-    `
-        border-radius: ${({ isfirst, islast }) =>
-            isfirst
-                ? '1.5rem 1.5rem 0 0'
-                : islast
-                ? '0 0 1.5rem 1.5rem'
-                : 'none'};
-    `}
-`;
-
 const EtcDiv = styled.div`
     display: flex;
     justify-content: space-around;
@@ -253,8 +211,11 @@ const TableText = styled.div`
     margin-left: auto;
     margin-right: auto;
 
+    width: 1.5vw;
+
     ${isMobile &&
     `
+       width: auto;
        font-size: 3.2vw;
     `}
 `;
