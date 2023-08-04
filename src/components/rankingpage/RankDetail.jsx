@@ -6,7 +6,7 @@ import CmtTag from './rightSection/CmtTag';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
 import AltTableImg from '../../assets/_common/altTable.png';
-
+import { useLocation } from 'react-router-dom';
 const RankDetail = ({
     memberId,
     currentUserId,
@@ -19,6 +19,9 @@ const RankDetail = ({
 }) => {
     const [currentUser, setCurrentUser] = useState();
     const [commentNum, setCommentNum] = useState();
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const sort = params.get('sort');
 
     useEffect(() => {
         setCommentNum();
@@ -30,6 +33,11 @@ const RankDetail = ({
         fetchDetailData(currentUserId);
         setLoading(false);
     }, [currentUserId]);
+
+    // useEffect(() => {
+    //     console.log(loading);
+    //     console.log(rankLoading);
+    // }, [loading, rankLoading]);
 
     return loading || rankLoading ? (
         <RightSectionSkeleton />
