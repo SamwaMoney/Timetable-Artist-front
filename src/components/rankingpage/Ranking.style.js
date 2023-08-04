@@ -616,7 +616,6 @@ S.TimeTable = styled.img`
     width: 85%;
     height: ${props => (props.height ? `${props.height}vw` : '30vw')};
     background-color: #888;
-    border: 0.05rem solid black;
     margin-top: 0.8rem;
 `;
 
