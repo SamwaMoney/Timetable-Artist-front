@@ -4,6 +4,7 @@ import { useState } from 'react';
 import TimeTable from './TimeTable';
 import add_timetable from '../../assets/createpage/add_timetable.png';
 import MTimeTableInputModal from './M_TimeTableInputModal';
+import ResetModal from '../_common/ResetModal';
 
 const MCreateTimeTable = () => {
     const nickname = '삼와머니';
@@ -11,13 +12,22 @@ const MCreateTimeTable = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [colorIndex, setColorIndex] = useState(0);
 
+    // 초기화 모달 open 여부
+    const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+    // 초기화 모달 open 관련 함수
+    const handleResetModal = () => {
+        setIsResetModalOpen(true);
+    };
+
     return (
         <>
             <S.MWrapper>
                 <MHamburgerButton />
                 <S.MInnerContainer>
                     <S.MButtonDiv className={isModalOpen ? 'delete' : ''}>
-                        <S.MResetBtn>초기화</S.MResetBtn>
+                        <S.MResetBtn onClick={handleResetModal}>
+                            초기화
+                        </S.MResetBtn>
                         <S.MCompleteBtn>완성</S.MCompleteBtn>
                     </S.MButtonDiv>
                     <S.MTimeTableText className={isModalOpen ? 'delete' : ''}>
@@ -48,6 +58,9 @@ const MCreateTimeTable = () => {
                     colorIndex={colorIndex}
                     setColorIndex={setColorIndex}
                 />
+            )}
+            {isResetModalOpen && (
+                <ResetModal setIsResetModalOpen={setIsResetModalOpen} />
             )}
         </>
     );

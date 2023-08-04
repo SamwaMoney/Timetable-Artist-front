@@ -3,12 +3,19 @@ import { M } from './Modal.style';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { useDispatch } from 'react-redux';
+import { resetSelectedData } from '../../reducer/action';
+
 const ResetModal = ({ setIsResetModalOpen }) => {
+
+    const dispatch = useDispatch();
+
     const handleResetClick = () => {
-        // 시간표 삭제 api 불러오기
+        // 시간표 초기화 액션 함수 불러오기
+        dispatch(resetSelectedData());
         setIsResetModalOpen(false);
-        window.location.reload();
     };
+    
     return (
         <M.Modal className={`${isMobile && 'mobile-background'}`}>
             <div
