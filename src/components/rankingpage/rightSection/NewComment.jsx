@@ -3,53 +3,62 @@ import { S, M } from '../Ranking.style';
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-const NewComment = ({ isMobile, currentUserId, updateComment }) => {
+const NewComment = ({
+    isMobile,
+    currentUserId,
+    updateComment,
+    isSubmitting,
+}) => {
     const params = useParams();
     //현재 시간표 id => 모바일일 경우 파람으로, 웹에서는 props로 전달받음
     const tableId = isMobile ? params.id : currentUserId;
     //댓글
-    const [newText, setNewText] = useState();
+    const [newText, setNewText] = useState('');
     //익명 체크했는지
     const [isNoName, setIsNoName] = useState(false);
     //내 멤버ID 가져오기 (키값 확인)
     const memberId = localStorage.getItem('memberId') || -1;
-
     const noNameBox = useRef();
 
     const onChangeText = e => {
         setNewText(e.target.value);
-        console.log(newText);
     };
 
     //새로운 댓글 보내는 로직 (익명 프로퍼티 추가되야 함)
     const onSubmitNewComment = () => {
-        const newComment = {
-            tableId,
-            memberId,
-            content: newText,
-            nameHide: isNoName,
-        };
-        updateComment(newComment);
-        setNewText('');
-        setIsNoName(false);
-        noNameBox.current.checked = false;
+        if (!isSubmitting) {
+            console.log('안기다려');
+            const newComment = {
+                tableId,
+                memberId,
+                content: newText,
+                nameHide: isNoName,
+            };
+            updateComment(newComment);
+            setIsNoName(false);
+            noNameBox.current.checked = false;
+            setNewText('');
+        } else {
+            console.log('기다려');
+            alert('잠시만 기다려주세요!');
+        }
     };
+
+    // useEffect(() => {
+    //     console.log('isSubmiting', isSubmitting);
+    //     setNewText('');
+    // }, [isSubmitting]);
 
     //익명 체크 이벤트 함수
     const onChangeChecked = e => {
-        console.log('체크된 상태', e.target.checked);
         if (e.target.checked) {
             return setIsNoName(true);
         }
     };
 
-    useEffect(() => {
-        console.log('memberId', memberId);
-    }, []);
-
-    // 엔터 키 입력 시 강의 추가
+    //엔터 키 입력 시 강의 추가
     const handleKeyDown = e => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && !isSubmitting) {
             onSubmitNewComment();
         }
     };
@@ -64,6 +73,7 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                         onChange={e => {
                             onChangeChecked(e);
                         }}
+                        ref={noNameBox}
                     />
                     <M.NoNameText>익명</M.NoNameText>
                 </M.checkBoxNoName>
@@ -78,13 +88,13 @@ const NewComment = ({ isMobile, currentUserId, updateComment }) => {
                         로그인 후에 댓글을 쓸 수 있습니다.
                     </M.CommentDisabled>
                 )}
-                <M.UploadImg
-                    src={Write}
-                    alt='올리기'
+                <M.UploadButton
                     onClick={onSubmitNewComment}
                     type='button'
                     disabled={!newText}
-                />
+                >
+                    <img src={Write} alt='올리기' />
+                </M.UploadButton>
             </M.NewCommentContainer>
         </M.NewCommentWrapper>
     ) : (

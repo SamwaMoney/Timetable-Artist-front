@@ -2,17 +2,11 @@ import { S, M } from '../Ranking.style';
 import { TiDelete } from 'react-icons/ti';
 import CmtLikeBtn from './CmtLikeBtn';
 import { timeHelper } from '../../../utils/time-helper';
-import DeleteCmtConfirmModal from '../../_common/DeleteCmtConfirmModal';
+import { styled } from 'styled-components';
 
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
 //현재 시간을 0시간전으로 계산해서 보여주기
-const OneComment = ({
-    isMobile,
-    data,
-    deleteMyComment,
-    setIsDeleteCmtModalOpen,
-    isDeleteCmtModalOpen,
-}) => {
+const OneComment = ({ isMobile, data, deleteMyComment }) => {
     const {
         replyId,
         memberId,
@@ -25,8 +19,6 @@ const OneComment = ({
 
     const myMemberId = localStorage.getItem('memberId') / 1 || -1;
 
-    console.log('oneComment', replyId);
-
     return isMobile ? (
         <M.OneCommentContainer>
             <M.CommentInfo>
@@ -37,8 +29,8 @@ const OneComment = ({
                 <M.IconContainer>
                     {memberId === myMemberId ? (
                         <TiDelete
-                            size='8vw'
                             color='var(--background)'
+                            size='8vw'
                             onClick={() => {
                                 const confirmDelete =
                                     window.confirm('댓글을 삭제하시겠습니까?');
@@ -56,14 +48,6 @@ const OneComment = ({
                 </M.IconContainer>
             </M.CommentInfo>
             <M.CommentText>{content}</M.CommentText>
-            {/* {isDeleteCmtModalOpen && (
-                <DeleteCmtConfirmModal
-                    setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
-                    deleteMyComment={deleteMyComment}
-                    replyId={replyId}
-                    memberId={myMemberId}
-                />
-            )} */}
         </M.OneCommentContainer>
     ) : (
         data && (
@@ -76,7 +60,7 @@ const OneComment = ({
                 </S.CommentInfo>
                 <S.CommentText>{content}</S.CommentText>
                 {/*내 댓글일떄만 삭제 버튼*/}
-                {memberId === myMemberId ? (
+                {memberId === myMemberId && (
                     <div
                         style={{
                             position: 'absolute',
@@ -89,6 +73,7 @@ const OneComment = ({
                             size='2rem'
                             color='var(--background)'
                             onClick={() => {
+                                deleteMyComment(memberId, replyId);
                                 const confirmDelete =
                                     window.confirm('댓글을 삭제하시겠습니까?');
                                 if (confirmDelete) {
@@ -97,7 +82,7 @@ const OneComment = ({
                             }}
                         />
                     </div>
-                ) : null}
+                )}
                 <div
                     style={{
                         position: 'absolute',
@@ -112,14 +97,6 @@ const OneComment = ({
                         replyLikeCount={replyLikeCount}
                     />
                 </div>
-                {/* {isDeleteCmtModalOpen && (
-                    <DeleteCmtConfirmModal
-                        setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
-                        deleteMyComment={deleteMyComment}
-                        replyId={replyId}
-                        memberId={myMemberId}
-                    />
-                )} */}
             </S.OneCommentContainer>
         )
     );

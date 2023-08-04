@@ -16,11 +16,6 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
 
     const memberId = localStorage.getItem('memberId') || -1;
 
-    useEffect(() => {
-        console.log('좋아요 여부', isLike);
-        console.log('좋아요 여부 바뀜', likeNum);
-    }, [currentUser]);
-
     //좋아요 누르기 (낙관적 업데이트)
     const onGiveLike = async () => {
         if (memberId === -1) {

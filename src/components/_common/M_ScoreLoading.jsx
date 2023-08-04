@@ -32,7 +32,6 @@ const MLoading = () => {
                     <Waviy style={{ '--i': 16 }}>.</Waviy>
                     <span style={{ marginLeft: '5px' }}></span>
                     <Waviy style={{ '--i': 18 }}>.</Waviy>
-                    {/* <span>☆ƪ(˘⌣˘)ʃ☆</span> */}
                 </div>
             </LoadingWrapper>
         </Wrapper>
@@ -63,12 +62,12 @@ const waviyAnimation = keyframes`
     transform: translateY(0);
   }
   20% {
-    transform: translateY(-10vw);
+    transform: translateY(-6vw);
   }
 `;
 
 const Waviy = styled.span`
-    font-size: 6vw;
+    font-size: 5vw;
     font-weight: 500;
     position: relative;
     display: inline-block;

@@ -70,7 +70,6 @@ const Rank = ({ isMyData }) => {
 
     //랭킹 로딩 중일떄
     useEffect(() => {
-        console.log('랭킹 로딩중', rankLoading);
         if (rankLoading && rankingData) {
             setRankLoading(false);
         }
@@ -95,7 +94,7 @@ const Rank = ({ isMyData }) => {
                                 시간표 등록하기
                             </S.NewButton>
                         ) : isMyData ? (
-                            <MyScore isMobile={false} data={rankingData} />
+                            <MyScore isMobile={false} datas={rankingData} />
                         ) : (
                             <S.NewButton
                                 onClick={() => {
@@ -105,9 +104,7 @@ const Rank = ({ isMyData }) => {
                             />
                         )}
                         <TabContainer />
-                        {/* {rankLoading ? (
-                            <RankingListSkeleton />
-                        ) : ( */}
+
                         <RankingList
                             rankLoading={rankLoading}
                             data={rankingData}

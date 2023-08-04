@@ -18,7 +18,6 @@ const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
         setIsLike(true);
         setLikeCount(prev => prev + 1);
         const res = await RankingApis.PostCommentLike(replyId, memberId);
-        console.log('댓글 좋아요 결과', res);
         //서버 요청 실패시 롤백
         if (res?.status !== 201) {
             setIsLike(false);
@@ -37,7 +36,6 @@ const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
         });
         //좋아요 취소하는 api 로직
         const res = await RankingApis.DeleteCommentLike(replyId, memberId);
-        console.log('댓글 좋아요 취소 결과', res);
     };
 
     if (isMobile) {

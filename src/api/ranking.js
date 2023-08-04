@@ -46,7 +46,7 @@ const RankingApis = {
     DeleteTimeTableLike: async (timetableId, memberId) => {
         try {
             const res = await http.delete(
-                `/timetables/${timetableId}/likes?memberId=4`,
+                `/timetables/${timetableId}/likes?memberId=${memberId}`,
             );
             console.log(res);
             return res;
@@ -66,7 +66,7 @@ const RankingApis = {
                 content,
                 nameHide,
             });
-            console.log(res);
+            console.log('댓글작성', res);
             return res;
         } catch (err) {
             console.log(err);
