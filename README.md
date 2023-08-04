@@ -56,50 +56,50 @@
 <h3> 📂 폴더 구조 </h3>
 
 ```javascript
-api;
-http.js;
-members.js;
-timetables.js;
-ranking.js;
-assets;
-_common;
-creatpage;
-mainpage;
-rankingpage;
-scorepage;
-components;
-_common;
-aboutuspage;
-createpage;
-loginpage;
-mainpage;
-rankingpage;
-scorepage;
-pages;
-AboutUsPage.jsx;
-CreatePage.jsx;
-Errorpage.jsx;
-LoadingPage.jsx;
-LoginPage.jsx;
-MainPage.jsx;
-RankingPage.jsx;
-ScorePage.jsx;
-M_MenuPage.jsx;
-reducer;
-action.js;
-index.js;
-myResult.js;
-timetable.js;
-skeleton;
-store;
-style;
-common.css;
-global.js;
-utils;
-time - helper.js;
-picker - options.js;
-time - validation.js;
-consts;
+api
+ |_http.js
+ |_members.js
+ |_timetables.js
+ |_ranking.js
+assets
+ |_ _common
+ |_creatpage
+ |_mainpage
+ |_rankingpage
+ |_scorepage
+components
+ |_ _common
+ |_aboutuspage
+ |_createpage
+ |_loginpage
+ |_mainpage
+ |_rankingpage
+ |_scorepage
+pages
+ |_AboutUsPage.jsx
+ |_CreatePage.jsx
+ |_Errorpage.jsx
+ |_LoadingPage.jsx
+ |_LoginPage.jsx
+ |_MainPage.jsx
+ |_RankingPage.jsx
+ |_ScorePage.jsx
+ |_M_MenuPage.jsx
+reducer
+ |_action.js
+ |_index.js
+ |_myResult.js
+ |_timetable.js
+skeleton
+store
+style
+common.css
+global.js
+utils
+ |_time - helper.js
+ |_picker - options.js
+ |_time - validation.js
+consts
 ```
 
 <br/>
