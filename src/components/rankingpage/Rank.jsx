@@ -29,10 +29,11 @@ const Rank = ({ isLogin }) => {
         setLoading(true);
         setRankLoading(true);
         const fetchData = async sort => {
+            sort = sort ? sort : 'LOWEST';
             const res = await getRankingList(sort, memberId);
             console.log('받아온 랭킹정보', sort, res);
             setRankingData(res?.data);
-            setCurrentUserId(res?.data[0].timetableId);
+            setCurrentUserId(res?.data[0]?.timetableId);
         };
         fetchData(sort);
     }, [sort]);

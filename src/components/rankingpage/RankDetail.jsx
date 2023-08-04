@@ -6,6 +6,7 @@ import CmtTag from './rightSection/CmtTag';
 import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
+import AltTableImg from '../../assets/_common/altTable.png';
 
 const RankDetail = ({
     memberId,
@@ -41,7 +42,7 @@ const RankDetail = ({
     ) : (
         <S.SmallContainer>
             <RankUserInfo data={currentUser} loading={loading} />
-            <S.TimeTable src={currentUser?.imgUrl || Timetable} />
+            <S.TimeTable src={currentUser?.imgUrl || AltTableImg} />
             <S.ButtonContainer>
                 <LikeBtn
                     currentUser={currentUser}

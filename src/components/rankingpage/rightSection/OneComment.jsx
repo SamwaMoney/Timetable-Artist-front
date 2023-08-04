@@ -6,7 +6,13 @@ import { styled } from 'styled-components';
 
 //자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
 //현재 시간을 0시간전으로 계산해서 보여주기
-const OneComment = ({ isMobile, data, deleteMyComment }) => {
+const OneComment = ({
+    isMobile,
+    data,
+    deleteMyComment,
+    getCommentData,
+    timetableId,
+}) => {
     const {
         replyId,
         memberId,
@@ -41,9 +47,12 @@ const OneComment = ({ isMobile, data, deleteMyComment }) => {
                         />
                     ) : null}
                     <CmtLikeBtn
+                        replyId={replyId}
                         isMobile={true}
                         heart={heart}
                         replyLikeCount={replyLikeCount}
+                        getCommentData={getCommentData}
+                        timetableId={timetableId}
                     />
                 </M.IconContainer>
             </M.CommentInfo>
@@ -95,6 +104,9 @@ const OneComment = ({ isMobile, data, deleteMyComment }) => {
                         heart={heart}
                         replyId={replyId}
                         replyLikeCount={replyLikeCount}
+                        getCommentData={getCommentData}
+                        timetableId={timetableId}
+                        memberId={memberId}
                     />
                 </div>
             </S.OneCommentContainer>

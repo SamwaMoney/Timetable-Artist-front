@@ -99,6 +99,7 @@ const RankingApis = {
 
     // 댓글 좋아요 등록
     PostCommentLike: async (replyId, memberId) => {
+        console.log(replyId);
         try {
             const res = await http.post(`/${replyId}/likes`, {
                 memberId,

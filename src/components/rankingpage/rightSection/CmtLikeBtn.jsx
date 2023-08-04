@@ -4,7 +4,15 @@ import GetLike from '../../../assets/rankingpage/heart2.png';
 import { M, S } from '../Ranking.style';
 import RankingApis from '../../../api/ranking';
 
-const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
+const CmtLikeBtn = ({
+    isMobile,
+    heart,
+    replyLikeCount,
+    replyId,
+    getCommentData,
+    timetableId,
+}) => {
+    console.log('timetime', timetableId);
     const [isLike, setIsLike] = useState(heart);
     const [likeCount, setLikeCount] = useState(replyLikeCount);
 
@@ -17,12 +25,14 @@ const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
         }
         setIsLike(true);
         setLikeCount(prev => prev + 1);
+        console.log('re', replyId);
         const res = await RankingApis.PostCommentLike(replyId, memberId);
         //서버 요청 실패시 롤백
         if (res?.status !== 201) {
             setIsLike(false);
             setLikeCount(prev => prev - 1);
         }
+        await getCommentData(timetableId, memberId);
     };
 
     //좋아요 취소
@@ -36,6 +46,7 @@ const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
         });
         //좋아요 취소하는 api 로직
         await RankingApis.DeleteCommentLike(replyId, memberId);
+        await getCommentData(timetableId, memberId);
     };
 
     if (isMobile) {
