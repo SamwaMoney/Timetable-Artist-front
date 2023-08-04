@@ -42,6 +42,7 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
 
     //댓글 가져온 후에 댓글 state에 데이터 추가하는 로직
     const getCommentData = async (timetableId, memberId) => {
+        console.log('댓글', timetableId, memberId);
         const res = await getComment(timetableId, memberId);
         setCommentData(res?.data?.replies);
         setLoading(false);

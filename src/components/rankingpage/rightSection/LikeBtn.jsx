@@ -6,7 +6,13 @@ import RankingApis from '../../../api/ranking';
 import { useLocation } from 'react-router-dom';
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
 //시간표
-const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
+const LikeBtn = ({
+    isMobile,
+    timetableId,
+    currentUser,
+    getRankingList,
+    setRankingData,
+}) => {
     const [isLike, setIsLike] = useState();
     const [likeNum, setLikeNum] = useState();
 
@@ -36,9 +42,11 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
             setLikeNum(prev => prev - 1);
         } else {
             setIsLike(true);
-            if (sort === 'LIKE') {
-                getRankingList(sort, memberId);
-            }
+        }
+        if (sort === 'LIKE') {
+            console.log('좋아요 재정렬', sort, memberId);
+            const res = await getRankingList(sort, memberId);
+            setRankingData(res?.data);
         }
     };
 
@@ -58,7 +66,8 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
         } else {
             setIsLike(false);
             if (sort === 'LIKE') {
-                getRankingList(sort, memberId);
+                const res = await getRankingList(sort, memberId);
+                setRankingData(res?.data);
             }
         }
     };
