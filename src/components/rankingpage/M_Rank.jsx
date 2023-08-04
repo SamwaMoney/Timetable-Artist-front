@@ -14,7 +14,6 @@ const MobileRank = ({ isLogin }) => {
     const params = new URLSearchParams(location.search);
     const sort = params.get('sort') || 'LOWEST';
     const [rankingData, setRankingData] = useState();
-    // const [isLogin, setIsLogin] = useState(false);
     const memberId = localStorage.getItem('memberId') || -1;
     const [loading, setLoading] = useState(true);
     const [rankLoading, setRankLoading] = useState(true);
@@ -59,7 +58,7 @@ const MobileRank = ({ isLogin }) => {
                     onClick={() => {
                         navigate('/login');
                     }}
-                    isMobile={false}
+                    isMobile={true}
                 >
                     시간표 등록하기
                 </M.NewButton>
@@ -68,12 +67,12 @@ const MobileRank = ({ isLogin }) => {
                     onClick={() => {
                         navigate('/create');
                     }}
-                    isMobile={false}
+                    isMobile={true}
                 >
                     시간표 등록하기
                 </M.NewButton>
             ) : (
-                <MyScore isMobile={false} datas={memoizedRankingData} />
+                <MyScore isMobile={true} datas={memoizedRankingData} />
             )}
             <TabContainer isMobile={true} />
             <RankingList

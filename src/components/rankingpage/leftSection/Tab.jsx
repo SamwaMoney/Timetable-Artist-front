@@ -73,11 +73,15 @@ const TabContainer = ({ isMobile }) => {
                 currentSort={sort}
             >
                 {sort !== 'HIGHEST' ? (
-                    <span style={{ color: 'var(--red)' }}>최악</span>
+                    <span style={{ color: 'var(--red)', fontSize: '1vw' }}>
+                        최악
+                    </span>
                 ) : (
-                    <span style={{ color: 'var(--blue)' }}>최고</span>
+                    <span style={{ color: 'var(--blue)', fontSize: '1vw' }}>
+                        최고
+                    </span>
                 )}
-                <span>의 시간표</span>
+                <span style={{ fontSize: '1vw' }}>의 시간표</span>
             </S.Tab>
             <S.LikeTab
                 onClick={() => onMoveSortPage('LIKE')}

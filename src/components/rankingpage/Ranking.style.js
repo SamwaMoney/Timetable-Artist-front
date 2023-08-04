@@ -203,7 +203,7 @@ S.Tab = styled(Tab)`
 `;
 
 S.LikeTab = styled(Tab)`
-    font-size: 1rem;
+    font-size: 1vw;
     border-bottom: ${({ currentSort }) =>
         currentSort === 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
@@ -290,7 +290,7 @@ M.Slider = styled(Slider)`
 `;
 
 S.ToggleText = styled.div`
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-left: 10px;
     color: black;
 `;

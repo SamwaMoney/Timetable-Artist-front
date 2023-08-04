@@ -49,14 +49,12 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
 
     //댓글 삭제후 업데이트 로직
     const deleteMyComment = async (memberId, replyId) => {
-        // console.log('댓글삭제', memberId, replyId);
         await RankingApis.DeleteComment(memberId, replyId);
         await getCommentData();
     };
 
     //댓글 추가후 업데이트 로직
     const updateComment = async newComment => {
-        // console.log('추가된 댓글', newComment);
         setIsSubmitting(true); // 요청이 시작되었음을 나타내기 위해 상태를 true로 설정
         try {
             await RankingApis.PostComment(newComment);
