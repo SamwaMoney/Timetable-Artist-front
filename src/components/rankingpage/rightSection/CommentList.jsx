@@ -14,18 +14,11 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
     //댓글을 요청하는 중
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    //댓글 가져온 후에 댓글 state에 데이터 추가하는 로직
-    const getCommentData = async () => {
-        const res = await getComment(currentUserId, memberId);
-        setCommentData(res?.data?.replies);
-        setLoading(false);
-    };
-
     //처음에 댓글 불러오는 로직
     useEffect(() => {
         setLoading(true); //댓글 불러올떄마다 loading 띄우기
         setCommentData(); //댓글 초기화
-        getCommentData();
+        getCommentData(currentUserId, memberId);
     }, [currentUserId]);
 
     //로딩 상태 보여주는 UI
@@ -47,10 +40,17 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
         return await RankingApis.GetTimeTableComments(timetableId, memberId);
     };
 
+    //댓글 가져온 후에 댓글 state에 데이터 추가하는 로직
+    const getCommentData = async (timetableId, memberId) => {
+        const res = await getComment(timetableId, memberId);
+        setCommentData(res?.data?.replies);
+        setLoading(false);
+    };
+
     //댓글 삭제후 업데이트 로직
     const deleteMyComment = async (memberId, replyId) => {
         await RankingApis.DeleteComment(memberId, replyId);
-        await getCommentData();
+        await getCommentData(currentUserId, memberId);
     };
 
     //댓글 추가후 업데이트 로직
@@ -58,7 +58,7 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
         setIsSubmitting(true); // 요청이 시작되었음을 나타내기 위해 상태를 true로 설정
         try {
             await RankingApis.PostComment(newComment);
-            await getCommentData();
+            await getCommentData(currentUserId, memberId);
             setIsSubmitting(false);
         } catch (error) {
             console.error('댓글 업로드 실패:', error);
@@ -76,7 +76,7 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
             <MCommentContainer>
                 {loading ? (
                     <MCommentSkeleton />
-                ) : commentData.length > 0 ? (
+                ) : commentData?.length > 0 ? (
                     commentData.map(reply => (
                         <OneComment
                             isMobile={true}
@@ -85,6 +85,7 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
                             key={Math.random() * 1000}
                             setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
                             isDeleteCmtModalOpen={isDeleteCmtModalOpen}
+                            getCommentData={getCommentData}
                         />
                     ))
                 ) : (
@@ -110,6 +111,8 @@ const CommentList = ({ isMobile, currentUserId, setCommentNum }) => {
                             key={Math.random() * 1000}
                             setIsDeleteCmtModalOpen={setIsDeleteCmtModalOpen}
                             isDeleteCmtModalOpen={isDeleteCmtModalOpen}
+                            getCommentData={getCommentData}
+                            timetableId={currentUserId}
                         />
                     ))
                 ) : (
