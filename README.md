@@ -27,71 +27,103 @@
 </div>
 
  <br/>
+
+ <h3> ⭐️ 기능 설명 </h3>
+<h4>😀 Auth: 회원가입, 로그인 </h4>
+<div>- 회원가입, 회원탈퇴 기능</div>
+<div>- 로그인, 로그아웃 기능</div>
+<div>- 토큰 리프레시 기능</div>
+<h4>📝 Create: 시간표 생성 </h4>
+<div>- 시간표 블럭 UI</div>
+<div>- 인풋(웹), 스와이퍼(모바일)로 수업 생성</div>
+<div>- 블럭 클릭으로 수업 삭제</div>
+<div>- 시간표 삭제 후 재생성 기능</div>
+<h4>💯 Score: 시간표 채점 </h4>
+<div>- 시간표 알고리즘으로 채점 기능</div>
+<div>- 시간표 유형별 결과 제공</div>
+<div>- 랭킹보드에 강의명 숨김 옵션으로 게시 여부 설정 가능</div>
+<div>- 결과 이미지 저장 기능</div>
+<div>- SNS에 공유 기능</div>
+<h4>🔢 Rank: 랭킹보드 보기 </h4>
+<div>- 시간표를 점수 오름차순(최악의 시간표), 점수 내림차순(최고의 시간표), 인기 시간표(좋아요 개수)로 정렬 가능</div>
+<div>- 분류 방법에 따라 내 순위를 실시간으로 반영</div>
+<div>- 시간표 별 좋아요 기능, 댓글(익명 가능)기능</div>
+<div>- 댓글 별 좋아요 기능, 좋아요 순으로 정렬</div>
+<h4></h4>
+
+<br/>
+
 <h3> 📂 폴더 구조 </h3>
 
 ```javascript
-api
-    http.js
-    members.js
-    timetables.js
-    ranking.js
-assets
-    _common 
-    creatpage
-    mainpage 
-    rankingpage 
-    scorepage
-components
-    _common 
-    aboutuspage 
-    createpage 
-    loginpage 
-    mainpage 
-    rankingpage
-    scorepage 
-pages 
-    AboutUsPage.jsx
-    CreatePage.jsx 
-    Errorpage.jsx 
-    LoadingPage.jsx 
-    LoginPage.jsx 
-    MainPage.jsx 
-    RankingPage.jsx 
-    ScorePage.jsx 
-    M_MenuPage.jsx 
-reducer 
-    action.js 
-    index.js 
-    myResult.js 
-    timetable.js
-store 
-style 
-    common.css 
-    global.js 
-utils 
-    time-helper.js 
+api;
+http.js;
+members.js;
+timetables.js;
+ranking.js;
+assets;
+_common;
+creatpage;
+mainpage;
+rankingpage;
+scorepage;
+components;
+_common;
+aboutuspage;
+createpage;
+loginpage;
+mainpage;
+rankingpage;
+scorepage;
+pages;
+AboutUsPage.jsx;
+CreatePage.jsx;
+Errorpage.jsx;
+LoadingPage.jsx;
+LoginPage.jsx;
+MainPage.jsx;
+RankingPage.jsx;
+ScorePage.jsx;
+M_MenuPage.jsx;
+reducer;
+action.js;
+index.js;
+myResult.js;
+timetable.js;
+skeleton;
+store;
+style;
+common.css;
+global.js;
+utils;
+time - helper.js;
+picker - options.js;
+time - validation.js;
 consts;
 ```
 
 <br/>
 <h3> ✨ 사용 라이브러리 </h3>
-
 <h4>main</h4>
 
- react-redux /
- react-router-dom /
- react-query
- <br/>
+react-redux /
+react-router-dom /
+react-query
+<br/>
+
 <h4>styles</h4>
 
- react-device-detect /
- react-icons /
- styled-components /
- swiper
- <br/>
+react-device-detect /
+react-icons /
+styled-components /
+swiper
+<br/>
+
 <h4>협업도구</h4>
 
- github / 
- notion /
- pigma / 
- prettier
+github /
+notion /
+pigma /
+prettier
+<br/>
+

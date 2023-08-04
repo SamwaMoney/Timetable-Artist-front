@@ -3,33 +3,51 @@ import RankUserInfo from './rightSection/RankUserInfo';
 import LikeBtn from './rightSection/LikeBtn';
 import CommentList from './rightSection/CommentList';
 import CmtTag from './rightSection/CmtTag';
-import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AltTableImg from '../../assets/_common/altTable.png';
+
 const RankDetail = ({
     memberId,
     currentUserId,
     getRankingList,
-    currentUser,
+    setLoading,
+    setRankingData,
     loading,
     rankLoading,
     getDetailData,
 }) => {
+    const [currentUser, setCurrentUser] = useState();
     const [commentNum, setCommentNum] = useState();
-    console.log(currentUser);
+
+    useEffect(() => {
+        setCommentNum();
+        setCurrentUser();
+        const fetchDetailData = async timetableId => {
+            const res = await getDetailData(timetableId, memberId);
+            setCurrentUser(res?.data);
+        };
+        fetchDetailData(currentUserId);
+        setLoading(false);
+    }, [currentUserId]);
+
+    // useEffect(() => {
+    //     console.log('currentUserId', currentUserId);
+    //     setLoading(false);
+    // }, [currentUser]);
+
     return loading || rankLoading ? (
         <RightSectionSkeleton />
     ) : (
         <S.SmallContainer>
             <RankUserInfo data={currentUser} loading={loading} />
-            <S.TimeTable src={Timetable} />
-            {/* <S.TimeTable src={currentUser?.tableImg} alt='사진' /> */}
-            {/*버튼 컨테이너*/}
+            <S.TimeTable src={currentUser?.imgUrl || AltTableImg} />
             <S.ButtonContainer>
                 <LikeBtn
                     currentUser={currentUser}
                     timetableId={currentUserId}
                     getRankingList={getRankingList}
+                    setRankingData={setRankingData}
                 />
                 <CmtTag number={commentNum} />
             </S.ButtonContainer>

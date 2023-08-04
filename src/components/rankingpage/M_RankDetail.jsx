@@ -1,4 +1,5 @@
 import { S, M } from './Ranking.style';
+import { SK } from '../../skeleton/skeleton.style';
 import { useSearchParams } from 'react-router-dom';
 import LikeBtn from './rightSection/LikeBtn';
 import CmtTag from './rightSection/CmtTag';
@@ -10,8 +11,6 @@ import MDetailSectionSkeleton from '../../skeleton/MDetailSectionSkeleton';
 import { useEffect, useState } from 'react';
 import RankingApis from '../../api/ranking';
 import { useParams } from 'react-router-dom';
-import Timetable from '../../assets/scorepage/timetable.png';
-import MRankingLoading from '../_common/M_RankingLoading';
 
 //해당 유저의 아이디를 params로 가져오고, rank의 경우는 쿼리스트링으로 가져옴
 //시간표 채점 결과 조회 api를 사용함.
@@ -78,8 +77,8 @@ const MRankDetail = () => {
                             </M.CategoryContainer>
                         </M.UserInfo>
                     </M.RankContainer>
-                    {/* <S.TimeTable src={currentUser?.tableImg} alt='사진' /> */}
-                    <M.TimeTable src={Timetable} alt='사진' />
+
+                    <S.TimeTable height={100} src={currentUser?.imgUrl} />
                     <M.DetailBtnContainer>
                         <LikeBtn
                             isMobile={true}
@@ -89,8 +88,6 @@ const MRankDetail = () => {
                         />
                         <CmtTag isMobile={true} number={commentNum} />
                     </M.DetailBtnContainer>
-                    {/*뎃글 적는 인풋창 */}
-                    {/* <NewComment isMobile={true} currentUserId={timetableId} /> */}
                     <CommentList
                         isMobile={true}
                         currentUserId={timetableId}

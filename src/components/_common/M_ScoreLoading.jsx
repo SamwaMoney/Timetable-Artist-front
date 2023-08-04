@@ -1,12 +1,28 @@
 import React from 'react';
 import { FlexCenter, S } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
+import { useEffect, useState } from 'react';
 // ٩( ᐛ )و  ◡
 const MLoading = () => {
+    const emogi = ['〆(･⌄･;)', '_〆(･⌄･;)', '__〆(･⌄･;)'];
+    const [time, setTime] = useState(0);
+    useEffect(() => {
+        const timeoutId = setInterval(() => {
+            if (time === 2) {
+                setTime(0);
+            } else {
+                setTime(prev => prev + 1);
+            }
+        }, 1000);
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [time]);
+
     return (
         <Wrapper>
             <LoadingWrapper>
-                <Emoticon> __〆(･⌄･;) </Emoticon>
+                <Emoticon>{emogi[time]}</Emoticon>
 
                 <div className='waviy'>
                     <Waviy style={{ '--i': 1 }}>시</Waviy>
@@ -32,7 +48,6 @@ const MLoading = () => {
                     <Waviy style={{ '--i': 16 }}>.</Waviy>
                     <span style={{ marginLeft: '5px' }}></span>
                     <Waviy style={{ '--i': 18 }}>.</Waviy>
-                    {/* <span>☆ƪ(˘⌣˘)ʃ☆</span> */}
                 </div>
             </LoadingWrapper>
         </Wrapper>
@@ -54,7 +69,7 @@ const LoadingWrapper = styled.div`
 `;
 
 const Emoticon = styled.div`
-    font-size: 8vw;
+    font-size: 7vw;
     padding-bottom: 12vw;
 `;
 
@@ -63,12 +78,12 @@ const waviyAnimation = keyframes`
     transform: translateY(0);
   }
   20% {
-    transform: translateY(-10vw);
+    transform: translateY(-4vw);
   }
 `;
 
 const Waviy = styled.span`
-    font-size: 6vw;
+    font-size: 5vw;
     font-weight: 500;
     position: relative;
     display: inline-block;

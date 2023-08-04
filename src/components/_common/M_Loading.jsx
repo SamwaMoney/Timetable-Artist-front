@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { S } from '../rankingpage/Ranking.style';
 import { FlexCenter } from '../rankingpage/Ranking.style';
-const Loading = props => {
+import styled, { keyframes } from 'styled-components';
+
+const MLoading = props => {
     const emogi = '٩( ᐛ )و';
     const [isFlipped, setIsFlipped] = useState(false);
 
     useEffect(() => {
         const timeoutId = setInterval(() => {
             setIsFlipped(prev => !prev);
-        }, 1000); // 1초 뒤에 반전 클래스를 제거합니다.
+        }, 1000);
 
         return () => {
             clearTimeout(timeoutId);
         };
     }, [isFlipped]);
-
     return (
-        <S.Container>
+        <Wrapper>
             <LoadingWrapper>
                 <Emogi className={isFlipped ? '' : 'flipped'}>{emogi}</Emogi>
                 <Text className='waviy'>
@@ -47,11 +46,43 @@ const Loading = props => {
                     <Waviy style={{ '--i': 16 }}>.</Waviy>
                 </Text>
             </LoadingWrapper>
-        </S.Container>
+        </Wrapper>
     );
 };
 
-export default Loading;
+export default MLoading;
+
+const Wrapper = styled.div`
+    width: 100%;
+    height: 100%;
+`;
+const LoadingWrapper = styled.div`
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to bottom, #e2e2e2, var(--green));
+    ${FlexCenter}
+    flex-direction: column;
+`;
+
+const waviyAnimation = keyframes`
+  0%, 40%, 100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-4vw);
+  }
+`;
+
+const Waviy = styled.span`
+    font-size: 5vw;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+    color: ${props => props.color || '#000'};
+    text-transform: uppercase;
+    animation: ${waviyAnimation} 4.6s infinite;
+    animation-delay: calc(0.1s * var(--i));
+`;
 
 const Emogi = styled.div`
     font-size: 2rem;
@@ -60,35 +91,7 @@ const Emogi = styled.div`
         transform: scaleX(-1);
     }
 `;
+
 const Text = styled.div`
     letter-spacing: 2px;
-`;
-
-const LoadingWrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    border: 0.1rem solid black;
-    background: linear-gradient(to bottom, #e2e2e2, var(--green));
-    ${FlexCenter}
-    flex-direction:column;
-`;
-
-const waviyAnimation = keyframes`
-  0%, 40%, 100% {
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateY(-15px);
-  }
-`;
-
-const Waviy = styled.span`
-    font-size: 1.5rem;
-    position: relative;
-    display: inline-block;
-    color: ${props => props.color || '#000'};
-    text-transform: uppercase;
-    animation: ${waviyAnimation} 4s infinite;
-    animation-delay: calc(0.1s * var(--i));
-    padding: 1px;
 `;

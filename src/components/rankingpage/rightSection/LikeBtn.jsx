@@ -6,20 +6,26 @@ import RankingApis from '../../../api/ranking';
 import { useLocation } from 'react-router-dom';
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
 //시간표
-const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
-    const [isLike, setIsLike] = useState(currentUser?.liked);
-    const [likeNum, setLikeNum] = useState(currentUser?.likeCount);
+const LikeBtn = ({
+    isMobile,
+    timetableId,
+    currentUser,
+    getRankingList,
+    setRankingData,
+}) => {
+    const [isLike, setIsLike] = useState();
+    const [likeNum, setLikeNum] = useState();
+
+    useEffect(() => {
+        setLikeNum(currentUser?.likeCount);
+        setIsLike(currentUser?.liked);
+    }, [currentUser]);
 
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const sort = params.get('sort') || 'LOWEST';
 
     const memberId = localStorage.getItem('memberId') || -1;
-
-    useEffect(() => {
-        console.log('좋아요 여부', isLike);
-        console.log('좋아요 여부 바뀜', likeNum);
-    }, [currentUser]);
 
     //좋아요 누르기 (낙관적 업데이트)
     const onGiveLike = async () => {
@@ -36,9 +42,11 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
             setLikeNum(prev => prev - 1);
         } else {
             setIsLike(true);
-            if (sort === 'LIKE') {
-                getRankingList(sort, memberId);
-            }
+        }
+        if (sort === 'LIKE') {
+            console.log('좋아요 재정렬', sort, memberId);
+            const res = await getRankingList(sort, memberId);
+            setRankingData(res?.data);
         }
     };
 
@@ -58,7 +66,8 @@ const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
         } else {
             setIsLike(false);
             if (sort === 'LIKE') {
-                getRankingList(sort, memberId);
+                const res = await getRankingList(sort, memberId);
+                setRankingData(res?.data);
             }
         }
     };

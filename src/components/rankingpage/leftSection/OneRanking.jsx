@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { S, M } from '../Ranking.style';
 import CmtTag from '../rightSection/CmtTag';
-import Timetable from '../../../assets/scorepage/timetable.png';
 import LikeTag from '../rightSection/LikeTag';
+// import AltTableImg from '../../assets/_common/altTable.png';
+import AltTableImg from '../../../assets/_common/altTable.png';
 //선택된 user의 id와 일치하면 해당 유저의 랭킹 색을 초록색으로 바꿔줘야 함
 //받아온 data의 첫번쨰 유저가 default => 클릭할떄마다 바뀜
 const OneRanking = ({
@@ -32,7 +33,7 @@ const OneRanking = ({
         username,
         score,
         tableTypeContent,
-        tableImg,
+        imgUrl,
         likeCount,
         liked,
     } = data ? data : null;
@@ -66,10 +67,6 @@ const OneRanking = ({
         setIsShowTimeTable(prev => !prev);
     };
 
-    useEffect(() => {
-        console.log(commentCount);
-    }, [commentCount]);
-
     return isMobile ? (
         <>
             <M.OneRankWrapper>
@@ -96,7 +93,7 @@ const OneRanking = ({
                     <>
                         <M.TimeTableWrapper>
                             <S.TimeTable
-                                src={Timetable}
+                                src={imgUrl || AltTableImg}
                                 alt='사진'
                                 onClick={() => {
                                     onMoveMDetail(timetableId, index);

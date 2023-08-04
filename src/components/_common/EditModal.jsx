@@ -1,5 +1,5 @@
 import { M } from './Modal.style';
-import { CreateTable, DeleteTable } from '../../api/timetables';
+import { DeleteTable } from '../../api/timetables';
 
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
@@ -10,8 +10,7 @@ const EditModal = ({ setIsEditModalOpen }) => {
     const handleCheckClick = async () => {
         const tableId = localStorage.getItem('tableId');
         const res = await DeleteTable(tableId);
-        if (res.status === 200) {
-            CreateTable();
+        if (res?.status === 200) {
             setIsEditModalOpen(false);
             navigate('/create');
         } else {

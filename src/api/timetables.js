@@ -27,8 +27,10 @@ export const CreateTable = async () => {
         });
         console.log(res);
         GetTableId();
+        return res.data.timetableId;
     } catch (err) {
         console.log('시간표 생성 에러', err);
+        return null;
     }
 };
 
