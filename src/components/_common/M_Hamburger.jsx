@@ -3,7 +3,6 @@ import WithdrawalModal from './WithdrawalModal';
 import EditModal from './EditModal';
 import BackBtn from './BackBtn';
 import { Logout, isLogin } from '../../api/members';
-import { CreateTable, GetTableId } from '../../api/timetables';
 
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -30,12 +29,9 @@ const MHamburger = () => {
         if (isLogin()) {
             const tableId = localStorage.getItem('tableId');
             // tableId 가져오기
-            // 'null'인지 null인지 체크
             if (tableId !== 'null') {
                 setIsEditModalOpen(true);
             } else {
-                CreateTable();
-                GetTableId();
                 navigate('/create');
             }
         } else {

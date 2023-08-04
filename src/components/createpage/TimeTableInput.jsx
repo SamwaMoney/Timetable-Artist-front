@@ -13,7 +13,7 @@ import {
     isNotTwoTimeOverlapped,
 } from '../../utils/time-validation';
 import { TimeResetObj } from '../../utils/time-helper';
-import { CreateClasses } from '../../api/timetables';
+import { CreateClasses, CreateTable } from '../../api/timetables';
 import { useNavigate } from 'react-router-dom';
 
 const TimeTableInput = () => {
@@ -193,7 +193,7 @@ const TimeTableInput = () => {
         }
         // memberId, timetableId 받아오기
         const memberId = localStorage.getItem('memberId');
-        const timeTableId = localStorage.getItem('tableId');
+        const timeTableId = await CreateTable();
 
         // - 반복문 돌면서 memberId, timetableId 추가, startTime, endTime 시간과 분 분리, startTime, endTime 삭제
         const finalTimeTableData = timetableData.map(classData => {
