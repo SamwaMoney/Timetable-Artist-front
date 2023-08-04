@@ -8,7 +8,10 @@ const RankingListSkeleton = () => {
                 .fill()
                 .map(el => {
                     return (
-                        <S.RankContainer top={1}>
+                        <S.RankContainer
+                            top={1}
+                            key={Math.floor(Math.random() * 10000)}
+                        >
                             <div
                                 style={{
                                     display: 'flex',

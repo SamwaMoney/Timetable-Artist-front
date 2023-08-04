@@ -63,10 +63,7 @@ const MobileRank = ({ isLogin }) => {
                 >
                     시간표 등록하기
                 </M.NewButton>
-            ) : timetableId && isLogin ? (
-                // <MyScore isMobile={false} datas={rankingData} />
-                <MyScore isMobile={false} datas={memoizedRankingData} />
-            ) : (
+            ) : timetableId === 'null' ? (
                 <M.NewButton
                     onClick={() => {
                         navigate('/create');
@@ -75,6 +72,8 @@ const MobileRank = ({ isLogin }) => {
                 >
                     시간표 등록하기
                 </M.NewButton>
+            ) : (
+                <MyScore isMobile={false} datas={memoizedRankingData} />
             )}
             <TabContainer isMobile={true} />
             <RankingList

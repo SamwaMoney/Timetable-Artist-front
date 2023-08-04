@@ -30,46 +30,49 @@
 <h3> 📂 폴더 구조 </h3>
 
 ```javascript
-api
-    http.js
-    members.js
-    timetables.js
-    ranking.js
-assets
-    _common 
-    creatpage
-    mainpage 
-    rankingpage 
-    scorepage
-components
-    _common 
-    aboutuspage 
-    createpage 
-    loginpage 
-    mainpage 
-    rankingpage
-    scorepage 
-pages 
-    AboutUsPage.jsx
-    CreatePage.jsx 
-    Errorpage.jsx 
-    LoadingPage.jsx 
-    LoginPage.jsx 
-    MainPage.jsx 
-    RankingPage.jsx 
-    ScorePage.jsx 
-    M_MenuPage.jsx 
-reducer 
-    action.js 
-    index.js 
-    myResult.js 
-    timetable.js
-store 
-style 
-    common.css 
-    global.js 
-utils 
-    time-helper.js 
+api;
+http.js;
+members.js;
+timetables.js;
+ranking.js;
+assets;
+_common;
+creatpage;
+mainpage;
+rankingpage;
+scorepage;
+components;
+_common;
+aboutuspage;
+createpage;
+loginpage;
+mainpage;
+rankingpage;
+scorepage;
+pages;
+AboutUsPage.jsx;
+CreatePage.jsx;
+Errorpage.jsx;
+LoadingPage.jsx;
+LoginPage.jsx;
+MainPage.jsx;
+RankingPage.jsx;
+ScorePage.jsx;
+M_MenuPage.jsx;
+reducer;
+action.js;
+index.js;
+myResult.js;
+timetable.js;
+skeleton;
+store;
+style;
+common.css;
+global.js;
+utils;
+time - helper.js;
+picker - options.js;
+time - validation.js;
 consts;
 ```
 
@@ -78,20 +81,22 @@ consts;
 
 <h4>main</h4>
 
- react-redux /
- react-router-dom /
- react-query
- <br/>
+react-redux /
+react-router-dom /
+react-query
+<br/>
+
 <h4>styles</h4>
 
- react-device-detect /
- react-icons /
- styled-components /
- swiper
- <br/>
+react-device-detect /
+react-icons /
+styled-components /
+swiper
+<br/>
+
 <h4>협업도구</h4>
 
- github / 
- notion /
- pigma / 
- prettier
+github /
+notion /
+pigma /
+prettier
