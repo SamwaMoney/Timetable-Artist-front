@@ -6,12 +6,12 @@ import add_timetable from '../../assets/createpage/add_timetable.png';
 import MTimeTableInputModal from './M_TimeTableInputModal';
 import ResetModal from '../_common/ResetModal';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CreateClasses, CreateTable } from '../../api/timetables';
 import { useNavigate } from 'react-router-dom';
 
 const MCreateTimeTable = () => {
-    const nickname = '삼와머니';
+    const nickname = localStorage.getItem('username');
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [colorIndex, setColorIndex] = useState(0);
