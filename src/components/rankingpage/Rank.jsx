@@ -3,7 +3,7 @@ import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import { S } from './Ranking.style';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RankingApis from '../../api/ranking';
 import Loading from '../_common/Loading';
@@ -14,6 +14,7 @@ const Rank = ({ isLogin }) => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const sort = params.get('sort');
+    console.log('sortsort', sort);
     const navigate = useNavigate();
     //api로 받아온 데이터 관리하는 곳
     const [rankingData, setRankingData] = useState();
@@ -36,7 +37,8 @@ const Rank = ({ isLogin }) => {
             setCurrentUserId(res?.data[0]?.timetableId);
         };
         fetchData(sort);
-    }, [sort]);
+        setLoading(false);
+    }, [sort, currentUserId, memberId]);
 
     const getRankingList = (sort, memberId) => {
         return RankingApis.GetRanking(sort, memberId);
@@ -53,8 +55,7 @@ const Rank = ({ isLogin }) => {
         }
     }, [rankLoading, rankingData]);
 
-    const memoizedRankingData = useMemo(() => rankingData, [rankingData]);
-
+    useEffect(() => {}, []);
     return (
         <S.Wrapper>
             <Hamburger />
@@ -83,15 +84,12 @@ const Rank = ({ isLogin }) => {
                                 시간표 등록하기
                             </S.NewButton>
                         ) : (
-                            <MyScore
-                                isMobile={false}
-                                datas={memoizedRankingData}
-                            />
+                            <MyScore isMobile={false} datas={rankingData} />
                         )}
                         <TabContainer />
                         <RankingList
                             rankLoading={rankLoading}
-                            data={memoizedRankingData}
+                            data={rankingData}
                             currentUserId={currentUserId}
                             setCurrentUserId={setCurrentUserId}
                         />
@@ -104,9 +102,11 @@ const Rank = ({ isLogin }) => {
                         setLoading={setLoading}
                         loading={loading}
                         rankLoading={rankLoading}
+                        setRankLoading={setRankLoading}
                         timetableId={timetableId}
                         getDetailData={getDetailData}
                         setRankingData={setRankingData}
+                        sort={sort}
                     />
                 </S.Container>
             )}

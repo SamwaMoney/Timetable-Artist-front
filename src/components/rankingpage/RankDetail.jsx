@@ -6,7 +6,7 @@ import CmtTag from './rightSection/CmtTag';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
 import AltTableImg from '../../assets/_common/altTable.png';
-
+import { useLocation } from 'react-router-dom';
 const RankDetail = ({
     memberId,
     currentUserId,
@@ -15,23 +15,35 @@ const RankDetail = ({
     setRankingData,
     loading,
     rankLoading,
+    setRankLoading,
     getDetailData,
 }) => {
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const sort = params.get('sort');
     const [currentUser, setCurrentUser] = useState();
     const [commentNum, setCommentNum] = useState();
 
     useEffect(() => {
         setCommentNum();
         setCurrentUser();
-        const fetchDetailData = async timetableId => {
+        console.log('currentUser', currentUserId);
+        const fetchDetailData = async (timetableId, memberId) => {
             const res = await getDetailData(timetableId, memberId);
+            console.log('res', res);
             setCurrentUser(res?.data);
         };
-        fetchDetailData(currentUserId);
+        fetchDetailData(currentUserId, memberId);
         setLoading(false);
-    }, [currentUserId]);
+        setRankLoading(false);
+    }, [currentUserId, sort]);
 
-    return loading || rankLoading ? (
+    // useEffect(() => {
+    //     console.log('loading', loading);
+    //     console.log('rankLoading', rankLoading);
+    // }, [loading, rankLoading]);
+
+    return rankLoading ? (
         <RightSectionSkeleton />
     ) : (
         <S.SmallContainer>
