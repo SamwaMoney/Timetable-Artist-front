@@ -3,14 +3,15 @@ import MyScore from './leftSection/MyScore';
 import TabContainer from './leftSection/Tab';
 import RankingList from './leftSection/RankingList';
 import { S } from './Ranking.style';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RankingApis from '../../api/ranking';
 import Loading from '../_common/Loading';
 import RankDetail from './RankDetail';
 import { useLocation } from 'react-router-dom';
+import ScoreLoading from '../_common/ScoreLoading';
 
-const Rank = ({ isMyData }) => {
+const Rank = ({ isLogin }) => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const sort = params.get('sort');
@@ -19,12 +20,10 @@ const Rank = ({ isMyData }) => {
     const [rankingData, setRankingData] = useState();
     const [currentUserId, setCurrentUserId] = useState();
     const memberId = localStorage.getItem('memberId') || -1;
-    let isLogin = memberId !== -1;
     const [loading, setLoading] = useState(true);
     const [rankLoading, setRankLoading] = useState(true);
+    const timetableId = localStorage.getItem('tableId');
 
-    //디테일 유저 정보
-    const [currentUser, setCurrentUser] = useState();
     //sort에 따라 랭킹 정보 불러오기
     useEffect(() => {
         console.log('sort바뀜', sort);
@@ -48,26 +47,6 @@ const Rank = ({ isMyData }) => {
         return RankingApis.GetOneRankingDetail(timetableId, memberId);
     };
 
-    //디테일 유저 정보 불러오기
-    useEffect(() => {
-        setCurrentUser();
-        const fetchDetailData = async timetableId => {
-            const res = await getDetailData(timetableId, memberId);
-            setCurrentUser(res?.data);
-        };
-        //현재 유저 아이디가 있을때만 데이터 요청
-        if (currentUserId) {
-            fetchDetailData(currentUserId);
-        }
-    }, [currentUserId]);
-
-    //로딩 상태 보여주는 UI
-    useEffect(() => {
-        if (loading && currentUser) {
-            setLoading(false);
-        }
-    }, [loading, currentUser]);
-
     //랭킹 로딩 중일떄
     useEffect(() => {
         if (rankLoading && rankingData) {
@@ -75,11 +54,13 @@ const Rank = ({ isMyData }) => {
         }
     }, [rankLoading, rankingData]);
 
+    const memoizedRankingData = useMemo(() => rankingData, [rankingData]);
+
     return (
         <S.Wrapper>
             <Hamburger />
             {/*랭킹 보여주는 left section*/}
-            {(!currentUserId || loading) && !sort ? (
+            {!currentUserId && !sort ? (
                 <Loading title='랭킹보드' />
             ) : (
                 <S.Container>
@@ -93,25 +74,28 @@ const Rank = ({ isMyData }) => {
                             >
                                 시간표 등록하기
                             </S.NewButton>
-                        ) : isMyData ? (
-                            <MyScore isMobile={false} datas={rankingData} />
+                        ) : timetableId && isLogin ? (
+                            <MyScore
+                                isMobile={false}
+                                datas={memoizedRankingData}
+                            />
                         ) : (
                             <S.NewButton
                                 onClick={() => {
                                     navigate('/create');
                                 }}
                                 isMobile={false}
-                            />
+                            >
+                                시간표 등록하기
+                            </S.NewButton>
                         )}
                         <TabContainer />
-
                         <RankingList
                             rankLoading={rankLoading}
-                            data={rankingData}
+                            data={memoizedRankingData}
                             currentUserId={currentUserId}
                             setCurrentUserId={setCurrentUserId}
                         />
-                        {/* )} */}
                     </S.SmallContainer>
                     {/*개별 유저 데이터 보여주는 right section*/}
                     <RankDetail
@@ -120,7 +104,6 @@ const Rank = ({ isMyData }) => {
                         getRankingList={getRankingList}
                         setLoading={setLoading}
                         loading={loading}
-                        currentUser={currentUser}
                         rankLoading={rankLoading}
                         getDetailData={getDetailData}
                     />

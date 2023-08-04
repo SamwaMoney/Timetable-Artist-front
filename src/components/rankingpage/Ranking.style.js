@@ -74,7 +74,7 @@ S.NewButton = styled(NewButton)`
 `;
 
 M.NewButton = styled(NewButton)`
-    margin-top: 10vw;
+    margin-top: 22vw;
     padding: 4vw;
     border-radius: 10vw;
     font-size: 4vw;
@@ -613,8 +613,8 @@ S.FlexContainer = styled.div`
 
 //시간표 목업 사진
 S.TimeTable = styled.img`
-    width: 95%;
-    height: 30vw;
+    width: 80%;
+    height: ${props => (props.height ? `${props.height}vw` : '30vw')};
     background-color: #888;
     border: 0.05rem solid black;
     margin-top: 0.8rem;

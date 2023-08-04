@@ -10,13 +10,11 @@ import { useSelector } from 'react-redux';
 const MyScore = ({ isMobile, datas }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const sort = searchParams.get('sort') || 'LOWEST';
-    const [myRankingData, setMyRankingData] = useState();
     const [myScore, setMyScore] = useState();
     const [myRanking, setMyRanking] = useState();
     const timetableId = localStorage.getItem('tableId') || -1;
     //리덕스
-    // const score = useSelector(state => state.myInfoReducer);
-    // console.log(score);
+    const score = useSelector(state => state.myInfoReducer);
 
     //내 점수랑 랭킹 업데이트
     useEffect(() => {
@@ -32,16 +30,14 @@ const MyScore = ({ isMobile, datas }) => {
         }
     }, [sort, datas, timetableId]);
 
-    useEffect(() => {
-        console.log('myScore', myScore);
-    }, [myScore]);
-
     return isMobile ? (
         <M.MyScoreWrapper>
             <M.MyScoreContainer>
                 <S.FlexBox>
                     <M.Text>내 점수</M.Text>
-                    {myScore && <M.RankText>{myScore}점</M.RankText>}
+                    {myScore && (
+                        <M.RankText>{score?.myScore || myScore}점</M.RankText>
+                    )}
                 </S.FlexBox>
                 <S.FlexBox>
                     <M.Text>내 랭킹</M.Text>
@@ -53,7 +49,9 @@ const MyScore = ({ isMobile, datas }) => {
         <S.MyScoreContainer>
             <S.FlexBox>
                 <S.Text>내 점수</S.Text>
-                {myScore && <S.RankText>{myScore}점</S.RankText>}
+                {myScore && (
+                    <S.RankText>{score.myScore || myScore}점</S.RankText>
+                )}
             </S.FlexBox>
             <S.FlexBox>
                 <S.Text>내 랭킹</S.Text>

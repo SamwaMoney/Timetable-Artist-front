@@ -1,4 +1,5 @@
 import { S, M } from './Ranking.style';
+import { SK } from '../../skeleton/skeleton.style';
 import { useSearchParams } from 'react-router-dom';
 import LikeBtn from './rightSection/LikeBtn';
 import CmtTag from './rightSection/CmtTag';
@@ -76,8 +77,8 @@ const MRankDetail = () => {
                             </M.CategoryContainer>
                         </M.UserInfo>
                     </M.RankContainer>
-                    <S.TimeTable src={currentUser?.imgUrl} alt='사진' />
-                    {/* <M.TimeTable src={Timetable} alt='사진' /> */}
+
+                    <S.TimeTable height={110} src={currentUser?.imgUrl} />
                     <M.DetailBtnContainer>
                         <LikeBtn
                             isMobile={true}
@@ -87,8 +88,6 @@ const MRankDetail = () => {
                         />
                         <CmtTag isMobile={true} number={commentNum} />
                     </M.DetailBtnContainer>
-                    {/*뎃글 적는 인풋창 */}
-                    {/* <NewComment isMobile={true} currentUserId={timetableId} /> */}
                     <CommentList
                         isMobile={true}
                         currentUserId={timetableId}

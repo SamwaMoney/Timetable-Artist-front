@@ -7,8 +7,13 @@ import { useLocation } from 'react-router-dom';
 //내가 하트를 누른 상태이면 해당 isLike가 true여야 함.
 //시간표
 const LikeBtn = ({ isMobile, timetableId, currentUser, getRankingList }) => {
-    const [isLike, setIsLike] = useState(currentUser?.liked);
-    const [likeNum, setLikeNum] = useState(currentUser?.likeCount);
+    const [isLike, setIsLike] = useState();
+    const [likeNum, setLikeNum] = useState();
+
+    useEffect(() => {
+        setLikeNum(currentUser?.likeCount);
+        setIsLike(currentUser?.liked);
+    }, [currentUser]);
 
     const location = useLocation();
     const params = new URLSearchParams(location.search);

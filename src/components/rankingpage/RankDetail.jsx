@@ -5,26 +5,46 @@ import CommentList from './rightSection/CommentList';
 import CmtTag from './rightSection/CmtTag';
 import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { SK } from '../../skeleton/skeleton.style';
+import TimeTable from '../createpage/TimeTable';
+
 const RankDetail = ({
     memberId,
     currentUserId,
     getRankingList,
-    currentUser,
+    setLoading,
+    // currentUser,
     loading,
     rankLoading,
     getDetailData,
 }) => {
+    const [currentUser, setCurrentUser] = useState();
     const [commentNum, setCommentNum] = useState();
+
+    useEffect(() => {
+        setCommentNum();
+        setCurrentUser();
+        const fetchDetailData = async timetableId => {
+            const res = await getDetailData(timetableId, memberId);
+            setCurrentUser(res?.data);
+        };
+        fetchDetailData(currentUserId);
+        setLoading(false);
+    }, [currentUserId]);
+
+    useEffect(() => {
+        console.log('currentUserId', currentUserId);
+        setLoading(false);
+    }, [currentUser]);
+
     console.log('imgUrl', currentUser?.photo);
     return loading || rankLoading ? (
         <RightSectionSkeleton />
     ) : (
         <S.SmallContainer>
             <RankUserInfo data={currentUser} loading={loading} />
-            <S.TimeTable src={Timetable} />
-            {/* <S.TimeTable src={currentUser?.photo} alt='사진' /> */}
-            {/*버튼 컨테이너*/}
+            <S.TimeTable src={currentUser?.imgUrl || Timetable} />
             <S.ButtonContainer>
                 <LikeBtn
                     currentUser={currentUser}
