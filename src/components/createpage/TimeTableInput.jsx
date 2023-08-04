@@ -1,7 +1,7 @@
 import { S } from './TimeTableInput.style';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSelectedData } from '../../reducer/action';
+import { addSelectedData, resetSelectedData } from '../../reducer/action';
 import add_course from '../../assets/createpage/add_course.png';
 import subtract_course from '../../assets/createpage/subtract_course.png';
 import DateTimeDropdown from './DateTimeDropdown';
@@ -16,7 +16,7 @@ import { TimeResetObj } from '../../utils/time-helper';
 import { CreateClasses, CreateTable } from '../../api/timetables';
 import { useNavigate } from 'react-router-dom';
 
-const TimeTableInput = () => {
+const TimeTableInput = ({ setIsLoading }) => {
     // dropdown open 여부
     const [isOpen, setIsOpen] = useState([false, false, false]);
     const [isSecondOpen, setIsSecondOpen] = useState([false, false, false]);
@@ -184,13 +184,15 @@ const TimeTableInput = () => {
 
     // 시간표 완성 버튼 클릭 시 제출하는 함수
     const handleSubmitClassData = async () => {
-        console.log('시간표 완성');
 
         // 만약 수업 개수가 없으면 강의가 없습니다 alert 띄우기
         if (timetableData.length <= 0) {
             alert('현재 추가된 강의가 없습니다. 강의를 추가해주세요!');
             return;
         }
+
+        setIsLoading(true);
+
         // memberId, timetableId 받아오기
         const memberId = localStorage.getItem('memberId');
         const timeTableId = await CreateTable();
@@ -231,14 +233,16 @@ const TimeTableInput = () => {
             return newClassData;
         });
 
-        console.log(finalTimeTableData);
-
         // post
         const res = await CreateClasses(finalTimeTableData);
 
         // post 성공 시 결과 페이지로 이동
         if (res.status === 200 || res.status === 201) {
+            setIsLoading(false);
+            dispatch(resetSelectedData());
             navigate('/score');
+        } else {
+            alert("수업 생성 오류가 발생하였습니다");
         }
     };
 
