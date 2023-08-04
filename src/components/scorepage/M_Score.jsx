@@ -12,7 +12,6 @@ import {
     ScoreTable,
     UploadTable,
 } from '../../api/scores';
-import { CreateTable } from '../../api/timetables';
 
 import Timetable from '../createpage/TimeTable';
 import M_ScoreLoading from '../_common/M_ScoreLoading';
@@ -407,7 +406,6 @@ const M_Score = () => {
                             <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
                             <S.Button
                                 onClick={() => {
-                                    CreateTable();
                                     navigate('/create');
                                 }}
                             >

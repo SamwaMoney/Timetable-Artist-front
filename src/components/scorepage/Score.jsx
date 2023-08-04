@@ -12,10 +12,8 @@ import {
     ScoreTable,
     UploadTable,
 } from '../../api/scores';
-import { CreateTable } from '../../api/timetables';
 
 import Timetable from '../createpage/TimeTable';
-import Loading from '../_common/Loading';
 import ScoreLoading from '../_common/ScoreLoading';
 import sharing_icon from '../../assets/scorepage/sharing_option.svg';
 import sharing_none from '../../assets/scorepage/sharing_none.svg';
@@ -418,7 +416,6 @@ const Score = () => {
                             <S.NoDataText>아직 시간표가 없어요!</S.NoDataText>
                             <S.Button
                                 onClick={() => {
-                                    CreateTable();
                                     navigate('/create');
                                 }}
                             >
