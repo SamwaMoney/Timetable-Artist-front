@@ -93,8 +93,8 @@ reducer
 skeleton
 store
 style
-common.css
-global.js
+  |_common.css
+  |_global.js
 utils
  |_time - helper.js
  |_picker - options.js
