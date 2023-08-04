@@ -157,8 +157,7 @@ const TimeTableContainer = styled.div`
     `
        align-items: stretch;
        height: 55%;
-       border: 0px;
-       width: 90%;
+       width: 95vw;
     `}
 
     &.isScorePage {
@@ -212,6 +211,7 @@ const TableText = styled.div`
     margin-right: auto;
 
     width: 1.5vw;
+    text-align: center;
 
     ${isMobile &&
     `
