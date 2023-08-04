@@ -81,7 +81,7 @@ S.DescTimeText = styled(S.DescText)`
 
 // PlaceDropdown
 S.DropdownDiv = styled.div`
-    width: 14.45rem;
+    width: 100%;
     height: ${props => (props.isopen ? '10rem' : '2rem')};
 
     border-radius: ${props => (props.isopen ? '18px' : '28px')};
