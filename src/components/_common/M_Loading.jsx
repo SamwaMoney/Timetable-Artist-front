@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FlexCenter } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
-// ٩( ᐛ )و  ◡
+
 const MLoading = props => {
     const emogi = '٩( ᐛ )و';
     const [isFlipped, setIsFlipped] = useState(false);
@@ -9,7 +9,7 @@ const MLoading = props => {
     useEffect(() => {
         const timeoutId = setInterval(() => {
             setIsFlipped(prev => !prev);
-        }, 1000); // 1초 뒤에 반전 클래스를 제거합니다.
+        }, 1000);
 
         return () => {
             clearTimeout(timeoutId);
@@ -69,7 +69,7 @@ const waviyAnimation = keyframes`
     transform: translateY(0);
   }
   20% {
-    transform: translateY(-6vw);
+    transform: translateY(-4vw);
   }
 `;
 

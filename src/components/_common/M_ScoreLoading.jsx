@@ -1,12 +1,28 @@
 import React from 'react';
 import { FlexCenter, S } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
+import { useEffect, useState } from 'react';
 // ٩( ᐛ )و  ◡
 const MLoading = () => {
+    const emogi = ['〆(･⌄･;)', '_〆(･⌄･;)', '__〆(･⌄･;)'];
+    const [time, setTime] = useState(0);
+    useEffect(() => {
+        const timeoutId = setInterval(() => {
+            if (time === 2) {
+                setTime(0);
+            } else {
+                setTime(prev => prev + 1);
+            }
+        }, 1000); // 1초 뒤에 반전 클래스를 제거합니다.
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [time]);
+
     return (
         <Wrapper>
             <LoadingWrapper>
-                <Emoticon> __〆(･⌄･;) </Emoticon>
+                <Emoticon>{emogi[time]}</Emoticon>
 
                 <div className='waviy'>
                     <Waviy style={{ '--i': 1 }}>시</Waviy>
@@ -53,7 +69,7 @@ const LoadingWrapper = styled.div`
 `;
 
 const Emoticon = styled.div`
-    font-size: 8vw;
+    font-size: 7vw;
     padding-bottom: 12vw;
 `;
 

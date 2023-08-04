@@ -1,4 +1,5 @@
 import { S, M } from './Ranking.style';
+import { SK } from '../../skeleton/skeleton.style';
 import { useSearchParams } from 'react-router-dom';
 import LikeBtn from './rightSection/LikeBtn';
 import CmtTag from './rightSection/CmtTag';
@@ -76,6 +77,7 @@ const MRankDetail = () => {
                             </M.CategoryContainer>
                         </M.UserInfo>
                     </M.RankContainer>
+
                     <S.TimeTable height={110} src={currentUser?.imgUrl} />
                     <M.DetailBtnContainer>
                         <LikeBtn

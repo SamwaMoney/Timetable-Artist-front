@@ -6,6 +6,9 @@ import CmtTag from './rightSection/CmtTag';
 import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
+import { SK } from '../../skeleton/skeleton.style';
+import TimeTable from '../createpage/TimeTable';
+
 const RankDetail = ({
     memberId,
     currentUserId,
@@ -41,9 +44,7 @@ const RankDetail = ({
     ) : (
         <S.SmallContainer>
             <RankUserInfo data={currentUser} loading={loading} />
-            {/* <S.TimeTable src={Timetable} /> */}
-            <S.TimeTable src={currentUser?.imgUrl} alt='사진' />
-            {/*버튼 컨테이너*/}
+            <S.TimeTable src={currentUser?.imgUrl || Timetable} />
             <S.ButtonContainer>
                 <LikeBtn
                     currentUser={currentUser}

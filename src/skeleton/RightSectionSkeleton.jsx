@@ -7,7 +7,7 @@ const RightSectionSkeleton = () => {
                 <SK.RankNum height={4} width={5} />
                 <SK.UserInfo height={4} />
             </SK.RankContainer>
-            <SK.TimaTableImg height={30} />
+            <SK.TimaTableImg height={110} />
         </SK.SmallContainer>
     );
 };
