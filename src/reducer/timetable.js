@@ -1,4 +1,8 @@
-import { ADD_SELECTED_DATA, DELETE_SELECTED_DATA } from './action';
+import {
+    ADD_SELECTED_DATA,
+    DELETE_SELECTED_DATA,
+    RESET_SELECTED_DATA,
+} from './action';
 
 const initialState = {
     selectedData: [], // 빈 배열로 초기화
@@ -16,8 +20,13 @@ const timeTableReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedData: state.selectedData.filter(
-                    lecture => lecture.className !== lectureNameToDelete,
+                    lecture => lecture.className !== lectureNameToDelete, // 삭제할 데이터 이름과 비교하여 삭제
                 ),
+            };
+        case RESET_SELECTED_DATA:
+            return {
+                ...state,
+                selectedData: [], // 빈 배열로 초기화
             };
         default:
             return state;

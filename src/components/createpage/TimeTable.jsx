@@ -70,8 +70,6 @@ const TimeTable = ({ isScorePage, isHidden, classList }) => {
           })
         : [];
 
-    console.log(scorePageClassData);
-
     return (
         <TimeTableContainer
             className={isScorePage === true ? 'isScorePage' : ''}
