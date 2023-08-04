@@ -189,6 +189,7 @@ const TimeCell = styled.td`
 
     background-color: var(--background);
     text-align: center;
+    width: 1.5vw;
 
     ${isMobile &&
     `
