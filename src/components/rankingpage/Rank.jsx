@@ -53,6 +53,12 @@ const Rank = ({ isLogin }) => {
         }
     }, [rankLoading, rankingData]);
 
+    useEffect(() => {
+        if (loading && rankingData) {
+            setLoading(false);
+        }
+    }, [loading, rankingData]);
+
     const memoizedRankingData = useMemo(() => rankingData, [rankingData]);
 
     return (
