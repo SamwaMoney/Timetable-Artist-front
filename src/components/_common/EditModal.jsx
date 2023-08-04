@@ -10,7 +10,7 @@ const EditModal = ({ setIsEditModalOpen }) => {
     const handleCheckClick = async () => {
         const tableId = localStorage.getItem('tableId');
         const res = await DeleteTable(tableId);
-        if (res.status === 200) {
+        if (res?.status === 200) {
             CreateTable();
             setIsEditModalOpen(false);
             navigate('/create');
