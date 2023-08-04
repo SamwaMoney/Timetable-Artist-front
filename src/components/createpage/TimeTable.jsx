@@ -83,7 +83,7 @@ const TimeTable = ({ isScorePage, isHidden, classList }) => {
                         ))}
                     </tr>
                 </thead>
-                <tbody style={{ backgroundColor: 'white' }}>
+                <tbody>
                     {timeSlots.map((timeSlot, index) => (
                         <tr key={timeSlot}>
                             <TimeCell
