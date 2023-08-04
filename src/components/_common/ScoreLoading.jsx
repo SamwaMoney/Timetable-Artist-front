@@ -2,8 +2,9 @@ import React from 'react';
 import { FlexCenter, S } from '../rankingpage/Ranking.style';
 import styled, { keyframes } from 'styled-components';
 import { useEffect, useState } from 'react';
+
 // ٩( ᐛ )و  ◡
-const MLoading = () => {
+const ScoreLoading = () => {
     const emogi = ['〆(･⌄･;)', '_〆(･⌄･;)', '__〆(･⌄･;)'];
     const [time, setTime] = useState(0);
     useEffect(() => {
@@ -13,22 +14,22 @@ const MLoading = () => {
             } else {
                 setTime(prev => prev + 1);
             }
-        }, 1000);
+        }, 1000); // 1초 뒤에 반전 클래스를 제거합니다.
         return () => {
             clearTimeout(timeoutId);
         };
     }, [time]);
 
     return (
-        <Wrapper>
+        <S.Container>
             <LoadingWrapper>
-                <Emoticon>{emogi[time]}</Emoticon>
+                <Emogi>{emogi[time]}</Emogi>
 
-                <div className='waviy'>
+                <Text className='waviy'>
                     <Waviy style={{ '--i': 1 }}>시</Waviy>
                     <Waviy style={{ '--i': 2 }}>간</Waviy>
                     <Waviy style={{ '--i': 3 }}>표</Waviy>
-                    <span style={{ marginLeft: '3vw' }}></span>
+                    <span style={{ marginLeft: '0.7vw' }}></span>
                     <Waviy style={{ '--i': 5 }} color='red'>
                         채
                     </Waviy>
@@ -38,7 +39,7 @@ const MLoading = () => {
                     <Waviy style={{ '--i': 7 }} color='red'>
                         중
                     </Waviy>
-                    <span style={{ marginLeft: '3vw' }}></span>
+                    <span style={{ marginLeft: '0.7vw' }}></span>
                     <Waviy style={{ '--i': 10 }}>입</Waviy>
                     <Waviy style={{ '--i': 11 }}>니</Waviy>
                     <Waviy style={{ '--i': 12 }}>다</Waviy>
@@ -48,29 +49,33 @@ const MLoading = () => {
                     <Waviy style={{ '--i': 16 }}>.</Waviy>
                     <span style={{ marginLeft: '5px' }}></span>
                     <Waviy style={{ '--i': 18 }}>.</Waviy>
-                </div>
+                </Text>
             </LoadingWrapper>
-        </Wrapper>
+        </S.Container>
     );
 };
 
-export default MLoading;
+export default ScoreLoading;
 
-const Wrapper = styled.div`
+const Emogi = styled.div`
+    font-size: 2rem;
+    padding-bottom: 5rem;
+    &.flipped {
+        transform: scaleX(-1);
+    }
+`;
+
+const LoadingWrapper = styled.div`
     width: 100%;
     height: 100%;
-`;
-const LoadingWrapper = styled.div`
-    height: 100vh;
-    width: 100%;
+    border: 0.1rem solid black;
     background: linear-gradient(to bottom, #e2e2e2, var(--green));
     ${FlexCenter}
-    flex-direction: column;
+    flex-direction:column;
 `;
 
-const Emoticon = styled.div`
-    font-size: 7vw;
-    padding-bottom: 12vw;
+const Text = styled.div`
+    letter-spacing: 2px;
 `;
 
 const waviyAnimation = keyframes`
@@ -78,17 +83,17 @@ const waviyAnimation = keyframes`
     transform: translateY(0);
   }
   20% {
-    transform: translateY(-4vw);
+    transform: translateY(-15px);
   }
 `;
 
 const Waviy = styled.span`
-    font-size: 5vw;
-    font-weight: 500;
+    font-size: 1.5rem;
     position: relative;
     display: inline-block;
     color: ${props => props.color || '#000'};
     text-transform: uppercase;
-    animation: ${waviyAnimation} 4.6s infinite;
+    animation: ${waviyAnimation} 4s infinite;
     animation-delay: calc(0.1s * var(--i));
+    padding: 1px;
 `;

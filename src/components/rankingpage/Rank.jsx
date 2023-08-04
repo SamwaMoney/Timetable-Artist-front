@@ -9,6 +9,7 @@ import RankingApis from '../../api/ranking';
 import Loading from '../_common/Loading';
 import RankDetail from './RankDetail';
 import { useLocation } from 'react-router-dom';
+import ScoreLoading from '../_common/ScoreLoading';
 
 const Rank = ({ isLogin }) => {
     const location = useLocation();
