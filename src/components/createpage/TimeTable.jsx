@@ -63,8 +63,8 @@ const TimeTable = ({ isScorePage, isHidden, classList }) => {
               newClassData.endTime = `${newClassData.endH}:${newClassData.endM}`;
 
               // 배경색 추가
-              newClassData.backgroundColor =
-                  CLASS_BLOCK_COLOR[index >= 8 ? index - 8 : index];
+              //   newClassData.bgColor =
+              //       CLASS_BLOCK_COLOR[index >= 8 ? index - 8 : index];
 
               return newClassData;
           })

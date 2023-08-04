@@ -68,7 +68,7 @@ const TimeTableCell = ({
                             parseFloat(timeData.startTime)) *
                         2
                     }
-                    style={{ backgroundColor: timeData.backgroundColor }}
+                    style={{ backgroundColor: timeData.bgColor }}
                     className='selected'
                     onClick={() => {
                         setIsDeleteModalOpen(true);
