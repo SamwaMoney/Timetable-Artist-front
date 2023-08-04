@@ -10,6 +10,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CreateClasses, CreateTable } from '../../api/timetables';
 import { useNavigate } from 'react-router-dom';
 
+import M_ScoreLoading from '../_common/M_ScoreLoading';
+import { resetSelectedData } from '../../reducer/action';
+
 const MCreateTimeTable = () => {
     const nickname = localStorage.getItem('username');
 
@@ -24,6 +27,9 @@ const MCreateTimeTable = () => {
         setIsResetModalOpen(true);
     };
 
+    // 로딩 중 표시 여부
+    const [isLoading, setIsLoading] = useState(false);
+
     // redux에 있는 시간표 데이터. 시간표 완성 시 사용
     const timetableData = useSelector(
         state => state.timeTableReducer,
@@ -32,15 +38,19 @@ const MCreateTimeTable = () => {
     // navigate
     const navigate = useNavigate();
 
+    // dispatch
+    const dispatch = useDispatch();
+
     // 시간표 완성 버튼 클릭 시 제출하는 함수
     const handleSubmitClassData = async () => {
-        console.log('시간표 완성');
-
         // 만약 수업 개수가 없으면 강의가 없습니다 alert 띄우기
         if (timetableData.length <= 0) {
             alert('현재 추가된 강의가 없습니다. 강의를 추가해주세요!');
             return;
         }
+
+        setIsLoading(true);
+
         // memberId, timetableId 받아오기
         const memberId = localStorage.getItem('memberId');
         const timeTableId = await CreateTable();
@@ -86,54 +96,71 @@ const MCreateTimeTable = () => {
 
         // post 성공 시 결과 페이지로 이동
         if (res.status === 200 || res.status === 201) {
+            setIsLoading(false);
+            dispatch(resetSelectedData());
             navigate('/score');
+        } else {
+            alert('수업 생성 오류가 발생하였습니다');
         }
     };
 
     return (
         <>
-            <S.MWrapper>
-                <MHamburgerButton />
-                <S.MInnerContainer>
-                    <S.MButtonDiv className={isModalOpen ? 'delete' : ''}>
-                        <S.MResetBtn onClick={handleResetModal}>
-                            초기화
-                        </S.MResetBtn>
-                        <S.MCompleteBtn onClick={handleSubmitClassData}>
-                            완성
-                        </S.MCompleteBtn>
-                    </S.MButtonDiv>
-                    <S.MTimeTableText className={isModalOpen ? 'delete' : ''}>
-                        <S.MNicknameText>{nickname}</S.MNicknameText>의 시간표
-                    </S.MTimeTableText>
+            {isLoading ? (
+                <S.MLoadingWrapper>
+                    <M_ScoreLoading />
+                </S.MLoadingWrapper>
+            ) : (
+                <>
+                    <S.MWrapper>
+                        <MHamburgerButton />
+                        <S.MInnerContainer>
+                            <S.MButtonDiv
+                                className={isModalOpen ? 'delete' : ''}
+                            >
+                                <S.MResetBtn onClick={handleResetModal}>
+                                    초기화
+                                </S.MResetBtn>
+                                <S.MCompleteBtn onClick={handleSubmitClassData}>
+                                    완성
+                                </S.MCompleteBtn>
+                            </S.MButtonDiv>
+                            <S.MTimeTableText
+                                className={isModalOpen ? 'delete' : ''}
+                            >
+                                <S.MNicknameText>{nickname}</S.MNicknameText>의
+                                시간표
+                            </S.MTimeTableText>
 
-                    <TimeTable
-                        isScorePage={false}
-                        isHidden={false}
-                        classList={null}
-                    />
+                            <TimeTable
+                                isScorePage={false}
+                                isHidden={false}
+                                classList={null}
+                            />
 
-                    <S.MAddButtonDiv>
-                        <S.MAddButton
-                            src={add_timetable}
-                            alt='+버튼'
-                            onClick={() => {
-                                setIsModalOpen(true);
-                            }}
+                            <S.MAddButtonDiv>
+                                <S.MAddButton
+                                    src={add_timetable}
+                                    alt='+버튼'
+                                    onClick={() => {
+                                        setIsModalOpen(true);
+                                    }}
+                                />
+                            </S.MAddButtonDiv>
+                        </S.MInnerContainer>
+                    </S.MWrapper>
+                    {isModalOpen && (
+                        <MTimeTableInputModal
+                            isModalOpen={isModalOpen}
+                            setIsModalOpen={setIsModalOpen}
+                            colorIndex={colorIndex}
+                            setColorIndex={setColorIndex}
                         />
-                    </S.MAddButtonDiv>
-                </S.MInnerContainer>
-            </S.MWrapper>
-            {isModalOpen && (
-                <MTimeTableInputModal
-                    isModalOpen={isModalOpen}
-                    setIsModalOpen={setIsModalOpen}
-                    colorIndex={colorIndex}
-                    setColorIndex={setColorIndex}
-                />
-            )}
-            {isResetModalOpen && (
-                <ResetModal setIsResetModalOpen={setIsResetModalOpen} />
+                    )}
+                    {isResetModalOpen && (
+                        <ResetModal setIsResetModalOpen={setIsResetModalOpen} />
+                    )}
+                </>
             )}
         </>
     );
