@@ -31,11 +31,6 @@ const RankDetail = ({
         setLoading(false);
     }, [currentUserId]);
 
-    // useEffect(() => {
-    //     console.log('currentUserId', currentUserId);
-    //     setLoading(false);
-    // }, [currentUser]);
-
     return loading || rankLoading ? (
         <RightSectionSkeleton />
     ) : (
