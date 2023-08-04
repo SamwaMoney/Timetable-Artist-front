@@ -100,3 +100,10 @@ github /
 notion /
 pigma /
 prettier
+
+<h3> ⭐️ 기능 설명 </h3>
+<h4>Auth: 회원가입, 로그인 </h4>
+<h4>Create: 시간표 생성 </h4>
+<h4>Score: 시간표 채점 </h4>
+<h4>Rank: 랭킹보드 보기 </h4>
+<h4></h4>
