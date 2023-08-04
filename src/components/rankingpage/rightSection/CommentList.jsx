@@ -140,6 +140,7 @@ const MCommentContainer = styled.div`
 const MNoComment = styled.div`
     text-align: center;
     margin-top: 10vw;
+    margin-bottom: 5vw;
 `;
 
 const SNoComment = styled.div`

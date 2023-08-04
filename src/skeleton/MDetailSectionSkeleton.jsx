@@ -1,11 +1,11 @@
 import { SK } from './skeleton.style';
-import MCommentSkeleton from './MCommentSkeleton';
+
 const MDetailSectionSkeleton = () => {
     return (
         <div
             style={{
                 backgroundColor: 'var(--background)',
-                height: '100vh',
+                minHeight: '100vh',
                 width: '100vw',
             }}
         >
