@@ -48,7 +48,7 @@ const M_Score = () => {
     const [isRankingModalOpen, setRankingModalOpen] = useState(false);
     const [isUploaded, setIsUploaded] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [isHidden, setIsHidden] = useState(true);
+    const [isHidden, setIsHidden] = useState(false);
 
     const mainURL = window.location.href.slice(0, -5);
     const status = useScript('https://developers.kakao.com/sdk/js/kakao.js');

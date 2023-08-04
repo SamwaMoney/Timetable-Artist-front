@@ -47,7 +47,7 @@ const Score = () => {
     const [isRankingModalOpen, setRankingModalOpen] = useState(false);
     const [isUploaded, setIsUploaded] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [isHidden, setIsHidden] = useState(true);
+    const [isHidden, setIsHidden] = useState(false);
     const [height, setHeight] = useState('70%');
     const [width, setWidth] = useState('70%');
 
