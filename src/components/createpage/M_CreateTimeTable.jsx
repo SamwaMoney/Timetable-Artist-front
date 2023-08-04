@@ -7,7 +7,7 @@ import MTimeTableInputModal from './M_TimeTableInputModal';
 import ResetModal from '../_common/ResetModal';
 
 import { useSelector } from 'react-redux';
-import { CreateClasses } from '../../api/timetables';
+import { CreateClasses, CreateTable } from '../../api/timetables';
 import { useNavigate } from 'react-router-dom';
 
 const MCreateTimeTable = () => {
@@ -43,7 +43,7 @@ const MCreateTimeTable = () => {
         }
         // memberId, timetableId 받아오기
         const memberId = localStorage.getItem('memberId');
-        const timeTableId = localStorage.getItem('tableId');
+        const timeTableId = await CreateTable();
 
         // - 반복문 돌면서 memberId, timetableId 추가, startTime, endTime 시간과 분 분리, startTime, endTime 삭제
         const finalTimeTableData = timetableData.map(classData => {
@@ -90,7 +90,6 @@ const MCreateTimeTable = () => {
         }
     };
 
-
     return (
         <>
             <S.MWrapper>
@@ -100,7 +99,9 @@ const MCreateTimeTable = () => {
                         <S.MResetBtn onClick={handleResetModal}>
                             초기화
                         </S.MResetBtn>
-                        <S.MCompleteBtn onClick={handleSubmitClassData}>완성</S.MCompleteBtn>
+                        <S.MCompleteBtn onClick={handleSubmitClassData}>
+                            완성
+                        </S.MCompleteBtn>
                     </S.MButtonDiv>
                     <S.MTimeTableText className={isModalOpen ? 'delete' : ''}>
                         <S.MNicknameText>{nickname}</S.MNicknameText>의 시간표
