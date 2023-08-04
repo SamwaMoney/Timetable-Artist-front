@@ -22,8 +22,8 @@ const refreshHTTP = axios.create({
 refreshHTTP.defaults.withCredentials = true;
 
 // axios request 대한 interceptors 토큰 만료 확인
-http.interceptors.request.use(
-    async config => {
+http.interceptors.request.use(async config => {
+    try {
         const refreshToken = localStorage.getItem('refreshToken');
         const expireAt = localStorage.getItem('expireAt');
         let accessToken = localStorage.getItem('accessToken');
@@ -44,12 +44,11 @@ http.interceptors.request.use(
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
-    },
-    async error => {
-        // ex) refreshToken이 만료된 경우
-        console.log('리프레시 에러', error);
+    } catch (err) {
+        console.log('리프레시 에러', err);
         localStorage.clear();
+        alert('토큰이 만료되었습니다.\n다시 로그인해 주세요.');
         window.location.reload();
-        return Promise.reject(error);
-    },
-);
+        return Promise.reject(err);
+    }
+});
