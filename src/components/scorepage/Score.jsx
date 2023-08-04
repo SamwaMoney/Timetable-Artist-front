@@ -42,7 +42,7 @@ import { addMyScore } from '../../reducer/action';
 const Score = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isScored, setIsScored] = useState(true);
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
     const [timetableId, setTimeTableId] = useState(null);
     const [isRankingModalOpen, setRankingModalOpen] = useState(false);
     const [isUploaded, setIsUploaded] = useState(false);
