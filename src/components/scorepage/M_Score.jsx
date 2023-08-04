@@ -85,6 +85,7 @@ const M_Score = () => {
     const onCapture = () => {
         html2canvas(document.getElementById('capture')).then(canvas => {
             let resultImg = canvas.toDataURL('image/png');
+            onSaveAs(resultImg, 'timetable-result.png');
         });
     };
 
@@ -136,7 +137,6 @@ const M_Score = () => {
     const onUploadBtnClick = async () => {
         const canvas = await html2canvas(document.getElementById('tableImage'));
         let timetableImg = canvas.toDataURL('image/png');
-        onSaveAs(timetableImg, 'time.png');
         timetableImg = await dataURLtoBlob(timetableImg);
 
         timetableImg = new File([timetableImg], `timetable_${memberId}.png`, {
