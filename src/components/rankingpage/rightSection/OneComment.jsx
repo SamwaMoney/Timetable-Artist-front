@@ -53,6 +53,7 @@ const OneComment = ({
                         replyLikeCount={replyLikeCount}
                         getCommentData={getCommentData}
                         timetableId={timetableId}
+                        memberId={memberId}
                     />
                 </M.IconContainer>
             </M.CommentInfo>

@@ -26,15 +26,21 @@ const SignUp = () => {
     // 아이디 입력 이벤트 핸들러
     const handleIdChange = e => {
         setId(e.target.value);
-        if (e.target.value.length < 4) setIdLengthCheck(true);
-        else setIdLengthCheck(false);
+        if (e.target.value.length < 4) {
+            setIdLengthCheck(true);
+        } else {
+            setIdLengthCheck(false);
+        }
     };
 
     // 비밀번호 입력 이벤트 핸들러
     const handlePwChange = e => {
         setPw(e.target.value);
-        if (e.target.value.length < 6) setPwLengthCheck(true);
-        else setPwLengthCheck(false);
+        if (e.target.value.length < 6) {
+            setPwLengthCheck(true);
+        } else {
+            setPwLengthCheck(false);
+        }
         setIsPwMatch(pwCheck === e.target.value);
     };
 

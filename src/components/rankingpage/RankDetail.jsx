@@ -3,7 +3,6 @@ import RankUserInfo from './rightSection/RankUserInfo';
 import LikeBtn from './rightSection/LikeBtn';
 import CommentList from './rightSection/CommentList';
 import CmtTag from './rightSection/CmtTag';
-import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
 import AltTableImg from '../../assets/_common/altTable.png';
@@ -13,7 +12,7 @@ const RankDetail = ({
     currentUserId,
     getRankingList,
     setLoading,
-    // currentUser,
+    setRankingData,
     loading,
     rankLoading,
     getDetailData,
@@ -32,10 +31,10 @@ const RankDetail = ({
         setLoading(false);
     }, [currentUserId]);
 
-    useEffect(() => {
-        console.log('currentUserId', currentUserId);
-        setLoading(false);
-    }, [currentUser]);
+    // useEffect(() => {
+    //     console.log('currentUserId', currentUserId);
+    //     setLoading(false);
+    // }, [currentUser]);
 
     return loading || rankLoading ? (
         <RightSectionSkeleton />
@@ -48,6 +47,7 @@ const RankDetail = ({
                     currentUser={currentUser}
                     timetableId={currentUserId}
                     getRankingList={getRankingList}
+                    setRankingData={setRankingData}
                 />
                 <CmtTag number={commentNum} />
             </S.ButtonContainer>

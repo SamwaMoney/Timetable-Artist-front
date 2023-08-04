@@ -104,7 +104,9 @@ const Rank = ({ isLogin }) => {
                         setLoading={setLoading}
                         loading={loading}
                         rankLoading={rankLoading}
+                        timetableId={timetableId}
                         getDetailData={getDetailData}
+                        setRankingData={setRankingData}
                     />
                 </S.Container>
             )}
