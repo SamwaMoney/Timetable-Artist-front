@@ -91,7 +91,7 @@ const TimeTableInput = () => {
                 endTime: null,
                 location: selectedPlace,
                 className: selectedClassName,
-                backgroundColor: null,
+                bgColor: null,
             };
 
             // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
@@ -103,7 +103,7 @@ const TimeTableInput = () => {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
                 className: selectedClassName,
-                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
+                bgColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             newData2 = {
@@ -111,7 +111,7 @@ const TimeTableInput = () => {
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
                 className: selectedClassName,
-                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
+                bgColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             //⭐️두개의 시간인풋의 시간이 겹치는지 확인하는 로직
@@ -148,7 +148,7 @@ const TimeTableInput = () => {
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
                 className: selectedClassName,
-                backgroundColor: CLASS_BLOCK_COLOR[countColorIndex],
+                bgColor: CLASS_BLOCK_COLOR[countColorIndex],
             };
 
             //⭐️시간 검사 로직
@@ -195,14 +195,14 @@ const TimeTableInput = () => {
         const memberId = localStorage.getItem('memberId');
         const timeTableId = localStorage.getItem('tableId');
 
-        // - 반복문 돌면서 memberId, timetableId 추가, 배경색 삭제, startTime, endTime 시간과 분 분리, startTime, endTime 삭제
+        // - 반복문 돌면서 memberId, timetableId 추가, startTime, endTime 시간과 분 분리, startTime, endTime 삭제
         const finalTimeTableData = timetableData.map(classData => {
             // 새로운 객체를 생성하여 원본 객체의 프로퍼티를 복사
             const newClassData = { ...classData };
 
             // memberId, timetableId 추가
             newClassData.memberId = parseInt(memberId, 10);
-            newClassData.timetable = timeTableId;
+            newClassData.timetable = parseInt(timeTableId, 10);
 
             // startTime에서 시간과 분 분리하여 숫자 형태로 프로퍼티 추가
             if (newClassData.startTime) {
@@ -213,7 +213,7 @@ const TimeTableInput = () => {
                 newClassData.startH = null;
                 newClassData.startM = null;
             }
-            
+
             // endTime에서 시간과 분 분리하여 숫자 형태로 프로퍼티 추가
             if (newClassData.endTime) {
                 const endTimeParts = newClassData.endTime.split(':');
@@ -224,10 +224,9 @@ const TimeTableInput = () => {
                 newClassData.endM = null;
             }
 
-            // startTime, endTime, backgroundColor 삭제
+            // startTime, endTime 삭제
             delete newClassData.startTime;
             delete newClassData.endTime;
-            delete newClassData.backgroundColor;
 
             return newClassData;
         });

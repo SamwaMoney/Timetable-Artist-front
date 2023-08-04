@@ -108,7 +108,7 @@ const MTimeTableInputModal = ({
                 endTime: null,
                 location: selectedPlace,
                 className: courseName,
-                backgroundColor: null,
+                bgColor: null,
             };
             // 액션을 디스패치하여 Redux Store의 selectedData 배열에 추가
             dispatch(addSelectedData(newData1));
@@ -118,14 +118,14 @@ const MTimeTableInputModal = ({
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
                 className: courseName,
-                backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
+                bgColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
             newData2 = {
                 ...plusSelectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
                 className: courseName,
-                backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
+                bgColor: CLASS_BLOCK_COLOR[colorIndex],
             };
 
             //두개의 시간인풋의 시간이 겹치는지 확인하는 로직
@@ -162,7 +162,7 @@ const MTimeTableInputModal = ({
                 ...selectedDateTime, //선택한 요일, 시작시간, 끝시간
                 location: selectedPlace,
                 className: courseName,
-                backgroundColor: CLASS_BLOCK_COLOR[colorIndex],
+                bgColor: CLASS_BLOCK_COLOR[colorIndex],
             };
             //시간 검사 로직
             if (
