@@ -11,13 +11,29 @@ const TabContainer = ({ isMobile }) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     /*정렬 기준대로 쿼리스트링을 바꿔줌*/
-    const onMoveSortPage = e => {
-        const { innerText } = e.target;
-        if (innerText === '최악의 시간표') {
-            searchParams.set('sort', 'LOWEST');
-            searchParams.set('rank', 1);
-        } else if (innerText === '최고의 시간표') {
+    // const onMoveSortPage = e => {
+    //     const { innerText } = e.target;
+    //     console.log(innerText);
+    //     if (innerText === '최악의 시간표') {
+    //         searchParams.set('sort', 'LOWEST');
+    //         searchParams.set('rank', 1);
+    //     } else if (innerText === '최고의 시간표') {
+    //         searchParams.set('sort', 'HIGHEST');
+    //         searchParams.set('rank', 1);
+    //     } else {
+    //         searchParams.set('sort', 'LIKE');
+    //         searchParams.set('rank', 1);
+    //     }
+    //     setSearchParams(searchParams);
+    // };
+
+    const onMoveSortPage = sortValue => {
+        console.log(sortValue);
+        if (sortValue === 'HIGHEST') {
             searchParams.set('sort', 'HIGHEST');
+            searchParams.set('rank', 1);
+        } else if (sortValue === 'LOWEST') {
+            searchParams.set('sort', 'LOWEST');
             searchParams.set('rank', 1);
         } else {
             searchParams.set('sort', 'LIKE');
@@ -30,17 +46,20 @@ const TabContainer = ({ isMobile }) => {
         <M.TabContainer>
             <M.Tab
                 currentSort={sort}
-                onClick={e => {
-                    onMoveSortPage(e);
-                }}
+                onClick={() =>
+                    onMoveSortPage(sort !== 'HIGHEST' ? 'LOWEST' : 'HIGHEST')
+                }
             >
-                {sort !== 'HIGHEST' ? '최악의 시간표' : '최고의 시간표'}
+                {sort !== 'HIGHEST' ? (
+                    <span style={{ color: 'var(--red)' }}>최악</span>
+                ) : (
+                    <span style={{ color: 'var(--blue)' }}>최고</span>
+                )}
+                <span>의 시간표</span>
             </M.Tab>
             <M.LikeTab
                 currentSort={sort}
-                onClick={e => {
-                    onMoveSortPage(e);
-                }}
+                onClick={() => onMoveSortPage('LIKE')}
             >
                 인기 시간표
             </M.LikeTab>
@@ -48,17 +67,24 @@ const TabContainer = ({ isMobile }) => {
     ) : (
         <S.TabContainer>
             <S.Tab
-                onClick={e => {
-                    onMoveSortPage(e);
-                }}
+                onClick={() =>
+                    onMoveSortPage(sort !== 'HIGHEST' ? 'LOWEST' : 'HIGHEST')
+                }
                 currentSort={sort}
             >
-                {sort !== 'HIGHEST' ? '최악의 시간표' : '최고의 시간표'}
+                {sort !== 'HIGHEST' ? (
+                    <span style={{ color: 'var(--red)', fontSize: '1vw' }}>
+                        최악
+                    </span>
+                ) : (
+                    <span style={{ color: 'var(--blue)', fontSize: '1vw' }}>
+                        최고
+                    </span>
+                )}
+                <span style={{ fontSize: '1vw' }}>의 시간표</span>
             </S.Tab>
             <S.LikeTab
-                onClick={e => {
-                    onMoveSortPage(e);
-                }}
+                onClick={() => onMoveSortPage('LIKE')}
                 currentSort={sort}
             >
                 인기 시간표

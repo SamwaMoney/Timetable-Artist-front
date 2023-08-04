@@ -21,45 +21,33 @@ const NewComment = ({
     const noNameBox = useRef();
 
     const onChangeText = e => {
+        console.log(e.target.value);
         setNewText(e.target.value);
     };
 
     //새로운 댓글 보내는 로직 (익명 프로퍼티 추가되야 함)
     const onSubmitNewComment = () => {
         if (!isSubmitting) {
-            console.log('안기다려');
             const newComment = {
                 tableId,
                 memberId,
                 content: newText,
                 nameHide: isNoName,
             };
-            updateComment(newComment);
-            setIsNoName(false);
-            noNameBox.current.checked = false;
+            updateComment(newComment).then(() => {
+                setIsNoName(false);
+                noNameBox.current.checked = false;
+            });
             setNewText('');
         } else {
-            console.log('기다려');
             alert('잠시만 기다려주세요!');
         }
     };
-
-    // useEffect(() => {
-    //     console.log('isSubmiting', isSubmitting);
-    //     setNewText('');
-    // }, [isSubmitting]);
 
     //익명 체크 이벤트 함수
     const onChangeChecked = e => {
         if (e.target.checked) {
             return setIsNoName(true);
-        }
-    };
-
-    //엔터 키 입력 시 강의 추가
-    const handleKeyDown = e => {
-        if (e.key === 'Enter' && !isSubmitting) {
-            onSubmitNewComment();
         }
     };
 
@@ -114,7 +102,6 @@ const NewComment = ({
                     placeholder='댓글 쓰기...'
                     onChange={onChangeText}
                     value={newText}
-                    onKeyDown={handleKeyDown}
                 />
             ) : (
                 <S.CommentDisabled>

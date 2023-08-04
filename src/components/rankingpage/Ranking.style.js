@@ -203,7 +203,7 @@ S.Tab = styled(Tab)`
 `;
 
 S.LikeTab = styled(Tab)`
-    font-size: 1rem;
+    font-size: 1vw;
     border-bottom: ${({ currentSort }) =>
         currentSort === 'LIKE' ? '5px solid black' : '2.5px solid black'};
 `;
@@ -290,7 +290,7 @@ M.Slider = styled(Slider)`
 `;
 
 S.ToggleText = styled.div`
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-left: 10px;
     color: black;
 `;
@@ -613,7 +613,7 @@ S.FlexContainer = styled.div`
 
 //시간표 목업 사진
 S.TimeTable = styled.img`
-    width: 80%;
+    width: 85%;
     height: ${props => (props.height ? `${props.height}vw` : '30vw')};
     background-color: #888;
     border: 0.05rem solid black;

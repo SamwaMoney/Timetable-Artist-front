@@ -6,8 +6,6 @@ import CmtTag from './rightSection/CmtTag';
 import Timetable from '../../assets/scorepage/timetable.png';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
-import { SK } from '../../skeleton/skeleton.style';
-import TimeTable from '../createpage/TimeTable';
 
 const RankDetail = ({
     memberId,
@@ -38,7 +36,6 @@ const RankDetail = ({
         setLoading(false);
     }, [currentUser]);
 
-    console.log('imgUrl', currentUser?.photo);
     return loading || rankLoading ? (
         <RightSectionSkeleton />
     ) : (

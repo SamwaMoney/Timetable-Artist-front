@@ -9,7 +9,6 @@ import RankingApis from '../../api/ranking';
 import Loading from '../_common/Loading';
 import RankDetail from './RankDetail';
 import { useLocation } from 'react-router-dom';
-import ScoreLoading from '../_common/ScoreLoading';
 
 const Rank = ({ isLogin }) => {
     const location = useLocation();
@@ -26,7 +25,6 @@ const Rank = ({ isLogin }) => {
 
     //sort에 따라 랭킹 정보 불러오기
     useEffect(() => {
-        console.log('sort바뀜', sort);
         setRankingData();
         setLoading(true);
         setRankLoading(true);
@@ -74,12 +72,7 @@ const Rank = ({ isLogin }) => {
                             >
                                 시간표 등록하기
                             </S.NewButton>
-                        ) : timetableId && isLogin ? (
-                            <MyScore
-                                isMobile={false}
-                                datas={memoizedRankingData}
-                            />
-                        ) : (
+                        ) : timetableId === 'null' ? (
                             <S.NewButton
                                 onClick={() => {
                                     navigate('/create');
@@ -88,6 +81,11 @@ const Rank = ({ isLogin }) => {
                             >
                                 시간표 등록하기
                             </S.NewButton>
+                        ) : (
+                            <MyScore
+                                isMobile={false}
+                                datas={memoizedRankingData}
+                            />
                         )}
                         <TabContainer />
                         <RankingList

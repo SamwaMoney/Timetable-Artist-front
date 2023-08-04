@@ -35,7 +35,7 @@ const CmtLikeBtn = ({ isMobile, heart, replyLikeCount, replyId }) => {
             return prev - 1;
         });
         //좋아요 취소하는 api 로직
-        const res = await RankingApis.DeleteCommentLike(replyId, memberId);
+        await RankingApis.DeleteCommentLike(replyId, memberId);
     };
 
     if (isMobile) {

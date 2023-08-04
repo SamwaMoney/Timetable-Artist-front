@@ -78,7 +78,7 @@ const MRankDetail = () => {
                         </M.UserInfo>
                     </M.RankContainer>
 
-                    <S.TimeTable height={110} src={currentUser?.imgUrl} />
+                    <S.TimeTable height={100} src={currentUser?.imgUrl} />
                     <M.DetailBtnContainer>
                         <LikeBtn
                             isMobile={true}

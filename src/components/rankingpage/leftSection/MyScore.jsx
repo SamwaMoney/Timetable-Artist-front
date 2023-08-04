@@ -13,7 +13,7 @@ const MyScore = ({ isMobile, datas }) => {
     const [myScore, setMyScore] = useState();
     const [myRanking, setMyRanking] = useState();
     const timetableId = localStorage.getItem('tableId') || -1;
-    //리덕스
+
     const score = useSelector(state => state.myInfoReducer);
 
     //내 점수랑 랭킹 업데이트
