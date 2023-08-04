@@ -38,7 +38,7 @@ export const CreateTable = async () => {
 export const DeleteTable = async tableId => {
     try {
         const memberId = localStorage.getItem('memberId');
-        const res = await http.delete(`/timetables/${tableId}/${memberId}`);
+        const res = await http.delete(`/timetables/${memberId}/${tableId}`);
         console.log(res);
         localStorage.setItem('tableId', 'null');
         return res;

@@ -9,6 +9,11 @@ S.BasicContainer = styled.div`
     flex-direction: column;
 `;
 
+S.MLoadingWrapper = styled(S.BasicContainer)`
+    width: 100vw;
+    height: 100vh;
+`;
+
 S.MWrapper = styled.div`
     background-color: var(--background);
     width: 100%;
