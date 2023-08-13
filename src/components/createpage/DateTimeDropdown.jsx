@@ -59,7 +59,7 @@ const DateTimeDropdown = ({
                             alignItems: 'center',
                             justifyContent: 'space-between',
                         }}
-                        onClick={() => changeOpen(0, true)}
+                        onClick={() => changeOpen(0, !isOpen[0])}
                     >
                         <S.DescDayText>
                             {selectedDateTime.weekday}
@@ -93,7 +93,7 @@ const DateTimeDropdown = ({
                             alignItems: 'center',
                             justifyContent: 'space-between',
                         }}
-                        onClick={() => changeOpen(1, true)}
+                        onClick={() => changeOpen(1, !isOpen[1])}
                     >
                         <S.DescTimeText>
                             {selectedDateTime.startTime}
@@ -127,7 +127,7 @@ const DateTimeDropdown = ({
                             alignItems: 'center',
                             justifyContent: 'space-between',
                         }}
-                        onClick={() => changeOpen(2, true)}
+                        onClick={() => changeOpen(2, !isOpen[2])}
                     >
                         <S.DescTimeText>
                             {selectedDateTime.endTime}
