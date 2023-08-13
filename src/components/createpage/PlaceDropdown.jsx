@@ -24,7 +24,7 @@ const PlaceDropdown = ({
                             alignItems: 'center',
                             justifyContent: 'space-between',
                         }}
-                        onClick={() => setIsPlaceOpen(true)}
+                        onClick={() => setIsPlaceOpen(!isPlaceOpen)}
                     >
                         <S.DescPlaceText>{selectedPlace}</S.DescPlaceText>
                         <S.DownIcon
