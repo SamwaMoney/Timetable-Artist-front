@@ -126,11 +126,12 @@ const TableCell = styled.td`
             : 'none'};
 
     &.selected {
-        /* background-color: #5f96ff; */
         color: white;
         border-radius: 9px;
-        font-size: 10px;
+        font-size: 0.5vw;
         position: relative;
+
+        ${isMobile && `font-size: 10px;`}
     }
 
     ${isMobile &&
@@ -157,7 +158,7 @@ const BlockText = styled.div`
 
 const BlockNameText = styled.div`
     font-weight: 700;
-    margin-bottom: 10%;
+    margin-bottom: 9%;
 
     &.isHidden {
         display: none;

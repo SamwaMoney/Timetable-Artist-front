@@ -3,7 +3,6 @@ import { isMobile } from 'react-device-detect';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import TimeTableRow from './TimeTableRow';
-import { CLASS_BLOCK_COLOR } from '../../consts/timeTableInput';
 
 // props로 초기화 버튼 null 처리하기
 const TimeTable = ({ isScorePage, isHidden, classList }) => {
@@ -48,23 +47,26 @@ const TimeTable = ({ isScorePage, isHidden, classList }) => {
 
     // 점수 페이지 용 데이터 가공
     const scorePageClassData = classList
-        ? classList.map((classData, index) => {
+        ? classList.map(classData => {
               // 새로운 객체를 생성하여 원본 객체의 프로퍼티를 복사
               const newClassData = { ...classData };
 
-              // 요일 한글로 바꿔주기
-              newClassData.weekday = getKeyByValue(
-                  dayMappings,
-                  newClassData.weekday,
-              );
+              // 요일 한글로 바꿔주기 (ONLINE 수업일 경우 제외)
+              if (newClassData.weekday !== 'ONLINE') {
+                  newClassData.weekday = getKeyByValue(
+                      dayMappings,
+                      newClassData.weekday,
+                  );
+              }
 
               // startTime, endTime 추가
-              newClassData.startTime = `${newClassData.startH}:${newClassData.startM}`;
-              newClassData.endTime = `${newClassData.endH}:${newClassData.endM}`;
-
-              // 배경색 추가
-              //   newClassData.bgColor =
-              //       CLASS_BLOCK_COLOR[index >= 8 ? index - 8 : index];
+              if (newClassData.startH === null) {
+                  newClassData.startTime = null;
+                  newClassData.endTime = null;
+              } else {
+                  newClassData.startTime = `${newClassData.startH}:${newClassData.startM}`;
+                  newClassData.endTime = `${newClassData.endH}:${newClassData.endM}`;
+              }
 
               return newClassData;
           })
@@ -111,28 +113,49 @@ const TimeTable = ({ isScorePage, isHidden, classList }) => {
                     ))}
                 </tbody>
             </table>
+
             <EtcDiv>
                 <TableText>etc</TableText>
                 <EtcDescDiv ref={etcDescDivRef}>
-                    {selectedData &&
-                        selectedData.map(lecture => {
-                            if (lecture.startTime === null) {
-                                return (
-                                    <div
-                                        key={lecture.className}
-                                        style={{
-                                            display:
-                                                isHidden === true
-                                                    ? 'none'
-                                                    : 'block',
-                                        }}
-                                    >
-                                        {lecture.className}
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })}
+                    {isScorePage === true
+                        ? scorePageClassData &&
+                          scorePageClassData.map(lecture => {
+                              if (lecture.weekday === 'ONLINE') {
+                                  return (
+                                      <div
+                                          key={lecture.className}
+                                          style={{
+                                              display:
+                                                  isHidden === true
+                                                      ? 'none'
+                                                      : 'block',
+                                          }}
+                                      >
+                                          {lecture.className}
+                                      </div>
+                                  );
+                              }
+                              return null;
+                          })
+                        : selectedData &&
+                          selectedData.map(lecture => {
+                              if (lecture.startTime === null) {
+                                  return (
+                                      <div
+                                          key={lecture.className}
+                                          style={{
+                                              display:
+                                                  isHidden === true
+                                                      ? 'none'
+                                                      : 'block',
+                                          }}
+                                      >
+                                          {lecture.className}
+                                      </div>
+                                  );
+                              }
+                              return null;
+                          })}
                 </EtcDescDiv>
             </EtcDiv>
         </TimeTableContainer>
