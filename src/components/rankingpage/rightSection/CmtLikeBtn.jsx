@@ -18,8 +18,8 @@ const CmtLikeBtn = ({
     const memberId = localStorage.getItem('memberId') || -1;
     const params = useParams();
     const tableId = params.id;
-    console.log('timetime', timetableId);
-    //좋아요 누르기
+
+    //댓글 좋아요 누르기
     const onGiveLike = async () => {
         if (memberId === -1) {
             return alert('로그인이 필요한 기능입니다.');
@@ -28,10 +28,13 @@ const CmtLikeBtn = ({
         setLikeCount(prev => prev + 1);
         const res = await RankingApis.PostCommentLike(replyId, memberId);
         //서버 요청 실패시 롤백
-        if (res?.status !== 201) {
+        if (res?.status >= 300) {
             setIsLike(false);
             setLikeCount(prev => prev - 1);
+        } else {
+            setIsLike(true);
         }
+        //댓글 다시 불러오기
         if (isMobile) {
             getCommentData(tableId, memberId);
         } else {
@@ -39,7 +42,7 @@ const CmtLikeBtn = ({
         }
     };
 
-    //좋아요 취소
+    //댓글 좋아요 취소
     const onCancelLike = async () => {
         setIsLike(false);
         setLikeCount(prev => {
@@ -48,12 +51,20 @@ const CmtLikeBtn = ({
             }
             return prev - 1;
         });
-        //좋아요 취소하는 api 로직
-        await RankingApis.DeleteCommentLike(replyId, memberId);
-        if (isMobile) {
-            await getCommentData(tableId, memberId);
+        //댓글 좋아요 취소 로직
+        const res = await RankingApis.DeleteCommentLike(replyId, memberId);
+        //서버 요청 실패시 롤백
+        if (res?.status >= 300) {
+            setIsLike(true);
+            setLikeCount(prev => prev - 1);
         } else {
-            await getCommentData(timetableId, memberId);
+            setIsLike(false);
+        }
+        //댓글 다시 불러오기
+        if (isMobile) {
+            getCommentData(tableId, memberId);
+        } else {
+            getCommentData(timetableId, memberId);
         }
     };
 

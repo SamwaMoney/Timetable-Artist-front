@@ -10,23 +10,6 @@ const TabContainer = ({ isMobile }) => {
     const sort = params.get('sort');
     const [searchParams, setSearchParams] = useSearchParams();
 
-    /*정렬 기준대로 쿼리스트링을 바꿔줌*/
-    // const onMoveSortPage = e => {
-    //     const { innerText } = e.target;
-    //     console.log(innerText);
-    //     if (innerText === '최악의 시간표') {
-    //         searchParams.set('sort', 'LOWEST');
-    //         searchParams.set('rank', 1);
-    //     } else if (innerText === '최고의 시간표') {
-    //         searchParams.set('sort', 'HIGHEST');
-    //         searchParams.set('rank', 1);
-    //     } else {
-    //         searchParams.set('sort', 'LIKE');
-    //         searchParams.set('rank', 1);
-    //     }
-    //     setSearchParams(searchParams);
-    // };
-
     const onMoveSortPage = sortValue => {
         console.log(sortValue);
         if (sortValue === 'HIGHEST') {

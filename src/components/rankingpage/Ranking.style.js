@@ -504,6 +504,19 @@ M.IconButton = styled(IconButton)`
     }
 `;
 
+M.HeartButton = styled(IconButton)`
+    color: black;
+    border-radius: 2vw;
+    margin-right: 1vw;
+    width: 16vw;
+    height: 8vw;
+    position: absolute;
+    left: -8vw;
+    p {
+        font-size: 4vw;
+    }
+`;
+
 S.EventIcon = styled.img`
     width: ${props => (props.width ? props.width : '2vw')}rem;
     cursor: pointer;

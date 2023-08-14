@@ -12,8 +12,6 @@ import { useEffect, useState } from 'react';
 import RankingApis from '../../api/ranking';
 import { useParams } from 'react-router-dom';
 
-//해당 유저의 아이디를 params로 가져오고, rank의 경우는 쿼리스트링으로 가져옴
-//시간표 채점 결과 조회 api를 사용함.
 const MRankDetail = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     //유저의 랭크
@@ -29,9 +27,8 @@ const MRankDetail = () => {
     const [loading, setLoading] = useState(true);
     const [commentNum, setCommentNum] = useState();
 
+    //디테일 정보 불러오는 로직
     useEffect(() => {
-        //timetableId로 해당 유저의 정보 검색
-        //comment는 따로 검색
         setLoading(true);
         const fetch = async () => {
             const res = await getDetailData(timetableId, memberId);

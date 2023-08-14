@@ -8,8 +8,6 @@ import ScorePage from './pages/ScorePage';
 import RankingPage from './pages/RankingPage';
 import AboutUsPage from './pages/AboutUsPage';
 import MenuPage from './pages/M_MenuPage';
-import MError from './components/_common/M_Error';
-import Error from './components/_common/Error';
 import ErrorPage from './pages/ErrorPage';
 import MRankDetail from './components/rankingpage/M_RankDetail';
 import { Provider } from 'react-redux';

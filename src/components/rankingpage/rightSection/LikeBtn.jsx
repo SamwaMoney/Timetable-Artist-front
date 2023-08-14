@@ -37,14 +37,18 @@ const LikeBtn = ({
         const res = await RankingApis.PostTimeTableLike(timetableId, memberId);
         console.log('좋아요 기능', res);
         //서버 요청 실패시 롤백
-        if (res?.status !== 201) {
+        if (res?.status >= 300) {
             setIsLike(false);
-            setLikeNum(prev => prev - 1);
+            setLikeNum(prev => {
+                if (prev === 0) {
+                    return prev;
+                }
+                return prev - 1;
+            });
         } else {
             setIsLike(true);
         }
         if (sort === 'LIKE') {
-            console.log('좋아요 재정렬', sort, memberId);
             const res = await getRankingList(sort, memberId);
             setRankingData(res?.data);
         }
@@ -58,9 +62,8 @@ const LikeBtn = ({
             timetableId,
             memberId,
         );
-        console.log('좋아요 취소 결과', res?.status);
         //서버 요청 실패시 롤백
-        if (res?.status !== 200) {
+        if (res?.status >= 300) {
             setIsLike(true);
             setLikeNum(prev => prev + 1);
         } else {

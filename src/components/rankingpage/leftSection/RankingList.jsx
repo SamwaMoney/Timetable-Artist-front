@@ -13,7 +13,6 @@ const RankingList = ({
 }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const sort = searchParams.get('sort') || 'LOWEST';
-    //선택한 정렬방식대로 순위 바꿔줌
 
     return (
         <>

@@ -1,19 +1,19 @@
 import { S, M } from '../Ranking.style';
 import Comment from '../../../assets/rankingpage/comment.png';
 const CmtTag = ({ isMobile, number }) => {
-    return isMobile
-        ? number >= 0 && (
-              <M.IconButton>
-                  <S.NoEventIcon width={2} src={Comment} alt='댓글' />
-                  <p>{number}</p>
-              </M.IconButton>
-          )
-        : number >= 0 && (
-              <S.IconButton>
-                  <S.NoEventIcon width={2} src={Comment} alt='댓글' />
-                  <p>{number}</p>
-              </S.IconButton>
-          );
+    return isMobile ? (
+        <M.IconButton>
+            <S.NoEventIcon width={2} src={Comment} alt='댓글' />
+            <p>{number}</p>
+        </M.IconButton>
+    ) : (
+        number >= 0 && (
+            <S.IconButton>
+                <S.NoEventIcon width={2} src={Comment} alt='댓글' />
+                <p>{number}</p>
+            </S.IconButton>
+        )
+    );
 };
 
 export default CmtTag;

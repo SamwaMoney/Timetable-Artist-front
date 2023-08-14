@@ -6,40 +6,31 @@ import CmtTag from './rightSection/CmtTag';
 import RightSectionSkeleton from '../../skeleton/RightSectionSkeleton';
 import { useState, useEffect } from 'react';
 import AltTableImg from '../../assets/_common/altTable.png';
-import { useLocation } from 'react-router-dom';
+
 const RankDetail = ({
     memberId,
     currentUserId,
     getRankingList,
-    setLoading,
     setRankingData,
     loading,
     rankLoading,
     getDetailData,
+    rankingData,
 }) => {
     const [currentUser, setCurrentUser] = useState();
     const [commentNum, setCommentNum] = useState();
-    const location = useLocation();
-    const params = new URLSearchParams(location.search);
-    const sort = params.get('sort');
 
     useEffect(() => {
         setCommentNum();
         setCurrentUser();
-        const fetchDetailData = async timetableId => {
-            const res = await getDetailData(timetableId, memberId);
-            setCurrentUser(res?.data);
-        };
-        fetchDetailData(currentUserId);
-        setLoading(false);
-    }, [currentUserId]);
+        const res = rankingData?.filter(
+            data => data.timetableId === currentUserId,
+        );
+        console.log('현재 user정보', res && res[0]);
+        res && setCurrentUser(res[0]);
+    }, [currentUserId, rankingData]);
 
-    // useEffect(() => {
-    //     console.log(loading);
-    //     console.log(rankLoading);
-    // }, [loading, rankLoading]);
-
-    return loading || rankLoading ? (
+    return loading || rankLoading || !currentUser ? (
         <RightSectionSkeleton />
     ) : (
         <S.SmallContainer>
