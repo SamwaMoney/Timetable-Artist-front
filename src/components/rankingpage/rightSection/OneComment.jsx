@@ -2,10 +2,7 @@ import { S, M } from '../Ranking.style';
 import { TiDelete } from 'react-icons/ti';
 import CmtLikeBtn from './CmtLikeBtn';
 import { timeHelper } from '../../../utils/time-helper';
-import { styled } from 'styled-components';
 
-//자신 댓글인지 확인해서 맞으면 삭제 버튼 & 색상 다르게 보여주기
-//현재 시간을 0시간전으로 계산해서 보여주기
 const OneComment = ({
     isMobile,
     data,

@@ -18,6 +18,7 @@ const Rank = ({ isLogin }) => {
     //api로 받아온 데이터 관리하는 곳
     const [rankingData, setRankingData] = useState();
     const [currentUserId, setCurrentUserId] = useState();
+    // const [currentUserRank, setCurrentUserRank] = useState();
     const memberId = localStorage.getItem('memberId') || -1;
     const [loading, setLoading] = useState(true);
     const [rankLoading, setRankLoading] = useState(true);
@@ -34,6 +35,7 @@ const Rank = ({ isLogin }) => {
             console.log('받아온 랭킹정보', sort, res);
             setRankingData(res?.data);
             setCurrentUserId(res?.data[0]?.timetableId);
+            // setCurrentUserRank(0);
         };
         fetchData(sort);
     }, [sort]);
@@ -113,6 +115,7 @@ const Rank = ({ isLogin }) => {
                         timetableId={timetableId}
                         getDetailData={getDetailData}
                         setRankingData={setRankingData}
+                        rankingData={rankingData}
                     />
                 </S.Container>
             )}

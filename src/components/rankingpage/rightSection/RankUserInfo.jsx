@@ -2,12 +2,9 @@ import { S } from '../Ranking.style';
 import { useSearchParams } from 'react-router-dom';
 
 //오른쪽 섹션에 나오는 웹의 디테일 페이지
-//기본은 1, 쿼리스트링의 id가 바뀔 때마다 해당 id로 api 요청해서 보여주기
-//commentList와 따로 해야한다?
 const RankUserInfo = ({ data, loading }) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // const { owner, score, tableTypeContent } = data;
     const rank = searchParams.get('rank') || 1;
 
     return (
