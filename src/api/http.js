@@ -39,10 +39,10 @@ http.interceptors.request.use(async config => {
                 'expireAt',
                 moment().add(1, 'hour').format('yyyy-MM-DD HH:mm:ss'),
             );
-
-            // config 헤더에 accessToken 적용
-            config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
+        config.headers.Authorization = accessToken
+            ? `Bearer ${accessToken}`
+            : null;
         return config;
     } catch (err) {
         console.log('리프레시 에러', err);
